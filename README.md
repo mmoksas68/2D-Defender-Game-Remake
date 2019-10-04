@@ -1,11 +1,11 @@
 # CS_319_Project
 Defender Game
 
-#About Game
+# About Game
 
-#New Features
+# New Features
 
-#Group Members
+# Group Members
 Doğukan
 Musab
 Aybüke
