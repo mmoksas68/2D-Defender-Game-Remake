@@ -6,9 +6,9 @@ Defender Game
 # New Features
 
 # Group Members
-Doğukan
-Musab
-Aybüke
-Hamza
-Meryem
+- Doğukan
+- Musab
+- Aybüke
+- Hamza
+- Meryem
 
