@@ -19,9 +19,9 @@ Defender is an old video game. In this game, a player controls a spaceship to sa
 
 
 # Group Members
-- Doğukan
-- Musab
-- Aybüke
-- Hamza
-- Meryem
+- Doğukan KÖSE
+- Musab OKŞAŞ
+- Aybüke ERTEKİN
+- Hamza PEHLİVAN
+- Meryem EFE
 
