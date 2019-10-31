@@ -26,4 +26,5 @@ Defender is an old video game. In this game, a player controls a spaceship to sa
 - Meryem EFE
 
 # Links
+Link for Project Meetings Document: https://drive.google.com/file/d/1SZuEcgDk-16_4ClcNFcdrplQeXqld5ln/view?usp=sharing
 Link for Analysis Report - Iteration 1: https://drive.google.com/file/d/1fW70vvsQzHF4RUny_4E4CkQypN6E9tvB/view?usp=sharing
