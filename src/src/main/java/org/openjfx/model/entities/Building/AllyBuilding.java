@@ -5,8 +5,8 @@ import org.openjfx.model.Location;
 
 public class AllyBuilding extends Building {
 
-    public AllyBuilding(Location location, int hitBoxWidth, int hitBoxHeight, int healthPoint) {
-        super(location, hitBoxWidth, hitBoxHeight, healthPoint);
+    public AllyBuilding(Location location, int hitBoxWidth, int hitBoxHeight) {
+        super(location, hitBoxWidth, hitBoxHeight);
     }
 
     public Location callForBackUp(){

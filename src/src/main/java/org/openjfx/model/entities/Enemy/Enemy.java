@@ -4,7 +4,8 @@ import org.openjfx.model.LocatableObject;
 import org.openjfx.model.Location;
 
 public abstract class Enemy extends LocatableObject {
-    private int healthPoint;
+    public static final double WIDTH_SCALE = 0.03;
+    public static final double HEIGHT_SCALE = 0.05;
     private int damage;
     private int velocity;
     private int radarRadius;
@@ -14,19 +15,11 @@ public abstract class Enemy extends LocatableObject {
 
     public Enemy(Location location, int hitBoxWidth, int hitBoxHeight, int healthPoint, int damage, int velocity, int radarRadius) {
         super(location, hitBoxWidth, hitBoxHeight);
-        this.healthPoint = healthPoint;
         this.damage = damage;
         this.velocity = velocity;
         this.radarRadius = radarRadius;
     }
 
-    public int getHealthPoint() {
-        return healthPoint;
-    }
-
-    public void setHealthPoint(int healthPoint) {
-        this.healthPoint = healthPoint;
-    }
 
     public int getDamage() {
         return damage;

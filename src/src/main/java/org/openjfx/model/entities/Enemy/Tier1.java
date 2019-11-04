@@ -3,6 +3,7 @@ package org.openjfx.model.entities.Enemy;
 import org.openjfx.model.FireBullets;
 import org.openjfx.model.Location;
 import org.openjfx.model.entities.Bullet.Bullet;
+import org.openjfx.utilization.PositionHelper;
 
 public class Tier1 extends Enemy implements SimpleEnemy, FireBullets {
     private int bulletVelocity;
@@ -31,7 +32,8 @@ public class Tier1 extends Enemy implements SimpleEnemy, FireBullets {
 
     @Override
     public void wonderAround() {
-
+        if(getDestinationType().equals("spacecraft"));
+            fireBullet();
     }
 
     @Override
@@ -46,6 +48,25 @@ public class Tier1 extends Enemy implements SimpleEnemy, FireBullets {
 
     @Override
     public Bullet fireBullet() {
-        return new Bullet(new Location(this.getLocation().getPositionX(), this.getLocation().getPositionY()), 5,2, bulletDamage, bulletVelocity, getDestinationLocation().getPositionX(), getDestinationLocation().getPositionY());
+        PositionHelper enemyHelper = new PositionHelper(this);
+        double x = 0;
+        double y = 0;
+        if(getDestinationLocation().getPositionX() > 0 && getDestinationLocation().getPositionY() > 0){
+            x = enemyHelper.getRight() + 1;
+            y = enemyHelper.getBottom() + 1;
+        }
+        if(getDestinationLocation().getPositionX() > 0 && getDestinationLocation().getPositionY() < 0){
+            x = enemyHelper.getRight() + 1;
+            y = enemyHelper.getTop() - 6;
+        }
+        if(getDestinationLocation().getPositionX() < 0 && getDestinationLocation().getPositionY() > 0){
+            x = enemyHelper.getLeft() - 6;
+            y = enemyHelper.getBottom() + 1;
+        }
+        if(getDestinationLocation().getPositionX() < 0 && getDestinationLocation().getPositionY() < 0){
+            x = enemyHelper.getLeft() - 6;
+            y = enemyHelper.getTop() - 6;
+        }
+        return new Bullet(new Location(x ,y),5, 2, 30, 5, getDestinationLocation().getPositionX(), -getDestinationLocation().getPositionY());
     }
 }

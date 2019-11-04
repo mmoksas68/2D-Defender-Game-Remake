@@ -1,9 +1,9 @@
 package org.openjfx.view;
 
-
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import org.openjfx.utilization.ModelToView;
 import org.openjfx.view.entities.BulletView;
 import org.openjfx.view.entities.EnemyView;
 import org.openjfx.view.entities.SpacecraftView;
@@ -23,43 +23,65 @@ public class MapView extends Pane {
         super(nodes);
     }
 
-    public void refreshEnemy(int x, int y, int w, int h, long ID){
+    public void refreshEnemy(ModelToView modelToView){
         EnemyView enemy;
-        if(currentNodes.containsKey(ID)){
-            enemy = (EnemyView) currentNodes.get(ID);
-            enemy.setTranslateX(x);
-            enemy.setTranslateY(y);
+        if(currentNodes.containsKey(modelToView.getID())){
+            enemy = (EnemyView) currentNodes.get(modelToView.getID());
+            if(modelToView.isDead()){
+                getChildren().remove(enemy);
+            }else {
+                enemy.setTranslateX(modelToView.getLocationX() - modelToView.getCurrentViewLeft());
+                enemy.setTranslateY(modelToView.getLocationY());
+                enemy.setWidth(modelToView.getHitboxWidth());
+                enemy.setHeight(modelToView.getHitboxHeight());
+            }
+
         } else {
-            enemy = new EnemyView(x, y, w, h, Color.RED);
-            currentNodes.put(ID, enemy);
+            enemy = new EnemyView(modelToView.getLocationX() - modelToView.getCurrentViewLeft(),
+                                    modelToView.getLocationY(), modelToView.getHitboxWidth(),
+                                    modelToView.getHitboxHeight(), Color.RED);
+            currentNodes.put(modelToView.getID(), enemy);
             getChildren().add(enemy);
         }
     }
 
-    public void refreshBullet(int x, int y, int w, int h, long ID){
+    public void refreshBullet(ModelToView modelToView){
         BulletView bullet;
-        if(currentNodes.containsKey(ID)){
-            bullet = (BulletView) currentNodes.get(ID);
-            bullet.setTranslateX(x);
-            bullet.setTranslateY(y);
+        if(currentNodes.containsKey(modelToView.getID())){
+            bullet = (BulletView) currentNodes.get(modelToView.getID());
+            if(modelToView.isDead()){
+                getChildren().remove(bullet);
+            }else {
+                bullet.setTranslateX(modelToView.getLocationX() - modelToView.getCurrentViewLeft());
+                bullet.setTranslateY(modelToView.getLocationY());
+                bullet.setWidth(modelToView.getHitboxWidth());
+                bullet.setWidth(modelToView.getHitboxHeight());
+            }
+
         } else {
-            bullet = new BulletView(x, y, w, h, Color.BLACK);
-            currentNodes.put(ID, bullet);
+            bullet = new BulletView(modelToView.getLocationX() - modelToView.getCurrentViewLeft(),
+                    modelToView.getLocationY(), modelToView.getHitboxWidth(),
+                    modelToView.getHitboxHeight(), Color.BLACK);
+            currentNodes.put(modelToView.getID(), bullet);
             getChildren().add(bullet);
         }
     }
 
-    public void refreshSpacecraft(int x, int y, int w, int h, long ID){
+    public void refreshSpacecraft(ModelToView modelToView){
         SpacecraftView spacecraft;
 
-        if(currentNodes.containsKey(ID) ){
-            spacecraft = (SpacecraftView) currentNodes.get(ID);
-            spacecraft.setTranslateX(x);
-            spacecraft.setTranslateY(y);
+        if(currentNodes.containsKey(modelToView.getID()) ){
+            spacecraft = (SpacecraftView) currentNodes.get(modelToView.getID());
+            spacecraft.setTranslateX(modelToView.getLocationX() - modelToView.getCurrentViewLeft());
+            spacecraft.setTranslateY(modelToView.getLocationY());
+            spacecraft.setWidth(modelToView.getHitboxWidth());
+            spacecraft.setHeight(modelToView.getHitboxHeight());
         } else {
-            spacecraft = new SpacecraftView(x,y,w,h,Color.CYAN);
+            spacecraft = new SpacecraftView(modelToView.getLocationX() - modelToView.getCurrentViewLeft(),
+                    modelToView.getLocationY(), modelToView.getHitboxWidth(),
+                    modelToView.getHitboxHeight(), Color.CYAN);
             getChildren().add(spacecraft);
-            currentNodes.put(ID,spacecraft);
+            currentNodes.put(modelToView.getID(),spacecraft);
         }
     }
 

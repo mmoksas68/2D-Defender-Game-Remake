@@ -8,13 +8,11 @@ import java.util.ArrayList;
 public class Boss extends LocatableObject {
     private int level;
     private ArrayList<String> dialogues;
-    private int healthPoint;
 
-    public Boss(Location location, int hitBoxWidth, int hitBoxHeight, int level, ArrayList<String> dialogues, int healthPoint) {
+    public Boss(Location location, int hitBoxWidth, int hitBoxHeight, int level, ArrayList<String> dialogues) {
         super(location, hitBoxWidth, hitBoxHeight);
         this.level = level;
         this.dialogues = dialogues;
-        this.healthPoint = healthPoint;
     }
 
     public int getLevel() {
@@ -23,14 +21,6 @@ public class Boss extends LocatableObject {
 
     public ArrayList<String> getDialogues() {
         return dialogues;
-    }
-
-    public int getHealthPoint() {
-        return healthPoint;
-    }
-
-    public void setHealthPoint(int healthPoint) {
-        this.healthPoint = healthPoint;
     }
 
     public void useSpecialPower(){

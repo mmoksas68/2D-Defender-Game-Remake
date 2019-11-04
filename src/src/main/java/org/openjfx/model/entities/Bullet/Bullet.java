@@ -4,13 +4,15 @@ import org.openjfx.model.LocatableObject;
 import org.openjfx.model.Location;
 
 public class Bullet extends LocatableObject {
-
+    public static final double WIDTH_SCALE = 0.003;
+    public static final double HEIGHT_SCALE = 0.001;
     private int damage;
     private int velocity;
-    private int directionX;
-    private int directionY;
+    private double directionX;
+    private double directionY;
 
-    public Bullet(Location location, int hitBoxWidth, int hitBoxHeight, int damage, int velocity, int directionX, int directionY) {
+
+    public Bullet(Location location, int hitBoxWidth, int hitBoxHeight, int damage, int velocity, double directionX, double directionY) {
         super(location, hitBoxWidth, hitBoxHeight);
         this.damage = damage;
         this.velocity = velocity;
@@ -38,19 +40,19 @@ public class Bullet extends LocatableObject {
         this.velocity = velocity;
     }
 
-    public int getDirectionX() {
+    public double getDirectionX() {
         return directionX;
     }
 
-    public void setDirectionX(int directionX) {
+    public void setDirectionX(double directionX) {
         this.directionX = directionX;
     }
 
-    public int getDirectionY() {
+    public double getDirectionY() {
         return directionY;
     }
 
-    public void setDirectionY(int directionY) {
+    public void setDirectionY(double directionY) {
         this.directionY = directionY;
     }
 }

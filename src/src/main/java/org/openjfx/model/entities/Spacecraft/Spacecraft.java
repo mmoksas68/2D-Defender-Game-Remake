@@ -4,17 +4,19 @@ import org.openjfx.model.FireBullets;
 import org.openjfx.model.LocatableObject;
 import org.openjfx.model.Location;
 import org.openjfx.model.entities.Bullet.Bullet;
+import org.openjfx.utilization.PositionHelper;
 
 public class Spacecraft extends LocatableObject implements FireBullets {
 
-    public static final int MAX_PACE = 30;
+    public static final int MAX_PACE = 5;
     public static final int MAX_SMARTBOMB = 3;
+    public static final double WIDTH_SCALE = 0.03;
+    public static final double HEIGHT_SCALE = 0.02;
     private int qunFrequency;
     private int gunPower;
     private int gunType;
     private int bulletVelocity;
-    private int velocity;
-    private int healthPoint;
+    private double velocity;
     private int currentBuffSlot;
     private int smartBombStock;
     private boolean isBatteryCharged;
@@ -22,14 +24,13 @@ public class Spacecraft extends LocatableObject implements FireBullets {
     private boolean infiniteArmor;
     private boolean isDirectionLeft;
 
-    public Spacecraft(Location location, int hitBoxWidth, int hitBoxHeight, int qunFrequency, int gunPower, int gunType, int bulletVelocity, int velocity, int healthPoint, int currentBuffSlot, int smartBombStock, boolean isBatteryCharged, boolean isBuffSlotOccupied, boolean infiniteArmor) {
+    public Spacecraft(Location location, int hitBoxWidth, int hitBoxHeight, int qunFrequency, int gunPower, int gunType, int bulletVelocity, double velocity, int currentBuffSlot, int smartBombStock, boolean isBatteryCharged, boolean isBuffSlotOccupied, boolean infiniteArmor) {
         super(location, hitBoxWidth, hitBoxHeight);
         this.qunFrequency = qunFrequency;
         this.gunPower = gunPower;
         this.gunType = gunType;
         this.bulletVelocity = bulletVelocity;
         this.velocity = velocity;
-        this.healthPoint = healthPoint;
         this.currentBuffSlot = currentBuffSlot;
         this.smartBombStock = smartBombStock;
         this.isBatteryCharged = isBatteryCharged;
@@ -37,19 +38,19 @@ public class Spacecraft extends LocatableObject implements FireBullets {
         this.infiniteArmor = infiniteArmor;
     }
 
-    public void useBuffSlot(){
+    public void useBuffSlot() {
 
     }
 
-    public void useSmartBomb(){
+    public void useSmartBomb() {
 
     }
 
-    public void useHyperJump(){
+    public void useHyperJump() {
 
     }
 
-    public void freezeEnemy(){
+    public void freezeEnemy() {
 
     }
 
@@ -93,20 +94,14 @@ public class Spacecraft extends LocatableObject implements FireBullets {
         this.bulletVelocity = bulletVelocity;
     }
 
-    public int getVelocity() {
+    public double getVelocity() {
         return velocity;
     }
 
-    public void setVelocity(int velocity) {
+    public void setVelocity(double velocity) {
+        if(Math.abs(velocity) > MAX_PACE)
+            this.velocity = velocity > 0 ? MAX_PACE : -MAX_PACE;
         this.velocity = velocity;
-    }
-
-    public int getHealthPoint() {
-        return healthPoint;
-    }
-
-    public void setHealthPoint(int healthPoint) {
-        this.healthPoint = healthPoint;
     }
 
     public int getCurrentBuffSlot() {
@@ -159,7 +154,15 @@ public class Spacecraft extends LocatableObject implements FireBullets {
 
     @Override
     public Bullet fireBullet() {
-        int direction = isDirectionLeft() ? 10 : -10;
-        return new Bullet(new Location(this.getLocation().getPositionX(), this.getLocation().getPositionY()), 5,2, 5, 5, direction, 0);
+        int direction = isDirectionLeft() ? -10 : 10;
+        PositionHelper spacecraftHelper = new PositionHelper(this);
+        Location location = isDirectionLeft() ?
+                            new Location(spacecraftHelper.getLeft() - 10,
+                                    ((spacecraftHelper.getTop() + spacecraftHelper.getBottom()) / 2))
+                            :
+                            new Location(spacecraftHelper.getRight() + 10,
+                                    ((spacecraftHelper.getTop() + spacecraftHelper.getBottom()) / 2));
+
+        return new Bullet(location,5, 2, 30, 10, direction, 0);
     }
 }
