@@ -6,6 +6,7 @@ import org.openjfx.model.Location;
 public abstract class Enemy extends LocatableObject {
     public static final double WIDTH_SCALE = 0.03;
     public static final double HEIGHT_SCALE = 0.05;
+
     private int damage;
     private int velocity;
     private int radarRadius;

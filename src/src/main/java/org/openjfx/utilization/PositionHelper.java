@@ -32,6 +32,10 @@ public class PositionHelper {
                 );
     }
 
+    public double findRadius(){
+        return Math.sqrt(Math.pow((middlePointX-left),2) + Math.pow((middlePointY-top),2)) + 3;
+    }
+
     public double getLeft() {
         return left;
     }

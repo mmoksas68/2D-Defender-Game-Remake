@@ -8,32 +8,59 @@ import org.openjfx.utilization.PositionHelper;
 public class Tier1 extends Enemy implements SimpleEnemy, FireBullets {
     private int bulletVelocity;
     private int bulletDamage;
+    private int gunPeriod;
+    private int gunTimer = 0;
 
-    public Tier1(Location location, int hitBoxWidth, int hitBoxHeight, int healthPoint, int damage, int velocity, int radarRadius, int bulletVelocity) {
+    public Tier1(Location location, int hitBoxWidth, int hitBoxHeight, int healthPoint, int damage, int velocity, int radarRadius, int bulletVelocity, int bulletDamage, int gunPeriod) {
         super(location, hitBoxWidth, hitBoxHeight, healthPoint, damage, velocity, radarRadius);
         this.bulletVelocity = bulletVelocity;
+        this.bulletDamage = bulletDamage;
+        this.gunPeriod = gunPeriod;
     }
 
+    @Override
     public int getBulletVelocity() {
         return bulletVelocity;
     }
 
+    @Override
     public void setBulletVelocity(int bulletVelocity) {
         this.bulletVelocity = bulletVelocity;
     }
 
+    @Override
     public int getBulletDamage() {
         return bulletDamage;
     }
 
+    @Override
     public void setBulletDamage(int bulletDamage) {
         this.bulletDamage = bulletDamage;
     }
 
     @Override
+    public int getGunPeriod() {
+        return gunPeriod;
+    }
+
+    @Override
+    public void setGunPeriod(int gunPeriod) {
+        this.gunPeriod = gunPeriod;
+    }
+
+    @Override
+    public int getGunTimer() {
+        return gunTimer;
+    }
+
+    @Override
+    public void setGunTimer(int gunTimer) {
+        this.gunTimer = gunTimer;
+    }
+
+    @Override
     public void wonderAround() {
-        if(getDestinationType().equals("spacecraft"));
-            fireBullet();
+
     }
 
     @Override
@@ -49,24 +76,18 @@ public class Tier1 extends Enemy implements SimpleEnemy, FireBullets {
     @Override
     public Bullet fireBullet() {
         PositionHelper enemyHelper = new PositionHelper(this);
-        double x = 0;
-        double y = 0;
-        if(getDestinationLocation().getPositionX() > 0 && getDestinationLocation().getPositionY() > 0){
-            x = enemyHelper.getRight() + 1;
-            y = enemyHelper.getBottom() + 1;
-        }
-        if(getDestinationLocation().getPositionX() > 0 && getDestinationLocation().getPositionY() < 0){
-            x = enemyHelper.getRight() + 1;
-            y = enemyHelper.getTop() - 6;
-        }
-        if(getDestinationLocation().getPositionX() < 0 && getDestinationLocation().getPositionY() > 0){
-            x = enemyHelper.getLeft() - 6;
-            y = enemyHelper.getBottom() + 1;
-        }
-        if(getDestinationLocation().getPositionX() < 0 && getDestinationLocation().getPositionY() < 0){
-            x = enemyHelper.getLeft() - 6;
-            y = enemyHelper.getTop() - 6;
-        }
+        double radius = enemyHelper.findRadius();
+        double x = Math.sqrt((radius*radius) / (Math.pow(getDestinationLocation().getPositionY()/getDestinationLocation().getPositionX(),2) + 1));
+        double y = Math.abs(getDestinationLocation().getPositionY()/getDestinationLocation().getPositionX())*x;
+
+        if(getDestinationLocation().getPositionX() < 0)
+            x = -x;
+        if(getDestinationLocation().getPositionY() < 0)
+            y = -y;
+
+        x += enemyHelper.getMiddlePointX();
+        y += enemyHelper.getMiddlePointY();
+
         return new Bullet(new Location(x ,y),5, 2, 30, 5, getDestinationLocation().getPositionX(), -getDestinationLocation().getPositionY());
     }
 }

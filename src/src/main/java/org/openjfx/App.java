@@ -7,20 +7,20 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import org.openjfx.controller.Game;
+import org.openjfx.controller.PreBossGameController;
 
 
 /**
  * JavaFX App
  */
 public class App extends Application {
-    Game game;
+    PreBossGameController preBossGameController;
 
     @Override
     public void start(Stage stage) {
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        game = new Game(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
-        stage.setScene(game.getScene());
+        preBossGameController = new PreBossGameController(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
+        stage.setScene(preBossGameController.getScene());
         stage.setResizable(false);
         stage.setFullScreen(true);
         stage.setFullScreenExitHint(null);
@@ -28,8 +28,8 @@ public class App extends Application {
         stage.show();
 
         ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) ->{
-            game.setSceneWidth(stage.getWidth());
-            game.setSceneHeight(stage.getHeight());
+            preBossGameController.setSceneWidth(stage.getWidth());
+            preBossGameController.setSceneHeight(stage.getHeight());
         };
 
         stage.widthProperty().addListener(stageSizeListener);

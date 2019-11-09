@@ -87,7 +87,6 @@ public abstract class LocatableObject {
     }
 
     public void moveToDirection(double velocity, double directionX, double directionY){
-        //System.out.println(velocity + " " + directionX + " " + directionY);
         velocity = Math.abs(velocity);
         if(Math.round(directionX) ==  0.0 && Math.round(directionY) ==  0.0)
             return;
