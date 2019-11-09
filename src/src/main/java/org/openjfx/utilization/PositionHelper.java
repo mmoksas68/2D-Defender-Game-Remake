@@ -36,6 +36,14 @@ public class PositionHelper {
         return Math.sqrt(Math.pow((middlePointX-left),2) + Math.pow((middlePointY-top),2)) + 3;
     }
 
+    public boolean isInside(double maxWidth, double maxHeight){
+        if (top < 0 | bottom > maxHeight | right > maxWidth | left < 0){
+            return false;
+        }
+        else
+            return true;
+    }
+
     public double getLeft() {
         return left;
     }

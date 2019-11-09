@@ -23,6 +23,7 @@ public abstract class Enemy extends LocatableObject {
         this.damage = damage;
         this.velocity = velocity;
         this.radarRadius = radarRadius;
+        destinationLocation = new Location(0,0);
     }
 
 
