@@ -184,7 +184,6 @@ public class PreBossGameController {
 
     private void refreshMap(){
         preBossMap.checkMapSituation();
-
         for( var enemy : preBossMap.getFiringEnemies() ){
             bulletFire(enemy, enemy.getDestinationType().equals("spacecraft"));
         }

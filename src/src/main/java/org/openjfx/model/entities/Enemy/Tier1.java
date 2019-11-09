@@ -5,7 +5,7 @@ import org.openjfx.model.Location;
 import org.openjfx.model.entities.Bullet.Bullet;
 import org.openjfx.utilization.PositionHelper;
 
-public class Tier1 extends Enemy implements SimpleEnemy, FireBullets {
+public class Tier1 extends Enemy implements FireBullets {
     private int bulletVelocity;
     private int bulletDamage;
     private int gunPeriod;
@@ -58,10 +58,10 @@ public class Tier1 extends Enemy implements SimpleEnemy, FireBullets {
         this.gunTimer = gunTimer;
     }
 
-    @Override
+    /*@Override
     public void wonderAround() {
 
-    }
+    } */
 
     @Override
     public void evolve() {

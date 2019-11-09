@@ -74,7 +74,7 @@ public class PreBossMap implements Serializable {
 
     public void initMap() {
         for (int i = 0; i < 50; i++) {
-            Tier1 enemy = new Tier1(new Location((int) (Math.random() * MAX_WIDTH), (int) (Math.random() * (1080-(int)(MAX_HEIGHT*Enemy.HEIGHT_SCALE)))), (int)(hitboxWidthScale*Enemy.WIDTH_SCALE), (int)(hitboxHeightScale*Enemy.HEIGHT_SCALE), 30, 50, 50, 500, 50, 5, 30);
+            Tier1 enemy = new Tier1(new Location((int) (Math.random() * MAX_WIDTH), (int) (Math.random() * (1080-(int)(MAX_HEIGHT*Enemy.HEIGHT_SCALE)))), (int)(hitboxWidthScale*Enemy.WIDTH_SCALE), (int)(hitboxHeightScale*Enemy.HEIGHT_SCALE), 30, 50, 2, 359, 50, 5, 30);
             enemies.put(enemy.getID(), enemy);
         }
     }
@@ -98,7 +98,10 @@ public class PreBossMap implements Serializable {
         for (var enemy : getEnemies().values()) {
             checkCollision(enemy, getBuildings());
             checkCollision(enemy, Collections.singletonMap(spacecraft.getID(), spacecraft));
-
+            wonderAround(enemy);
+            if (!enemy.getDestinationType().equals("spacecraft")) {
+                enemy.moveToDirection(enemy.getVelocity(), enemy.getDestinationLocation().getPositionX(), -enemy.getDestinationLocation().getPositionY());
+            }
             if(enemy instanceof Tier1)
                 firingEnemies.add(enemy);
         }
@@ -122,7 +125,7 @@ public class PreBossMap implements Serializable {
 
                     ((Enemy) obj).setDestinationType("spacecraft");
                 }else{
-                    ((Enemy) obj).setDestinationLocation(new Location(0,0));
+                   // ((Enemy) obj).setDestinationLocation(new Location(0,0));
                     ((Enemy) obj).setDestinationType("empty");
                 }
             }
@@ -141,6 +144,22 @@ public class PreBossMap implements Serializable {
                     iterator.setDead(true);
             }
         }
+    }
+
+    public void wonderAround(Enemy enemy){
+            if (!enemy.getDestinationType().equals("spacecraft")) {
+                double randomY;
+                double randomX;
+                enemy.setChangeDirectionTimer(enemy.getChangeDirectionTimer() % enemy.getChangeDirectionPeriod());
+
+                if (enemy.getChangeDirectionTimer() == 0) {
+                    randomX = 5 * (Math.random() - 0.5);
+                    randomY = 5 * (Math.random() - 0.5);
+                    enemy.setDestinationLocation(new Location(randomX, randomY));
+                }
+                enemy.setChangeDirectionTimer(enemy.getChangeDirectionTimer() + 1);
+            }
+
     }
 
 

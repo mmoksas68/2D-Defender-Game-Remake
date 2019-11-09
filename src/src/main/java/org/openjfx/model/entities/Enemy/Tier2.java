@@ -27,11 +27,6 @@ public class Tier2 extends Enemy implements SimpleEnemy {
     }
 
     @Override
-    public void wonderAround() {
-
-    }
-
-    @Override
     public void evolve() {
 
     }

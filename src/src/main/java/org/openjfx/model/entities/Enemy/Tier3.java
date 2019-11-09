@@ -67,11 +67,6 @@ public class Tier3 extends Enemy implements SimpleEnemy, FireBullets {
     }
 
     @Override
-    public void wonderAround() {
-
-    }
-
-    @Override
     public void evolve() {
 
     }
