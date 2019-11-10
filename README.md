@@ -30,4 +30,4 @@ Link for Project Meetings Document: https://drive.google.com/file/d/1SZuEcgDk-16
 
 Link for Analysis Report - Iteration 1: https://drive.google.com/file/d/1fW70vvsQzHF4RUny_4E4CkQypN6E9tvB/view?usp=sharing
 
-Link for Design Repory - Iteration 1: https://docs.google.com/document/d/1_O1bfRJ8JNr8-TyUobhqp26IlblEl2XeTNwm86Dv6i8/edit?usp=sharing
+Link for Design Report - Iteration 1: https://docs.google.com/document/d/1_O1bfRJ8JNr8-TyUobhqp26IlblEl2XeTNwm86Dv6i8/edit?usp=sharing
