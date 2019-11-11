@@ -1,9 +1,5 @@
 package org.openjfx.model;
 
-import org.openjfx.model.entities.Boss.Boss;
-import org.openjfx.model.entities.Boss.Laser;
-import org.openjfx.model.entities.Boss.LittleBoss;
-import org.openjfx.model.entities.Boss.Rocket;
 import org.openjfx.model.entities.Buff.Buff;
 import org.openjfx.model.entities.Building.Building;
 import org.openjfx.model.entities.Bullet.Bullet;
@@ -22,7 +18,10 @@ import java.util.List;
 public class PreBossMap implements Serializable {
     public static double MAX_HEIGHT;
     public static double MAX_WIDTH;
-
+    private static double hitboxWidthScale;
+    private static double hitboxHeightScale;
+    private double viewLeft;
+    private double viewRight;
     private int level;
     private java.util.Map<Long, Enemy> enemies = new HashMap<Long, Enemy>();
     private java.util.Map<Long, Building> buildings = new HashMap<Long, Building>();
@@ -32,13 +31,7 @@ public class PreBossMap implements Serializable {
     private List<Enemy> firingEnemies;
     private Spacecraft spacecraft;
     private Spacecraft spacecraft2;
-    private double viewLeft;
-    private double viewRight;
-    private static double hitboxWidthScale;
-    private static double hitboxHeightScale;
-    private boolean isFreeze;
-    private boolean isExceedUpper = false;
-    private boolean isExceedSide = false;
+    private boolean isFrozen;
 
     public PreBossMap(int level, double hitboxWidthScale, double hitboxHeightScale ) {
         this.hitboxWidthScale = hitboxWidthScale;
@@ -48,13 +41,13 @@ public class PreBossMap implements Serializable {
         viewLeft = 2*hitboxWidthScale;
         viewRight = 3*hitboxWidthScale;
         this.level = level;
-        spacecraft = new Spacecraft(new Location(MAX_WIDTH/2, MAX_HEIGHT/2), (int)(hitboxWidthScale*Spacecraft.WIDTH_SCALE), (int)(hitboxHeightScale*Spacecraft.HEIGHT_SCALE), 30, 1, 1, 1, 7, 1, 1, true, true, true);
+        spacecraft = new Spacecraft(new Location(MAX_WIDTH/2, MAX_HEIGHT/2), (hitboxHeightScale/1080*Spacecraft.WIDTH_SCALE), (hitboxHeightScale/1080*Spacecraft.HEIGHT_SCALE), 30, 1, 1, 1, 7, 1, 1, true, true, true);
         initMap();
     }
 
     public void refreshMap() {
         refreshLocatableObject(Collections.singletonMap(spacecraft.getID(), spacecraft), Spacecraft.WIDTH_SCALE, Spacecraft.HEIGHT_SCALE);
-        refreshLocatableObject(getEnemies(), Enemy.WIDTH_SCALE, Enemy.HEIGHT_SCALE);
+        refreshLocatableObject(getEnemies(), Tier1.WIDTH_SCALE, Tier1.HEIGHT_SCALE);
         refreshLocatableObject(getBullets(), Bullet.WIDTH_SCALE, Bullet.HEIGHT_SCALE);
         viewLeft = 5*hitboxWidthScale*viewLeft / MAX_WIDTH;
         MAX_WIDTH = 5*hitboxWidthScale;
@@ -65,8 +58,8 @@ public class PreBossMap implements Serializable {
         for(var iterator : list.values()){
             iterator.getLocation().setPositionX(5*hitboxWidthScale*iterator.getLocation().getPositionX() / MAX_WIDTH);
             iterator.getLocation().setPositionY(hitboxHeightScale*iterator.getLocation().getPositionY() / MAX_HEIGHT);
-            iterator.setHitBoxWidth(hitboxWidthScale*widthScaleSpecific);
-            iterator.setHitBoxHeight(hitboxHeightScale*heightScaleSpecific);
+            iterator.setHitBoxWidth(hitboxHeightScale/1080*widthScaleSpecific);
+            iterator.setHitBoxHeight(hitboxHeightScale/1080*heightScaleSpecific);
         }
     }
 
@@ -76,7 +69,7 @@ public class PreBossMap implements Serializable {
 
     public void initMap() {
         for (int i = 0; i < 50; i++) {
-            Tier1 enemy = new Tier1(new Location((int) (Math.random() * (MAX_WIDTH-40)), (int) (Math.random() * (1000-(int)(MAX_HEIGHT*Enemy.HEIGHT_SCALE)))), (int)(hitboxWidthScale*Enemy.WIDTH_SCALE), (int)(hitboxHeightScale*Enemy.HEIGHT_SCALE), 30, 50, 2, 359, 50, 5, 30);
+            Tier1 enemy = new Tier1(new Location( (Math.random() * (MAX_WIDTH-40)),  (Math.random() * (1000-(MAX_HEIGHT*Tier1.HEIGHT_SCALE/1080)))), ((hitboxHeightScale/1080)*Tier1.WIDTH_SCALE), ((hitboxHeightScale*Tier1.HEIGHT_SCALE)/1080), 30, 5, 359, 4, 5, 50, false);
             enemies.put(enemy.getID(), enemy);
         }
     }
@@ -158,8 +151,6 @@ public class PreBossMap implements Serializable {
                 }
                 enemy.setChangeDirectionTimer(enemy.getChangeDirectionTimer() + 1);
                 enemy.moveToDirection(enemy.getVelocity(), enemy.getDestinationLocation().getPositionX(), enemy.getDestinationLocation().getPositionY());
-                isExceedUpper = false;
-                isExceedSide = false;
             }
             else {
                 enemy.setChangeDirectionTimer(0);
@@ -248,28 +239,28 @@ public class PreBossMap implements Serializable {
         this.viewRight = viewRight;
     }
 
-    public boolean isFreeze() {
-        return isFreeze;
+    public boolean isFrozen() {
+        return isFrozen;
     }
 
-    public void setFreeze(boolean freeze) {
-        isFreeze = freeze;
+    public void setFrozen(boolean frozen) {
+        isFrozen = frozen;
     }
 
-    public double getHitboxWidthScale() {
+    public static double getHitboxWidthScale() {
         return hitboxWidthScale;
     }
 
-    public void setHitboxWidthScale(double hitboxWidthScale) {
-        this.hitboxWidthScale = hitboxWidthScale;
+    public static void setHitboxWidthScale(double hitboxWidthScale) {
+        PreBossMap.hitboxWidthScale = hitboxWidthScale;
     }
 
-    public double getHitboxHeightScale() {
+    public static double getHitboxHeightScale() {
         return hitboxHeightScale;
     }
 
-    public void setHitboxHeightScale(double hitboxHeightScale) {
-        this.hitboxHeightScale = hitboxHeightScale;
+    public static void setHitboxHeightScale(double hitboxHeightScale) {
+        PreBossMap.hitboxHeightScale = hitboxHeightScale;
     }
 
     public List<Enemy> getFiringEnemies() {

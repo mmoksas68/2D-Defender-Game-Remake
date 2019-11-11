@@ -5,13 +5,16 @@ import org.openjfx.model.Location;
 import org.openjfx.model.entities.Bullet.Bullet;
 
 public class Tier3 extends Enemy implements SimpleEnemy, FireBullets {
+    public static final double WIDTH_SCALE = 0.03;
+    public static final double HEIGHT_SCALE = 0.05;
+    private static final int MAX_HEALTH = 30;
     private int bulletVelocity;
     private int bulletDamage;
     private int gunPeriod;
     private int gunTimer = 0;
 
-    public Tier3(Location location, int hitBoxWidth, int hitBoxHeight, int healthPoint, int damage, int velocity, int radarRadius, int bulletVelocity, int bulletDamage, int gunPeriod) {
-        super(location, hitBoxWidth, hitBoxHeight, healthPoint, damage, velocity, radarRadius);
+    public Tier3(Location location, double hitBoxWidth, double hitBoxHeight, int damage, int velocity, int radarRadius, int bulletVelocity, int bulletDamage, int gunPeriod, boolean isEvolved) {
+        super(location, hitBoxWidth, hitBoxHeight, damage, velocity, radarRadius, isEvolved, MAX_HEALTH);
         this.bulletVelocity = bulletVelocity;
         this.bulletDamage = bulletDamage;
         this.gunPeriod = gunPeriod;
@@ -66,13 +69,4 @@ public class Tier3 extends Enemy implements SimpleEnemy, FireBullets {
         return new Bullet(new Location(this.getLocation().getPositionX(), this.getLocation().getPositionY()), 5,2, bulletDamage, bulletVelocity, getDestinationLocation().getPositionX(), getDestinationLocation().getPositionY());
     }
 
-    @Override
-    public void evolve() {
-
-    }
-
-    @Override
-    public void radarSearch() {
-
-    }
 }

@@ -13,8 +13,9 @@ public class ModelToViewSpaceCraft {
     private double currentViewRight;
     private boolean isDead;
     private boolean isDirectionLeft;
+    private boolean isMoving;
 
-    public ModelToViewSpaceCraft(Spacecraft spacecraft, double currentViewLeft, double currentViewRight) {
+    public ModelToViewSpaceCraft(Spacecraft spacecraft, double currentViewLeft, double currentViewRight, boolean isMoving) {
         this.locationX = spacecraft.getLocation().getPositionX();
         this.locationY = spacecraft.getLocation().getPositionY();
         this.hitboxWidth = spacecraft.getHitBoxWidth();
@@ -24,6 +25,7 @@ public class ModelToViewSpaceCraft {
         this.isDirectionLeft = spacecraft.isDirectionLeft();
         this.currentViewLeft = currentViewLeft;
         this.currentViewRight = currentViewRight;
+        this.isMoving = isMoving;
     }
 
     public double getLocationX() {
@@ -96,5 +98,13 @@ public class ModelToViewSpaceCraft {
 
     public void setDirectionLeft(boolean directionLeft) {
         isDirectionLeft = directionLeft;
+    }
+
+    public boolean isMoving() {
+        return isMoving;
+    }
+
+    public void setMoving(boolean moving) {
+        isMoving = moving;
     }
 }

@@ -14,7 +14,7 @@ public class EnemyView extends ImageView {
 
     static {
         try {
-            image = new Image(new FileInputStream("images/enemy.png"));
+            image = new Image(new FileInputStream("assets/images/enemy.png"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

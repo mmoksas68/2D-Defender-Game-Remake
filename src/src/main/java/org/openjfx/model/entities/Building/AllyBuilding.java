@@ -1,15 +1,29 @@
 package org.openjfx.model.entities.Building;
 
-import org.openjfx.model.LocatableObject;
 import org.openjfx.model.Location;
 
 public class AllyBuilding extends Building {
+    public static final int MAX_HEALTH = 500;
+    private int attackingEnemyNumber = 0;
+    private boolean isUnderAttack = false;
 
     public AllyBuilding(Location location, int hitBoxWidth, int hitBoxHeight) {
-        super(location, hitBoxWidth, hitBoxHeight);
+        super(location, hitBoxWidth, hitBoxHeight, MAX_HEALTH);
     }
 
-    public Location callForBackUp(){
-        return new Location(0,0);
+    public int getAttackingEnemyNumber() {
+        return attackingEnemyNumber;
+    }
+
+    public void setAttackingEnemyNumber(int attackingEnemyNumber) {
+        this.attackingEnemyNumber = attackingEnemyNumber;
+    }
+
+    public boolean isUnderAttack() {
+        return isUnderAttack;
+    }
+
+    public void setUnderAttack(boolean underAttack) {
+        isUnderAttack = underAttack;
     }
 }

@@ -3,15 +3,16 @@ package org.openjfx.model.entities.Spacecraft;
 import org.openjfx.model.FireBullets;
 import org.openjfx.model.LocatableObject;
 import org.openjfx.model.Location;
+import org.openjfx.model.PreBossMap;
 import org.openjfx.model.entities.Bullet.Bullet;
 import org.openjfx.utilization.PositionHelper;
 
 public class Spacecraft extends LocatableObject implements FireBullets {
-
+    public static final int MAX_HEALTH = 100;
     public static final int MAX_PACE = 5;
     public static final int MAX_SMARTBOMB = 3;
-    public static final double WIDTH_SCALE = 0.03;
-    public static final double HEIGHT_SCALE = 0.05;
+    public static final double WIDTH_SCALE = 90;
+    public static final double HEIGHT_SCALE = 120;
     private int gunPeriod;
     private int gunTimer = 0;
     private int bulletDamage;
@@ -25,8 +26,8 @@ public class Spacecraft extends LocatableObject implements FireBullets {
     private boolean infiniteArmor;
     private boolean isDirectionLeft;
 
-    public Spacecraft(Location location, int hitBoxWidth, int hitBoxHeight, int gunPeriod, int bulletDamage, int gunType, int bulletVelocity, double velocity, int currentBuffSlot, int smartBombStock, boolean isBatteryCharged, boolean isBuffSlotOccupied, boolean infiniteArmor) {
-        super(location, hitBoxWidth, hitBoxHeight);
+    public Spacecraft(Location location, double hitBoxWidth, double hitBoxHeight, int gunPeriod, int bulletDamage, int gunType, int bulletVelocity, double velocity, int currentBuffSlot, int smartBombStock, boolean isBatteryCharged, boolean isBuffSlotOccupied, boolean infiniteArmor) {
+        super(location, hitBoxWidth, hitBoxHeight, MAX_HEALTH);
         this.gunPeriod = gunPeriod;
         this.bulletDamage = bulletDamage;
         this.gunType = gunType;
@@ -181,6 +182,6 @@ public class Spacecraft extends LocatableObject implements FireBullets {
                             new Location(spacecraftHelper.getRight() + 10,
                                     ((spacecraftHelper.getTop() + spacecraftHelper.getBottom()) / 2));
 
-        return new Bullet(location,5, 2, 30, 10, direction, 0);
+        return new Bullet(location,(Bullet.WIDTH_SCALE * PreBossMap.getHitboxHeightScale()/1080), (Bullet.HEIGHT_SCALE* PreBossMap.getHitboxHeightScale()/1080), 3, 10, direction, 0);
     }
 }

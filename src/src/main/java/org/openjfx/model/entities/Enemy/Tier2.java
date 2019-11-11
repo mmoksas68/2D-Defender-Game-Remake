@@ -3,10 +3,13 @@ package org.openjfx.model.entities.Enemy;
 import org.openjfx.model.Location;
 
 public class Tier2 extends Enemy implements SimpleEnemy {
+    public static final double WIDTH_SCALE = 0.03;
+    public static final double HEIGHT_SCALE = 0.05;
+    private static final int MAX_HEALTH = 5;
     private int impactRadius;
 
-    public Tier2(Location location, int hitBoxWidth, int hitBoxHeight, int healthPoint, int damage, int velocity, int radarRadius, int impactRadius) {
-        super(location, hitBoxWidth, hitBoxHeight, healthPoint, damage, velocity, radarRadius);
+    public Tier2(Location location, double hitBoxWidth, double hitBoxHeight, int damage, int velocity, int radarRadius, int impactRadius, boolean isEvolved) {
+        super(location, hitBoxWidth, hitBoxHeight, damage, velocity, radarRadius, isEvolved, MAX_HEALTH);
         this.impactRadius = impactRadius;
     }
 
@@ -26,14 +29,5 @@ public class Tier2 extends Enemy implements SimpleEnemy {
 
     }
 
-    @Override
-    public void evolve() {
-
-    }
-
-    @Override
-    public void radarSearch() {
-
-    }
 }
 

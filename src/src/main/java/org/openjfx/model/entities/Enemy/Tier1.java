@@ -2,17 +2,21 @@ package org.openjfx.model.entities.Enemy;
 
 import org.openjfx.model.FireBullets;
 import org.openjfx.model.Location;
+import org.openjfx.model.PreBossMap;
 import org.openjfx.model.entities.Bullet.Bullet;
 import org.openjfx.utilization.PositionHelper;
 
 public class Tier1 extends Enemy implements FireBullets {
+    public static final double WIDTH_SCALE = 100;
+    public static final double HEIGHT_SCALE = 60;
+    private static final int MAX_HEALTH = 1;
     private int bulletVelocity;
     private int bulletDamage;
     private int gunPeriod;
     private int gunTimer = 0;
 
-    public Tier1(Location location, int hitBoxWidth, int hitBoxHeight, int healthPoint, int damage, int velocity, int radarRadius, int bulletVelocity, int bulletDamage, int gunPeriod) {
-        super(location, hitBoxWidth, hitBoxHeight, healthPoint, damage, velocity, radarRadius);
+    public Tier1(Location location, double hitBoxWidth, double hitBoxHeight, int damage, int velocity, int radarRadius, int bulletVelocity, int bulletDamage, int gunPeriod, boolean isEvolved) {
+        super(location, hitBoxWidth, hitBoxHeight, damage, velocity, radarRadius, isEvolved, MAX_HEALTH);
         this.bulletVelocity = bulletVelocity;
         this.bulletDamage = bulletDamage;
         this.gunPeriod = gunPeriod;
@@ -58,20 +62,6 @@ public class Tier1 extends Enemy implements FireBullets {
         this.gunTimer = gunTimer;
     }
 
-    /*@Override
-    public void wonderAround() {
-
-    } */
-
-    @Override
-    public void evolve() {
-
-    }
-
-    @Override
-    public void radarSearch() {
-
-    }
 
     @Override
     public Bullet fireBullet() {
@@ -88,6 +78,6 @@ public class Tier1 extends Enemy implements FireBullets {
         x += enemyHelper.getMiddlePointX();
         y += enemyHelper.getMiddlePointY();
 
-        return new Bullet(new Location(x ,y),5, 2, 30, 5, getDestinationLocation().getPositionX(), -getDestinationLocation().getPositionY());
+        return new Bullet(new Location(x ,y),(Bullet.WIDTH_SCALE * PreBossMap.getHitboxHeightScale()/1080), (Bullet.HEIGHT_SCALE* PreBossMap.getHitboxHeightScale()/1080), getBulletDamage(), getBulletVelocity(), getDestinationLocation().getPositionX(), -getDestinationLocation().getPositionY());
     }
 }

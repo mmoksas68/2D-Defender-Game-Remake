@@ -1,38 +1,30 @@
 package org.openjfx.model.entities.Enemy;
-
 import org.openjfx.model.LocatableObject;
 import org.openjfx.model.Location;
 
-import java.util.Random;
-
 
 public abstract class Enemy extends LocatableObject {
-    public static final double WIDTH_SCALE = 0.03;
-    public static final double HEIGHT_SCALE = 0.05;
     private int damage;
-    private int velocity;
+    private double velocity;
     private int radarRadius;
     private Location destinationLocation;
     private String destinationType;
     private int buffType;
+    private boolean isEvolved;
     private int changeDirectionPeriod = 100;
     private int changeDirectionTimer = 0;
 
-    public Enemy(Location location, int hitBoxWidth, int hitBoxHeight, int healthPoint, int damage, int velocity, int radarRadius) {
-        super(location, hitBoxWidth, hitBoxHeight);
+
+    public Enemy(Location location, double hitBoxWidth, double hitBoxHeight, int damage, double velocity, int radarRadius, boolean isEvolved, int health) {
+        super(location, hitBoxWidth, hitBoxHeight, isEvolved ? 2*health : health);
         this.damage = damage;
         this.velocity = velocity;
         this.radarRadius = radarRadius;
+        this.isEvolved = isEvolved;
         destinationLocation = new Location(0,0);
+        destinationType = "empty";
     }
 
-
-    public void evolve(){
-
-    }
-    public void radarSearch(){
-
-    }
     public int getDamage() {
         return damage;
     }
@@ -41,11 +33,11 @@ public abstract class Enemy extends LocatableObject {
         this.damage = damage;
     }
 
-    public int getVelocity() {
+    public double getVelocity() {
         return velocity;
     }
 
-    public void setVelocity(int velocity) {
+    public void setVelocity(double velocity) {
         this.velocity = velocity;
     }
 
@@ -73,28 +65,35 @@ public abstract class Enemy extends LocatableObject {
         this.destinationType = destinationType;
     }
 
-    public int getChangeDirectionTimer() {
-        return changeDirectionTimer;
-    }
-
-    public void setChangeDirectionTimer(int value) {
-        this.changeDirectionTimer = value;
-    }
-
-    public int getChangeDirectionPeriod() {
-        return changeDirectionPeriod;
-    }
-
-    public void setChangeDirectionPeriod(int value) {
-        this.changeDirectionPeriod = value;
-    }
-
-
     public int getBuffType() {
         return buffType;
     }
 
     public void setBuffType(int buffType) {
         this.buffType = buffType;
+    }
+
+    public boolean isEvolved() {
+        return isEvolved;
+    }
+
+    public void setEvolved(boolean evolved) {
+        isEvolved = evolved;
+    }
+
+    public int getChangeDirectionPeriod() {
+        return changeDirectionPeriod;
+    }
+
+    public void setChangeDirectionPeriod(int changeDirectionPeriod) {
+        this.changeDirectionPeriod = changeDirectionPeriod;
+    }
+
+    public int getChangeDirectionTimer() {
+        return changeDirectionTimer;
+    }
+
+    public void setChangeDirectionTimer(int changeDirectionTimer) {
+        this.changeDirectionTimer = changeDirectionTimer;
     }
 }

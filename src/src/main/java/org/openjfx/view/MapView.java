@@ -1,19 +1,20 @@
 package org.openjfx.view;
 
-import javafx.geometry.Insets;
 import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import org.openjfx.utilization.ModelToView;
 import org.openjfx.utilization.ModelToViewSpaceCraft;
+import org.openjfx.view.animations.explodeAnimation.ExplodeAnimation;
 import org.openjfx.view.entities.BulletView;
 import org.openjfx.view.entities.EnemyView;
-import org.openjfx.view.entities.SpacecraftView;
+import org.openjfx.view.entities.spacecraftView.SpacecraftGroup;
+
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,13 +24,15 @@ public class MapView extends Pane {
 
     static {
         try {
-            image = new BackgroundImage(new Image(new FileInputStream("images/background.png")), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+            image = new BackgroundImage(new Image(new FileInputStream("assets/images/background.png")), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     private java.util.Map<Long, Node> currentNodes = new HashMap<Long, Node>();
+    private java.util.Map<Long, SpacecraftGroup> spacecrafts = new HashMap<Long, SpacecraftGroup>();
+    private java.util.Map<Long, ExplodeAnimation> explodeAnimations = new HashMap<Long, ExplodeAnimation>();
 
     public MapView(double widthSize, double heightSize) {
         setPrefSize(widthSize, heightSize);
@@ -101,30 +104,45 @@ public class MapView extends Pane {
         }
     }
 
-    public void refreshSpacecraft(ModelToViewSpaceCraft modelToView){
-        SpacecraftView spacecraft;
+    public void refreshSpacecraft(ModelToViewSpaceCraft modelToViewSpaceCraft){
+        SpacecraftGroup spacecraftGroup;
 
-        if(currentNodes.containsKey(modelToView.getID()) ){
-            spacecraft = (SpacecraftView) currentNodes.get(modelToView.getID());
-            spacecraft.setTranslateX(modelToView.getLocationX() - modelToView.getCurrentViewLeft());
-            spacecraft.setTranslateY(modelToView.getLocationY());
-            spacecraft.setFitHeight(modelToView.getHitboxHeight());
-            spacecraft.setFitWidth(modelToView.getHitboxWidth());
-            if(modelToView.isDirectionLeft())
-                spacecraft.setRotate(-90);
-            else
-                spacecraft.setRotate(90);
+        if(spacecrafts.containsKey(modelToViewSpaceCraft.getID()) ){
+           spacecraftGroup = spacecrafts.get(modelToViewSpaceCraft.getID());
+           spacecraftGroup.refresh(modelToViewSpaceCraft);
         } else {
-            spacecraft = new SpacecraftView();
-            spacecraft.setTranslateX(modelToView.getLocationX() - modelToView.getCurrentViewLeft());
-            spacecraft.setTranslateY(modelToView.getLocationY());
-            spacecraft.setFitHeight(modelToView.getHitboxHeight());
-            spacecraft.setFitWidth(modelToView.getHitboxWidth());
-            spacecraft.setCacheHint(CacheHint.SPEED);
-            spacecraft.setCache(true);
-            spacecraft.setSmooth(true);
-            getChildren().add(spacecraft);
-            currentNodes.put(modelToView.getID(),spacecraft);
+            spacecraftGroup = new SpacecraftGroup(modelToViewSpaceCraft);
+            getChildren().add(spacecraftGroup.getSpacecraftView());
+            getChildren().add(spacecraftGroup.getFlame());
+            spacecrafts.put(modelToViewSpaceCraft.getID(), spacecraftGroup);
+        }
+    }
+
+    public void addExplodeAnimation(ModelToView modelToView){
+        ExplodeAnimation explodeAnimation = new ExplodeAnimation(modelToView);
+        explodeAnimations.put(modelToView.getID(), explodeAnimation);
+        explodeAnimation.setImageViewTimer(1);
+        getChildren().add(explodeAnimation.getImageViewList()[0]);
+    }
+
+    public void refreshExplodeAnimations(){
+        ArrayList<Long> toBeDeleted = new ArrayList<>();
+        for(var explodeAnimation : getExplodeAnimations().values()){
+            explodeAnimation.setImageViewTimer(explodeAnimation.getImageViewTimer() % explodeAnimation.getImageViewPeriod());
+            if(explodeAnimation.getImageViewTimer() == 0 && explodeAnimation.getCurrent() < 10){
+                getChildren().remove(explodeAnimation.getImageViewList()[explodeAnimation.getCurrent()]);
+                getChildren().add(explodeAnimation.getImageViewList()[explodeAnimation.getCurrent()+1]);
+                explodeAnimation.setCurrent(explodeAnimation.getCurrent()+1);
+            }
+            if(explodeAnimation.getCurrent() >= 10){
+                toBeDeleted.add(explodeAnimation.getID());
+                getChildren().remove(explodeAnimation.getImageViewList()[10]);
+            }
+            explodeAnimation.setImageViewTimer(explodeAnimation.getImageViewTimer()+1);
+
+        }
+        for(var currentID : toBeDeleted){
+            getExplodeAnimations().remove(currentID);
         }
     }
 
@@ -141,5 +159,21 @@ public class MapView extends Pane {
         super.setPrefSize(v, v1);
         Background background = new Background(image);
         this.setBackground(background);
+    }
+
+    public Map<Long, SpacecraftGroup> getSpacecrafts() {
+        return spacecrafts;
+    }
+
+    public void setSpacecrafts(Map<Long, SpacecraftGroup> spacecrafts) {
+        this.spacecrafts = spacecrafts;
+    }
+
+    public Map<Long, ExplodeAnimation> getExplodeAnimations() {
+        return explodeAnimations;
+    }
+
+    public void setExplodeAnimations(Map<Long, ExplodeAnimation> explodeAnimations) {
+        this.explodeAnimations = explodeAnimations;
     }
 }
