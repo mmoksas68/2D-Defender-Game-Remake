@@ -1,26 +1,23 @@
-package org.openjfx.view.entities;
+package org.openjfx.view.entities.spacecraftView;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class SpacecraftView extends ImageView {
-
+public class Flame extends ImageView {
     private static Image image;
 
     static {
         try {
-            image = new Image(new FileInputStream("images/spacecraft.png"));
+            image = new Image(new FileInputStream("assets/images/Flame_01.png"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public SpacecraftView() {
+    public Flame() {
         super(image);
     }
 

@@ -4,13 +4,14 @@ import org.openjfx.model.LocatableObject;
 import org.openjfx.model.Location;
 
 public class Meteor extends LocatableObject {
+    private static final int MAX_HEALTH = 30;
     private int velocity;
     private int damage;
     private int directionX;
     private int directionY;
 
     public Meteor(Location location, int hitBoxWidth, int hitBoxHeight, int velocity, int damage, int directionX, int directionY) {
-        super(location, hitBoxWidth, hitBoxHeight);
+        super(location, hitBoxWidth, hitBoxHeight, MAX_HEALTH);
         this.velocity = velocity;
         this.damage = damage;
         this.directionX = directionX;

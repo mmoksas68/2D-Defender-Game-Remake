@@ -1,4 +1,4 @@
-package org.openjfx.controller;
+package org.openjfx.controller.preBossControllers;
 
 import javafx.animation.*;
 import javafx.event.ActionEvent;
@@ -13,9 +13,9 @@ import org.openjfx.utilization.ModelToView;
 import org.openjfx.utilization.ModelToViewSpaceCraft;
 import org.openjfx.view.MapView;
 
-
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 public class PreBossGameController {
     private PreBossMap preBossMap;
@@ -33,6 +33,7 @@ public class PreBossGameController {
     private boolean gameOnChange = false;
     private boolean isGameFinished = false;
     private boolean isGameSuccessful = false;
+
 
     private AnimationTimer animationTimer = new AnimationTimer(){
         @Override
@@ -89,6 +90,7 @@ public class PreBossGameController {
             bulletFire(preBossMap.getSpacecraft(), spacePressed);
 
             refreshMap();
+            mapView.refreshExplodeAnimations();
 
             for (var bullet : preBossMap.getBullets().values()) {
                 bullet.moveToDirection(bullet.getVelocity(), bullet.getDirectionX(), bullet.getDirectionY());
@@ -195,15 +197,19 @@ public class PreBossGameController {
 
     private void refreshEnemy(){
         ArrayList<Long> toBeDeleted = new ArrayList<>();
+        HashMap<Long, ModelToView> explosionList = new HashMap<>();
         for(var enemy : preBossMap.getEnemies().values()){
+            ModelToView modelToView = new ModelToView( enemy, preBossMap.getViewLeft(), preBossMap.getViewRight());
             if(enemy.isDead()){
                 toBeDeleted.add(enemy.getID());
+                mapView.addExplodeAnimation(modelToView);
             }
-            mapView.refreshEnemy(new ModelToView( enemy, preBossMap.getViewLeft(), preBossMap.getViewRight()));
+            mapView.refreshEnemy(modelToView);
         }
 
         for(var it : toBeDeleted){
             preBossMap.deleteEnemy(it);
+            SoundController.explosion();
         }
     }
 
@@ -222,7 +228,7 @@ public class PreBossGameController {
 
     private void refreshSpacecraft(){
 
-        mapView.refreshSpacecraft( new ModelToViewSpaceCraft(preBossMap.getSpacecraft(), preBossMap.getViewLeft(), preBossMap.getViewRight()));
+        mapView.refreshSpacecraft( new ModelToViewSpaceCraft(preBossMap.getSpacecraft(), preBossMap.getViewLeft(), preBossMap.getViewRight(), (leftPressed || rightPressed)));
 
     }
 
@@ -285,7 +291,10 @@ public class PreBossGameController {
     }
 
     private <T> void bulletFire(T t, boolean isFiring){
+
         var current = t instanceof Tier1 ? (Tier1)t : (t instanceof Spacecraft ? (Spacecraft)t : null);
+
+
 
         current.setGunTimer(current.getGunTimer() % current.getGunPeriod());
 
@@ -294,10 +303,18 @@ public class PreBossGameController {
             {
                 Bullet bullet = current.fireBullet();
                 preBossMap.addBullet(bullet);
+                if(current instanceof Spacecraft && isFiring){
+                    SoundController.fireBullet();
+                }
             }
             current.setGunTimer(current.getGunTimer() + 1);
         }else if(current.getGunTimer() != 0)
             current.setGunTimer(current.getGunTimer() + 1);
 
     }
+
+
+
+
 }
+

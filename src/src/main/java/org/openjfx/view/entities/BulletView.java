@@ -10,7 +10,7 @@ public class BulletView extends ImageView {
 
     static {
         try {
-            image = new Image(new FileInputStream("images/bullet.png"));
+            image = new Image(new FileInputStream("assets/images/bullet.png"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

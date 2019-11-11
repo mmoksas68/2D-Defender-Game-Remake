@@ -20,7 +20,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1Sw0Jh41oR6tTov7KsEs2eeeePj" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -31,14 +31,14 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../projectCs319/src" />
+    <property name="last_opened_file_path" value="$MAVEN_REPOSITORY$/org/openjfx/javafx-media/13.0.1" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -109,6 +109,11 @@
       <workItem from="1573202130598" duration="10270000" />
       <workItem from="1573276513294" duration="97000" />
       <workItem from="1573276802180" duration="14426000" />
+      <workItem from="1573402563080" duration="168000" />
+      <workItem from="1573402932578" duration="5000" />
+      <workItem from="1573402995568" duration="2069000" />
+      <workItem from="1573405087831" duration="6303000" />
+      <workItem from="1573474609809" duration="21590000" />
     </task>
     <servers />
   </component>
@@ -130,5 +135,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
   </component>
 </project>

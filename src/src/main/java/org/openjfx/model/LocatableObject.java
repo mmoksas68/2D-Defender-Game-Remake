@@ -10,12 +10,12 @@ public abstract class LocatableObject {
     private boolean isDead = false;
     private int healthPoint;
 
-    public LocatableObject(Location location, double hitBoxWidth, double hitBoxHeight) {
+    public LocatableObject(Location location, double hitBoxWidth, double hitBoxHeight, int healthPoint) {
         this.location = location;
         this.hitBoxWidth = hitBoxWidth;
         this.hitBoxHeight = hitBoxHeight;
+        this.healthPoint = healthPoint;
         this.ID = currentID++;
-        healthPoint = 100;
     }
 
     public int getHealthPoint() {
