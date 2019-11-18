@@ -11,7 +11,7 @@ import org.openjfx.controller.preBossControllers.PreBossGameController;
 
 
 /**
- * JavaFX App
+ * JavaFX App**
  */
 public class App extends Application {
     PreBossGameController preBossGameController;
