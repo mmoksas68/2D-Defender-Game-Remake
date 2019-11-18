@@ -3,21 +3,34 @@ package org.openjfx.view;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
+import org.openjfx.utilization.ModelToView;
 
 
-public class TopBoard extends StackPane {
+public class GameBarView extends StackPane {
 
-    public MapRadarView mapRadarView;
+    public RadarMapView radarMapView;
 
-    public TopBoard(double width, double height){
-        setPrefSize(width*0.1,height*0.1);
+    public GameBarView(double width, double height){
+        setPrefSize(width,height);
         init(width, height);
-        getChildren().add(mapRadarView);
-        setAlignment(mapRadarView, Pos.CENTER);
+        getChildren().add(radarMapView);
     }
 
     private void init(double width, double height){
-        mapRadarView = new MapRadarView(width, height);
+        radarMapView = new RadarMapView(width, height);
     }
+
+    public void refreshEnemy(ModelToView modelToView){
+        radarMapView.refreshEnemy(modelToView);
+    }
+
+    public void refreshSpacecraft(ModelToView modelToView){
+        radarMapView.refreshSpacecraft(modelToView);
+    }
+
+    public void refreshGameBarView(double width, double height) {
+        radarMapView.refreshRadarMapView(width, height);
+    }
+
 }
 

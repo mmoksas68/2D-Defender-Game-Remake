@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a7a46841-6915-4e69-85ec-c406941c34f2" name="Default Changelist" comment="" />
+    <list default="true" id="a7a46841-6915-4e69-85ec-c406941c34f2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/model/GameBar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/model/RadarMap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/GameBarView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/RadarMapView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/PreBossGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/PreBossGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/model/PreBossMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/model/PreBossMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/model/PreBossMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/model/PreBossMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/view/entities/EnemyBuilding1View.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/view/entities/EnemyBuilding1View.class" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,6 +128,13 @@
       <workItem from="1573402995568" duration="2069000" />
       <workItem from="1573405087831" duration="6303000" />
       <workItem from="1573474609809" duration="21590000" />
+      <workItem from="1573516821518" duration="2862000" />
+      <workItem from="1573519799283" duration="129000" />
+      <workItem from="1573545559957" duration="8494000" />
+      <workItem from="1573570803032" duration="6655000" />
+      <workItem from="1573579101009" duration="1684000" />
+      <workItem from="1573582537088" duration="168000" />
+      <workItem from="1574070729037" duration="1244000" />
     </task>
     <servers />
   </component>

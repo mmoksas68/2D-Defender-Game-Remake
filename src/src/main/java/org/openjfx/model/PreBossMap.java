@@ -69,7 +69,7 @@ public class PreBossMap implements Serializable {
 
     public void initMap() {
         for (int i = 0; i < 50; i++) {
-            Tier1 enemy = new Tier1(new Location( (Math.random() * (MAX_WIDTH-40)),  (Math.random() * (1000-(MAX_HEIGHT*Tier1.HEIGHT_SCALE/1080)))), ((hitboxHeightScale/1080)*Tier1.WIDTH_SCALE), ((hitboxHeightScale*Tier1.HEIGHT_SCALE)/1080), 30, 5, 359, 4, 5, 50, false);
+            Tier1 enemy = new Tier1(new Location( (Math.random() * (MAX_WIDTH-50)),  (Math.random() * ((MAX_HEIGHT-60)))), ((hitboxHeightScale/1080)*Tier1.WIDTH_SCALE), ((hitboxHeightScale*Tier1.HEIGHT_SCALE)/1080), 30, 5, 359, 4, 5, 50, false);
             enemies.put(enemy.getID(), enemy);
         }
     }

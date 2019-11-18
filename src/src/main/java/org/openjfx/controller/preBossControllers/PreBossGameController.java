@@ -4,7 +4,10 @@ import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import org.openjfx.model.GameBar;
 import org.openjfx.model.PreBossMap;
 import org.openjfx.model.entities.Bullet.Bullet;
 import org.openjfx.model.entities.Enemy.Tier1;
@@ -12,14 +15,17 @@ import org.openjfx.model.entities.Spacecraft.Spacecraft;
 import org.openjfx.utilization.ModelToView;
 import org.openjfx.utilization.ModelToViewSpaceCraft;
 import org.openjfx.view.MapView;
+import org.openjfx.view.GameBarView;
+import org.openjfx.view.RadarMapView;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PreBossGameController {
     private PreBossMap preBossMap;
+    private GameBar gameBar;
     private MapView mapView;
+    private GameBarView gameBarView;
     private Scene scene;
     private double sceneWidth;
     private double sceneHeight;
@@ -33,6 +39,8 @@ public class PreBossGameController {
     private boolean gameOnChange = false;
     private boolean isGameFinished = false;
     private boolean isGameSuccessful = false;
+    private double rateGameBar = 0.12;
+    private double rateMap = 0.91;
 
 
     private AnimationTimer animationTimer = new AnimationTimer(){
@@ -107,12 +115,18 @@ public class PreBossGameController {
 
 
     private void initGame(){
-        preBossMap = new PreBossMap(3, sceneWidth, sceneHeight);
-        mapView = new MapView(sceneWidth,sceneHeight);
+        gameBar = new GameBar(sceneWidth, sceneHeight*rateGameBar);
+        gameBarView = new GameBarView(gameBar.getHitboxWidthScale(), gameBar.getHitboxHeightScale());
+        preBossMap = new PreBossMap(3, sceneWidth, sceneHeight*rateMap);
+        mapView = new MapView(sceneWidth,sceneHeight*rateMap);
 
         refreshMap();
 
-        scene = new Scene(mapView, sceneWidth, sceneHeight);
+        BorderPane rootPane = new BorderPane();
+        rootPane.setTop(gameBarView);
+        rootPane.setCenter(mapView);
+
+        scene = new Scene(rootPane, sceneWidth, sceneHeight);
 
         scene.setOnKeyPressed( e -> {
             switch (e.getCode()){
@@ -205,6 +219,7 @@ public class PreBossGameController {
                 mapView.addExplodeAnimation(modelToView);
             }
             mapView.refreshEnemy(modelToView);
+            gameBarView.refreshEnemy(modelToView);
         }
 
         for(var it : toBeDeleted){
@@ -220,6 +235,7 @@ public class PreBossGameController {
                 toBeDeleted.add(bullet.getID());
             }
             mapView.refreshBullet(new ModelToView(bullet, preBossMap.getViewLeft(), preBossMap.getViewRight()));
+
         }
         for(var it : toBeDeleted){
             preBossMap.deleteBullet(it);
@@ -227,9 +243,8 @@ public class PreBossGameController {
     }
 
     private void refreshSpacecraft(){
-
         mapView.refreshSpacecraft( new ModelToViewSpaceCraft(preBossMap.getSpacecraft(), preBossMap.getViewLeft(), preBossMap.getViewRight(), (leftPressed || rightPressed)));
-
+        gameBarView.refreshSpacecraft(new ModelToView(preBossMap.getSpacecraft(), preBossMap.getViewLeft(), preBossMap.getViewRight()));
     }
 
     public PreBossMap getPreBossMap() {
@@ -262,9 +277,13 @@ public class PreBossGameController {
 
     public void setSceneWidth(double sceneWidth) {
         this.sceneWidth = sceneWidth;
-        mapView.setPrefSize(sceneWidth,sceneHeight);
+        mapView.setPrefSize(sceneWidth,sceneHeight*rateMap);
+        gameBarView.setPrefSize(sceneWidth, sceneHeight*rateGameBar);
         preBossMap.setHitboxWidthScale(sceneWidth);
+        gameBar.setHitboxWidthScale(sceneWidth);
         preBossMap.refreshMap();
+        gameBar.refreshGameBar();
+        gameBarView.refreshGameBarView(sceneWidth, sceneHeight*rateGameBar);
     }
 
     public double getSceneHeight() {
@@ -273,9 +292,13 @@ public class PreBossGameController {
 
     public void setSceneHeight(double sceneHeight) {
         this.sceneHeight = sceneHeight;
-        mapView.setPrefSize(sceneWidth,sceneHeight);
-        preBossMap.setHitboxHeightScale(sceneHeight);
+        mapView.setPrefSize(sceneWidth,sceneHeight*rateMap);
+        gameBarView.setPrefSize(sceneWidth, sceneHeight*rateGameBar);
+        preBossMap.setHitboxHeightScale(sceneHeight*rateMap);
+        gameBar.setHitboxHeightScale(sceneHeight*rateGameBar);
         preBossMap.refreshMap();
+        gameBar.refreshGameBar();
+        gameBarView.refreshGameBarView(sceneWidth, sceneHeight*rateGameBar);
     }
 
     private void motionFunction(double accelerationSpeedChange, double constraint, double directionX, double directionY){
