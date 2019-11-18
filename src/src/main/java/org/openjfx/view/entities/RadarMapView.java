@@ -1,4 +1,4 @@
-package org.openjfx.view;
+package org.openjfx.view.entities;
 
 import javafx.scene.CacheHint;
 import javafx.scene.Node;
@@ -7,8 +7,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import org.openjfx.utilization.ModelToView;
 
+import org.openjfx.utilization.ModelToViewBuilding;
 import org.openjfx.utilization.ModelToViewEnemy;
+import org.openjfx.view.entities.buildingView.BuildingGroup;
 import org.openjfx.view.entities.bulletView.BulletView;
+import org.openjfx.view.entities.radarAllyBuildingView.RadarAllyBuildingView;
+import org.openjfx.view.entities.radarSpacecraftView.RadarSpaceCraftView;
 ;
 
 
@@ -29,8 +33,7 @@ public class RadarMapView extends Pane {
         this.currentWidth = width*widthScale;
         this.height = height;
         setMaxSize(currentWidth*5,height);
-        //setPrefSize(currentWidth*5, height);
-        setStyle("-fx-background-color: #1a237e");
+        setStyle("-fx-border-color : white; -fx-border-width : 0 1 0 1");
     }
 
     @Override
@@ -39,16 +42,16 @@ public class RadarMapView extends Pane {
     }
 
     public void refreshSpacecraft(ModelToView modelToView) {
-        BulletView spacecraftRadarView;
+         RadarSpaceCraftView spacecraftRadarView;
         if(currentNodes.containsKey(modelToView.getID())){
-            spacecraftRadarView = (BulletView) currentNodes.get(modelToView.getID());
+            spacecraftRadarView = (RadarSpaceCraftView) currentNodes.get(modelToView.getID());
             spacecraftRadarView.setTranslateX(modelToView.getLocationX()*widthScale);
             spacecraftRadarView.setTranslateY(modelToView.getLocationY()*heightScale);
             spacecraftRadarView.setFitWidth(modelToView.getHitboxWidth()*widthScale);
             spacecraftRadarView.setFitHeight(modelToView.getHitboxHeight()*heightScale);
 
         } else {
-            spacecraftRadarView = new BulletView();
+            spacecraftRadarView = new RadarSpaceCraftView();
             spacecraftRadarView.setTranslateX(modelToView.getLocationX() - modelToView.getCurrentViewLeft());
             spacecraftRadarView.setTranslateY(modelToView.getLocationY());
             spacecraftRadarView.setFitWidth(modelToView.getHitboxWidth());
@@ -83,6 +86,30 @@ public class RadarMapView extends Pane {
             enemyRadarView.setSmooth(true);
             currentNodes.put(modelToView.getID(), enemyRadarView);
             getChildren().add(enemyRadarView);
+        }
+    }
+
+    public void refreshBuilding(ModelToViewBuilding modelToViewBuilding) {
+        RadarAllyBuildingView allyBuilding;
+        if (currentNodes.containsKey(modelToViewBuilding.getID())) {
+            allyBuilding = (RadarAllyBuildingView) currentNodes.get(modelToViewBuilding.getID());
+            if (modelToViewBuilding.isDead()) {
+                getChildren().remove(allyBuilding);
+            }
+            else{
+                allyBuilding.setFitWidth(modelToViewBuilding.getHitboxWidth()*widthScale);
+                allyBuilding.setFitHeight(modelToViewBuilding.getHitboxHeight()*heightScale);
+                allyBuilding.setTranslateX(modelToViewBuilding.getLocationX()*widthScale);
+                allyBuilding.setTranslateY(modelToViewBuilding.getLocationY()*heightScale);
+            }
+        } else {
+            allyBuilding = new RadarAllyBuildingView();
+            allyBuilding.setFitWidth(modelToViewBuilding.getHitboxWidth()*widthScale);
+            allyBuilding.setFitHeight(modelToViewBuilding.getHitboxHeight()*heightScale);
+            allyBuilding.setTranslateX(modelToViewBuilding.getLocationX() - modelToViewBuilding.getCurrentViewLeft());
+            allyBuilding.setTranslateY(modelToViewBuilding.getLocationY());
+            currentNodes.put(modelToViewBuilding.getID(), allyBuilding);
+            getChildren().add(allyBuilding);
         }
     }
 

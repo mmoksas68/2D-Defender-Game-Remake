@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import org.openjfx.model.GameBar;
 import org.openjfx.model.preBoss.PreBossMap;
-import org.openjfx.model.entities.Building.AllyBuilding;
 import org.openjfx.model.entities.Bullet.Bullet;
 import org.openjfx.model.entities.Enemy.Tier1;
 import org.openjfx.model.entities.Spacecraft.Spacecraft;
@@ -17,7 +16,6 @@ import org.openjfx.utilization.ModelToViewEnemy;
 import org.openjfx.utilization.ModelToViewSpaceCraft;
 import org.openjfx.view.MapView;
 import org.openjfx.view.GameBarView;
-import org.openjfx.view.RadarMapView;
 
 import java.util.ArrayList;
 
@@ -243,6 +241,7 @@ public class PreBossGameController {
                 mapView.addExplodeAnimation(new ModelToView(building, preBossMap.getViewLeft(), preBossMap.getViewRight()));
             }
             mapView.refreshBuilding(new ModelToViewBuilding(building, preBossMap.getViewLeft(), preBossMap.getViewRight()));
+            gameBarView.refreshRadarBuilding(new ModelToViewBuilding(building, preBossMap.getViewLeft(), preBossMap.getViewRight()));
         }
         for (var it : toBeDeleted) {
             preBossMap.deleteAllyBuilding(it);
