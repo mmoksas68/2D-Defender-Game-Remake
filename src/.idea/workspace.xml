@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7a46841-6915-4e69-85ec-c406941c34f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/images/allyBuilding.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/allyBuilding2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/allyBuilding3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/radar_spacecraft.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/radarAllyBuildingView/RadarAllyBuildingView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/radarSpacecraftView/RadarSpaceCraftView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/PreBossGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/PreBossGameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/view/GameBarView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/GameBarView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/view/RadarMapView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/RadarMapView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/view/GameBarView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/view/GameBarView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/view/RadarMapView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/enemy_spawner_tier1.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -139,6 +125,7 @@
       <workItem from="1574070729037" duration="1244000" />
       <workItem from="1574080191899" duration="667000" />
       <workItem from="1574102686701" duration="4520000" />
+      <workItem from="1574109898389" duration="703000" />
     </task>
     <servers />
   </component>
