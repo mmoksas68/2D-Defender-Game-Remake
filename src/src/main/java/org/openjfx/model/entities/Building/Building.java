@@ -4,10 +4,10 @@ import org.openjfx.model.LocatableObject;
 import org.openjfx.model.Location;
 
 public abstract class Building extends LocatableObject {
-    public static final double WIDTH_SCALE = 0.03;
-    public static final double HEIGHT_SCALE = 0.05;
+    public static final double WIDTH_SCALE = 100;
+    public static final double HEIGHT_SCALE = 100;
 
-    public Building(Location location, int hitBoxWidth, int hitBoxHeight, int health) {
+    public Building(Location location, double hitBoxWidth, double hitBoxHeight, int health) {
         super(location, hitBoxWidth, hitBoxHeight, health);
     }
 }

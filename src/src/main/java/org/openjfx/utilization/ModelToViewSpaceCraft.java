@@ -14,8 +14,10 @@ public class ModelToViewSpaceCraft {
     private boolean isDead;
     private boolean isDirectionLeft;
     private boolean isMoving;
+    private int health;
 
     public ModelToViewSpaceCraft(Spacecraft spacecraft, double currentViewLeft, double currentViewRight, boolean isMoving) {
+        this.health = spacecraft.getHealthPoint();
         this.locationX = spacecraft.getLocation().getPositionX();
         this.locationY = spacecraft.getLocation().getPositionY();
         this.hitboxWidth = spacecraft.getHitBoxWidth();
@@ -106,5 +108,13 @@ public class ModelToViewSpaceCraft {
 
     public void setMoving(boolean moving) {
         isMoving = moving;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

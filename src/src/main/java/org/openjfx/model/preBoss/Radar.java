@@ -1,11 +1,11 @@
-package org.openjfx.model;
+package org.openjfx.model.preBoss;
+
+import org.openjfx.model.Location;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Radar {
-    public static final int MAX_HEIGHT = 300;
-    public static final int MAX_WIDHT = 500;
     private Map<Location, String> locations = new HashMap<Location, String>();
 
     public Radar() {

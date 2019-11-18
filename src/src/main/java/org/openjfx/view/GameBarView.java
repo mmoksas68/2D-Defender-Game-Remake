@@ -4,6 +4,7 @@ package org.openjfx.view;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import org.openjfx.utilization.ModelToView;
+import org.openjfx.utilization.ModelToViewEnemy;
 
 
 public class GameBarView extends StackPane {
@@ -20,7 +21,7 @@ public class GameBarView extends StackPane {
         radarMapView = new RadarMapView(width, height);
     }
 
-    public void refreshEnemy(ModelToView modelToView){
+    public void refreshEnemy(ModelToViewEnemy modelToView){
         radarMapView.refreshEnemy(modelToView);
     }
 

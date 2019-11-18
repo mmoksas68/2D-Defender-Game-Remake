@@ -7,7 +7,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import org.openjfx.utilization.ModelToView;
 
-import org.openjfx.view.entities.BulletView;
+import org.openjfx.utilization.ModelToViewEnemy;
+import org.openjfx.view.entities.bulletView.BulletView;
 ;
 
 
@@ -58,7 +59,7 @@ public class RadarMapView extends Pane {
         refreshCurrentRect(modelToView);
     }
 
-    public void refreshEnemy(ModelToView modelToView){
+    public void refreshEnemy(ModelToViewEnemy modelToView){
         BulletView enemyRadarView;
         if(currentNodes.containsKey(modelToView.getID())){
             enemyRadarView = (BulletView) currentNodes.get(modelToView.getID());

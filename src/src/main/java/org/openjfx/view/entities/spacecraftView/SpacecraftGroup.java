@@ -1,26 +1,24 @@
 package org.openjfx.view.entities.spacecraftView;
 
 import javafx.scene.CacheHint;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import org.openjfx.model.entities.Spacecraft.Spacecraft;
 import org.openjfx.utilization.ModelToViewSpaceCraft;
 
 public class SpacecraftGroup {
     private SpacecraftView spacecraftView;
     private Flame flame;
+    private Rectangle healthBar;
 
     public SpacecraftGroup(ModelToViewSpaceCraft modelToViewSpaceCraft){
         spacecraftView = new SpacecraftView();
-        spacecraftView.setTranslateX(modelToViewSpaceCraft.getLocationX() - modelToViewSpaceCraft.getCurrentViewLeft());
-        spacecraftView.setTranslateY(modelToViewSpaceCraft.getLocationY());
-        spacecraftView.setFitHeight(modelToViewSpaceCraft.getHitboxHeight());
-        spacecraftView.setFitWidth(modelToViewSpaceCraft.getHitboxWidth());
         spacecraftView.setCacheHint(CacheHint.SPEED);
         spacecraftView.setCache(true);
         spacecraftView.setSmooth(true);
         flame = new Flame();
-        flame.setTranslateX(spacecraftView.getTranslateX());
-        flame.setTranslateY(spacecraftView.getTranslateY());
-        flame.setFitHeight(spacecraftView.getFitHeight() + spacecraftView.getFitHeight()/2);
-        flame.setFitWidth(spacecraftView.getFitWidth());
+        healthBar = new Rectangle(spacecraftView.getFitWidth()*(8.5/10), spacecraftView.getFitHeight()*(1.0/10), Color.RED);
+        refresh(modelToViewSpaceCraft);
     }
 
     public void refresh(ModelToViewSpaceCraft modelToViewSpaceCraft){
@@ -49,6 +47,11 @@ public class SpacecraftGroup {
             flame.setVisible(true);
         else
             flame.setVisible(false);
+
+        healthBar.setHeight(spacecraftView.getFitHeight()*(0.5/10));
+        healthBar.setWidth((double)modelToViewSpaceCraft.getHealth()/ Spacecraft.getMaxHealth() * spacecraftView.getFitWidth()*(8.0/10));
+        healthBar.setTranslateX(spacecraftView.getTranslateX() + spacecraftView.getFitWidth()*(1.0/10));
+        healthBar.setTranslateY(spacecraftView.getTranslateY() + spacecraftView.getFitHeight()*(8.5/10));
     }
 
     public SpacecraftView getSpacecraftView() {
@@ -65,5 +68,13 @@ public class SpacecraftGroup {
 
     public void setFlame(Flame flame) {
         this.flame = flame;
+    }
+
+    public Rectangle getHealthBar() {
+        return healthBar;
+    }
+
+    public void setHealthBar(Rectangle healthBar) {
+        this.healthBar = healthBar;
     }
 }

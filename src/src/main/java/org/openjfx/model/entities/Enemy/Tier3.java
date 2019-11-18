@@ -7,7 +7,7 @@ import org.openjfx.model.entities.Bullet.Bullet;
 public class Tier3 extends Enemy implements SimpleEnemy, FireBullets {
     public static final double WIDTH_SCALE = 0.03;
     public static final double HEIGHT_SCALE = 0.05;
-    private static final int MAX_HEALTH = 30;
+    public static final int MAX_HEALTH = 30;
     private int bulletVelocity;
     private int bulletDamage;
     private int gunPeriod;

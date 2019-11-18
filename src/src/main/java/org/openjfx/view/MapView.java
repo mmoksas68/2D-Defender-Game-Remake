@@ -5,10 +5,14 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import org.openjfx.utilization.ModelToView;
+import org.openjfx.utilization.ModelToViewBuilding;
+import org.openjfx.utilization.ModelToViewEnemy;
 import org.openjfx.utilization.ModelToViewSpaceCraft;
 import org.openjfx.view.animations.explodeAnimation.ExplodeAnimation;
-import org.openjfx.view.entities.BulletView;
-import org.openjfx.view.entities.EnemyView;
+import org.openjfx.view.entities.bulletView.BulletView;
+import org.openjfx.view.entities.enemyView.EnemyGroup;
+import org.openjfx.view.entities.enemyView.EnemyView;
+import org.openjfx.view.entities.buildingView.BuildingGroup;
 import org.openjfx.view.entities.spacecraftView.SpacecraftGroup;
 
 
@@ -32,6 +36,8 @@ public class MapView extends Pane {
 
     private java.util.Map<Long, Node> currentNodes = new HashMap<Long, Node>();
     private java.util.Map<Long, SpacecraftGroup> spacecrafts = new HashMap<Long, SpacecraftGroup>();
+    private java.util.Map<Long, BuildingGroup> buildings = new HashMap<Long, BuildingGroup>();
+    private java.util.Map<Long, EnemyGroup> enemies = new HashMap<Long, EnemyGroup>();
     private java.util.Map<Long, ExplodeAnimation> explodeAnimations = new HashMap<Long, ExplodeAnimation>();
 
     public MapView(double widthSize, double heightSize) {
@@ -42,35 +48,22 @@ public class MapView extends Pane {
         super(nodes);
     }
 
-    public void refreshEnemy(ModelToView modelToView){
-        EnemyView enemy;
-        if(currentNodes.containsKey(modelToView.getID())){
-            enemy = (EnemyView) currentNodes.get(modelToView.getID());
-            if(modelToView.isDead()){
-                getChildren().remove(enemy);
-            }else {
-                enemy.setTranslateX(modelToView.getLocationX() - modelToView.getCurrentViewLeft());
-                enemy.setTranslateY(modelToView.getLocationY());
-                enemy.setFitWidth(modelToView.getHitboxWidth());
-                enemy.setFitHeight(modelToView.getHitboxHeight());
-                if(enemy.getTranslateX() < -500 || enemy.getTranslateX() > 2300)
-                    enemy.setVisible(false);
-                else
-                    enemy.setVisible(true);
-            }
-
-        } else {
-            enemy = new EnemyView();
-            enemy.setTranslateX(modelToView.getLocationX() - modelToView.getCurrentViewLeft());
-            enemy.setTranslateY(modelToView.getLocationY());
-            enemy.setFitWidth(modelToView.getHitboxWidth());
-            enemy.setFitHeight(modelToView.getHitboxHeight());
-            enemy.setCacheHint(CacheHint.SPEED);
-            enemy.setCache(true);
-            enemy.setSmooth(true);
-            currentNodes.put(modelToView.getID(), enemy);
-            getChildren().add(enemy);
+    public void refreshEnemy(ModelToViewEnemy modelToViewEnemy){
+        EnemyGroup enemyGroup;
+        if(enemies.containsKey(modelToViewEnemy.getID()) ){
+            enemyGroup = enemies.get(modelToViewEnemy.getID());
+            if(modelToViewEnemy.isDead()){
+                getChildren().remove(enemyGroup.getEnemyView());
+                getChildren().remove(enemyGroup.getHealthBar());
+            }else
+            enemyGroup.refresh(modelToViewEnemy);
+        } else if(!modelToViewEnemy.isDead()){
+            enemyGroup = new EnemyGroup(modelToViewEnemy);
+            getChildren().add(enemyGroup.getEnemyView());
+            getChildren().add(enemyGroup.getHealthBar());
+            enemies.put(modelToViewEnemy.getID(), enemyGroup);
         }
+
     }
 
     public void refreshBullet(ModelToView modelToView){
@@ -91,7 +84,7 @@ public class MapView extends Pane {
 
             }
 
-        } else {
+        } else if(!modelToView.isDead()){
             bullet = new BulletView();
             bullet.setTranslateX(modelToView.getLocationX() - modelToView.getCurrentViewLeft());
             bullet.setTranslateY(modelToView.getLocationY());
@@ -114,7 +107,25 @@ public class MapView extends Pane {
             spacecraftGroup = new SpacecraftGroup(modelToViewSpaceCraft);
             getChildren().add(spacecraftGroup.getSpacecraftView());
             getChildren().add(spacecraftGroup.getFlame());
+            getChildren().add(spacecraftGroup.getHealthBar());
             spacecrafts.put(modelToViewSpaceCraft.getID(), spacecraftGroup);
+        }
+    }
+
+    public void refreshBuilding(ModelToViewBuilding modelToViewBuilding){
+        BuildingGroup buildingGroup;
+        if(buildings.containsKey(modelToViewBuilding.getID()) ){
+            buildingGroup = buildings.get(modelToViewBuilding.getID());
+            if(modelToViewBuilding.isDead()){
+                getChildren().remove(buildingGroup.getBuildingView());
+                getChildren().remove(buildingGroup.getHealthBar());
+            }else
+            buildingGroup.refresh(modelToViewBuilding);
+        } else {
+            buildingGroup = new BuildingGroup(modelToViewBuilding);
+            getChildren().add(buildingGroup.getBuildingView());
+            getChildren().add(buildingGroup.getHealthBar());
+            buildings.put(modelToViewBuilding.getID(), buildingGroup);
         }
     }
 

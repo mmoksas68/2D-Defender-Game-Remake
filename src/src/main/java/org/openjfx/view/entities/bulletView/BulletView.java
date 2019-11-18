@@ -1,4 +1,4 @@
-package org.openjfx.view.entities;
+package org.openjfx.view.entities.bulletView;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

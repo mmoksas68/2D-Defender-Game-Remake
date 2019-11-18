@@ -3,7 +3,7 @@ package org.openjfx.model.entities.Spacecraft;
 import org.openjfx.model.FireBullets;
 import org.openjfx.model.LocatableObject;
 import org.openjfx.model.Location;
-import org.openjfx.model.PreBossMap;
+import org.openjfx.model.preBoss.PreBossMap;
 import org.openjfx.model.entities.Bullet.Bullet;
 import org.openjfx.utilization.PositionHelper;
 
@@ -183,5 +183,9 @@ public class Spacecraft extends LocatableObject implements FireBullets {
                                     ((spacecraftHelper.getTop() + spacecraftHelper.getBottom()) / 2));
 
         return new Bullet(location,(Bullet.WIDTH_SCALE * PreBossMap.getHitboxHeightScale()/1080), (Bullet.HEIGHT_SCALE* PreBossMap.getHitboxHeightScale()/1080), 3, 10, direction, 0);
+    }
+
+    public static int getMaxHealth() {
+        return MAX_HEALTH;
     }
 }

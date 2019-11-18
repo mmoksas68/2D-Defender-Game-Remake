@@ -1,7 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a7a46841-6915-4e69-85ec-c406941c34f2" name="Default Changelist" comment="" />
+    <list default="true" id="a7a46841-6915-4e69-85ec-c406941c34f2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/images/buildings/allybuilding.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/buildings/enemybuilding1t1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/buildings/enemybuilding1t2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/buildings/enemybuilding1t3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/buildings/enemybuilding2t1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/buildings/enemybuilding2t2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/buildings/enemybuilding2t3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/utilization/ModelToViewBuilding.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/utilization/ModelToViewEnemy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/buildingView/BuildingGroup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/buildingView/BuildingView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/enemyView/EnemyGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/PreBossGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/PreBossGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/model/PreBossMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/model/preBoss/PreBossMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/model/Radar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/model/preBoss/Radar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/model/entities/Building/AllyBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/model/entities/Building/AllyBuilding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/model/entities/Building/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/model/entities/Building/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/model/entities/Enemy/Tier1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/model/entities/Enemy/Tier1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/model/entities/Enemy/Tier2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/model/entities/Enemy/Tier2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/model/entities/Enemy/Tier3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/model/entities/Enemy/Tier3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/model/entities/Meteor/Meteor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/model/entities/Meteor/Meteor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/model/entities/Spacecraft/Spacecraft.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/model/entities/Spacecraft/Spacecraft.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/utilization/ModelToViewSpaceCraft.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/utilization/ModelToViewSpaceCraft.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/view/MapView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/MapView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/BulletView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/bulletView/BulletView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/EnemyView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/enemyView/EnemyView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/spacecraftView/SpacecraftGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/spacecraftView/SpacecraftGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/model/PreBossMap.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/model/Radar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/model/entities/Building/AllyBuilding.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/model/entities/Building/AllyBuilding.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/model/entities/Building/Building.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/model/entities/Building/Building.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/model/entities/Building/EnemyBuilding1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/model/entities/Building/EnemyBuilding1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/model/entities/Building/EnemyBuilding2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/model/entities/Building/EnemyBuilding2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/model/entities/Enemy/Tier1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/model/entities/Enemy/Tier1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/model/entities/Meteor/Meteor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/model/entities/Meteor/Meteor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/model/entities/Spacecraft/Spacecraft.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/model/entities/Spacecraft/Spacecraft.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/utilization/ModelToViewSpaceCraft.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/utilization/ModelToViewSpaceCraft.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/view/MapView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/view/MapView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/view/entities/BulletView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/view/entities/EnemyView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/view/entities/spacecraftView/SpacecraftGroup.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/view/entities/spacecraftView/SpacecraftGroup.class" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
