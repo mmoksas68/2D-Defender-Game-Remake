@@ -32,6 +32,19 @@ public class App extends Application {
             preBossGameController.setSceneHeight(stage.getHeight());
         };
 
+        ChangeListener<Boolean> gameOnChangeListener = (observable, oldValue, newValue) -> {
+            if (preBossGameController.gameOnChangeProperty().get()) {
+                if (preBossGameController.isGameOn()) {
+                    preBossGameController.getAnimationTimer().stop();
+                    preBossGameController.setGameOn(false);
+                } else {
+                    preBossGameController.getAnimationTimer().start();
+                    preBossGameController.setGameOn(true);
+                }
+                preBossGameController.setGameOnChange(false);
+            }
+        };
+        preBossGameController.gameOnChangeProperty().addListener(gameOnChangeListener);
         stage.widthProperty().addListener(stageSizeListener);
         stage.heightProperty().addListener(stageSizeListener);
     }

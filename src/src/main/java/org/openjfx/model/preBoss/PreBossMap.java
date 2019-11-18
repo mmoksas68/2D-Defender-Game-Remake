@@ -1,6 +1,9 @@
-package org.openjfx.model;
+package org.openjfx.model.preBoss;
 
+import org.openjfx.model.LocatableObject;
+import org.openjfx.model.Location;
 import org.openjfx.model.entities.Buff.Buff;
+import org.openjfx.model.entities.Building.AllyBuilding;
 import org.openjfx.model.entities.Building.Building;
 import org.openjfx.model.entities.Bullet.Bullet;
 import org.openjfx.model.entities.Enemy.Enemy;
@@ -10,10 +13,7 @@ import org.openjfx.model.entities.Spacecraft.Spacecraft;
 import org.openjfx.utilization.PositionHelper;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class PreBossMap implements Serializable {
     public static double MAX_HEIGHT;
@@ -24,7 +24,7 @@ public class PreBossMap implements Serializable {
     private double viewRight;
     private int level;
     private java.util.Map<Long, Enemy> enemies = new HashMap<Long, Enemy>();
-    private java.util.Map<Long, Building> buildings = new HashMap<Long, Building>();
+    private java.util.Map<Long, AllyBuilding> allyBuildings = new HashMap<Long, AllyBuilding>();
     private java.util.Map<Long, Bullet> bullets = new HashMap<Long, Bullet>();
     private java.util.Map<Long, Buff> buffs = new HashMap<Long, Buff>();
     private java.util.Map<Long, Meteor> meteors = new HashMap<Long, Meteor>();
@@ -33,9 +33,13 @@ public class PreBossMap implements Serializable {
     private Spacecraft spacecraft2;
     private boolean isFrozen;
 
+    public PreBossMap(){
+
+    }
+
     public PreBossMap(int level, double hitboxWidthScale, double hitboxHeightScale ) {
-        this.hitboxWidthScale = hitboxWidthScale;
-        this.hitboxHeightScale = hitboxHeightScale;
+        PreBossMap.hitboxWidthScale = hitboxWidthScale;
+        PreBossMap.hitboxHeightScale = hitboxHeightScale;
         MAX_WIDTH = 5*hitboxWidthScale;
         MAX_HEIGHT = hitboxHeightScale;
         viewLeft = 2*hitboxWidthScale;
@@ -54,7 +58,7 @@ public class PreBossMap implements Serializable {
         MAX_HEIGHT = hitboxHeightScale;
     }
 
-    public <T extends LocatableObject> void refreshLocatableObject( java.util.Map<Long, T> list, double widthScaleSpecific, double heightScaleSpecific ) {
+    public <T extends LocatableObject> void refreshLocatableObject(java.util.Map<Long, T> list, double widthScaleSpecific, double heightScaleSpecific ) {
         for(var iterator : list.values()){
             iterator.getLocation().setPositionX(5*hitboxWidthScale*iterator.getLocation().getPositionX() / MAX_WIDTH);
             iterator.getLocation().setPositionY(hitboxHeightScale*iterator.getLocation().getPositionY() / MAX_HEIGHT);
@@ -63,35 +67,32 @@ public class PreBossMap implements Serializable {
         }
     }
 
-    public Spacecraft getSpacecraft() {
-        return spacecraft;
-    }
 
-    public void initMap() {
+
+    private void initMap() {
         for (int i = 0; i < 50; i++) {
             Tier1 enemy = new Tier1(new Location( (Math.random() * (MAX_WIDTH-40)),  (Math.random() * (1000-(MAX_HEIGHT*Tier1.HEIGHT_SCALE/1080)))), ((hitboxHeightScale/1080)*Tier1.WIDTH_SCALE), ((hitboxHeightScale*Tier1.HEIGHT_SCALE)/1080), 30, 5, 359, 4, 5, 50, false);
             enemies.put(enemy.getID(), enemy);
+        }
+        for(int i=0; i < 5 ; i++){
+            AllyBuilding allyBuilding = new AllyBuilding(new Location( (Math.random() * (MAX_WIDTH-40)),  (Math.random() * (1000-(MAX_HEIGHT*Building.HEIGHT_SCALE/1080)))), ((hitboxHeightScale/1080)*Building.WIDTH_SCALE), ((hitboxHeightScale*Building.HEIGHT_SCALE)/1080));
+            allyBuildings.put(allyBuilding.getID(), allyBuilding);
         }
     }
 
     public void checkMapSituation() {
 
         for (var bullet : getBullets().values()) {
-            if (bullet.getLocation().getPositionX() <= viewLeft || bullet.getLocation().getPositionY() <= 0 ||
-                    bullet.getLocation().getPositionX() >= viewLeft + hitboxWidthScale || bullet.getLocation().getPositionY() >= MAX_HEIGHT) {
-                bullet.setDead(true);
-            } else {
                 checkCollision(bullet, getEnemies());
-                checkCollision(bullet, getBuildings());
+                checkCollision(bullet, getAllyBuildings());
                 checkCollision(bullet, Collections.singletonMap(spacecraft.getID(), spacecraft));
-            }
-
         }
 
         firingEnemies = new ArrayList<Enemy>();
 
         for (var enemy : getEnemies().values()) {
-            checkCollision(enemy, getBuildings());
+            enemy.setDestinationType("empty");
+            checkCollision(enemy, getAllyBuildings());
             checkCollision(enemy, Collections.singletonMap(spacecraft.getID(), spacecraft));
             wonderAround(enemy);
             if(enemy instanceof Tier1)
@@ -106,19 +107,21 @@ public class PreBossMap implements Serializable {
         for (var iterator : list.values()) {
             PositionHelper iteratorHelper = new PositionHelper(iterator);
 
-            if(obj instanceof Enemy && iterator instanceof Spacecraft){
-                if(PositionHelper.isInRadar(objHelper, iteratorHelper, ((Enemy) obj).getRadarRadius())){
+            if(obj instanceof Enemy && iterator instanceof Spacecraft && PositionHelper.isInRadar(objHelper, iteratorHelper, ((Enemy) obj).getRadarRadius())){
+                ((Enemy) obj).setDestinationLocation(
+                                                    new Location(
+                                                    iteratorHelper.getMiddlePointX() - objHelper.getMiddlePointX(),
+                                                    iteratorHelper.getMiddlePointY() - objHelper.getMiddlePointY()
+                                                    ));
 
-                    ((Enemy) obj).setDestinationLocation(
-                                                        new Location(
-                                                        iteratorHelper.getMiddlePointX() - objHelper.getMiddlePointX(),
-                                                        iteratorHelper.getMiddlePointY() - objHelper.getMiddlePointY()
-                                                        ));
-
-                    ((Enemy) obj).setDestinationType("spacecraft");
-                }else{
-                    ((Enemy) obj).setDestinationType("empty");
-                }
+                ((Enemy) obj).setDestinationType("spacecraft");
+            }else if(obj instanceof Enemy && iterator instanceof AllyBuilding && PositionHelper.isInRadar(objHelper, iteratorHelper, ((Enemy) obj).getRadarRadius())) {
+                ((Enemy) obj).setDestinationLocation(
+                        new Location(
+                                iteratorHelper.getMiddlePointX() - objHelper.getMiddlePointX(),
+                                iteratorHelper.getMiddlePointY() - objHelper.getMiddlePointY()
+                        ));
+                ((Enemy) obj).setDestinationType("allyBuilding");
             }
 
             if (PositionHelper.isThereACollision(objHelper, iteratorHelper)) {
@@ -138,7 +141,7 @@ public class PreBossMap implements Serializable {
     }
 
     public void wonderAround(Enemy enemy){
-        if (!enemy.getDestinationType().equals("spacecraft")) {
+        if (enemy.getDestinationType().equals("empty")) {
                 double randomY;
                 double randomX;
                 enemy.setChangeDirectionTimer(enemy.getChangeDirectionTimer() % enemy.getChangeDirectionPeriod());
@@ -166,6 +169,10 @@ public class PreBossMap implements Serializable {
             }
         }
 
+    }
+
+    public Spacecraft getSpacecraft() {
+        return spacecraft;
     }
 
     public void addEnemy(Enemy enemy) {
@@ -207,9 +214,6 @@ public class PreBossMap implements Serializable {
         return enemies;
     }
 
-    public java.util.Map<Long, Building> getBuildings() {
-        return buildings;
-    }
 
     public java.util.Map<Long, Bullet> getBullets() {
         return bullets;
@@ -295,8 +299,12 @@ public class PreBossMap implements Serializable {
         this.enemies = enemies;
     }
 
-    public void setBuildings(java.util.Map<Long, Building> buildings) {
-        this.buildings = buildings;
+    public Map<Long, AllyBuilding> getAllyBuildings() {
+        return allyBuildings;
+    }
+
+    public void setAllyBuildings(Map<Long, AllyBuilding> allyBuildings) {
+        this.allyBuildings = allyBuildings;
     }
 
     public void setBullets(java.util.Map<Long, Bullet> bullets) {
@@ -325,5 +333,9 @@ public class PreBossMap implements Serializable {
 
     public void setSpacecraft2(Spacecraft spacecraft2) {
         this.spacecraft2 = spacecraft2;
+    }
+
+    public void deleteAllyBuilding(Long ID) {
+        allyBuildings.remove(ID);
     }
 }

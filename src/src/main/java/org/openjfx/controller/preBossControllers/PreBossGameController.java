@@ -1,21 +1,22 @@
 package org.openjfx.controller.preBossControllers;
 
 import javafx.animation.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;
-import javafx.util.Duration;
-import org.openjfx.model.PreBossMap;
+import org.openjfx.model.preBoss.PreBossMap;
+import org.openjfx.model.entities.Building.AllyBuilding;
 import org.openjfx.model.entities.Bullet.Bullet;
 import org.openjfx.model.entities.Enemy.Tier1;
 import org.openjfx.model.entities.Spacecraft.Spacecraft;
 import org.openjfx.utilization.ModelToView;
+import org.openjfx.utilization.ModelToViewBuilding;
+import org.openjfx.utilization.ModelToViewEnemy;
 import org.openjfx.utilization.ModelToViewSpaceCraft;
 import org.openjfx.view.MapView;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 public class PreBossGameController {
     private PreBossMap preBossMap;
@@ -30,60 +31,61 @@ public class PreBossGameController {
     private boolean spacePressed = false;
     private double sliderAccelerationSpeed = 0;
     private boolean gameOn = true;
-    private boolean gameOnChange = false;
+    private BooleanProperty gameOnChange = new SimpleBooleanProperty(false);
     private boolean isGameFinished = false;
     private boolean isGameSuccessful = false;
 
 
-    private AnimationTimer animationTimer = new AnimationTimer(){
+    private AnimationTimer animationTimer = new AnimationTimer() {
         @Override
         public void handle(long l) {
-            if(upPressed && leftPressed){
-                motionFunction(preBossMap.getHitboxWidthScale()*(-0.04/1920), (Spacecraft.MAX_PACE/Math.sqrt(2)), -1,1 );
-            } else if(upPressed && rightPressed){
-                motionFunction(preBossMap.getHitboxWidthScale()*(0.04/1920), (Spacecraft.MAX_PACE/Math.sqrt(2)), 1,1 );
-            } else if(downPressed && leftPressed){
-                motionFunction(preBossMap.getHitboxWidthScale()*(-0.04/1920), (Spacecraft.MAX_PACE/Math.sqrt(2)), -1,-1 );
-            } else if(downPressed && rightPressed){
-                motionFunction(preBossMap.getHitboxWidthScale()*(0.04/1920), (Spacecraft.MAX_PACE/Math.sqrt(2)), 1,-1 );
-            } else if(upPressed){
+            if (upPressed && leftPressed) {
+                motionFunction(PreBossMap.getHitboxWidthScale() * (-0.04 / 1920), (Spacecraft.MAX_PACE / Math.sqrt(2)), -1, 1);
+            } else if (upPressed && rightPressed) {
+                motionFunction(PreBossMap.getHitboxWidthScale() * (0.04 / 1920), (Spacecraft.MAX_PACE / Math.sqrt(2)), 1, 1);
+            } else if (downPressed && leftPressed) {
+                motionFunction(PreBossMap.getHitboxWidthScale() * (-0.04 / 1920), (Spacecraft.MAX_PACE / Math.sqrt(2)), -1, -1);
+            } else if (downPressed && rightPressed) {
+                motionFunction(PreBossMap.getHitboxWidthScale() * (0.04 / 1920), (Spacecraft.MAX_PACE / Math.sqrt(2)), 1, -1);
+            } else if (upPressed) {
                 preBossMap.getSpacecraft().moveToDirection(preBossMap.getSpacecraft().getVelocity(), 0, 1);
-            } else if(downPressed){
+            } else if (downPressed) {
                 preBossMap.getSpacecraft().moveToDirection(preBossMap.getSpacecraft().getVelocity(), 0, -1);
-            } else if(leftPressed){
-                motionFunction(preBossMap.getHitboxWidthScale()*(-0.04/1920), Spacecraft.MAX_PACE, -1,0 );
-            } else if(rightPressed){
-                motionFunction(preBossMap.getHitboxWidthScale()*(0.04/1920), Spacecraft.MAX_PACE, 1,0 );
+            } else if (leftPressed) {
+                motionFunction(PreBossMap.getHitboxWidthScale() * (-0.04 / 1920), Spacecraft.MAX_PACE, -1, 0);
+            } else if (rightPressed) {
+                motionFunction(PreBossMap.getHitboxWidthScale() * (0.04 / 1920), Spacecraft.MAX_PACE, 1, 0);
             }
 
-            if(!leftPressed && !rightPressed){
+            if (!leftPressed && !rightPressed) {
                 sliderAccelerationSpeed = 0;
-                if(preBossMap.getSpacecraft().getLocation().getPositionX() - preBossMap.getViewLeft() > preBossMap.getHitboxWidthScale()/2 + 1){
-                    if(preBossMap.getSpacecraft().getLocation().getPositionX() - preBossMap.getViewLeft() > preBossMap.getHitboxWidthScale()/2 + 4 ){
-                        preBossMap.setViewLeft( preBossMap.getViewLeft() + preBossMap.getHitboxWidthScale()*3/1920 );
-                    }else
-                        preBossMap.setViewLeft(preBossMap.getSpacecraft().getLocation().getPositionX() - preBossMap.getHitboxWidthScale()/2);
+                if (preBossMap.getSpacecraft().getLocation().getPositionX() - preBossMap.getViewLeft() > PreBossMap.getHitboxWidthScale() / 2 + 1) {
+                    if (preBossMap.getSpacecraft().getLocation().getPositionX() - preBossMap.getViewLeft() > PreBossMap.getHitboxWidthScale() / 2 + 4) {
+                        preBossMap.setViewLeft(preBossMap.getViewLeft() + PreBossMap.getHitboxWidthScale() * 3 / 1920);
+                    } else
+                        preBossMap.setViewLeft(preBossMap.getSpacecraft().getLocation().getPositionX() - PreBossMap.getHitboxWidthScale() / 2);
                 }
 
-                if(preBossMap.getSpacecraft().getLocation().getPositionX() - preBossMap.getViewLeft() < preBossMap.getHitboxWidthScale()/2 - 1){
-                    if(preBossMap.getSpacecraft().getLocation().getPositionX() - preBossMap.getViewLeft() < preBossMap.getHitboxWidthScale()/2 - 4){
-                        preBossMap.setViewLeft( preBossMap.getViewLeft() - preBossMap.getHitboxWidthScale()*3/1920);
-                    }else
-                        preBossMap.setViewLeft(preBossMap.getSpacecraft().getLocation().getPositionX() - preBossMap.getHitboxWidthScale()/2);
-                }
-            }
-
-            if(leftPressed){
-                if(preBossMap.getSpacecraft().getLocation().getPositionX() < preBossMap.getViewLeft() + preBossMap.getHitboxWidthScale()*(170.0/1920) ){
-                    preBossMap.getSpacecraft().getLocation().setPositionX(preBossMap.getViewLeft() + preBossMap.getHitboxWidthScale()*(170.0/1920)) ;
-                    sliderAccelerationSpeed -= preBossMap.getHitboxWidthScale()*(4.0/1920);
+                if (preBossMap.getSpacecraft().getLocation().getPositionX() - preBossMap.getViewLeft() < PreBossMap.getHitboxWidthScale() / 2 - 1) {
+                    if (preBossMap.getSpacecraft().getLocation().getPositionX() - preBossMap.getViewLeft() < PreBossMap.getHitboxWidthScale() / 2 - 4) {
+                        preBossMap.setViewLeft(preBossMap.getViewLeft() - PreBossMap.getHitboxWidthScale() * 3 / 1920);
+                    } else
+                        preBossMap.setViewLeft(preBossMap.getSpacecraft().getLocation().getPositionX() - PreBossMap.getHitboxWidthScale() / 2);
                 }
             }
 
-            if(rightPressed){
-                if(preBossMap.getSpacecraft().getLocation().getPositionX() > preBossMap.getViewLeft() + preBossMap.getHitboxWidthScale()*(1750.0/1920) - preBossMap.getSpacecraft().getHitBoxWidth() ){
-                    preBossMap.getSpacecraft().getLocation().setPositionX(preBossMap.getViewLeft() + preBossMap.getHitboxWidthScale()*(1750.0/1920) - preBossMap.getSpacecraft().getHitBoxWidth()) ;
-                    sliderAccelerationSpeed += preBossMap.getHitboxWidthScale()*(4.0/1920);;
+            if (leftPressed) {
+                if (preBossMap.getSpacecraft().getLocation().getPositionX() < preBossMap.getViewLeft() + PreBossMap.getHitboxWidthScale() * (170.0 / 1920)) {
+                    preBossMap.getSpacecraft().getLocation().setPositionX(preBossMap.getViewLeft() + PreBossMap.getHitboxWidthScale() * (170.0 / 1920));
+                    sliderAccelerationSpeed -= PreBossMap.getHitboxWidthScale() * (4.0 / 1920);
+                }
+            }
+
+            if (rightPressed) {
+                if (preBossMap.getSpacecraft().getLocation().getPositionX() > preBossMap.getViewLeft() + PreBossMap.getHitboxWidthScale() * (1750.0 / 1920) - preBossMap.getSpacecraft().getHitBoxWidth()) {
+                    preBossMap.getSpacecraft().getLocation().setPositionX(preBossMap.getViewLeft() + PreBossMap.getHitboxWidthScale() * (1750.0 / 1920) - preBossMap.getSpacecraft().getHitBoxWidth());
+                    sliderAccelerationSpeed += PreBossMap.getHitboxWidthScale() * (4.0 / 1920);
+                    ;
                 }
             }
 
@@ -99,23 +101,23 @@ public class PreBossGameController {
         }
     };
 
-    public PreBossGameController(double sceneWidth, double sceneHeight){
+    public PreBossGameController(double sceneWidth, double sceneHeight) {
         this.sceneWidth = sceneWidth;
         this.sceneHeight = sceneHeight;
         initGame();
     }
 
 
-    private void initGame(){
+    private void initGame() {
         preBossMap = new PreBossMap(3, sceneWidth, sceneHeight);
-        mapView = new MapView(sceneWidth,sceneHeight);
+        mapView = new MapView(sceneWidth, sceneHeight);
 
         refreshMap();
 
         scene = new Scene(mapView, sceneWidth, sceneHeight);
 
-        scene.setOnKeyPressed( e -> {
-            switch (e.getCode()){
+        scene.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
                 case UP:
                     upPressed = true;
                     break;
@@ -136,8 +138,8 @@ public class PreBossGameController {
             }
         });
 
-        scene.setOnKeyReleased( e -> {
-            switch (e.getCode()){
+        scene.setOnKeyReleased(e -> {
+            switch (e.getCode()) {
 
                 case UP:
                     upPressed = false;
@@ -155,81 +157,77 @@ public class PreBossGameController {
                     spacePressed = false;
                     break;
                 case ESCAPE:
-                    gameOnChange = true;
+                    gameOnChange.set(true);
                     break;
             }
         });
 
 
-        final Timeline timeline = new Timeline();
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                if(gameOnChange){
-                    if(gameOn){
-                        animationTimer.stop();
-                        gameOn = false;
-                    }else{
-                        animationTimer.start();
-                        gameOn = true;
-                    }
-                    gameOnChange = false;
-                }
-            }
-        }));
-
-        timeline.playFromStart();
         animationTimer.start();
 
     }
 
-    private void refreshMap(){
+    private void refreshMap() {
         preBossMap.checkMapSituation();
-        for( var enemy : preBossMap.getFiringEnemies() ){
-            bulletFire(enemy, enemy.getDestinationType().equals("spacecraft"));
+        for (var enemy : preBossMap.getFiringEnemies()) {
+            bulletFire(enemy, !enemy.getDestinationType().equals("empty"));
         }
 
         refreshEnemy();
         refreshSpacecraft();
         refreshBullet();
+        refreshBuildings();
     }
 
-    private void refreshEnemy(){
+    private void refreshEnemy() {
         ArrayList<Long> toBeDeleted = new ArrayList<>();
-        HashMap<Long, ModelToView> explosionList = new HashMap<>();
-        for(var enemy : preBossMap.getEnemies().values()){
-            ModelToView modelToView = new ModelToView( enemy, preBossMap.getViewLeft(), preBossMap.getViewRight());
-            if(enemy.isDead()){
+        for (var enemy : preBossMap.getEnemies().values()) {
+            ModelToViewEnemy modelToViewEnemy = new ModelToViewEnemy(enemy, preBossMap.getViewLeft(), preBossMap.getViewRight());
+            if (enemy.isDead()) {
                 toBeDeleted.add(enemy.getID());
-                mapView.addExplodeAnimation(modelToView);
+                mapView.addExplodeAnimation(new ModelToView(enemy, preBossMap.getViewLeft(), preBossMap.getViewRight()));
             }
-            mapView.refreshEnemy(modelToView);
+            mapView.refreshEnemy(modelToViewEnemy);
         }
 
-        for(var it : toBeDeleted){
+        for (var it : toBeDeleted) {
             preBossMap.deleteEnemy(it);
             SoundController.explosion();
         }
     }
 
-    private void refreshBullet(){
+    private void refreshBullet() {
         ArrayList<Long> toBeDeleted = new ArrayList<>();
-        for(var bullet : preBossMap.getBullets().values()) {
-            if(bullet.isDead()){
+        for (var bullet : preBossMap.getBullets().values()) {
+            if (bullet.isDead()) {
                 toBeDeleted.add(bullet.getID());
             }
             mapView.refreshBullet(new ModelToView(bullet, preBossMap.getViewLeft(), preBossMap.getViewRight()));
         }
-        for(var it : toBeDeleted){
+        for (var it : toBeDeleted) {
             preBossMap.deleteBullet(it);
         }
     }
 
-    private void refreshSpacecraft(){
+    private void refreshSpacecraft() {
 
-        mapView.refreshSpacecraft( new ModelToViewSpaceCraft(preBossMap.getSpacecraft(), preBossMap.getViewLeft(), preBossMap.getViewRight(), (leftPressed || rightPressed)));
+        mapView.refreshSpacecraft(new ModelToViewSpaceCraft(preBossMap.getSpacecraft(), preBossMap.getViewLeft(), preBossMap.getViewRight(), (leftPressed || rightPressed)));
 
+    }
+
+    private void refreshBuildings(){
+        ArrayList<Long> toBeDeleted = new ArrayList<>();
+        for (var building : preBossMap.getAllyBuildings().values()) {
+            if (building.isDead()) {
+                toBeDeleted.add(building.getID());
+                mapView.addExplodeAnimation(new ModelToView(building, preBossMap.getViewLeft(), preBossMap.getViewRight()));
+            }
+            mapView.refreshBuilding(new ModelToViewBuilding(building, preBossMap.getViewLeft(), preBossMap.getViewRight()));
+        }
+        for (var it : toBeDeleted) {
+            preBossMap.deleteAllyBuilding(it);
+            SoundController.explosion();
+        }
     }
 
     public PreBossMap getPreBossMap() {
@@ -262,8 +260,8 @@ public class PreBossGameController {
 
     public void setSceneWidth(double sceneWidth) {
         this.sceneWidth = sceneWidth;
-        mapView.setPrefSize(sceneWidth,sceneHeight);
-        preBossMap.setHitboxWidthScale(sceneWidth);
+        mapView.setPrefSize(sceneWidth, sceneHeight);
+        PreBossMap.setHitboxWidthScale(sceneWidth);
         preBossMap.refreshMap();
     }
 
@@ -273,48 +271,69 @@ public class PreBossGameController {
 
     public void setSceneHeight(double sceneHeight) {
         this.sceneHeight = sceneHeight;
-        mapView.setPrefSize(sceneWidth,sceneHeight);
-        preBossMap.setHitboxHeightScale(sceneHeight);
+        mapView.setPrefSize(sceneWidth, sceneHeight);
+        PreBossMap.setHitboxHeightScale(sceneHeight);
         preBossMap.refreshMap();
     }
 
-    private void motionFunction(double accelerationSpeedChange, double constraint, double directionX, double directionY){
+    private void motionFunction(double accelerationSpeedChange, double constraint, double directionX, double directionY) {
         sliderAccelerationSpeed += accelerationSpeedChange;
 
-        if(sliderAccelerationSpeed < -constraint )
+        if (sliderAccelerationSpeed < -constraint)
             sliderAccelerationSpeed = -constraint;
-        if(sliderAccelerationSpeed > constraint)
+        if (sliderAccelerationSpeed > constraint)
             sliderAccelerationSpeed = constraint;
 
         preBossMap.setViewLeft(preBossMap.getViewLeft() + sliderAccelerationSpeed);
         preBossMap.getSpacecraft().moveToDirection(preBossMap.getSpacecraft().getVelocity(), directionX, directionY);
     }
 
-    private <T> void bulletFire(T t, boolean isFiring){
+    private <T> void bulletFire(T t, boolean isFiring) {
 
-        var current = t instanceof Tier1 ? (Tier1)t : (t instanceof Spacecraft ? (Spacecraft)t : null);
-
-
+        var current = t instanceof Tier1 ? (Tier1) t : (t instanceof Spacecraft ? (Spacecraft) t : null);
 
         current.setGunTimer(current.getGunTimer() % current.getGunPeriod());
 
-        if(isFiring){
-            if(current.getGunTimer() == 0)
-            {
+        if (isFiring) {
+            if (current.getGunTimer() == 0) {
                 Bullet bullet = current.fireBullet();
                 preBossMap.addBullet(bullet);
-                if(current instanceof Spacecraft && isFiring){
+                if (current instanceof Spacecraft) {
                     SoundController.fireBullet();
                 }
             }
             current.setGunTimer(current.getGunTimer() + 1);
-        }else if(current.getGunTimer() != 0)
+        } else if (current.getGunTimer() != 0)
             current.setGunTimer(current.getGunTimer() + 1);
 
     }
 
+    public boolean isGameOn() {
+        return gameOn;
+    }
 
+    public void setGameOn(boolean gameOn) {
+        this.gameOn = gameOn;
+    }
 
+    public boolean isGameOnChange() {
+        return gameOnChange.get();
+    }
 
+    public BooleanProperty gameOnChangeProperty() {
+        return gameOnChange;
+    }
+
+    public void setGameOnChange(boolean gameOnChange) {
+        this.gameOnChange.set(gameOnChange);
+    }
+
+    public AnimationTimer getAnimationTimer() {
+        return animationTimer;
+    }
+
+    public void setAnimationTimer(AnimationTimer animationTimer) {
+        this.animationTimer = animationTimer;
+    }
 }
 

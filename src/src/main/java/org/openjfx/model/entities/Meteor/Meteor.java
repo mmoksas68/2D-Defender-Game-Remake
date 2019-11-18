@@ -5,12 +5,14 @@ import org.openjfx.model.Location;
 
 public class Meteor extends LocatableObject {
     private static final int MAX_HEALTH = 30;
+    public static final double WIDTH_SCALE = 5;
+    public static final double HEIGHT_SCALE = 5;
     private int velocity;
     private int damage;
-    private int directionX;
-    private int directionY;
+    private double directionX;
+    private double directionY;
 
-    public Meteor(Location location, int hitBoxWidth, int hitBoxHeight, int velocity, int damage, int directionX, int directionY) {
+    public Meteor(Location location, int hitBoxWidth, int hitBoxHeight, int velocity, int damage, double directionX, double directionY) {
         super(location, hitBoxWidth, hitBoxHeight, MAX_HEALTH);
         this.velocity = velocity;
         this.damage = damage;
@@ -34,23 +36,20 @@ public class Meteor extends LocatableObject {
         this.damage = damage;
     }
 
-    public int getDirectionX() {
+    public double getDirectionX() {
         return directionX;
     }
 
-    public void setDirectionX(int directionX) {
+    public void setDirectionX(double directionX) {
         this.directionX = directionX;
     }
 
-    public int getDirectionY() {
+    public double getDirectionY() {
         return directionY;
     }
 
-    public void setDirectionY(int directionY) {
+    public void setDirectionY(double directionY) {
         this.directionY = directionY;
     }
 
-    public void explode(){
-
-    }
 }

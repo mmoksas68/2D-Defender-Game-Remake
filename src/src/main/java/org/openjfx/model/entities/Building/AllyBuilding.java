@@ -7,7 +7,7 @@ public class AllyBuilding extends Building {
     private int attackingEnemyNumber = 0;
     private boolean isUnderAttack = false;
 
-    public AllyBuilding(Location location, int hitBoxWidth, int hitBoxHeight) {
+    public AllyBuilding(Location location, double hitBoxWidth, double hitBoxHeight) {
         super(location, hitBoxWidth, hitBoxHeight, MAX_HEALTH);
     }
 

@@ -2,14 +2,14 @@ package org.openjfx.model.entities.Enemy;
 
 import org.openjfx.model.FireBullets;
 import org.openjfx.model.Location;
-import org.openjfx.model.PreBossMap;
+import org.openjfx.model.preBoss.PreBossMap;
 import org.openjfx.model.entities.Bullet.Bullet;
 import org.openjfx.utilization.PositionHelper;
 
 public class Tier1 extends Enemy implements FireBullets {
     public static final double WIDTH_SCALE = 100;
     public static final double HEIGHT_SCALE = 60;
-    private static final int MAX_HEALTH = 1;
+    public static final int MAX_HEALTH = 1;
     private int bulletVelocity;
     private int bulletDamage;
     private int gunPeriod;
