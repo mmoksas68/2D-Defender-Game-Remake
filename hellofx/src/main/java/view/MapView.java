@@ -15,16 +15,26 @@ public class MapView extends AnchorPane {
     private ArrayList <BulletView> bulletViews;
     private BossOneView bossOneView;
     private ArrayList <LaserView> laserViews;
+    private ArrayList <BuffView> buffViews;
     public MapView (){
         bulletViews = new ArrayList<>();
         laserViews = new ArrayList<>();
+        buffViews = new ArrayList<>();
     }
 
     public ArrayList <BulletView> getBulletViews () {
         return bulletViews;
     }
 
-    public void refreshSpaceCraftView( double currentX, double currentY) {
+    public ArrayList<BuffView> getBuffViews() {
+        return buffViews;
+    }
+
+    public void setBuffViews(ArrayList<BuffView> buffViews) {
+        this.buffViews = buffViews;
+    }
+
+    public void refreshSpaceCraftView(double currentX, double currentY) {
         spaceCraftView.refreshSpaceCraft(currentX, currentY);
     }
     public void refreshBullet(BulletView b, double currentX, double currentY) {
@@ -69,5 +79,13 @@ public class MapView extends AnchorPane {
    /* public LaserView getLaserView () {
         return laserView;
     }*/
+   public void addBuffView (BuffView buffView) {
+       buffViews.add( buffView);
+       getChildren().add( buffView);
+   }
+   public void refreshBuffView(BuffView bw, double currentX, double currentY) {
+       bw.setTranslateX( currentX);
+       bw.setTranslateY( currentY);
+   }
 
 }

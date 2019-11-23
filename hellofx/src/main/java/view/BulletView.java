@@ -14,7 +14,6 @@ public class BulletView extends ImageView {
         setImage( image);
         setFitWidth( width);
         setFitHeight( height);
-      //  super ( width, height, Color.BLACK);
         setTranslateX( x);
         setTranslateY(y);
     }

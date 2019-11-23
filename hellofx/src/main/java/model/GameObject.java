@@ -1,32 +1,23 @@
 package model;
 
 public abstract class GameObject {
-        private double x;
-        private double y;
+        private Location location;
         private double velocity;
         private double width;
         private double height;
         private int ID;
-        private static int nextID = 0;
-        public GameObject (double x, double y, double velocity, double width, double height) {
-            this.x = x; this.y = y;  this.velocity = velocity; this.width = width;
-            this.height = height;   ID = ++nextID;
+        private static int currentID = 0;
+        public GameObject (Location location, double velocity, double width, double height) {
+            this.location = location;  this.velocity = velocity; this.width = width;
+            this.height = height;   this.ID = currentID++;
         }
 
-    public double getX() {
-        return x;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public double getVelocity() {
@@ -58,8 +49,8 @@ public abstract class GameObject {
     public void move (Double xDir, Double yDir) {
             double distance = Math.sqrt(Math.pow( xDir,2) + Math.pow( yDir, 2));
             double multiplier = velocity / distance;
-            x = x + xDir * multiplier;
-            y = y + yDir * multiplier;
+            location.setPositionX( location.getPositionX()  + xDir * multiplier);
+            location.setPositionY( location.getPositionY() + yDir * multiplier);
     }
 }
 

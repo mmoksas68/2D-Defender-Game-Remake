@@ -13,7 +13,6 @@ public class LaserView extends ImageView {
         Image image = new Image( new FileInputStream("resources/bossLaser.png"));
 
         setImage( image);
-       // super ( width, height, color);
         setFitWidth( width);
         setFitHeight( height);
         setTranslateX( x);

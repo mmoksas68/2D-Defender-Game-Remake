@@ -3,13 +3,16 @@ package model;
 import java.util.ArrayList;
 
 public abstract class Boss extends GameObject {
+   // private final double BUFF_PROB = 0.01;
+
+    private double bullet_prob;
     private double healthPoint;
     private double gunPower;
     private double gunFrequency;
     private double bulletVelocity;
     private ArrayList<String> dialogues;
     public Boss(double velocity, double width, double height) {
-        super(600, 100,velocity,width,height);
+        super(new Location( 600,100),velocity,width,height);
     }
 
     public double getHealthPoint() {
@@ -52,6 +55,16 @@ public abstract class Boss extends GameObject {
         this.dialogues = dialogues;
     }
     public Bullet sendBullet() {
-        return new Bullet( getID(), getX(), getY(), getBulletVelocity());
+        return new Bullet( getID(), new Location( getLocation().getPositionX(), getLocation().getPositionY()) , getBulletVelocity());
     }
+
+
+    public double getBullet_prob() {
+        return bullet_prob;
+    }
+
+    public void setBullet_prob(double bullet_prob) {
+        this.bullet_prob = bullet_prob;
+    }
+
 }

@@ -9,10 +9,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import model.Bullet;
-import model.GameObject;
-import model.Laser;
-import model.Map;
+import model.*;
 
 import view.*;
 
@@ -22,6 +19,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class MapManager {
     private final double MAX_WIDTH = 800;
@@ -33,12 +32,12 @@ public class MapManager {
     private double  moveup = 0, movedown = 0;
     private boolean isShot = false;
 
-    private double laserProbality = 0.01, bulletProbality = 0.02, bossYdir = 1.0;
+    private double  bossYdir = 1.0;
     private double bossMoveUp = 0, bossMoveDown = 0;
     private  boolean laserUsed = false;
     private boolean laserIndicatorUsed = false;
     private double laserTimer = 0.0;
-    private boolean timerStarted = false;
+    private int buffSize = 0;
 
     private Laser laser;
     private Laser laserIndicator;
@@ -47,6 +46,8 @@ public class MapManager {
 
     private Scene gameScene;
     private Stage gameStage;
+
+    private HashMap <Buff, BuffView> hashMap = new HashMap<>();
 
     private Map map;
     private MapView mapView;
@@ -68,16 +69,10 @@ public class MapManager {
     }
     private void initializeGame () throws FileNotFoundException {
         map = new Map();
-        //ArrayList<Double> spaceCraftProperties = getProperties( map.getSpaceCraft());
-       // ArrayList <Double> bossOneProperties = getProperties( map.getBossOne ());
 
         mapView = new MapView();
-        mapView.addSpaceCraftView( map.getSpaceCraft().getX(), map.getSpaceCraft().getY(), map.getSpaceCraft().getWidth(), map.getSpaceCraft().getHeight());
-        mapView.addBossOneView( map.getBossOne().getX(), map.getBossOne().getY(), map.getBossOne().getWidth(),map.getBossOne().getHeight() );
-    }
-    private ArrayList<Double> getProperties (GameObject object) {
-        ArrayList<Double> list = new ArrayList<>(Arrays.asList(object.getX(), object.getY(), object.getWidth(), object.getHeight()));
-        return list;
+        mapView.addSpaceCraftView( map.getSpaceCraft().getLocation().getPositionX(), map.getSpaceCraft().getLocation().getPositionY(), map.getSpaceCraft().getWidth(), map.getSpaceCraft().getHeight());
+        mapView.addBossOneView( map.getBossOne().getLocation().getPositionX(), map.getBossOne().getLocation().getPositionY(), map.getBossOne().getWidth(),map.getBossOne().getHeight() );
     }
     private void initializeListeners () {
         gameScene.setOnKeyPressed( e-> {
@@ -96,7 +91,6 @@ public class MapManager {
                     break;
                 case SPACE:
                     isShot = true;
-                  //  gamePane.getChildren().add( bulletView);
                     break;
                 default:
             }
@@ -132,29 +126,33 @@ public class MapManager {
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
+                try {
                     animationBullets();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
 
             }
         };
         timer.start();
     }
     private void animationSpaceCraft () throws FileNotFoundException {
-        if ( map.getSpaceCraft().getX() >= MAX_WIDTH / 2 - 5*MOVE_OFFSET) moveright = 0;
+       /* if ( map.getSpaceCraft().getX() >= MAX_WIDTH / 2 - 5*MOVE_OFFSET) moveright = 0;
         if ( map.getSpaceCraft().getX() <= 2*MOVE_OFFSET) moveleft = 0;
         if ( map.getSpaceCraft().getY() <= 2*MOVE_OFFSET) moveup = 0;
-        if ( map.getSpaceCraft().getY() >= MAX_HEIGHT - map.getSpaceCraft().getHeight() - 2*MOVE_OFFSET) movedown = 0;
+        if ( map.getSpaceCraft().getY() >= MAX_HEIGHT - map.getSpaceCraft().getHeight() - 2*MOVE_OFFSET) movedown = 0;*/
        double xDirection = moveleft + moveright;
        double yDirection = movedown + moveup;
         double multiplier = 1 / Math.sqrt( Math.pow( xDirection,2) + Math.pow( yDirection, 2));
         if ( xDirection != 0 || yDirection != 0) {
             map.getSpaceCraft().move(xDirection * multiplier, yDirection * multiplier);
-            mapView.refreshSpaceCraftView( map.getSpaceCraft().getX(), map.getSpaceCraft().getY());
+            mapView.refreshSpaceCraftView( map.getSpaceCraft().getLocation().getPositionX(), map.getSpaceCraft().getLocation().getPositionY());
         }
 
         if ( isShot) {
-            Bullet b = map.getSpaceCraft().fire();
+            Bullet b = map.getSpaceCraft().fireBullet();
             map.getBullets().add( b);
-            BulletView bulletView = new BulletView( map.getSpaceCraft().getX(),map.getSpaceCraft().getY(),b.getWidth(), b.getHeight());
+            BulletView bulletView = new BulletView( map.getSpaceCraft().getLocation().getPositionX(),map.getSpaceCraft().getLocation().getPositionY(),b.getWidth(), b.getHeight());
             mapView.addBulletView( bulletView);
         }
 
@@ -175,7 +173,7 @@ public class MapManager {
 
                  laser = map.getBossOne().sendLaser();
                  map.getLasers().add( laser);
-                 laserView = new LaserView( laser.getX(),laser.getY(),laser.getWidth(),laser.getHeight(), Color.PINK);
+                 laserView = new LaserView( laser.getLocation().getPositionX(),laser.getLocation().getPositionY(),laser.getWidth(),laser.getHeight(), Color.PINK);
                  mapView.addLaserView( laserView);
                 laserUsed = true;
             }
@@ -195,72 +193,82 @@ public class MapManager {
 
             laserTimer = laserTimer + 0.016;
         }
-     //   if (!laserUsed ) {
         else {
             laser = null;
             laserUsed = false;
-            laserIndicatorUsed = Math.random() < laserProbality;
+            laserIndicatorUsed = Math.random() < map.getBossOne().getLASER_FREQ();
             laserTimer = laserIndicatorUsed ? 0.016 : 0.0;
             if ( laserIndicatorUsed) {
                 laserIndicator = map.getBossOne().sendLaserIndicator();
                 map.getLasers().add( laserIndicator);
-                laserIndicatorView = new LaserView( laserIndicator.getX(),laserIndicator.getY(),laserIndicator.getWidth(),laserIndicator.getHeight(),Color.CYAN);
+                laserIndicatorView = new LaserView( laserIndicator.getLocation().getPositionX(),laserIndicator.getLocation().getPositionY(),laserIndicator.getWidth(),laserIndicator.getHeight(),Color.CYAN);
                 mapView.addLaserView( laserIndicatorView);
 
             }
             else {
                 if (bossYdir == 1.0) {
-                    bossMoveUp = ((map.getBossOne().getY() - (2 * MOVE_OFFSET)) >= 0) ? -1 : 0;
-                    bossYdir = map.getBossOne().getY() <= MAX_HEIGHT / 5 ? 0.0 : 1.0;
+                    bossMoveUp = ((map.getBossOne().getLocation().getPositionY() - (2 * MOVE_OFFSET)) >= 0) ? -1 : 0;
+                    bossYdir = map.getBossOne().getLocation().getPositionY() <= MAX_HEIGHT / 5 ? 0.0 : 1.0;
                     map.getBossOne().move(0.0, bossMoveUp);
                     bossMoveDown = 0;
                 } else {
-                    bossMoveDown = ((map.getBossOne().getY() + map.getBossOne().getHeight() + (2 * MOVE_OFFSET)) <= MAX_HEIGHT) ? 1 : 0;
-                    bossYdir = (map.getBossOne().getY() + map.getBossOne().getHeight() / 2 >= MAX_HEIGHT - MAX_HEIGHT / 4) ? 1.0 : 0.0;
+                    bossMoveDown = ((map.getBossOne().getLocation().getPositionY() + map.getBossOne().getHeight() + (2 * MOVE_OFFSET)) <= MAX_HEIGHT) ? 1 : 0;
+                    bossYdir = (map.getBossOne().getLocation().getPositionY() + map.getBossOne().getHeight() / 2 >= MAX_HEIGHT - MAX_HEIGHT / 4) ? 1.0 : 0.0;
                     bossMoveUp = 0;
                     map.getBossOne().move(0.0, bossMoveDown);
                 }
-                mapView.refreshBossOne(map.getBossOne().getX(), map.getBossOne().getY());
+                mapView.refreshBossOne(map.getBossOne().getLocation().getPositionX(), map.getBossOne().getLocation().getPositionY());
             }
         }
-        /*else {
-
-            }*/
 
 
-        if ( Math.random() < bulletProbality) {
+
+        if ( Math.random() < map.getBossOne().getGunFrequency()) {
             Bullet b = map.getBossOne().sendBullet();
             map.getBullets().add( b);
-            BulletView bulletView = new BulletView( map.getBossOne().getX(),map.getBossOne().getY(),b.getWidth(), b.getHeight());
+            BulletView bulletView = new BulletView( map.getBossOne().getLocation().getPositionX(),map.getBossOne().getLocation().getPositionY(),b.getWidth(), b.getHeight());
             mapView.addBulletView( bulletView);
         }
-           // timer = 0.0;
-        //}
+
 
     }
-    private void animationBullets ()  {
-
+    private void animationBullets () throws FileNotFoundException {
 
         for ( int i = 0; i < map.getBullets().size(); i++) {
             Bullet b = map.getBullets().get(i);
             if ( b.getSourceID() == map.getSpaceCraft().getID()) {
                 b.move( 1.0,0.0);
-                mapView.refreshBullet( mapView.getBulletViews().get(i), b.getX(), b.getY());
+                mapView.refreshBullet( mapView.getBulletViews().get(i), b.getLocation().getPositionX(), b.getLocation().getPositionY());
             }
            else if ( b.getSourceID() == map.getBossOne().getID()) {
                 b.move( -1.0,0.0);
-                mapView.refreshBullet(mapView.getBulletViews().get(i), b.getX(),b.getY());
+                mapView.refreshBullet(mapView.getBulletViews().get(i), b.getLocation().getPositionX(),b.getLocation().getPositionY());
             }
             map.checkCollisions( b);
-            if ( b.getX() >= MAX_WIDTH || b.getX() <= 0 || b.isDead()) {
+            if ( b.getLocation().getPositionX() >= MAX_WIDTH || b.getLocation().getPositionX() <= 0 || b.isDead()) {
                 map.getBullets().remove(i);
                 mapView.removeBulletView( mapView.getBulletViews().get(i));
                 i--;
             }
+
            if ( map.getBossOne().getHealthPoint() <= 0)
                 mapView.getChildren().remove( mapView.getBossOneView());
             if ( map.getSpaceCraft().getHealthPoint() <= 0)
                 mapView.getChildren().remove( mapView.getSpaceCraftView());
+        }
+
+
+        for (java.util.Map.Entry<Buff, Boolean> entry : map.getBuffs().entrySet()) {
+
+            Buff buff = entry.getKey();
+            if ( entry.getValue() == false) {
+                BuffView buffView = new BuffView( buff.getName(),buff.getLocation().getPositionX(), buff.getLocation().getPositionY(), buff.getWidth(), buff.getHeight());
+                mapView.addBuffView( buffView);
+                hashMap.put( buff, buffView);
+                entry.setValue( true);
+            }
+            buff.move( -1.0,0.0);
+            mapView.refreshBuffView( hashMap.get( buff), buff.getLocation().getPositionX(),buff.getLocation().getPositionY());
         }
     }
 
