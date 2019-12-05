@@ -22,7 +22,7 @@ public class SpaceCraft extends GameObject implements FireBullets{
     private int healthPoint;
 
     public SpaceCraft () {
-        super( new Location( 50,280), 10,80,40);
+        super( new Location( 50,280), 10,50,50);
         healthPoint = 1000;
         bulletVelocity = 30;
         gunPower = 30;

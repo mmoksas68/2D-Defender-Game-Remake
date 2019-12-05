@@ -6,10 +6,11 @@ public class BossOne extends Boss {
     private int laserDamage;
     public BossOne () {
         super ( 3, 150,150);
-        setHealthPoint(10000000);
+        setHealthPoint(10000);
         setBulletVelocity( 10);
         setGunFrequency( 0.07);
-        laserDamage = 1000;
+        setGunPower( 30);
+        laserDamage = 10;
     }
     public Laser sendLaserIndicator() {
         return new Laser( new Location( 0,getLocation().getPositionY()+getHeight()/2-5),getLocation().getPositionX(),3,0);

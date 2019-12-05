@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 
 public class BossOneView extends ImageView {
     public  BossOneView (double x, double y, double width, double height) throws FileNotFoundException {
-        Image image = new Image( new FileInputStream("resources/boss1.png"));
+        Image image = new Image( new FileInputStream("resources/boss2.png"));
         setImage ( image);
         setFitWidth( width);
         setFitHeight( height);

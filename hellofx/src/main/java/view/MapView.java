@@ -4,6 +4,7 @@ package view;
 
 
 import javafx.scene.layout.AnchorPane;
+import model.LittleBoss;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -15,15 +16,21 @@ public class MapView extends AnchorPane {
     private ArrayList <BulletView> bulletViews;
     private BossOneView bossOneView;
     private ArrayList <LaserView> laserViews;
+    private ArrayList <LittleBossView> littleBossViews;
     private ArrayList <BuffView> buffViews;
     public MapView (){
         bulletViews = new ArrayList<>();
         laserViews = new ArrayList<>();
+        littleBossViews = new ArrayList<>();
         buffViews = new ArrayList<>();
     }
 
     public ArrayList <BulletView> getBulletViews () {
         return bulletViews;
+    }
+
+    public ArrayList<LittleBossView> getLittleBossViews(){
+        return littleBossViews;
     }
 
     public ArrayList<BuffView> getBuffViews() {
@@ -40,8 +47,12 @@ public class MapView extends AnchorPane {
     public void refreshBullet(BulletView b, double currentX, double currentY) {
         b.refreshBullet( currentX, currentY);
     }
-    public void refreshBossOne ( double currentX, double currentY) {
+    public void refreshBoss ( double currentX, double currentY) {
         bossOneView.refreshBossOne( currentX, currentY);
+    }
+
+    public void refreshLittleBoss( LittleBossView littleBossView, double currentX, double currentY){
+        littleBossView.refreshLittleBoss( currentX, currentY);
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -68,6 +79,17 @@ public class MapView extends AnchorPane {
         getChildren().remove( bulletView);
         bulletViews.remove( bulletView);
     }
+
+    public void addLittleBossView(LittleBossView littleBossView) {
+        littleBossViews.add( littleBossView);
+        getChildren().add( littleBossView);
+    }
+
+    public void removeLittleBossView( LittleBossView littleBossView){
+        getChildren().remove( littleBossView);
+        littleBossViews.remove( littleBossView);
+    }
+
     public void addLaserView (LaserView laserView) {
         laserViews.add( laserView);
         getChildren().add( laserView);
@@ -88,4 +110,10 @@ public class MapView extends AnchorPane {
        bw.setTranslateY( currentY);
    }
 
+   public void addMarkerView (MarkerView mw) throws FileNotFoundException {
+       getChildren().add( mw);
+   }
+   public void deleteMarkerView (MarkerView mw) {
+       getChildren().remove( mw);
+   }
 }

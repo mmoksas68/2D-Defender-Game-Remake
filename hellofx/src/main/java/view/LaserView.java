@@ -9,7 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class LaserView extends ImageView {
-    public  LaserView (double x, double y, double width, double height, Color color) throws FileNotFoundException {
+    public  LaserView (double x, double y, double width, double height) throws FileNotFoundException {
         Image image = new Image( new FileInputStream("resources/bossLaser.png"));
 
         setImage( image);

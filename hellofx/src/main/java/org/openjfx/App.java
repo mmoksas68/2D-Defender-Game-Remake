@@ -1,5 +1,5 @@
 package org.openjfx;
-import controller.MapManager;
+import controller.BossGameController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -16,8 +16,8 @@ public class App extends Application {
 
         @Override
     public void start(Stage stage) throws Exception {
-            MapManager viewManager = new MapManager();
-            stage = viewManager.getGameStage();
+            BossGameController bossGameController = new BossGameController(   3);
+            stage = bossGameController.getGameStage();
             stage.show();
     }
 }
