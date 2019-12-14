@@ -3,7 +3,7 @@ package org.openjfx;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import org.openjfx.controller.bossSceneController.BossGameController;
+import org.openjfx.controller.bossSceneControllers.BossGameController;
 import org.openjfx.controller.menuController.MainMenuController;
 
 

@@ -1,4 +1,4 @@
-package org.openjfx.controller.bossSceneController;
+package org.openjfx.controller.bossSceneControllers;
 
 
 import javafx.animation.AnimationTimer;

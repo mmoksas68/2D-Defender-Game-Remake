@@ -1,4 +1,4 @@
-package org.openjfx.controller.bossSceneController.BossBehaviourManager;
+package org.openjfx.controller.bossSceneControllers.BossBehaviourManager;
 
 import org.openjfx.model.Boss.BossMap;
 import org.openjfx.model.entities.Boss.Boss;
