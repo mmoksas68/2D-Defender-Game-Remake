@@ -1,8 +1,7 @@
-package org.openjfx.controller.bossSceneControllers;
+package org.openjfx.controller.bossSceneController;
 
 
 import javafx.animation.AnimationTimer;
-import javafx.beans.Observable;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;

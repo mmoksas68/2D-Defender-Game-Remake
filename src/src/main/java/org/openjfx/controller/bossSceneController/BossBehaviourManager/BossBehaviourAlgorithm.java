@@ -1,4 +1,4 @@
-package org.openjfx.controller.bossSceneControllers.BossBehaviourManager;
+package org.openjfx.controller.bossSceneController.BossBehaviourManager;
 
 public interface BossBehaviourAlgorithm {
    // void clockTick ();

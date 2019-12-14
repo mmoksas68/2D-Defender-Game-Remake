@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import org.openjfx.controller.PreBossGameController;
-import org.openjfx.controller.bossSceneControllers.BossGameController;
+import org.openjfx.controller.bossSceneController.BossGameController;
 import org.openjfx.view.menuView.MainMenu;
 import org.openjfx.view.menuView.PauseMenu;
 

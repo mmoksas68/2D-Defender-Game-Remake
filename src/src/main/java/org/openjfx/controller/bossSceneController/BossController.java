@@ -1,9 +1,9 @@
-package org.openjfx.controller.bossSceneControllers;
+package org.openjfx.controller.bossSceneController;
 
-import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossOneBehaviour;
-import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossThreeBehaviour;
-import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossTwoBehaviour;
-import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossBehaviourAlgorithm;
+import org.openjfx.controller.bossSceneController.BossBehaviourManager.BossOneBehaviour;
+import org.openjfx.controller.bossSceneController.BossBehaviourManager.BossThreeBehaviour;
+import org.openjfx.controller.bossSceneController.BossBehaviourManager.BossTwoBehaviour;
+import org.openjfx.controller.bossSceneController.BossBehaviourManager.BossBehaviourAlgorithm;
 import org.openjfx.model.Boss.BossMap;
 import org.openjfx.view.BossMapView;
 

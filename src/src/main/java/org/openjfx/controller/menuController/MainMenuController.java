@@ -9,7 +9,7 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.openjfx.controller.bossSceneControllers.BossGameController;
+import org.openjfx.controller.bossSceneController.BossGameController;
 import org.openjfx.controller.PreBossGameController;
 import org.openjfx.view.menuView.*;
 
