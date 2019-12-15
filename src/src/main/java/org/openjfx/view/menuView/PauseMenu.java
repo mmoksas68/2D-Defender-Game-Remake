@@ -8,9 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.openjfx.view.entities.menuEntitiesView.ExitButton;
-import org.openjfx.view.entities.menuEntitiesView.ResumeButton;
-import org.openjfx.view.entities.menuEntitiesView.SaveButton;
+import org.openjfx.view.menuView.menuEntitiesView.ExitButton;
+import org.openjfx.view.menuView.menuEntitiesView.ResumeButton;
+import org.openjfx.view.menuView.menuEntitiesView.SaveButton;
 
 import java.util.ArrayList;
 import java.util.List;

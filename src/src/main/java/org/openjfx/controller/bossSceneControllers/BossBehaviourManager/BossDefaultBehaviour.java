@@ -1,9 +1,9 @@
 package org.openjfx.controller.bossSceneControllers.BossBehaviourManager;
 
-import org.openjfx.model.Boss.BossMap;
-import org.openjfx.model.entities.Boss.Boss;
-import org.openjfx.model.entities.Bullet.Bullet;
-import org.openjfx.view.BossMapView;
+import org.openjfx.model.bossEntities.BossMap;
+import org.openjfx.model.bossEntities.Boss.Boss;
+import org.openjfx.model.commonEntities.Bullet.Bullet;
+import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 
 public abstract class BossDefaultBehaviour {
     BossMap bossMap;
@@ -39,12 +39,15 @@ public abstract class BossDefaultBehaviour {
       //  bossMapView.refreshBossView(bossMap.getBoss().getLocation().getPositionX(), bossMap.getBoss().getLocation().getPositionY());
     }
     public void shoot ()  {
+        /*
         if ( Math.random() < -10) {
+
             Bullet b = bossMap.getBoss().fireBullet();
             bossMap.addBullet( b);
-           /* BulletView bw = new BulletView();
-            bossMapView.addBulletView( bw);*/
+            BulletView bw = new BulletView();
+            bossMapView.addBulletView( bw);
         }
+        */
     }
 
     public double getAbilityTimer() {

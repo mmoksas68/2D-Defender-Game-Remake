@@ -1,9 +1,9 @@
 package org.openjfx.controller.bossSceneControllers.BossBehaviourManager;
 
-import org.openjfx.model.Boss.BossMap;
-import org.openjfx.model.entities.BossAbility.Marker;
-import org.openjfx.view.BossMapView;
-import org.openjfx.view.entities.BossAbilityViews.MarkerView;
+import org.openjfx.model.bossEntities.BossMap;
+import org.openjfx.model.bossEntities.BossAbility.Marker;
+import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
+import org.openjfx.view.gameSceneView.bossSceneView.bossAbilityViews.MarkerView;
 
 import java.util.ArrayList;
 

@@ -2,7 +2,7 @@ package org.openjfx.view.menuView;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
-import org.openjfx.view.entities.menuEntitiesView.FiyuvButton;
+import org.openjfx.view.menuView.menuEntitiesView.FiyuvButton;
 
 import java.util.ArrayList;
 import java.util.List;

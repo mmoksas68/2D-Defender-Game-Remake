@@ -4,8 +4,8 @@ import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossOneB
 import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossThreeBehaviour;
 import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossTwoBehaviour;
 import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossBehaviourAlgorithm;
-import org.openjfx.model.Boss.BossMap;
-import org.openjfx.view.BossMapView;
+import org.openjfx.model.bossEntities.BossMap;
+import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 
 public class BossController {
     private BossBehaviourAlgorithm algorithm;

@@ -16,20 +16,6 @@ public class App extends Application {
         launch(args);
     }
 
-    //@Override
-  /*  public void start(Stage stage) throws Exception {
-        BossGameController bossGameController = new BossGameController(   2);
-        stage = bossGameController.getGameStage();
-        stage.show();
-    }*/
-
-
-
-
-
-
-  //  PreBossGameController preBossGameController;
-    BossGameController bossGameController;
     @Override
     public void start(Stage stage) {
         MainMenuController mainController = new MainMenuController(stage);
