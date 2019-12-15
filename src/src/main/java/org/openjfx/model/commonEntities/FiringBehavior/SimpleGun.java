@@ -2,7 +2,9 @@ package org.openjfx.model.commonEntities.FiringBehavior;
 
 import org.openjfx.controller.SoundController;
 import org.openjfx.model.commonEntities.Bullet.Bullet;
+import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.preBossEntities.PreBossMap;
+import org.openjfx.utilization.PositionHelper;
 
 public abstract class SimpleGun implements FiringBehavior {
     private int gunPeriod;
