@@ -9,7 +9,7 @@ public class BulletView extends ImageView {
 
     public BulletView(ModelToViewBullet modelToViewBullet, double viewLeft, double scaleW, double scaleH) {
         Assets assets = Assets.getInstance();
-        setImage(assets.getPreBossAssets().getEnemyStation());
+        setImage(assets.getPreBossAssets().getBullet());
         setCacheHint(CacheHint.SPEED);
         setCache(true);
         setSmooth(true);

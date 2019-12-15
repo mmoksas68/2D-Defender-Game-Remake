@@ -1,5 +1,6 @@
 package org.openjfx.model.preBossEntities.Enemy;
 
+import org.openjfx.model.commonEntities.FiringBehavior.NoGun;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.FiringBehavior.EnemyGun;
 

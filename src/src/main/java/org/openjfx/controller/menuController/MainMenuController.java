@@ -1,5 +1,6 @@
 package org.openjfx.controller.menuController;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -44,13 +45,13 @@ public class MainMenuController {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.show();
         ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) ->{
             preBossGameController.setWidth(stage.getWidth());
             preBossGameController.setHeight(stage.getHeight());
         };
         stage.widthProperty().addListener(stageSizeListener);
         stage.heightProperty().addListener(stageSizeListener);
+        stage.show();
         fileController = new FileController();
         initMainController();
     }
@@ -73,7 +74,9 @@ public class MainMenuController {
 
     private void passBossScene(){
         fileController.loadPassedLevelInfo();
+        System.out.println(PassedLevelInfo.getInstance().isLevel1());
         System.out.println(PassedLevelInfo.getInstance().isLevel2());
+        System.out.println(PassedLevelInfo.getInstance().isLevel3());
     }
 
     private void finishGame(){
@@ -140,7 +143,7 @@ ON CLICK
         mainMenu.getHowToPlayBtn().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                passBossScene();
             }
         });
 

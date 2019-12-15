@@ -27,6 +27,7 @@ public class Settings implements Serializable {
 
 
     private Settings() {
+        up = KeyCode.UP;
 
     }
 
