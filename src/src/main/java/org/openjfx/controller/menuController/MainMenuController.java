@@ -45,12 +45,6 @@ public class MainMenuController {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
-        ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) ->{
-            preBossGameController.setWidth(stage.getWidth());
-            preBossGameController.setHeight(stage.getHeight());
-        };
-        stage.widthProperty().addListener(stageSizeListener);
-        stage.heightProperty().addListener(stageSizeListener);
         stage.show();
         fileController = new FileController();
         initMainController();
@@ -58,6 +52,12 @@ public class MainMenuController {
 
     private void start(){
         preBossGameController = new PreBossGameController(scene,primaryScreenBounds.getWidth(),primaryScreenBounds.getHeight());
+        ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) ->{
+            preBossGameController.setWidth(stage.getWidth());
+            preBossGameController.setHeight(stage.getHeight());
+        };
+        stage.widthProperty().addListener(stageSizeListener);
+        stage.heightProperty().addListener(stageSizeListener);
     }
 
     private void startBoss() {
@@ -73,10 +73,7 @@ public class MainMenuController {
     }
 
     private void passBossScene(){
-        fileController.loadPassedLevelInfo();
-        System.out.println(PassedLevelInfo.getInstance().isLevel1());
-        System.out.println(PassedLevelInfo.getInstance().isLevel2());
-        System.out.println(PassedLevelInfo.getInstance().isLevel3());
+        fileController.loadKeys();
     }
 
     private void finishGame(){

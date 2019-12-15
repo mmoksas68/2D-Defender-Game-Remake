@@ -24,7 +24,6 @@ public abstract class SimpleGun implements FiringBehavior {
 
         if (isFiring) {
             if (this.getGunTimer() == 0) {
-                System.out.println(this.fireBullet());
                 Bullet bullet = this.fireBullet();
                 preBossMap.addBullet(bullet);
                 if (this instanceof SpacecraftGun) {
