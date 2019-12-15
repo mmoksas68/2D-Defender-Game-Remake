@@ -1,6 +1,6 @@
 package org.openjfx.utilization;
 
-import org.openjfx.model.LocatableObject;
+import org.openjfx.model.commonEntities.LocatableObject;
 
 public class PositionHelper {
     private double left;

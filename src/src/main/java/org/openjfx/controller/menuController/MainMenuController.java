@@ -10,7 +10,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.openjfx.controller.bossSceneControllers.BossGameController;
-import org.openjfx.controller.PreBossGameController;
+import org.openjfx.controller.preBossSceneControllers.PreBossGameController;
 import org.openjfx.view.menuView.*;
 
 public class MainMenuController {
@@ -41,7 +41,14 @@ public class MainMenuController {
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
+        ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) ->{
+            preBossGameController.setWidth(stage.getWidth());
+            preBossGameController.setHeight(stage.getHeight());
+        };
+        stage.widthProperty().addListener(stageSizeListener);
+        stage.heightProperty().addListener(stageSizeListener);
         initMainController();
+
     }
 
     private void start(){
@@ -78,7 +85,7 @@ public class MainMenuController {
                     preBossGameController.setGameOnChange(false);
                 }
             };
-            preBossGameController.getGameOnChange().addListener(gameOnChangeListener);
+            preBossGameController.gameOnChangeProperty().addListener(gameOnChangeListener);
         }
         if(bossGameController != null) {
             ChangeListener<Boolean> gameOnChangeListener2 = (observable, oldValue, newValue) -> {

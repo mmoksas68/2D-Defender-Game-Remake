@@ -1,9 +1,9 @@
 package org.openjfx.controller.bossSceneControllers.BossBehaviourManager;
 
-import org.openjfx.model.Boss.BossMap;
-import org.openjfx.model.entities.BossAbility.LittleBoss;
-import org.openjfx.view.BossMapView;
-import org.openjfx.view.entities.BossAbilityViews.LittleBossView;
+import org.openjfx.model.bossEntities.BossMap;
+import org.openjfx.model.bossEntities.BossAbility.LittleBoss;
+import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
+import org.openjfx.view.gameSceneView.bossSceneView.bossAbilityViews.LittleBossView;
 
 public class BossThreeBehaviour  extends BossDefaultBehaviour implements BossBehaviourAlgorithm {
     LittleBoss littleBoss;

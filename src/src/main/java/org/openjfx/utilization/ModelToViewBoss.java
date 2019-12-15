@@ -1,6 +1,6 @@
 package org.openjfx.utilization;
 
-import org.openjfx.model.entities.Boss.Boss;
+import org.openjfx.model.bossEntities.Boss.Boss;
 
 public class ModelToViewBoss {
     private double locationX;
