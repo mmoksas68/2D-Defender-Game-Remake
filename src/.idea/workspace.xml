@@ -1,54 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a7a46841-6915-4e69-85ec-c406941c34f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/menuAssets/cross.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/menuAssets/forward.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/menuAssets/red_button00.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/menuAssets/red_button01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/menuAssets/save.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/menuController/MainMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/menuController/PauseMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/menuEntitiesView/ExitButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/menuEntitiesView/FiyuvButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/menuEntitiesView/ResumeButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/menuEntitiesView/SaveButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/menuView/Credits.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/menuView/HowToPlay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/menuView/LevelSelection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/menuView/MainMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/menuView/PauseMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/menuView/Settings.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/menuView/SpacecraftSelection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossBehaviourAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/bossSceneControllers/BossBehaviourManager/BossBehaviourAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossDefaultBehaviour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/bossSceneControllers/BossBehaviourManager/BossDefaultBehaviour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossOneBehaviour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/bossSceneControllers/BossBehaviourManager/BossOneBehaviour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossThreeBehaviour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/bossSceneControllers/BossBehaviourManager/BossThreeBehaviour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossTwoBehaviour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/bossSceneControllers/BossBehaviourManager/BossTwoBehaviour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/BossSceneControllers/BossController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/bossSceneControllers/BossController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/BossSceneControllers/BossGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/bossSceneControllers/BossGameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/PreBossGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/PreBossGameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/SoundController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/SoundController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossBehaviourAlgorithm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossDefaultBehaviour.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossOneBehaviour.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossThreeBehaviour.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossTwoBehaviour.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossGameController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossGameController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossGameController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/SoundController.class" beforeDir="false" />
-    </list>
+    <list default="true" id="a7a46841-6915-4e69-85ec-c406941c34f2" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -80,7 +33,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -120,12 +73,24 @@
       <recent name="C:\Users\kosed\Desktop\cs319\assets\menuAssets" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="13" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="org.openjfx.App" />
-      <module name="src" />
+      <module name="cs319" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.openjfx.*" />
@@ -141,18 +106,6 @@
         <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -221,6 +174,7 @@
       <workItem from="1576439465215" duration="366000" />
       <workItem from="1576440202056" duration="142000" />
       <workItem from="1576440350888" duration="172000" />
+      <workItem from="1576441056575" duration="4118000" />
     </task>
     <servers />
   </component>
