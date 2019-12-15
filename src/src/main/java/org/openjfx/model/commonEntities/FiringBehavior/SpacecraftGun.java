@@ -18,7 +18,6 @@ public class SpacecraftGun extends SimpleGun {
 
     @Override
     public Bullet fireBullet() {
-
         int direction = spacecraft.isDirectionLeft() ? -10 : 10;
         PositionHelper spacecraftHelper = new PositionHelper(spacecraft);
         Location location = spacecraft.isDirectionLeft() ?
@@ -27,7 +26,6 @@ public class SpacecraftGun extends SimpleGun {
                 :
                 new Location(spacecraftHelper.getRight() + 11,
                         ((spacecraftHelper.getTop() + spacecraftHelper.getBottom()) / 2));
-        System.out.println(direction);
         return new Bullet(location, getBulletDamage(), getBulletVelocity(), direction, 0);
     }
 }

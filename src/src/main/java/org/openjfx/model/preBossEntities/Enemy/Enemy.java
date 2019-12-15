@@ -12,7 +12,7 @@ public abstract class Enemy extends LocatableObject {
     private EnemyDestinations destinationType;
     private BuffTypes buffType;
     private boolean isEvolved;
-    private int changeDirectionPeriod = 100;
+    private int changeDirectionPeriod = 40;
     private int changeDirectionTimer = 0;
     private FiringBehavior firingBehavior;
     private int scorePoint;

@@ -12,8 +12,8 @@ public class Tier1Enemy extends Enemy{
     public static final int BULLET_VELOCITY = 10;
     public static final int BULLET_DAMAGE = 10;
     public static final int GUN_PERIOD = 100;
-    public static final int VELOCITY = 10;
-    public static final int RADAR_RADIUS = 1000;
+    public static final int VELOCITY = 7;
+    public static final int RADAR_RADIUS = 400;
 
 
     public Tier1Enemy(Location location, boolean isEvolved) {

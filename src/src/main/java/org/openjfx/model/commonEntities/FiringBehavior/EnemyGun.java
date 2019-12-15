@@ -25,6 +25,20 @@ public class EnemyGun extends SimpleGun{
         if(enemy.getDestinationLocation().getPositionY() < 0)
             y = -y;
 
+        if(x > 0){
+            x += 1;
+        }
+        else{
+            x -= 1;
+        }
+
+        if(y > 0){
+            y += 1;
+        }
+        else{
+            y -= 1;
+        }
+
         x += enemyHelper.getMiddlePointX();
         y += enemyHelper.getMiddlePointY();
 
