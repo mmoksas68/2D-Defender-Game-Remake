@@ -27,7 +27,7 @@ public class PreBossGameController {
     private boolean gameOn = true;
     private BooleanProperty gameOnChange = new SimpleBooleanProperty(false);
     private int scoreDecayTimer;
-    private boolean isSinglePlayer = false;
+    private boolean isSinglePlayer = true;
 
     private AnimationTimer animationTimer = new AnimationTimer() {
         @Override

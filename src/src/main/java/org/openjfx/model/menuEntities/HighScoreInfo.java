@@ -13,6 +13,4 @@ public class HighScoreInfo {
     }
 
    // public HighScoreInfo getInstance
-
-
 }

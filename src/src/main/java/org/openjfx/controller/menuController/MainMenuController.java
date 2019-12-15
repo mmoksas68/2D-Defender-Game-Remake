@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.openjfx.controller.bossSceneControllers.BossGameController;
 import org.openjfx.controller.preBossSceneControllers.PreBossGameController;
+import org.openjfx.fileManager.FileController;
+import org.openjfx.model.menuEntities.GameSaveObj;
+import org.openjfx.model.menuEntities.PassedLevelInfo;
 import org.openjfx.view.menuView.*;
 
 public class MainMenuController {
@@ -30,6 +33,7 @@ public class MainMenuController {
     private PreBossGameController preBossGameController;
     private BossGameController bossGameController;
     private PauseMenuController pauseMenuController;
+    private FileController fileController;
 
     public MainMenuController(Stage stage) {
         this.stage = stage;
@@ -47,8 +51,8 @@ public class MainMenuController {
         };
         stage.widthProperty().addListener(stageSizeListener);
         stage.heightProperty().addListener(stageSizeListener);
+        fileController = new FileController();
         initMainController();
-
     }
 
     private void start(){
@@ -60,11 +64,16 @@ public class MainMenuController {
     }
 
     private void saveGame(){
-
+        fileController.loadGame();
+        GameSaveObj gameSaveObj = GameSaveObj.getInstance();
+        System.out.println(gameSaveObj.getPreBossMap());
+        //preBossGameController = new PreBossGameController(scene,primaryScreenBounds.getWidth(),primaryScreenBounds.getHeight(),
+                //GameSaveObj.getInstance().getPreBossMap());
     }
 
     private void passBossScene(){
-
+        fileController.loadPassedLevelInfo();
+        System.out.println(PassedLevelInfo.getInstance().isLevel2());
     }
 
     private void finishGame(){
