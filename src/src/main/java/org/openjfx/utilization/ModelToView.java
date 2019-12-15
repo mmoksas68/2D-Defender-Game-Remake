@@ -1,6 +1,6 @@
 package org.openjfx.utilization;
 
-import org.openjfx.model.LocatableObject;
+import org.openjfx.model.commonEntities.LocatableObject;
 
 public class ModelToView {
     private double locationX;
@@ -8,19 +8,15 @@ public class ModelToView {
     private double hitboxWidth;
     private double hitboxHeight;
     private long ID;
-    private double currentViewLeft;
-    private double currentViewRight;
     private boolean isDead;
 
-    public ModelToView(LocatableObject locatableObject, double currentViewLeft, double currentViewRight) {
+    public ModelToView(LocatableObject locatableObject) {
         this.locationX = locatableObject.getLocation().getPositionX();
         this.locationY = locatableObject.getLocation().getPositionY();
         this.hitboxWidth = locatableObject.getHitBoxWidth();
         this.hitboxHeight = locatableObject.getHitBoxHeight();
         this.ID = locatableObject.getID();
         this.isDead = locatableObject.isDead();
-        this.currentViewLeft = currentViewLeft;
-        this.currentViewRight = currentViewRight;
     }
 
     public double getLocationX() {
@@ -61,22 +57,6 @@ public class ModelToView {
 
     public void setID(long ID) {
         this.ID = ID;
-    }
-
-    public double getCurrentViewLeft() {
-        return currentViewLeft;
-    }
-
-    public void setCurrentViewLeft(double currentViewLeft) {
-        this.currentViewLeft = currentViewLeft;
-    }
-
-    public double getCurrentViewRight() {
-        return currentViewRight;
-    }
-
-    public void setCurrentViewRight(double currentViewRight) {
-        this.currentViewRight = currentViewRight;
     }
 
     public boolean isDead() {

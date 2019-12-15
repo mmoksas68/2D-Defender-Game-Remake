@@ -7,22 +7,20 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import org.openjfx.controller.SoundController;
-import org.openjfx.model.Boss.BossMap;
-import org.openjfx.model.GameBar;
-import org.openjfx.model.entities.Boss.Boss;
-import org.openjfx.model.entities.Bullet.Bullet;
-import org.openjfx.model.entities.Spacecraft.Spacecraft;
+import org.openjfx.model.bossEntities.BossMap;
+import org.openjfx.model.bossEntities.Boss.Boss;
+import org.openjfx.model.commonEntities.Bullet.Bullet;
+import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
 import org.openjfx.utilization.ModelToView;
 import org.openjfx.utilization.ModelToViewBoss;
 import org.openjfx.utilization.ModelToViewSpaceCraft;
-import org.openjfx.view.BossMapView;
-import org.openjfx.view.GameBarView;
+import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 
 import java.util.ArrayList;
 
 public class BossGameController  {
-    private GameBar gameBar;
-    private GameBarView gameBarView;
+  //  private GameBar gameBar;
+//    private GameBarView gameBarView;
     private double rateGameBar = 0.12;
     private double rateMap = 0.91;
     private BossMap bossMap;
@@ -67,15 +65,15 @@ public class BossGameController  {
         initGame();
     }
     private void initGame() {
-        gameBar = new GameBar(sceneWidth, sceneHeight*rateGameBar);
-        gameBarView = new GameBarView(gameBar.getHitboxWidthScale(), gameBar.getHitboxHeightScale());
+      //  gameBar = new GameBar(sceneWidth, sceneHeight*rateGameBar);
+    //    gameBarView = new GameBarView(gameBar.getHitboxWidthScale(), gameBar.getHitboxHeightScale());
         bossMap = new BossMap(1, sceneWidth, sceneHeight*rateMap);
         bossMapView = new BossMapView (sceneWidth,sceneHeight*rateMap);
         bossController = new BossController(1, bossMap, bossMapView);
 
         refreshMap();
         BorderPane rootPane = new BorderPane();
-        rootPane.setTop(gameBarView);
+      //  rootPane.setTop(gameBarView);
         rootPane.setCenter(bossMapView);
         scene.setRoot(rootPane);
         //scene = new Scene(rootPane, sceneWidth, sceneHeight);
@@ -128,7 +126,7 @@ public class BossGameController  {
     }
     private <T> void bulletFire(T t, boolean isFiring) {
 
-
+/*
         var current = t instanceof Boss ? (Boss) t : (t instanceof Spacecraft ? (Spacecraft) t : null);
 
         current.setGunTimer(current.getGunTimer() % current.getGunPeriod());
@@ -145,7 +143,7 @@ public class BossGameController  {
             current.setGunTimer(current.getGunTimer() + 1);
         } else if (current.getGunTimer() != 0)
             current.setGunTimer(current.getGunTimer() + 1);
-
+*/
     }
 
     private void refreshMap() {
@@ -158,8 +156,8 @@ public class BossGameController  {
     }
     private void refreshSpacecraft() {
         boolean flame = moveleft + moveright != 0;
-        bossMapView.refreshSpacecraft( new ModelToViewSpaceCraft(bossMap.getSpacecraft(), bossMap.getViewLeft(), bossMap.getViewRight(), flame));
-        gameBarView.refreshSpacecraft(new ModelToView(bossMap.getSpacecraft(), bossMap.getViewLeft(), bossMap.getViewRight()));
+ //       bossMapView.refreshSpacecraft( new ModelToViewSpaceCraft(bossMap.getSpacecraft(), bossMap.getViewLeft(), bossMap.getViewRight(), flame));
+//        gameBarView.refreshSpacecraft(new ModelToView(bossMap.getSpacecraft(), bossMap.getViewLeft(), bossMap.getViewRight()));
     }
     private void refreshBullet() {
         ArrayList<Long> toBeDeleted = new ArrayList<>();
@@ -167,7 +165,7 @@ public class BossGameController  {
             if (bullet.isDead()) {
                 toBeDeleted.add(bullet.getID());
             }
-            bossMapView.refreshBullet(new ModelToView(bullet, bossMap.getViewLeft(), bossMap.getViewRight()));
+      //      bossMapView.refreshBullet(new ModelToView(bullet, bossMap.getViewLeft(), bossMap.getViewRight()));
 
         }
         for (var it : toBeDeleted) {
@@ -182,23 +180,23 @@ public class BossGameController  {
         this.sceneWidth = sceneWidth;
 
         bossMapView.setPrefSize(sceneWidth,sceneHeight*rateMap);
-        gameBarView.setPrefSize(sceneWidth, sceneHeight*rateGameBar);
+    /*    gameBarView.setPrefSize(sceneWidth, sceneHeight*rateGameBar);
         BossMap.setHitboxWidthScale(sceneWidth);
         gameBar.setHitboxWidthScale(sceneWidth);
         bossMap.refreshMap();
         gameBar.refreshGameBar();
-        gameBarView.refreshGameBarView(sceneWidth, sceneHeight*rateGameBar);
+        gameBarView.refreshGameBarView(sceneWidth, sceneHeight*rateGameBar);*/
     }
     public void setSceneHeight(double sceneHeight) {
 
         this.sceneHeight = sceneHeight;
         bossMapView.setPrefSize(sceneWidth,sceneHeight*rateMap);
-        gameBarView.setPrefSize(sceneWidth, sceneHeight*rateGameBar);
+     /*   gameBarView.setPrefSize(sceneWidth, sceneHeight*rateGameBar);
         BossMap.setHitboxHeightScale(sceneHeight*rateMap);
         gameBar.setHitboxHeightScale(sceneHeight*rateGameBar);
         bossMap.refreshMap();
         gameBar.refreshGameBar();
-        gameBarView.refreshGameBarView(sceneWidth, sceneHeight*rateGameBar);
+        gameBarView.refreshGameBarView(sceneWidth, sceneHeight*rateGameBar);*/
     }
   /*  private void motionFunction(double accelerationSpeedChange, double constraint, double directionX, double directionY) {
         sliderAccelerationSpeed += accelerationSpeedChange;

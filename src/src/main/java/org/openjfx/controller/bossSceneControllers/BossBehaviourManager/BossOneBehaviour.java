@@ -1,8 +1,8 @@
 package org.openjfx.controller.bossSceneControllers.BossBehaviourManager;
 
-import org.openjfx.model.Boss.BossMap;
-import org.openjfx.view.BossMapView;
-import org.openjfx.view.entities.BossAbilityViews.LaserView;
+import org.openjfx.model.bossEntities.BossMap;
+import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
+import org.openjfx.view.gameSceneView.bossSceneView.bossAbilityViews.LaserView;
 
 public class BossOneBehaviour extends BossDefaultBehaviour implements BossBehaviourAlgorithm {
     LaserView laserView;

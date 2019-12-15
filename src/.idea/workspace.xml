@@ -1,54 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a7a46841-6915-4e69-85ec-c406941c34f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/menuAssets/cross.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/menuAssets/forward.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/menuAssets/red_button00.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/menuAssets/red_button01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/menuAssets/save.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/menuController/MainMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/menuController/PauseMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/menuEntitiesView/ExitButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/menuEntitiesView/FiyuvButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/menuEntitiesView/ResumeButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/entities/menuEntitiesView/SaveButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/menuView/Credits.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/menuView/HowToPlay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/menuView/LevelSelection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/menuView/MainMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/menuView/PauseMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/menuView/Settings.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/view/menuView/SpacecraftSelection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossBehaviourAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/bossSceneControllers/BossBehaviourManager/BossBehaviourAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossDefaultBehaviour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/bossSceneControllers/BossBehaviourManager/BossDefaultBehaviour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossOneBehaviour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/bossSceneControllers/BossBehaviourManager/BossOneBehaviour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossThreeBehaviour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/bossSceneControllers/BossBehaviourManager/BossThreeBehaviour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossTwoBehaviour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/bossSceneControllers/BossBehaviourManager/BossTwoBehaviour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/BossSceneControllers/BossController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/bossSceneControllers/BossController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/BossSceneControllers/BossGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/bossSceneControllers/BossGameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/PreBossGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/PreBossGameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossControllers/SoundController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/SoundController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/openjfx/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossBehaviourAlgorithm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossDefaultBehaviour.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossOneBehaviour.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossThreeBehaviour.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossBehaviourManager/BossTwoBehaviour.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossGameController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossGameController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/BossSceneControllers/BossGameController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/PreBossGameController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/openjfx/controller/preBossControllers/SoundController.class" beforeDir="false" />
-    </list>
+    <list default="true" id="a7a46841-6915-4e69-85ec-c406941c34f2" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +34,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -94,19 +47,24 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/org/openjfx/view" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -211,7 +169,9 @@
       <workItem from="1576251466504" duration="711000" />
       <workItem from="1576252257188" duration="98000" />
       <workItem from="1576252397244" duration="2488000" />
-      <workItem from="1576319313043" duration="219000" />
+      <workItem from="1576333774138" duration="64000" />
+      <workItem from="1576333905522" duration="99000" />
+      <workItem from="1576442563721" duration="612000" />
     </task>
     <servers />
   </component>
@@ -236,5 +196,59 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="677" y="178" key="#App" timestamp="1576405038166">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="677" y="178" key="#App/0.0.1920.1040@0.0.1920.1040" timestamp="1576405038166" />
+    <state x="765" y="220" key="#com.intellij.ide.util.MemberChooser" timestamp="1576420524506">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="220" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1576420524506" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1576410320588">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576410320588" />
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1576414860396">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1576414860396" />
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1576437764942">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576437764942" />
+    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1576437764942">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576437764942" />
+    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1576437764941">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576437764941" />
+    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1576437764942">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576437764942" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1576437764776">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576437764776" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1576437764776">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576437764776" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1576437764776">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576437764776" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1576437764776">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576437764776" />
+    <state x="656" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1576394971790">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576394971790" />
   </component>
 </project>
