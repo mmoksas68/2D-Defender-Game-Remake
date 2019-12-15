@@ -103,7 +103,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../defenderGame/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -215,10 +215,8 @@
       <workItem from="1576251466504" duration="711000" />
       <workItem from="1576252257188" duration="98000" />
       <workItem from="1576252397244" duration="2488000" />
-      <workItem from="1576269230261" duration="698000" />
-      <workItem from="1576315248319" duration="19751000" />
-      <workItem from="1576394590084" duration="84000" />
-      <workItem from="1576394971975" duration="29635000" />
+      <workItem from="1576333774138" duration="64000" />
+      <workItem from="1576333905522" duration="99000" />
     </task>
     <servers />
   </component>
