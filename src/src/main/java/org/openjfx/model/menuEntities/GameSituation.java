@@ -28,7 +28,6 @@ public class GameSituation implements Serializable {
         spacecraft1 = 1;
         spacecraft2 = 0;
         isSinglePlayer = false;
-        resetVar();
     }
 
     public static GameSituation getInstance(){

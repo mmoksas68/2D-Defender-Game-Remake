@@ -2,6 +2,7 @@ package org.openjfx.view.gameSceneView.preBossSceneView;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.view.gameSceneView.preBossSceneView.TopBar.TopBarView;
 
 import java.io.FileInputStream;
@@ -11,6 +12,9 @@ public class RootPane extends BorderPane {
     private PreBossMapView preBossMapView1;
     private PreBossMapView preBossMapView2;
     private TopBarView topBarView;
+
+    private double height;
+    private double width;
 
     private static BackgroundImage image;
 
@@ -25,8 +29,10 @@ public class RootPane extends BorderPane {
     public RootPane(double width, double height, boolean isSinglePlayer) {
         setMaxSize(width,height);
         setPrefSize(width,height);
+        this.height = height;
+        this.width = width;
         topBarView = new TopBarView(width, height*1.5/10);
-        if(isSinglePlayer)
+        if(isSinglePlayer || GameSituation.getInstance().isTwoPlayerSingleShip())
         {
             preBossMapView1 = new PreBossMapView(width, height*8.8/10, isSinglePlayer);
             setCenter(this.preBossMapView1);
@@ -43,7 +49,16 @@ public class RootPane extends BorderPane {
         setBackground(background);
     }
 
-
+    public void twoPlayerOneShipScreen(PreBossMapView myView){
+        setCenter(null);
+        setBottom(null);
+        preBossMapView1 = myView;
+        preBossMapView1.setWidthSize(width);
+        preBossMapView1.setHeightSize(height*8.8/10);
+        preBossMapView1.refreshScale();
+        setCenter(preBossMapView1);
+        preBossMapView2 = null;
+    }
     public PreBossMapView getPreBossMapView1() {
         return preBossMapView1;
     }
