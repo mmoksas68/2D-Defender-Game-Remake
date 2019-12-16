@@ -29,6 +29,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="CSS File" />
         <option value="Class" />
       </list>
     </option>
@@ -58,6 +59,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/org/openjfx/model/menuEntities" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -67,6 +69,9 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\javafx\IdeaProjects\CS319\src\src\main\java\org\openjfx\view\menuView" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kosed\Desktop\Combined\src\src\main\java\org\openjfx\model\menuEntities" />
       <recent name="C:\Users\kosed\Desktop\cs319\src\main\java\org\openjfx\view" />
@@ -172,9 +177,10 @@
       <workItem from="1576252397244" duration="2488000" />
       <workItem from="1576333774138" duration="64000" />
       <workItem from="1576333905522" duration="99000" />
-
       <workItem from="1576442563721" duration="612000" />
-
+      <workItem from="1576531596903" duration="262000" />
+      <workItem from="1576531970149" duration="53000" />
+      <workItem from="1576532050727" duration="3631000" />
     </task>
     <servers />
   </component>

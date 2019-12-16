@@ -1,59 +1,74 @@
 package org.openjfx.model.menuEntities;
 
 public class GameSituation {
-    private static int level;
-    private static boolean isSinglePlayer;
-    private static boolean isPreBossFinished;
-    private static boolean isPreBossFinishedSuccessfully;
-    private static boolean isBossFinishedSuccessfully;
-    private static boolean isBossFinished;
+    private int level;
+    private boolean isSinglePlayer;
+    private boolean isPreBossFinished;
+    private boolean isPreBossFinishedSuccessfully;
+    private boolean isBossFinishedSuccessfully;
+    private boolean isBossFinished;
+    private static GameSituation gameSituation;
 
-    public GameSituation(int level, boolean isSinglePlayer) {
-        this.level = level;
-        this.isSinglePlayer = isSinglePlayer;
+    private GameSituation() {
+        isSinglePlayer = false;
+        level = 1;
+        isSinglePlayer = false;
         isPreBossFinished = false;
         isBossFinished = false;
         isBossFinishedSuccessfully = false;
         isPreBossFinishedSuccessfully = false;
     }
 
-    public static boolean isIsPreBossFinished() {
+    public static GameSituation getInstance(){
+        if(gameSituation == null)
+            gameSituation = new GameSituation();
+
+        return gameSituation;
+    }
+
+    public boolean isIsPreBossFinished() {
         return isPreBossFinished;
     }
 
-    public static void setIsPreBossFinished(boolean isPreBossFinished) {
-        GameSituation.isPreBossFinished = isPreBossFinished;
+    public void setIsPreBossFinished(boolean isPreBossFinished) {
+        this.isPreBossFinished = isPreBossFinished;
     }
 
-    public static boolean isIsPreBossFinishedSuccessfully() {
+    public boolean isIsPreBossFinishedSuccessfully() {
         return isPreBossFinishedSuccessfully;
     }
 
-    public static void setIsPreBossFinishedSuccessfully(boolean isPreBossFinishedSuccessfully) {
-        GameSituation.isPreBossFinishedSuccessfully = isPreBossFinishedSuccessfully;
+    public void setIsPreBossFinishedSuccessfully(boolean isPreBossFinishedSuccessfully) {
+        this.isPreBossFinishedSuccessfully = isPreBossFinishedSuccessfully;
     }
 
-    public static boolean isIsBossFinishedSuccessfully() {
+    public boolean isIsBossFinishedSuccessfully() {
         return isBossFinishedSuccessfully;
     }
 
-    public static void setIsBossFinishedSuccessfully(boolean isBossFinishedSuccessfully) {
-        GameSituation.isBossFinishedSuccessfully = isBossFinishedSuccessfully;
+    public void setIsBossFinishedSuccessfully(boolean isBossFinishedSuccessfully) {
+        this.isBossFinishedSuccessfully = isBossFinishedSuccessfully;
     }
 
-    public static boolean isIsBossFinished() {
+    public boolean isIsBossFinished() {
         return isBossFinished;
     }
 
-    public static void setIsBossFinished(boolean isBossFinished) {
-        GameSituation.isBossFinished = isBossFinished;
+    public void setIsBossFinished(boolean isBossFinished) {
+        this.isBossFinished = isBossFinished;
     }
 
-    public static int getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public static boolean isIsSinglePlayer() {
+    public boolean isIsSinglePlayer() {
         return isSinglePlayer;
     }
+
+    public void setSinglePlayer(boolean isSinglePlayer){
+        this.isSinglePlayer = isSinglePlayer;
+    }
+
+
 }

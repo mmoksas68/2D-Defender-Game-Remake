@@ -20,7 +20,9 @@ public class MainMenu extends VBox {
     private FiyuvButton howToPlayBtn;
     private FiyuvButton settingsBtn;
     private FiyuvButton creditsBtn;
+    private FiyuvButton scoresBtn;
     private FiyuvButton exitBtn;
+    private FiyuvButton resumeBtn;
 
     public MainMenu(){
         menuButtons = new ArrayList<>();
@@ -34,7 +36,10 @@ public class MainMenu extends VBox {
         createHowToPlayBtn();
         createSettingsBtn();
         createCreditsBtn();
+        createScoresBtn();
         createExitBtn();
+
+        createResumeBtn();
     }
 
     private void addMenuButton(FiyuvButton btn){
@@ -69,9 +74,19 @@ public class MainMenu extends VBox {
         addMenuButton(creditsBtn);
     }
 
+    private void createScoresBtn(){
+        scoresBtn = new FiyuvButton("High Scores");
+        addMenuButton(scoresBtn);
+    }
+
     private void createExitBtn(){
         exitBtn = new FiyuvButton("Exit");
         addMenuButton(exitBtn);
+    }
+
+    private void createResumeBtn(){
+        resumeBtn = new FiyuvButton("Resume");
+        addMenuButton(resumeBtn);
     }
 
     public FiyuvButton getSinglePlayerBtn(){
@@ -94,7 +109,11 @@ public class MainMenu extends VBox {
         return creditsBtn;
     }
 
+    public FiyuvButton getScoresBtn(){return scoresBtn;}
+
     public FiyuvButton getExitBtn(){
         return exitBtn;
     }
+
+    public FiyuvButton getResumeBtn(){return resumeBtn;}
 }

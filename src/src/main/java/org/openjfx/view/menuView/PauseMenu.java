@@ -17,7 +17,6 @@ import java.util.List;
 
 public class PauseMenu extends VBox {
 
-    private Stage stage;
     private Scene scene;
 
     private static final int MENU_BTN_START_X = 100;
@@ -59,8 +58,5 @@ public class PauseMenu extends VBox {
         return saveBtn;
     }
 
-    public Stage getStage(){
-        return stage;
-    }
 
 }
