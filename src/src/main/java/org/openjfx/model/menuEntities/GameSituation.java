@@ -12,7 +12,6 @@ public class GameSituation implements Serializable {
     private boolean isPreBossFinishedSuccessfully;
     private boolean isBossFinishedSuccessfully;
     private boolean isBossFinished;
-
     private static GameSituation gameSituation;
 
     private GameSituation(){
@@ -77,7 +76,7 @@ public class GameSituation implements Serializable {
         this.spacecraft2 = spacecraft2;
     }
 
-    public boolean isSinglePlayer() {
+    public boolean isIsSinglePlayer() {
         return isSinglePlayer;
     }
 
@@ -85,7 +84,7 @@ public class GameSituation implements Serializable {
         isSinglePlayer = singlePlayer;
     }
 
-    public boolean isPreBossFinished() {
+    public boolean isIsPreBossFinished() {
         return isPreBossFinished;
     }
 
@@ -109,11 +108,17 @@ public class GameSituation implements Serializable {
         isBossFinishedSuccessfully = bossFinishedSuccessfully;
     }
 
-    public boolean isBossFinished() {
+    public boolean isIsBossFinished() {
         return isBossFinished;
     }
 
     public void setBossFinished(boolean bossFinished) {
         isBossFinished = bossFinished;
     }
+
+    public void setIsSinglePlayer(boolean b){
+        isSinglePlayer = b;
+    }
+
+
 }

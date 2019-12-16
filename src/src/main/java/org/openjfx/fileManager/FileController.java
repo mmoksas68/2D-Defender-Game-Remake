@@ -1,6 +1,7 @@
 package org.openjfx.fileManager;
 
 import org.openjfx.model.menuEntities.GameSaveObj;
+import org.openjfx.model.menuEntities.HighScoreInfo;
 import org.openjfx.model.menuEntities.PassedLevelInfo;
 import org.openjfx.model.menuEntities.Settings;
 import org.openjfx.model.preBossEntities.PreBossMap;
@@ -48,18 +49,21 @@ public class FileController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void loadGame(){
         try {
-            fis = new FileInputStream(new File("gameData/gameSave.txt"));
+
+            //If you want to use saved game change directory
+            fis = new FileInputStream(new File("gameData/game.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         try {
             ois = new ObjectInputStream(fis);
         } catch (IOException e) {
+
+            System.out.println("EXCEPTION CATCHED");
             e.printStackTrace();
         }
         try {
@@ -81,14 +85,6 @@ public class FileController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-    }
-
-    public void saveHighScore(){
-
-    }
-
-    public void loadHighScore(){
 
     }
 
@@ -212,6 +208,77 @@ public class FileController {
             e.printStackTrace();
         }
     }
+
+    public void saveHighScores(){
+        HighScoreInfo highScoreInfo = HighScoreInfo.getInstance();
+        try {
+            fos = new FileOutputStream(new File("gameData/highScores.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try{
+            oos = new ObjectOutputStream(fos);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            oos.writeObject(highScoreInfo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            oos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void loadHighScores(){
+        try {
+            fis = new FileInputStream(new File("gameData/highScores.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            ois = new ObjectInputStream(fis);
+        } catch (EOFException e) {
+            System.out.println("exception!");
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            HighScoreInfo.setInstance((HighScoreInfo) ois.readObject());
+        } catch (EOFException e) {
+            System.out.println("exception!");
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ois.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     //##################################################################################################//
 

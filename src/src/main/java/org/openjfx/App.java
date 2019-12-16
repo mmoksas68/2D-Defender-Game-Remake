@@ -4,6 +4,7 @@ package org.openjfx;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.openjfx.controller.bossSceneControllers.BossGameController;
+import org.openjfx.controller.menuController.MainController;
 import org.openjfx.controller.menuController.MainMenuController;
 
 
@@ -18,6 +19,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        MainMenuController mainController = new MainMenuController(stage);
+        MainController mainController = new MainController(stage);
     }
 }
