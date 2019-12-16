@@ -143,7 +143,8 @@ public class GameSituation implements Serializable {
         this.isPreBossFinished.set(isPreBossFinished);
     }
 
-    public boolean isIsFirstCraftDied() {
+
+    public boolean isFirstCraftDied() {
         return isFirstCraftDied.get();
     }
 
@@ -155,7 +156,7 @@ public class GameSituation implements Serializable {
         this.isFirstCraftDied.set(isFirstCraftDied);
     }
 
-    public boolean isIsSecondCraftDied() {
+    public boolean isSecondCraftDied() {
         return isSecondCraftDied.get();
     }
 

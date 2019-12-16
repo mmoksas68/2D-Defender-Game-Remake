@@ -52,7 +52,6 @@ public class PreBossGameController {
 
         if(!isSinglePlayer)
             spacecraftController2 = new SpacecraftController(preBossMapController.getPreBossMap().getSpacecraft2(), rootPane.getPreBossMapView2(), preBossMapController.getPreBossMap());
-
         scene.setRoot(rootPane);
         initGame();
 
@@ -73,7 +72,7 @@ public class PreBossGameController {
 
     private void initGame(){
 
-        if(isSinglePlayer ){
+        if(isSinglePlayer){
             scene.setOnKeyPressed(e -> {
                 switch (e.getCode()) {
                     case UP:
@@ -209,7 +208,8 @@ public class PreBossGameController {
 
     private void refreshMap() {
         preBossMapController.checkMapSituation();
-        scoreCalculator();
+        increaseScore();
+        decreaseScore();
         refreshAndReflectBuff();
         refreshAndReflectBullet();
         refreshAndReflectEnemy();
@@ -329,7 +329,15 @@ public class PreBossGameController {
         rootPane.getTopBarView().getRightView().refresh();
     }
 
-    private void scoreCalculator() {
+    public void resume(){
+
+    }
+
+    public void pause(){
+
+    }
+
+    private void increaseScore() {
         for (var station : preBossMapController.getPreBossMap().getStations().values()) {
             if (station.isDead()) {
                 gameSituation.setScore(gameSituation.getScore() + EnemyStation.SCORE_POINT);
@@ -339,6 +347,10 @@ public class PreBossGameController {
             if (enemy.isDead()) {
                 gameSituation.setScore(gameSituation.getScore() + Tier1Enemy.SCORE_POINT);
             }
+        }
+    }
+
+    private void decreaseScore(){
             scoreDecayTimer++;
             scoreDecayTimer = scoreDecayTimer % SCORE_DECAY_PERIOD;
             if (scoreDecayTimer == 0) {
@@ -347,23 +359,6 @@ public class PreBossGameController {
                 else
                     gameSituation.setScore(0);
             }
-        }
-    }
-
-    public void resume(){
-
-    }
-
-    public void pause(){
-
-    }
-
-    private void increaseScore(int score){
-
-    }
-
-    private void decreaseScore(int score){
-
     }
 
     /*public BorderPane getRootPane() {
