@@ -30,14 +30,13 @@ public class PreBossGameController {
     private boolean gameOn = true;
     private BooleanProperty gameOnChange = new SimpleBooleanProperty(false);
     private int scoreDecayTimer = 0;
-    private final int scoreDecayPeriod = 1000;
+    private final int SCORE_DECAY_PERIOD = 30000;
     private boolean isSinglePlayer = false;
 
     private AnimationTimer animationTimer = new AnimationTimer() {
         @Override
         public void handle(long l) {
                  timerPulse();
-                 scoreDecayer();
         }
     };
 
@@ -215,6 +214,7 @@ public class PreBossGameController {
         refreshAndReflectMeteor();
         refreshAndReflectStations();
         refreshAndReflectScore();
+        scoreCalculator();
         refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
         if(!isSinglePlayer)
             refreshAndReflectSpacecraft(spacecraftController2.getSpacecraft());
@@ -291,7 +291,7 @@ public class PreBossGameController {
         for (var station : preBossMapController.getPreBossMap().getStations().values()) {
             if (station.isDead()) {
                 toBeDeleted.add(station.getID());
-                gameSituation.setScore(gameSituation.getScore()+ EnemyStation.SCORE_POINT);
+
                 spacecraftController1.getPreBossMapView().addExplodeAnimation(new ModelToView(station));
                 if (!isSinglePlayer)
                     spacecraftController2.getPreBossMapView().addExplodeAnimation(new ModelToView(station));
@@ -321,14 +321,24 @@ public class PreBossGameController {
         rootPane.getTopBarView().getRightView().refresh();
     }
 
-    public void scoreDecayer(){
-        scoreDecayTimer++;
-        scoreDecayTimer = scoreDecayTimer % scoreDecayPeriod;
-        if(scoreDecayTimer == 0){
-            if(gameSituation.getScore() > 10)
-                gameSituation.setScore(gameSituation.getScore()-10);
-            else
-                gameSituation.setScore(0);
+    private void scoreCalculator() {
+        for (var station : preBossMapController.getPreBossMap().getStations().values()) {
+            if (station.isDead()) {
+                gameSituation.setScore(gameSituation.getScore() + EnemyStation.SCORE_POINT);
+            }
+        }
+        for (var enemy : preBossMapController.getPreBossMap().getEnemies().values()) {
+            if (enemy.isDead()) {
+                gameSituation.setScore(gameSituation.getScore() + Tier1Enemy.SCORE_POINT);
+            }
+            scoreDecayTimer++;
+            scoreDecayTimer = scoreDecayTimer % SCORE_DECAY_PERIOD;
+            if (scoreDecayTimer == 0) {
+                if (gameSituation.getScore() > 5)
+                    gameSituation.setScore(gameSituation.getScore() - 5);
+                else
+                    gameSituation.setScore(0);
+            }
         }
     }
 
