@@ -3,8 +3,11 @@ package org.openjfx.controller.preBossSceneControllers;
 import javafx.animation.*;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.Scene;
+import javafx.scene.effect.GaussianBlur;
 import org.openjfx.controller.SoundController;
+import org.openjfx.controller.menuController.PauseMenuController;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.menuEntities.GameSituation2;
 import org.openjfx.model.preBossEntities.Enemy.Enemy;
@@ -50,11 +53,10 @@ public class PreBossGameController {
         preBossMapController = new PreBossMapController(isSinglePlayer);
         spacecraftController1 = new SpacecraftController(preBossMapController.getPreBossMap().getSpacecraft1(), rootPane.getPreBossMapView1(), preBossMapController.getPreBossMap());
 
-        if(!isSinglePlayer)
+        if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
             spacecraftController2 = new SpacecraftController(preBossMapController.getPreBossMap().getSpacecraft2(), rootPane.getPreBossMapView2(), preBossMapController.getPreBossMap());
         scene.setRoot(rootPane);
         initGame();
-
     }
 
 
@@ -66,141 +68,29 @@ public class PreBossGameController {
     private void timerPulse(){
         refreshMap();
         spacecraftController1.checkInputs();
-        if (!isSinglePlayer)
+        if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
             spacecraftController2.checkInputs();
     }
 
     private void initGame(){
-
         if(isSinglePlayer){
-            scene.setOnKeyPressed(e -> {
-                switch (e.getCode()) {
-                    case UP:
-                        spacecraftController1.setUpKeyPressed(true);
-                        break;
-                    case DOWN:
-                        spacecraftController1.setDownKeyPressed(true);
-                        break;
-                    case LEFT:
-                        spacecraftController1.setLeftKeyPressed(true);
-                        spacecraftController1.getSpacecraft().setDirectionLeft(true);
-                        break;
-                    case RIGHT:
-                        spacecraftController1.setRightKeyPressed(true);
-                        spacecraftController1.getSpacecraft().setDirectionLeft(false);
-                        break;
-                    case ALT_GRAPH:
-                        spacecraftController1.setFireKeyPressed(true);
-                        break;
-
-                }
-            });
-
-            scene.setOnKeyReleased(e -> {
-                switch (e.getCode()) {
-                    case UP:
-                        spacecraftController1.setUpKeyPressed(false);
-                        break;
-                    case DOWN:
-                        spacecraftController1.setDownKeyPressed(false);
-                        break;
-                    case LEFT:
-                        spacecraftController1.setLeftKeyPressed(false);
-                        break;
-                    case RIGHT:
-                        spacecraftController1.setRightKeyPressed(false);
-                        break;
-                    case ALT_GRAPH:
-                        spacecraftController1.setFireKeyPressed(false);
-                        break;
-                    case ESCAPE:
-                        gameOnChange.set(true);
-                        break;
-                }
-            });
+            keysFor1();
         }
         else {
-
-
-            scene.setOnKeyPressed(e -> {
-                switch (e.getCode()) {
-                    case W:
-                        spacecraftController2.setUpKeyPressed(true);
-                        break;
-                    case S:
-                        spacecraftController2.setDownKeyPressed(true);
-                        break;
-                    case A:
-                        spacecraftController2.setLeftKeyPressed(true);
-                        spacecraftController2.getSpacecraft().setDirectionLeft(true);
-                        break;
-                    case D:
-                        spacecraftController2.setRightKeyPressed(true);
-                        spacecraftController2.getSpacecraft().setDirectionLeft(false);
-                        break;
-                    case SPACE:
-                        spacecraftController2.setFireKeyPressed(true);
-                        break;
-
-                    case UP:
-                        spacecraftController1.setUpKeyPressed(true);
-                        break;
-                    case DOWN:
-                        spacecraftController1.setDownKeyPressed(true);
-                        break;
-                    case LEFT:
-                        spacecraftController1.setLeftKeyPressed(true);
-                        spacecraftController1.getSpacecraft().setDirectionLeft(true);
-                        break;
-                    case RIGHT:
-                        spacecraftController1.setRightKeyPressed(true);
-                        spacecraftController1.getSpacecraft().setDirectionLeft(false);
-                        break;
-                    case ALT_GRAPH:
-                        spacecraftController1.setFireKeyPressed(true);
-                        break;
-
-                }
-            });
-
-            scene.setOnKeyReleased(e -> {
-                switch (e.getCode()) {
-                    case W:
-                        spacecraftController2.setUpKeyPressed(false);
-                        break;
-                    case S:
-                        spacecraftController2.setDownKeyPressed(false);
-                        break;
-                    case A:
-                        spacecraftController2.setLeftKeyPressed(false);
-                        break;
-                    case D:
-                        spacecraftController2.setRightKeyPressed(false);
-                        break;
-                    case SPACE:
-                        spacecraftController2.setFireKeyPressed(false);
-                        break;
-                    case UP:
-                        spacecraftController1.setUpKeyPressed(false);
-                        break;
-                    case DOWN:
-                        spacecraftController1.setDownKeyPressed(false);
-                        break;
-                    case LEFT:
-                        spacecraftController1.setLeftKeyPressed(false);
-                        break;
-                    case RIGHT:
-                        spacecraftController1.setRightKeyPressed(false);
-                        break;
-                    case ALT_GRAPH:
-                        spacecraftController1.setFireKeyPressed(false);
-                        break;
-                    case ESCAPE:
-                        gameOnChange.set(true);
-                        break;
-                }
-            });
+            keysForBoth();
         }
+        ChangeListener<Boolean> isFirstDied = (observable, oldValue, newValue) -> {
+            if(gameSituation.isFirstCraftDied()){
+                spacecraftController1 = new SpacecraftController(spacecraftController2.getSpacecraft(), spacecraftController2.getPreBossMapView(), spacecraftController2.getPreBossMap());
+                spacecraftController2 = null;
+                keysFor2();
+            }
+            if(gameSituation.isSecondCraftDied()){
+                spacecraftController2 = null;
+            }
+        };
+        gameSituation.twoPlayerSingleShipProperty().addListener(isFirstDied);
+
 
         animationTimer.start();
 
@@ -217,7 +107,7 @@ public class PreBossGameController {
         refreshAndReflectStations();
         refreshAndReflectScore();
         refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
-        if(!isSinglePlayer)
+        if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
             refreshAndReflectSpacecraft(spacecraftController2.getSpacecraft());
     }
 
@@ -229,12 +119,12 @@ public class PreBossGameController {
             if (enemy.isDead()) {
                 toBeDeleted.add(enemy.getID());
                 spacecraftController1.getPreBossMapView().addExplodeAnimation(new ModelToView(enemy));
-                if (!isSinglePlayer)
+                if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
                     spacecraftController2.getPreBossMapView().addExplodeAnimation(new ModelToView(enemy));
             }
 
             spacecraftController1.getPreBossMapView().refreshEnemy(modelToViewEnemy);
-            if (!isSinglePlayer)
+            if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
                 spacecraftController2.getPreBossMapView().refreshEnemy(modelToViewEnemy);
             rootPane.getTopBarView().getMiddleView().refresh(new RadarObject(enemy));
         }
@@ -252,7 +142,7 @@ public class PreBossGameController {
                 toBeDeleted.add(bullet.getID());
             }
             spacecraftController1.getPreBossMapView().refreshBullet(new ModelToViewBullet(bullet));
-            if (!isSinglePlayer)
+            if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
                 spacecraftController2.getPreBossMapView().refreshBullet(new ModelToViewBullet(bullet));
 
         }
@@ -264,29 +154,35 @@ public class PreBossGameController {
 
     private void refreshAndReflectSpacecraft(Spacecraft spacecraft){
 
-        if(!isSinglePlayer){
+        if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip()){
             if(spacecraft.getID() == spacecraftController1.getSpacecraft().getID())
             {
                 if(spacecraft.isDead()){
                     gameSituation.setIsFirstCraftDied(true);
+                    gameSituation.setTwoPlayerSingleShip(true);
+                }else{
+
+                    spacecraftController2.getPreBossMapView().refreshSpacecraftSecondary( new ModelToViewSpaceCraft(spacecraft));
                 }
                 spacecraftController1.getPreBossMapView().refreshSpacecraftMain( new ModelToViewSpaceCraft(spacecraft));
-                spacecraftController2.getPreBossMapView().refreshSpacecraftSecondary( new ModelToViewSpaceCraft(spacecraft));
             }
 
+            if(spacecraftController2 != null) {
+                if (spacecraft.getID() == spacecraftController2.getSpacecraft().getID()) {
 
-            if(spacecraft.getID() == spacecraftController2.getSpacecraft().getID())
-            {
-                if(spacecraft.isDead()){
-                    gameSituation.setIsSecondCraftDied(true);
+                    if (spacecraft.isDead()) {
+                        gameSituation.setIsSecondCraftDied(true);
+                        gameSituation.setTwoPlayerSingleShip(true);
+                    } else {
+                        spacecraftController2.getPreBossMapView().refreshSpacecraftMain(new ModelToViewSpaceCraft(spacecraft));
+                        spacecraftController1.getPreBossMapView().refreshSpacecraftSecondary(new ModelToViewSpaceCraft(spacecraft));
+                    }
                 }
-                spacecraftController2.getPreBossMapView().refreshSpacecraftMain( new ModelToViewSpaceCraft(spacecraft));
-                spacecraftController1.getPreBossMapView().refreshSpacecraftSecondary( new ModelToViewSpaceCraft(spacecraft));
             }
-        }else{
+        }
+        else{
             spacecraftController1.getPreBossMapView().refreshSpacecraftMain( new ModelToViewSpaceCraft(spacecraft));
         }
-
 
 
         rootPane.getTopBarView().getMiddleView().refresh(new RadarObject(spacecraft));
@@ -301,11 +197,11 @@ public class PreBossGameController {
                 toBeDeleted.add(station.getID());
 
                 spacecraftController1.getPreBossMapView().addExplodeAnimation(new ModelToView(station));
-                if (!isSinglePlayer)
+                if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
                     spacecraftController2.getPreBossMapView().addExplodeAnimation(new ModelToView(station));
             }
             spacecraftController1.getPreBossMapView().refreshStations(new ModelToViewStation(station));
-            if (!isSinglePlayer)
+            if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
                 spacecraftController2.getPreBossMapView().refreshStations(new ModelToViewStation(station));
             rootPane.getTopBarView().getMiddleView().refresh(new RadarObject(station));
         }
@@ -360,6 +256,188 @@ public class PreBossGameController {
                     gameSituation.setScore(0);
             }
     }
+
+    //#############################################################################################################
+
+    private void keysFor1(){
+        scene.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case UP:
+                    spacecraftController1.setUpKeyPressed(true);
+                    break;
+                case DOWN:
+                    spacecraftController1.setDownKeyPressed(true);
+                    break;
+                case LEFT:
+                    spacecraftController1.setLeftKeyPressed(true);
+                    spacecraftController1.getSpacecraft().setDirectionLeft(true);
+                    break;
+                case RIGHT:
+                    spacecraftController1.setRightKeyPressed(true);
+                    spacecraftController1.getSpacecraft().setDirectionLeft(false);
+                    break;
+                case ALT_GRAPH:
+                    spacecraftController1.setFireKeyPressed(true);
+                    break;
+
+            }
+        });
+
+        scene.setOnKeyReleased(e -> {
+            switch (e.getCode()) {
+                case UP:
+                    spacecraftController1.setUpKeyPressed(false);
+                    break;
+                case DOWN:
+                    spacecraftController1.setDownKeyPressed(false);
+                    break;
+                case LEFT:
+                    spacecraftController1.setLeftKeyPressed(false);
+                    break;
+                case RIGHT:
+                    spacecraftController1.setRightKeyPressed(false);
+                    break;
+                case ALT_GRAPH:
+                    spacecraftController1.setFireKeyPressed(false);
+                    break;
+                case ESCAPE:
+                    gameOnChange.set(true);
+                    break;
+            }
+        });
+    }
+
+    private void keysFor2(){
+        scene.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case W:
+                    spacecraftController1.setUpKeyPressed(true);
+                    break;
+                case S:
+                    spacecraftController1.setDownKeyPressed(true);
+                    break;
+                case A:
+                    spacecraftController1.setLeftKeyPressed(true);
+                    spacecraftController1.getSpacecraft().setDirectionLeft(true);
+                    break;
+                case D:
+                    spacecraftController1.setRightKeyPressed(true);
+                    spacecraftController1.getSpacecraft().setDirectionLeft(false);
+                    break;
+                case SPACE:
+                    spacecraftController1.setFireKeyPressed(true);
+                    break;
+
+            }
+        });
+
+        scene.setOnKeyReleased(e -> {
+            switch (e.getCode()) {
+                case W:
+                    spacecraftController1.setUpKeyPressed(false);
+                    break;
+                case S:
+                    spacecraftController1.setDownKeyPressed(false);
+                    break;
+                case A:
+                    spacecraftController1.setLeftKeyPressed(false);
+                    break;
+                case D:
+                    spacecraftController1.setRightKeyPressed(false);
+                    break;
+                case SPACE:
+                    spacecraftController1.setFireKeyPressed(false);
+                    break;
+                case ESCAPE:
+                    gameOnChange.set(true);
+                    break;
+            }
+        });
+    }
+
+    private void keysForBoth(){
+        scene.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case W:
+                    spacecraftController2.setUpKeyPressed(true);
+                    break;
+                case S:
+                    spacecraftController2.setDownKeyPressed(true);
+                    break;
+                case A:
+                    spacecraftController2.setLeftKeyPressed(true);
+                    spacecraftController2.getSpacecraft().setDirectionLeft(true);
+                    break;
+                case D:
+                    spacecraftController2.setRightKeyPressed(true);
+                    spacecraftController2.getSpacecraft().setDirectionLeft(false);
+                    break;
+                case SPACE:
+                    spacecraftController2.setFireKeyPressed(true);
+                    break;
+
+                case UP:
+                    spacecraftController1.setUpKeyPressed(true);
+                    break;
+                case DOWN:
+                    spacecraftController1.setDownKeyPressed(true);
+                    break;
+                case LEFT:
+                    spacecraftController1.setLeftKeyPressed(true);
+                    spacecraftController1.getSpacecraft().setDirectionLeft(true);
+                    break;
+                case RIGHT:
+                    spacecraftController1.setRightKeyPressed(true);
+                    spacecraftController1.getSpacecraft().setDirectionLeft(false);
+                    break;
+                case ALT_GRAPH:
+                    spacecraftController1.setFireKeyPressed(true);
+                    break;
+
+            }
+        });
+
+        scene.setOnKeyReleased(e -> {
+            switch (e.getCode()) {
+                case W:
+                    spacecraftController2.setUpKeyPressed(false);
+                    break;
+                case S:
+                    spacecraftController2.setDownKeyPressed(false);
+                    break;
+                case A:
+                    spacecraftController2.setLeftKeyPressed(false);
+                    break;
+                case D:
+                    spacecraftController2.setRightKeyPressed(false);
+                    break;
+                case SPACE:
+                    spacecraftController2.setFireKeyPressed(false);
+                    break;
+                case UP:
+                    spacecraftController1.setUpKeyPressed(false);
+                    break;
+                case DOWN:
+                    spacecraftController1.setDownKeyPressed(false);
+                    break;
+                case LEFT:
+                    spacecraftController1.setLeftKeyPressed(false);
+                    break;
+                case RIGHT:
+                    spacecraftController1.setRightKeyPressed(false);
+                    break;
+                case ALT_GRAPH:
+                    spacecraftController1.setFireKeyPressed(false);
+                    break;
+                case ESCAPE:
+                    gameOnChange.set(true);
+                    break;
+            }
+        });
+    }
+
+
+    //#############################################################################################################
 
     /*public BorderPane getRootPane() {
         return rootPane;
@@ -462,6 +540,7 @@ public class PreBossGameController {
     public void setAnimationTimer(AnimationTimer animationTimer) {
         this.animationTimer = animationTimer;
     }
+
 
 
 }

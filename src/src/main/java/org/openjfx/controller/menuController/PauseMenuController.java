@@ -3,6 +3,8 @@ package org.openjfx.controller.menuController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
@@ -28,6 +30,8 @@ public class PauseMenuController {
         pauseMenu = new PauseMenu();
         primaryScene = scene;
         stage = new Stage();
+        stage.initOwner(scene.getWindow());
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         this.scene = new Scene(pauseMenu,350,150);
         stage.setScene(this.scene);
         stage.initStyle(StageStyle.UNDECORATED);

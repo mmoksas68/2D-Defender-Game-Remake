@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -45,6 +46,7 @@ public class MainMenuController {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.show();
         fileController = new FileController();
         initMainController();
