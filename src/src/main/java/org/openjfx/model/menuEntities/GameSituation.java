@@ -1,5 +1,8 @@
 package org.openjfx.model.menuEntities;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 import java.io.Serializable;
 
 public class GameSituation implements Serializable {
@@ -8,10 +11,12 @@ public class GameSituation implements Serializable {
     private int spacecraft1;
     private int spacecraft2;
     private boolean isSinglePlayer;
-    private boolean isPreBossFinished;
-    private boolean isPreBossFinishedSuccessfully;
-    private boolean isBossFinishedSuccessfully;
-    private boolean isBossFinished;
+    private BooleanProperty isPreBossFinished;
+    private BooleanProperty isPreBossFinishedSuccessfully;
+    private BooleanProperty isBossFinishedSuccessfully;
+    private BooleanProperty isBossFinished;
+    private BooleanProperty isFirstCraftDied;
+    private BooleanProperty isSecondCraftDied;
 
     private static GameSituation gameSituation;
 
@@ -19,8 +24,10 @@ public class GameSituation implements Serializable {
         //şimdilik böyle normalde menüden setlenekcek bu değerler
         level = 1;
         score = 0;
-        spacecraft1 = 0;
-        spacecraft2 = 1;
+        spacecraft1 = 1;
+        spacecraft2 = 0;
+        isSinglePlayer = false;
+        resetVar();
     }
 
     public static GameSituation getInstance(){
@@ -35,10 +42,12 @@ public class GameSituation implements Serializable {
     }
 
     public void resetVar(){
-        this.isPreBossFinished = false;
-        this.isPreBossFinishedSuccessfully = false;
-        this.isBossFinished = false;
-        this.isBossFinishedSuccessfully = false;
+        this.isPreBossFinished = new SimpleBooleanProperty(false);
+        this.isPreBossFinishedSuccessfully = new SimpleBooleanProperty(false);
+        this.isBossFinished = new SimpleBooleanProperty(false);
+        this.isBossFinishedSuccessfully = new SimpleBooleanProperty(false);
+        this.isFirstCraftDied = new SimpleBooleanProperty(false);
+        this.isSecondCraftDied = new SimpleBooleanProperty(false);
     }
 
     public void resetScore(){
@@ -85,35 +94,76 @@ public class GameSituation implements Serializable {
         isSinglePlayer = singlePlayer;
     }
 
-    public boolean isPreBossFinished() {
-        return isPreBossFinished;
+
+    public boolean isIsBossFinished() {
+        return isBossFinished.get();
     }
 
-    public void setPreBossFinished(boolean preBossFinished) {
-        isPreBossFinished = preBossFinished;
-    }
-
-    public boolean isPreBossFinishedSuccessfully() {
-        return isPreBossFinishedSuccessfully;
-    }
-
-    public void setPreBossFinishedSuccessfully(boolean preBossFinishedSuccessfully) {
-        isPreBossFinishedSuccessfully = preBossFinishedSuccessfully;
-    }
-
-    public boolean isBossFinishedSuccessfully() {
-        return isBossFinishedSuccessfully;
-    }
-
-    public void setBossFinishedSuccessfully(boolean bossFinishedSuccessfully) {
-        isBossFinishedSuccessfully = bossFinishedSuccessfully;
-    }
-
-    public boolean isBossFinished() {
+    public BooleanProperty isBossFinishedProperty() {
         return isBossFinished;
     }
 
-    public void setBossFinished(boolean bossFinished) {
-        isBossFinished = bossFinished;
+    public void setIsBossFinished(boolean isBossFinished) {
+        this.isBossFinished.set(isBossFinished);
+    }
+
+    public boolean isIsBossFinishedSuccessfully() {
+        return isBossFinishedSuccessfully.get();
+    }
+
+    public BooleanProperty isBossFinishedSuccessfullyProperty() {
+        return isBossFinishedSuccessfully;
+    }
+
+    public void setIsBossFinishedSuccessfully(boolean isBossFinishedSuccessfully) {
+        this.isBossFinishedSuccessfully.set(isBossFinishedSuccessfully);
+    }
+
+    public boolean isIsPreBossFinishedSuccessfully() {
+        return isPreBossFinishedSuccessfully.get();
+    }
+
+    public BooleanProperty isPreBossFinishedSuccessfullyProperty() {
+        return isPreBossFinishedSuccessfully;
+    }
+
+    public void setIsPreBossFinishedSuccessfully(boolean isPreBossFinishedSuccessfully) {
+        this.isPreBossFinishedSuccessfully.set(isPreBossFinishedSuccessfully);
+    }
+
+    public boolean isIsPreBossFinished() {
+        return isPreBossFinished.get();
+    }
+
+    public BooleanProperty isPreBossFinishedProperty() {
+        return isPreBossFinished;
+    }
+
+    public void setIsPreBossFinished(boolean isPreBossFinished) {
+        this.isPreBossFinished.set(isPreBossFinished);
+    }
+
+    public boolean isIsFirstCraftDied() {
+        return isFirstCraftDied.get();
+    }
+
+    public BooleanProperty isFirstCraftDiedProperty() {
+        return isFirstCraftDied;
+    }
+
+    public void setIsFirstCraftDied(boolean isFirstCraftDied) {
+        this.isFirstCraftDied.set(isFirstCraftDied);
+    }
+
+    public boolean isIsSecondCraftDied() {
+        return isSecondCraftDied.get();
+    }
+
+    public BooleanProperty isSecondCraftDiedProperty() {
+        return isSecondCraftDied;
+    }
+
+    public void setIsSecondCraftDied(boolean isSecondCraftDied) {
+        this.isSecondCraftDied.set(isSecondCraftDied);
     }
 }

@@ -106,6 +106,10 @@ public class PreBossMapView extends Pane {
         if(spacecraftViewGroup1 != null){
            spacecraftViewGroup = spacecraftViewGroup1;
            spacecraftViewGroup.refresh(modelToViewSpaceCraft, sliderLeft, layoutScaleWidth, layoutScaleHeight);
+            if(modelToViewSpaceCraft.isDead()){
+                getChildren().remove(spacecraftViewGroup.getFlame());
+                getChildren().remove(spacecraftViewGroup.getSpacecraftView());
+            }
         } else {
             spacecraftViewGroup = new SpacecraftViewGroup(modelToViewSpaceCraft, sliderLeft, layoutScaleWidth, layoutScaleHeight);
             spacecraftViewGroup1 = spacecraftViewGroup;
@@ -118,6 +122,10 @@ public class PreBossMapView extends Pane {
         if(spacecraftViewGroup2 != null){
            spacecraftViewGroup = spacecraftViewGroup2;
            spacecraftViewGroup.refresh(modelToViewSpaceCraft, sliderLeft, layoutScaleWidth, layoutScaleHeight);
+            if(modelToViewSpaceCraft.isDead()){
+                getChildren().remove(spacecraftViewGroup.getFlame());
+                getChildren().remove(spacecraftViewGroup.getSpacecraftView());
+            }
         } else {
             spacecraftViewGroup = new SpacecraftViewGroup(modelToViewSpaceCraft, sliderLeft, layoutScaleWidth, layoutScaleHeight);
             spacecraftViewGroup2 = spacecraftViewGroup;
