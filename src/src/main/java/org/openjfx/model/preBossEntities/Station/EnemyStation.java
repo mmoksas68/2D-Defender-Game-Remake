@@ -1,7 +1,7 @@
 package org.openjfx.model.preBossEntities.Station;
 
 import org.openjfx.model.commonEntities.Location;
-import org.openjfx.model.menuEntities.GameSituation;
+import org.openjfx.model.menuEntities.GameSituation2;
 
 public class EnemyStation extends Station{
     public static final int MAX_HEALTH = 50;
@@ -17,7 +17,7 @@ public class EnemyStation extends Station{
 
     public EnemyStation(Location location) {
         super(location, MAX_HEALTH);
-        level = GameSituation.getLevel();
+        level = GameSituation2.getLevel();
         producePeriod = level == 1 ? LEVEL1_PRODUCE_PERIOD : (level == 2 ? LEVEL2_PRODUCE_PERIOD : (level == 3 ? LEVEL3_PRODUCE_PERIOD : 0));
     }
 

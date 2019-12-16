@@ -4,11 +4,14 @@ import javafx.animation.*;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import org.openjfx.controller.SoundController;
 import org.openjfx.model.menuEntities.GameSituation;
+import org.openjfx.model.menuEntities.GameSituation2;
+import org.openjfx.model.preBossEntities.Enemy.Enemy;
+import org.openjfx.model.preBossEntities.Enemy.Tier1Enemy;
 import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
+import org.openjfx.model.preBossEntities.Station.EnemyStation;
 import org.openjfx.utilization.*;
 import org.openjfx.view.gameSceneView.preBossSceneView.RootPane;
 import org.openjfx.view.gameSceneView.preBossSceneView.TopBar.radarView.RadarObject;
@@ -26,18 +29,20 @@ public class PreBossGameController {
     private SpacecraftController spacecraftController2;
     private boolean gameOn = true;
     private BooleanProperty gameOnChange = new SimpleBooleanProperty(false);
-    private int scoreDecayTimer;
+    private int scoreDecayTimer = 0;
+    private final int scoreDecayPeriod = 1000;
     private boolean isSinglePlayer = false;
 
     private AnimationTimer animationTimer = new AnimationTimer() {
         @Override
         public void handle(long l) {
                  timerPulse();
+                 scoreDecayer();
         }
     };
 
     public PreBossGameController(Scene scene, double initWidth, double initHeight) {
-
+        gameSituation = GameSituation.getInstance();
         this.scene = scene;
         rootPane = new RootPane(initWidth, initHeight, isSinglePlayer);
         this.width = initWidth;
@@ -209,10 +214,12 @@ public class PreBossGameController {
         refreshAndReflectEnemy();
         refreshAndReflectMeteor();
         refreshAndReflectStations();
+        refreshAndReflectScore();
         refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
         if(!isSinglePlayer)
             refreshAndReflectSpacecraft(spacecraftController2.getSpacecraft());
     }
+
 
     private void refreshAndReflectEnemy() {
         ArrayList<Long> toBeDeleted = new ArrayList<>();
@@ -220,6 +227,7 @@ public class PreBossGameController {
             ModelToViewEnemy modelToViewEnemy = new ModelToViewEnemy(enemy);
             if (enemy.isDead()) {
                 toBeDeleted.add(enemy.getID());
+                gameSituation.setScore(gameSituation.getScore()+Tier1Enemy.SCORE_POINT);
                 spacecraftController1.getPreBossMapView().addExplodeAnimation(new ModelToView(enemy));
                 if (!isSinglePlayer)
                     spacecraftController2.getPreBossMapView().addExplodeAnimation(new ModelToView(enemy));
@@ -283,6 +291,7 @@ public class PreBossGameController {
         for (var station : preBossMapController.getPreBossMap().getStations().values()) {
             if (station.isDead()) {
                 toBeDeleted.add(station.getID());
+                gameSituation.setScore(gameSituation.getScore()+ EnemyStation.SCORE_POINT);
                 spacecraftController1.getPreBossMapView().addExplodeAnimation(new ModelToView(station));
                 if (!isSinglePlayer)
                     spacecraftController2.getPreBossMapView().addExplodeAnimation(new ModelToView(station));
@@ -305,6 +314,22 @@ public class PreBossGameController {
 
     private void refreshAndReflectMeteor(){
 
+    }
+
+    private void refreshAndReflectScore() {
+
+        rootPane.getTopBarView().getRightView().refresh();
+    }
+
+    public void scoreDecayer(){
+        scoreDecayTimer++;
+        scoreDecayTimer = scoreDecayTimer % scoreDecayPeriod;
+        if(scoreDecayTimer == 0){
+            if(gameSituation.getScore() > 10)
+                gameSituation.setScore(gameSituation.getScore()-10);
+            else
+                gameSituation.setScore(0);
+        }
     }
 
     public void resume(){

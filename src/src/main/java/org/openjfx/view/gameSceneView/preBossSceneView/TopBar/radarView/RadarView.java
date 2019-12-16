@@ -1,18 +1,23 @@
 package org.openjfx.view.gameSceneView.preBossSceneView.TopBar.radarView;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Screen;
 import org.openjfx.assetManager.Assets;
+import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
 import org.openjfx.model.preBossEntities.PreBossMap;
 
 import java.util.HashMap;
 
 
 public class RadarView extends Pane {
-
+    private static Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     private HashMap<Long, ImageView> radarObjects = new HashMap<>();
     private double scaleW;
     private double scaleH;
+    private Rectangle rectangle;
 
     public RadarView(double width, double height) {
         setMinSize(width, height);
@@ -24,7 +29,9 @@ public class RadarView extends Pane {
 
     public void refresh(RadarObject obj){
         ImageView imageView = null;
-
+        /*if (obj.getType().equals(RadarTypes.Spacecraft)){
+            getChildren().add(rectangle);
+        } */
         if(radarObjects.containsKey(obj.getID()) ){
             imageView = radarObjects.get(obj.getID());
             if(obj.isDead()){
