@@ -64,7 +64,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -177,6 +177,7 @@
       <workItem from="1576333905522" duration="99000" />
       <workItem from="1576442563721" duration="612000" />
       <workItem from="1576485609204" duration="12980000" />
+      <workItem from="1576512848406" duration="12494000" />
     </task>
     <servers />
   </component>
@@ -255,17 +256,5 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="656" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576394971790" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossSceneControllers/PreBossGameController.java</url>
-          <line>31</line>
-          <properties field="scoreDecayTimer" class="org.openjfx.controller.preBossSceneControllers.PreBossGameController" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

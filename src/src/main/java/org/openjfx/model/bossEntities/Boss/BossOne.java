@@ -11,10 +11,15 @@ public class BossOne extends Boss {
     private static final double hitBoxHeight = 150;
     private static final int MAX_HEALTH_POINT = 1000;
     private static final double velocity = 3;
+    private static int gunPower = 10;
+    private static double bulletVelocity = 10.0;
+    private static double gunFrequency = 0.05;
 
     public BossOne () {
         super ( velocity, hitBoxWidth, hitBoxHeight, MAX_HEALTH_POINT);
-        setGunFrequency( 1);
+        setGunFrequency( gunFrequency);
+        setGunPower( gunPower);
+        setBulletVelocity( bulletVelocity);
     }
 
     public Laser sendLaserIndicator() {

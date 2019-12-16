@@ -1,5 +1,6 @@
 package org.openjfx.model.commonEntities.FiringBehavior;
 
+import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.commonEntities.Bullet.Bullet;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.preBossEntities.Enemy.Enemy;
@@ -44,4 +45,6 @@ public class EnemyGun extends SimpleGun{
 
         return new Bullet(new Location(x ,y), getBulletDamage(), getBulletVelocity(), enemy.getDestinationLocation().getPositionX(), -enemy.getDestinationLocation().getPositionY());
     }
+
+
 }

@@ -1,5 +1,7 @@
 package org.openjfx.model.bossEntities;
 
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.bossEntities.Boss.Boss;
@@ -13,35 +15,33 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class BossMap {
-    public static double MAX_HEIGHT;
-    public static double MAX_WIDTH;
-    private static double hitboxWidthScale;
-    private static double hitboxHeightScale;
-    private double viewLeft;
-    private double viewRight;
-    private Boss boss;
-    private int level;
+    private static Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+    public static double MAP_HEIGHT = primaryScreenBounds.getHeight();
+    public static double MAP_WIDTH = primaryScreenBounds.getWidth();
 
-    private Spacecraft spacecraft;
+    private int level;
+    private boolean isSinglePlayer;
+    private Boss boss;
+    private Spacecraft spacecraft1;
     private Spacecraft spacecraft2;
     private java.util.Map<Long, Bullet> bullets = new HashMap<Long, Bullet>();
 
-    public BossMap(int level,  double hitboxWidthScale, double hitboxHeightScale) {
-        BossMap.hitboxWidthScale = hitboxWidthScale;
-        BossMap.hitboxHeightScale = hitboxHeightScale;
-        MAX_WIDTH = 5 * hitboxWidthScale;
-        MAX_HEIGHT = hitboxHeightScale;
-        viewLeft = 2 * hitboxWidthScale;
-        viewRight = 3 * hitboxWidthScale;
+    public BossMap(int level, boolean isSinglePlayer) {
         this.level = level;
+        this.isSinglePlayer = isSinglePlayer;
        // spacecraft = new Spacecraft(new Location(MAX_WIDTH / 2, MAX_HEIGHT / 2), (hitboxHeightScale / 1080 * Spacecraft.WIDTH_SCALE), (hitboxHeightScale / 1080 * Spacecraft.HEIGHT_SCALE), 30, 1, 1, 1, 7, 1, 1, true, true, true);
         initMap();
     }
     private void initMap() {
+        spacecraft1 = new Spacecraft( new Location( 0 ,450));
+        spacecraft1.setChoosenPicNo( 0);
+        if ( !isSinglePlayer) {
+            spacecraft2 = new Spacecraft(new Location(0, 800));
+            spacecraft2.setChoosenPicNo( 1);
+        }
         switch ( level) {
             case 1:
                 boss = new BossOne();
-                System.out.println( "Boss Created");
                 break;
             case 2:
                 boss = new BossTwo();
@@ -54,36 +54,12 @@ public class BossMap {
         }
     }
 
-    public double getViewLeft() {
-        return viewLeft;
+
+    public Spacecraft getSpacecraft1() {
+        return spacecraft1;
     }
 
-    public double getViewRight() {
-        return viewRight;
-    }
-
-    public Spacecraft getSpacecraft() {
-        return spacecraft;
-    }
-
-    public void setViewLeft(double viewLeft) {
-        this.viewLeft = viewLeft;
-    }
-
-    public void setViewRight(double viewRight) {
-        this.viewRight = viewRight;
-    }
-
-    public static double getHitboxWidthScale() {
-        return hitboxWidthScale;
-    }
-    public static void setHitboxWidthScale(double hitboxWidthScale) {
-        BossMap.hitboxWidthScale = hitboxWidthScale;
-    }
-    public static void setHitboxHeightScale(double hitboxHeightScale) {
-        BossMap.hitboxHeightScale = hitboxHeightScale;
-    }
-    public void checkBoundry ( double [] array, LocatableObject gameObject) {
+   /* public void checkBoundry ( double [] array, LocatableObject gameObject) {
          double MOVE_OFFSET = 10.0;
 
         if ( gameObject instanceof Spacecraft) {
@@ -94,7 +70,7 @@ public class BossMap {
                 array[3] = 0;
         }
 
-    }
+    }*/
     public java.util.Map<Long, Bullet> getBullets() {
         return bullets;
     }
@@ -103,9 +79,6 @@ public class BossMap {
     }
     public void addBullet(Bullet bullet) {
         bullets.put(bullet.getID(), bullet);
-    }
-    public static double getHitboxHeightScale() {
-        return hitboxHeightScale;
     }
     public Boss getBoss() {
         return boss;

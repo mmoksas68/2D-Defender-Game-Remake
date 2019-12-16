@@ -7,114 +7,101 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import org.openjfx.controller.SoundController;
+import org.openjfx.controller.preBossSceneControllers.SpacecraftController;
 import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.bossEntities.Boss.Boss;
 import org.openjfx.model.commonEntities.Bullet.Bullet;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
+import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.utilization.ModelToView;
 import org.openjfx.utilization.ModelToViewBoss;
+import org.openjfx.utilization.ModelToViewBullet;
 import org.openjfx.utilization.ModelToViewSpaceCraft;
 import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
+import org.openjfx.view.gameSceneView.preBossSceneView.RootPane;
+import org.openjfx.view.gameSceneView.preBossSceneView.TopBar.radarView.RadarObject;
 
 import java.util.ArrayList;
 
 public class BossGameController  {
-  //  private GameBar gameBar;
-//    private GameBarView gameBarView;
-    private double rateGameBar = 0.12;
-    private double rateMap = 0.91;
-    private BossMap bossMap;
-    private BossMapView bossMapView;
+
+    private RootPane rootPane;
     private Scene scene;
-    private double  moveleft = 0, moveright = 0;
-    private double  moveup = 0, movedown = 0;
-    private boolean spacePressed = false;
-    private BooleanProperty gameOnChange = new SimpleBooleanProperty(false);
-    private boolean gameOn = true;
-    private double sceneWidth;
-    private double sceneHeight;
+    private double width;
+    private double height;
+    private GameSituation gameSituation;
+    private BossMapController bossMapController;
     private BossController bossController;
-    private double sliderAccelerationSpeed = 0;
+    private SpacecraftController spacecraftController1;
+    private SpacecraftController spacecraftController2;
+    private boolean gameOn = true;
+    private BooleanProperty gameOnChange = new SimpleBooleanProperty(false);
+    private int scoreDecayTimer = 0;
+    private final int SCORE_DECAY_PERIOD = 30000;
+    private boolean isSinglePlayer = false;
     private AnimationTimer animationTimer = new AnimationTimer() {
         @Override
         public void handle(long l) {
+            timerPulse();
 
-            double [] boundArray = { moveright, moveleft, moveup, movedown};
-            bossMap.checkBoundry( boundArray, bossMap.getSpacecraft());
-
-            double xDirection = boundArray [0] + boundArray [1]; // moveright + moveleft
-            double yDirection = boundArray [2] + boundArray[3];  // moveup + movedown
-            double multiplier = 1 / Math.sqrt( Math.pow( xDirection,2) + Math.pow( yDirection, 2));
-            if ( xDirection != 0 || yDirection != 0) {
-                bossMap.getSpacecraft().moveToDirection(bossMap.getSpacecraft().getVelocity(),xDirection * multiplier, yDirection * multiplier);
-            }
-            bulletFire( bossMap.getSpacecraft(), spacePressed);
-            bossController.behave();
-            for (var bullet : bossMap.getBullets().values()) {
-                bullet.moveToDirection(bullet.getVelocity(), bullet.getDirectionX(), bullet.getDirectionY());
-            }
-            refreshMap();
-          //  bossMapView.refreshExplodeAnimations();
         }
     };
 
-    public BossGameController(Scene newScene, double sceneWidth, double sceneHeight) {
-        this.sceneWidth = sceneWidth;
-        this.sceneHeight = sceneHeight;
-        scene = newScene;
+    public BossGameController(Scene scene, double initWidth, double initHeight) {
+        gameSituation = GameSituation.getInstance();
+        this.scene = scene;
+        rootPane = new RootPane(initWidth, initHeight);
+        bossMapController = new BossMapController( new BossMap( 1, true));
+        bossController = new BossController( 1, bossMapController.getBossMap(), rootPane.getBossMapView());
+        this.width = initWidth;
+        this.height = initHeight;
+        spacecraftController1 = new SpacecraftController(bossMapController.getBossMap().getSpacecraft1(), rootPane.getBossMapView(),bossMapController.getBossMap());
+        scene.setRoot( rootPane);
         initGame();
     }
-    private void initGame() {
-      //  gameBar = new GameBar(sceneWidth, sceneHeight*rateGameBar);
-    //    gameBarView = new GameBarView(gameBar.getHitboxWidthScale(), gameBar.getHitboxHeightScale());
-        bossMap = new BossMap(1, sceneWidth, sceneHeight*rateMap);
-        bossMapView = new BossMapView (sceneWidth,sceneHeight*rateMap);
-        bossController = new BossController(1, bossMap, bossMapView);
-
+    private void timerPulse() {
         refreshMap();
-        BorderPane rootPane = new BorderPane();
-      //  rootPane.setTop(gameBarView);
-        rootPane.setCenter(bossMapView);
-        scene.setRoot(rootPane);
-        //scene = new Scene(rootPane, sceneWidth, sceneHeight);
-
+        spacecraftController1.getInputs();
+        bossController.behave();
+    }
+    private void initGame() {
+        refreshMap();
         scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case UP:
-                    moveup = 1;
+                    spacecraftController1.setUpKeyPressed(true);
                     break;
                 case DOWN:
-                    movedown = -1;
+                    spacecraftController1.setDownKeyPressed(true);
                     break;
                 case LEFT:
-                    moveleft = -1;
+                    spacecraftController1.setLeftKeyPressed(true);
                     break;
                 case RIGHT:
-                    moveright = 1;
+                    spacecraftController1.setRightKeyPressed(true);
                     break;
-                case SPACE:
-                    spacePressed = true;
+                case ALT_GRAPH:
+                    spacecraftController1.setFireKeyPressed(true);
                     break;
             }
         });
 
         scene.setOnKeyReleased(e -> {
             switch (e.getCode()) {
-
                 case UP:
-                    moveup = 0;
+                    spacecraftController1.setUpKeyPressed(false);
                     break;
                 case DOWN:
-                    movedown = 0;
+                    spacecraftController1.setDownKeyPressed(false);
                     break;
                 case LEFT:
-                    moveleft = 0;
+                    spacecraftController1.setLeftKeyPressed(false);
                     break;
                 case RIGHT:
-                    moveright = 0;
+                    spacecraftController1.setRightKeyPressed(false);
                     break;
-                case SPACE:
-                    spacePressed = false;
+                case ALT_GRAPH:
+                    spacecraftController1.setFireKeyPressed(false);
                     break;
                 case ESCAPE:
                     gameOnChange.set(true);
@@ -124,91 +111,55 @@ public class BossGameController  {
 
         animationTimer.start();
     }
-    private <T> void bulletFire(T t, boolean isFiring) {
-
-/*
-        var current = t instanceof Boss ? (Boss) t : (t instanceof Spacecraft ? (Spacecraft) t : null);
-
-        current.setGunTimer(current.getGunTimer() % current.getGunPeriod());
-
-        if (isFiring) {
-            if (current.getGunTimer() == 0) {
-                Bullet bullet = current.fireBullet();
-                bossMap.addBullet(bullet);
-                if (current instanceof Spacecraft) {
-                    SoundController.fireBullet();
-                    System.out.println( bossMap.getBoss().getLocation().getPositionY());
-                }
-            }
-            current.setGunTimer(current.getGunTimer() + 1);
-        } else if (current.getGunTimer() != 0)
-            current.setGunTimer(current.getGunTimer() + 1);
-*/
-    }
 
     private void refreshMap() {
-        refreshSpacecraft();
-        refreshBullet();
-        refreshBoss();
+        bossMapController.checkMapSituation();
+        scoreCalculator();
+        refreshAndReflectBuff();
+        refreshAndReflectBullet();
+        refreshAndReflectMeteor();
+        refreshAndReflectScore();
+        refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
+        refresAndReflectBoss();
     }
-    private void refreshBoss() {
-        bossMapView.refreshBossView( new ModelToViewBoss( bossMap.getBoss()));
+
+    private void scoreCalculator () {
+
     }
-    private void refreshSpacecraft() {
-        boolean flame = moveleft + moveright != 0;
- //       bossMapView.refreshSpacecraft( new ModelToViewSpaceCraft(bossMap.getSpacecraft(), bossMap.getViewLeft(), bossMap.getViewRight(), flame));
-//        gameBarView.refreshSpacecraft(new ModelToView(bossMap.getSpacecraft(), bossMap.getViewLeft(), bossMap.getViewRight()));
+    private void refreshAndReflectBuff() {
+
     }
-    private void refreshBullet() {
+    private void refreshAndReflectBullet() {
         ArrayList<Long> toBeDeleted = new ArrayList<>();
-        for (var bullet : bossMap.getBullets().values()) {
+        for (var bullet : bossMapController.getBossMap().getBullets().values()) {
             if (bullet.isDead()) {
                 toBeDeleted.add(bullet.getID());
             }
-      //      bossMapView.refreshBullet(new ModelToView(bullet, bossMap.getViewLeft(), bossMap.getViewRight()));
+            spacecraftController1.getBossMapView().refreshBullet(new ModelToViewBullet(bullet));
 
         }
         for (var it : toBeDeleted) {
-            bossMap.deleteBullet(it);
+            bossMapController.getBossMap().deleteBullet(it);
         }
+    }
+    private void refreshAndReflectMeteor() {
+
+    }
+    private void refreshAndReflectScore() {
+
+    }
+    private void refreshAndReflectSpacecraft(Spacecraft spacecraft) {
+        rootPane.getBossMapView().refreshSpacecraftMain( new ModelToViewSpaceCraft(spacecraft));
+        rootPane.getTopBarView().getMiddleView().refresh(new RadarObject(spacecraft));
+    }
+    private void refresAndReflectBoss() {
+        rootPane.getBossMapView().refreshBossView( new ModelToViewBoss( bossMapController.getBossMap().getBoss()));
     }
 
     public Scene getScene() {
         return scene;
     }
-    public void setSceneWidth(double sceneWidth) {
-        this.sceneWidth = sceneWidth;
 
-        bossMapView.setPrefSize(sceneWidth,sceneHeight*rateMap);
-    /*    gameBarView.setPrefSize(sceneWidth, sceneHeight*rateGameBar);
-        BossMap.setHitboxWidthScale(sceneWidth);
-        gameBar.setHitboxWidthScale(sceneWidth);
-        bossMap.refreshMap();
-        gameBar.refreshGameBar();
-        gameBarView.refreshGameBarView(sceneWidth, sceneHeight*rateGameBar);*/
-    }
-    public void setSceneHeight(double sceneHeight) {
-
-        this.sceneHeight = sceneHeight;
-        bossMapView.setPrefSize(sceneWidth,sceneHeight*rateMap);
-     /*   gameBarView.setPrefSize(sceneWidth, sceneHeight*rateGameBar);
-        BossMap.setHitboxHeightScale(sceneHeight*rateMap);
-        gameBar.setHitboxHeightScale(sceneHeight*rateGameBar);
-        bossMap.refreshMap();
-        gameBar.refreshGameBar();
-        gameBarView.refreshGameBarView(sceneWidth, sceneHeight*rateGameBar);*/
-    }
-  /*  private void motionFunction(double accelerationSpeedChange, double constraint, double directionX, double directionY) {
-        sliderAccelerationSpeed += accelerationSpeedChange;
-
-        if (sliderAccelerationSpeed < -constraint)
-            sliderAccelerationSpeed = -constraint;
-        if (sliderAccelerationSpeed > constraint)
-            sliderAccelerationSpeed = constraint;
-
-        bossMap.setViewLeft(bossMap.getViewLeft() + sliderAccelerationSpeed);
-        bossMap.getSpacecraft().moveToDirection(bossMap.getSpacecraft().getVelocity(), directionX, directionY);
-    }*/
     public BooleanProperty gameOnChangeProperty() {
         return gameOnChange;
     }
@@ -229,3 +180,20 @@ public class BossGameController  {
         return gameOnChange;
     }
 }
+
+ /*   double [] boundArray = { moveright, moveleft, moveup, movedown};
+            bossMap.checkBoundry( boundArray, bossMap.getSpacecraft());
+
+                    double xDirection = boundArray [0] + boundArray [1]; // moveright + moveleft
+                    double yDirection = boundArray [2] + boundArray[3];  // moveup + movedown
+                    double multiplier = 1 / Math.sqrt( Math.pow( xDirection,2) + Math.pow( yDirection, 2));
+                    if ( xDirection != 0 || yDirection != 0) {
+                    bossMap.getSpacecraft().moveToDirection(bossMap.getSpacecraft().getVelocity(),xDirection * multiplier, yDirection * multiplier);
+                    }
+                    bulletFire( bossMap.getSpacecraft(), spacePressed);
+                    bossController.behave();
+                    for (var bullet : bossMap.getBullets().values()) {
+                    bullet.moveToDirection(bullet.getVelocity(), bullet.getDirectionX(), bullet.getDirectionY());
+                    }
+                    refreshMap();
+//  bossMapView.refreshExplodeAnimations();*/

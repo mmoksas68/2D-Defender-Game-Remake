@@ -1,6 +1,7 @@
 package org.openjfx.model.commonEntities.FiringBehavior;
 
 import org.openjfx.controller.SoundController;
+import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.commonEntities.Bullet.Bullet;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.preBossEntities.PreBossMap;
@@ -20,7 +21,21 @@ public abstract class SimpleGun implements FiringBehavior {
         this.bulletVelocity = bulletVelocity;
         isFiring = false;
     }
+    public void gunTimer( BossMap bossMap) {
+        this.setGunTimer(this.getGunTimer() % this.getGunPeriod());
 
+        if (isFiring) {
+            if (this.getGunTimer() == 0) {
+                Bullet bullet = this.fireBullet();
+                bossMap.addBullet(bullet);
+                if (this instanceof SpacecraftGun) {
+                    SoundController.fireBullet();
+                }
+            }
+            this.setGunTimer(this.getGunTimer() + 1);
+        } else if (this.getGunTimer() != 0)
+            this.setGunTimer(this.getGunTimer() + 1);
+    }
     public void gunTimer(PreBossMap preBossMap){
         this.setGunTimer(this.getGunTimer() % this.getGunPeriod());
 
