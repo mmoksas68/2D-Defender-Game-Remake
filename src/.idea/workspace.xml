@@ -173,6 +173,7 @@
       <workItem from="1576333774138" duration="64000" />
       <workItem from="1576333905522" duration="99000" />
       <workItem from="1576442563721" duration="612000" />
+      <workItem from="1576485609204" duration="1849000" />
     </task>
     <servers />
   </component>
@@ -260,6 +261,11 @@
           <line>28</line>
           <properties field="scoreDecayTimer" class="org.openjfx.controller.preBossSceneControllers.PreBossGameController" />
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/openjfx/controller/preBossSceneControllers/PreBossMapController.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

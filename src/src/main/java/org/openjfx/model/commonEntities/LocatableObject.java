@@ -30,6 +30,10 @@ public abstract class LocatableObject {
         return location;
     }
 
+    public void setLocation(Location location){
+        this.location = location;
+    }
+
     public double getHitBoxWidth() {
         return hitBoxWidth;
     }

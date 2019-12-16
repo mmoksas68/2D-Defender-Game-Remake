@@ -1,6 +1,7 @@
 package org.openjfx.view.gameSceneView.preBossSceneView.TopBar;
 
 import javafx.scene.layout.*;
+import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.view.gameSceneView.preBossSceneView.TopBar.radarView.RadarView;
 
 public class TopBarView extends BorderPane {

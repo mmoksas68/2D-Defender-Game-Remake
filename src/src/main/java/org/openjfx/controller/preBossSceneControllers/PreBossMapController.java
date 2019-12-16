@@ -51,7 +51,7 @@ public class PreBossMapController {
 
         for (var enemy : preBossMap.getEnemies().values()) {
             enemy.setDestinationType(EnemyDestinations.RandomLocation);
-            checkCollision(enemy, preBossMap.getStations());
+            //checkCollision(enemy, preBossMap.getStations());
             checkCollision(enemy, Collections.singletonMap(preBossMap.getSpacecraft1().getID(), preBossMap.getSpacecraft1()));
             if(!isSinglePlayer)
                 checkCollision(enemy, Collections.singletonMap(preBossMap.getSpacecraft2().getID(), preBossMap.getSpacecraft2()));

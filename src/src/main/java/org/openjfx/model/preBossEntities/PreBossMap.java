@@ -1,5 +1,6 @@
 package org.openjfx.model.preBossEntities;
 
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import org.openjfx.model.commonEntities.Buff.Buff;
@@ -11,6 +12,7 @@ import org.openjfx.model.commonEntities.Bullet.Bullet;
 import org.openjfx.model.preBossEntities.Enemy.Enemy;
 import org.openjfx.model.preBossEntities.Meteor.Meteor;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
+import org.openjfx.utilization.PositionHelper;
 
 import java.io.Serializable;
 import java.util.*;
@@ -47,36 +49,44 @@ public class PreBossMap implements Serializable {
         for (int i=0; i < 50 ; i++){
             double x = Math.random()*PreBossMap.MAP_WIDTH;
             double y = Math.random()*PreBossMap.MAP_HEIGHT;
-            if(x >= PreBossMap.MAP_WIDTH){
+            Tier1Enemy enemy = new Tier1Enemy(new Location(x,y), false);
+            PositionHelper helper = new PositionHelper(enemy);
+            helper.isInside(enemy.getHitBoxWidth(), enemy.getHitBoxHeight());
+            if(helper.getRight() >= PreBossMap.MAP_WIDTH){
                 x -= 100;
             }
-            if(x <= 0){
+            if(helper.getLeft() <= 0){
                 x += 100;
             }
-            if(y <= 0){
+            if(helper.getTop() <= 0){
                 y += 100;
             }
-            if(y >= PreBossMap.MAP_HEIGHT){
+            if(helper.getBottom() >= PreBossMap.MAP_HEIGHT){
                 y -= 100;
             }
-            addEnemy(new Tier1Enemy(new Location(x,y), false));
+            enemy.setLocation(new Location(x,y));
+            addEnemy(enemy);
+
         }
         for (int i=0; i < 5 ; i++){
             double x = Math.random()*PreBossMap.MAP_WIDTH;
             double y = Math.random()*PreBossMap.MAP_HEIGHT;
-            if(x >= PreBossMap.MAP_WIDTH){
-                x -= 300;
+            EnemyStation enemyStation = new EnemyStation(new Location(x,y));
+            PositionHelper helper = new PositionHelper(enemyStation);
+            if(helper.getRight() >= PreBossMap.MAP_WIDTH){
+                x -= 100;
             }
-            if(x <= 0){
-                x += 300;
+            if(helper.getLeft() <= 0){
+                x += 100;
             }
-            if(y <= 0){
-                y += 300;
+            if(helper.getTop() <= 0){
+                y += 100;
             }
-            if(y >= PreBossMap.MAP_HEIGHT){
-                y -= 300;
+            if(helper.getBottom() >= PreBossMap.MAP_HEIGHT){
+                y -= 100;
             }
-            addStation(new EnemyStation(new Location(x, y)));
+            enemyStation.setLocation(new Location(x,y));
+            addStation(enemyStation);
         }
     }
 
