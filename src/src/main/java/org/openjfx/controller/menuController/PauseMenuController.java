@@ -46,6 +46,8 @@ public class PauseMenuController {
         pauseMenu = new PauseMenu();
         primaryScene = scene;
         stage = new Stage();
+        stage.initOwner(scene.getWindow());
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         this.scene = new Scene(pauseMenu,350,150);
         stage.setScene(this.scene);
         stage.initStyle(StageStyle.UNDECORATED);
