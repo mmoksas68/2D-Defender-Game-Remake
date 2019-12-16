@@ -1,5 +1,7 @@
 package org.openjfx.model.preBossEntities;
 
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import org.openjfx.model.commonEntities.Buff.Buff;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.preBossEntities.Enemy.Tier1Enemy;
@@ -14,7 +16,8 @@ import java.io.Serializable;
 import java.util.*;
 
 public class PreBossMap implements Serializable {
-    public static double MAP_HEIGHT = 1000;
+    private static Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+    public static double MAP_HEIGHT = primaryScreenBounds.getHeight();
     public static double MAP_WIDTH = 10000;
     private int level;
     private java.util.Map<Long, Enemy> enemies = new HashMap<Long, Enemy>();
@@ -42,10 +45,38 @@ public class PreBossMap implements Serializable {
             spacecraft2 = new Spacecraft(new Location(4960, 520));
 
         for (int i=0; i < 50 ; i++){
-            addEnemy(new Tier1Enemy(new Location(Math.random()*10000, Math.random()*1000), false));
+            double x = Math.random()*PreBossMap.MAP_WIDTH;
+            double y = Math.random()*PreBossMap.MAP_HEIGHT;
+            if(x >= PreBossMap.MAP_WIDTH){
+                x -= 100;
+            }
+            if(x <= 0){
+                x += 100;
+            }
+            if(y <= 0){
+                y += 100;
+            }
+            if(y >= PreBossMap.MAP_HEIGHT){
+                y -= 100;
+            }
+            addEnemy(new Tier1Enemy(new Location(x,y), false));
         }
         for (int i=0; i < 5 ; i++){
-            addStation(new EnemyStation(new Location(Math.random()*10000, Math.random()*1000)));
+            double x = Math.random()*PreBossMap.MAP_WIDTH;
+            double y = Math.random()*PreBossMap.MAP_HEIGHT;
+            if(x >= PreBossMap.MAP_WIDTH){
+                x -= 300;
+            }
+            if(x <= 0){
+                x += 300;
+            }
+            if(y <= 0){
+                y += 300;
+            }
+            if(y >= PreBossMap.MAP_HEIGHT){
+                y -= 300;
+            }
+            addStation(new EnemyStation(new Location(x, y)));
         }
     }
 

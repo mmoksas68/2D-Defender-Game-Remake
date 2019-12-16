@@ -27,22 +27,6 @@ public class Settings implements Serializable {
 
 
     private Settings() {
-        up         = KeyCode.UP ;
-        down       = KeyCode.DOWN ;
-        left       = KeyCode.LEFT ;
-        right      = KeyCode.RIGHT ;
-        fire       = KeyCode.ALT_GRAPH;
-        hyperJump  = KeyCode.K;
-        smartBomb  = KeyCode.L;
-        up2        = KeyCode.W ;
-        down2      = KeyCode.S ;
-        left2      = KeyCode.A ;
-        right2     = KeyCode.D ;
-        fire2      = KeyCode.SPACE ;
-        hyperJump2 = KeyCode.X ;
-        smartBomb2 = KeyCode.C;
-        background = 1;
-        volume     = 50;
     }
 
     public static Settings getInstance(){

@@ -3,6 +3,7 @@ package org.openjfx.view.gameSceneView.preBossSceneView;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.utilization.*;
 import org.openjfx.view.gameSceneView.commonViews.buff.BuffView;
 import org.openjfx.view.gameSceneView.commonViews.explodeAnimation.ExplodeAnimation;
@@ -51,10 +52,10 @@ public class PreBossMapView extends Pane {
 
         if(isSinglePlayer){
             layoutScaleWidth = widthSize / 1920.0;
-            layoutScaleHeight = heightSize / 832.0;
+            layoutScaleHeight = heightSize / 832;
         }else{
             layoutScaleWidth = widthSize / 1920.0;
-            layoutScaleHeight = heightSize / 832.0;
+            layoutScaleHeight = heightSize / (PreBossMap.MAP_HEIGHT+ 50);
         }
 
         setStyle("-fx-border-color : white; -fx-border-width : 0 0 1 0");

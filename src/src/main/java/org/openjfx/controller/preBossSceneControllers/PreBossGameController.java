@@ -289,7 +289,7 @@ public class PreBossGameController {
             }
             spacecraftController1.getPreBossMapView().refreshStations(new ModelToViewStation(station));
             if (!isSinglePlayer)
-                spacecraftController1.getPreBossMapView().refreshStations(new ModelToViewStation(station));
+                spacecraftController2.getPreBossMapView().refreshStations(new ModelToViewStation(station));
             rootPane.getTopBarView().getMiddleView().refresh(new RadarObject(station));
         }
 
@@ -323,9 +323,9 @@ public class PreBossGameController {
 
     }
 
-    public BorderPane getRootPane() {
+    /*public BorderPane getRootPane() {
         return rootPane;
-    }
+    } */
 
     public void setRootPane(RootPane rootPane) {
         this.rootPane = rootPane;

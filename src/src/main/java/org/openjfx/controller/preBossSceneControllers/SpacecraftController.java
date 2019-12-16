@@ -3,6 +3,7 @@ package org.openjfx.controller.preBossSceneControllers;
 import org.openjfx.model.commonEntities.FiringBehavior.SpacecraftGun;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
 import org.openjfx.model.preBossEntities.PreBossMap;
+import org.openjfx.utilization.PositionHelper;
 import org.openjfx.view.gameSceneView.preBossSceneView.PreBossMapView;
 
 public class SpacecraftController {
@@ -45,38 +46,40 @@ public class SpacecraftController {
                 move(0.04, spacecraft.getVelocity() , 1, 0);
             }
 
-            if (!leftKeyPressed && !rightKeyPressed) {
-                preBossMapView.setSliderAccelerationSpeed(0);
-                if (spacecraft.getLocation().getPositionX() - preBossMapView.getSliderLeft() > 941) {
-                    if (spacecraft.getLocation().getPositionX() - preBossMapView.getSliderLeft() > 944) {
-                        preBossMapView.setSliderLeft(preBossMapView.getSliderLeft() + 5);
-                    } else
-                        preBossMapView.setSliderLeft(spacecraft.getLocation().getPositionX() - 940);
+
+                if (!leftKeyPressed && !rightKeyPressed) {
+                    preBossMapView.setSliderAccelerationSpeed(0);
+                    if (spacecraft.getLocation().getPositionX() - preBossMapView.getSliderLeft() > 941) {
+                        if (spacecraft.getLocation().getPositionX() - preBossMapView.getSliderLeft() > 944) {
+                            preBossMapView.setSliderLeft(preBossMapView.getSliderLeft() + 5);
+                        } else
+                            preBossMapView.setSliderLeft(spacecraft.getLocation().getPositionX() - 940);
+                    }
+
+                    if (spacecraft.getLocation().getPositionX() - preBossMapView.getSliderLeft() < 939) {
+                        if (spacecraft.getLocation().getPositionX() - preBossMapView.getSliderLeft() < 936) {
+                            preBossMapView.setSliderLeft(preBossMapView.getSliderLeft() - 5);
+                        } else
+                            preBossMapView.setSliderLeft(spacecraft.getLocation().getPositionX() - 940);
+                    }
                 }
 
-                if (spacecraft.getLocation().getPositionX() - preBossMapView.getSliderLeft() < 939) {
-                    if (spacecraft.getLocation().getPositionX() - preBossMapView.getSliderLeft() < 936) {
-                        preBossMapView.setSliderLeft(preBossMapView.getSliderLeft() - 5);
-                    } else
-                        preBossMapView.setSliderLeft(spacecraft.getLocation().getPositionX() - 940);
+                if (leftKeyPressed) {
+                    spacecraft.setDirectionLeft(true);
+                    if (spacecraft.getLocation().getPositionX() < preBossMapView.getSliderLeft() + 170.0) {
+                        spacecraft.getLocation().setPositionX(preBossMapView.getSliderLeft() + 170.0);
+                        preBossMapView.setSliderLeft(preBossMapView.getSliderLeft() - 4);
+                    }
                 }
-            }
 
-            if (leftKeyPressed) {
-                spacecraft.setDirectionLeft(true);
-                if (spacecraft.getLocation().getPositionX() < preBossMapView.getSliderLeft() + 170.0) {
-                    spacecraft.getLocation().setPositionX(preBossMapView.getSliderLeft() + 170.0);
-                    preBossMapView.setSliderLeft(preBossMapView.getSliderLeft() - 4);
+                if (rightKeyPressed) {
+                    spacecraft.setDirectionLeft(false);
+                    if (spacecraft.getLocation().getPositionX() > preBossMapView.getSliderLeft() + 1750.0 - spacecraft.getHitBoxWidth()) {
+                        spacecraft.getLocation().setPositionX(preBossMapView.getSliderLeft() + 1750.0 - spacecraft.getHitBoxWidth());
+                        preBossMapView.setSliderLeft(preBossMapView.getSliderLeft() + 4);
+                    }
                 }
-            }
 
-            if (rightKeyPressed) {
-                spacecraft.setDirectionLeft(false);
-                if (spacecraft.getLocation().getPositionX() > preBossMapView.getSliderLeft() + 1750.0 - spacecraft.getHitBoxWidth()) {
-                    spacecraft.getLocation().setPositionX(preBossMapView.getSliderLeft() + 1750.0 - spacecraft.getHitBoxWidth());
-                    preBossMapView.setSliderLeft(preBossMapView.getSliderLeft() + 4);
-                }
-            }
 
             ((SpacecraftGun)spacecraft.getSpacecraftGun()).setFiring(fireKeyPressed);
 
@@ -92,17 +95,45 @@ public class SpacecraftController {
 
     private void move(double accelerationSpeedChange, double constraint, double directionX, double directionY){
 
-            spacecraft.setMoving(true);
+        PositionHelper positionHelper = new PositionHelper(spacecraft);
+        boolean outTop = positionHelper.getTop()-1 < 0;
+        boolean outBottom = positionHelper.getBottom()+1 > PreBossMap.MAP_HEIGHT;
+        boolean outRight = positionHelper.getRight()+1 > PreBossMap.MAP_WIDTH;
+        boolean outLeft = positionHelper.getLeft()-1 < 0;
+        if (outTop){
+            if (directionY == 1){
+                directionY = 0;
+            }
+        }
+        if (outBottom){
+            if (directionY == -1){
+                directionY = 0;
+            }
+        }
+        if (outLeft){
+            if (directionX == -1){
+                directionX = 0;
+                leftKeyPressed = false;
+            }
+        }
+        if (outRight){
+            if (directionX == 1){
+                directionX = 0;
+                rightKeyPressed = false;
+            }
+        }
 
-            this.getPreBossMapView().setSliderAccelerationSpeed(this.getPreBossMapView().getSliderAccelerationSpeed() + accelerationSpeedChange); ;
+        spacecraft.setMoving(true);
 
-            if (this.getPreBossMapView().getSliderAccelerationSpeed() < -constraint)
-                this.getPreBossMapView().setSliderAccelerationSpeed( -constraint);
-            if (this.getPreBossMapView().getSliderAccelerationSpeed() > constraint)
-                this.getPreBossMapView().setSliderAccelerationSpeed(constraint);
+        this.getPreBossMapView().setSliderAccelerationSpeed(this.getPreBossMapView().getSliderAccelerationSpeed() + accelerationSpeedChange); ;
 
-            this.getPreBossMapView().setSliderLeft(this.getPreBossMapView().getSliderLeft() + this.getPreBossMapView().getSliderAccelerationSpeed());
-            spacecraft.moveToDirection(spacecraft.getVelocity(), directionX, directionY);
+        if (this.getPreBossMapView().getSliderAccelerationSpeed() < -constraint)
+            this.getPreBossMapView().setSliderAccelerationSpeed( -constraint);
+        if (this.getPreBossMapView().getSliderAccelerationSpeed() > constraint)
+            this.getPreBossMapView().setSliderAccelerationSpeed(constraint);
+
+        this.getPreBossMapView().setSliderLeft(this.getPreBossMapView().getSliderLeft() + this.getPreBossMapView().getSliderAccelerationSpeed());
+        spacecraft.moveToDirection(spacecraft.getVelocity(), directionX, directionY);
     }
 
     private void activateSmartBomb(){

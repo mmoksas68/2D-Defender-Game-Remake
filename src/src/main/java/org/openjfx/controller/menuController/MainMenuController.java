@@ -73,11 +73,9 @@ public class MainMenuController {
     }
 
     private void passBossScene(){
-        fileController.loadKeys();
     }
 
     private void finishGame(){
-
     }
 
     private void ifPaused(){
