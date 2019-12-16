@@ -28,11 +28,11 @@ public class RootPane extends BorderPane {
         topBarView = new TopBarView(width, height*1.5/10);
         if(isSinglePlayer)
         {
-            preBossMapView1 = new PreBossMapView(width, height*9/10, isSinglePlayer);
+            preBossMapView1 = new PreBossMapView(width, height*8.8/10, isSinglePlayer);
             setCenter(this.preBossMapView1);
         }else{
-            preBossMapView1 = new PreBossMapView(width, height*4.5/10, isSinglePlayer);
-            preBossMapView2 = new PreBossMapView(width, height*4.5/10, isSinglePlayer);
+            preBossMapView1 = new PreBossMapView(width, height*4.4/10, isSinglePlayer);
+            preBossMapView2 = new PreBossMapView(width, height*4.4/10, isSinglePlayer);
             setCenter(preBossMapView1);
             setBottom(preBossMapView2);
         }

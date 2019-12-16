@@ -52,10 +52,10 @@ public class PreBossMapView extends Pane {
 
         if(isSinglePlayer){
             layoutScaleWidth = widthSize / 1920.0;
-            layoutScaleHeight = heightSize / 832;
+            layoutScaleHeight = heightSize / (PreBossMap.MAP_HEIGHT+ 10);
         }else{
             layoutScaleWidth = widthSize / 1920.0;
-            layoutScaleHeight = heightSize / (PreBossMap.MAP_HEIGHT+ 50);
+            layoutScaleHeight = heightSize / (PreBossMap.MAP_HEIGHT+ 10);
         }
 
         setStyle("-fx-border-color : white; -fx-border-width : 0 0 1 0");
