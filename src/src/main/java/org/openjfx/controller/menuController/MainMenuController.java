@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -14,6 +15,7 @@ import org.openjfx.controller.bossSceneControllers.BossGameController;
 import org.openjfx.controller.preBossSceneControllers.PreBossGameController;
 import org.openjfx.fileManager.FileController;
 import org.openjfx.model.menuEntities.GameSaveObj;
+import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.menuEntities.PassedLevelInfo;
 import org.openjfx.view.menuView.*;
 
@@ -45,12 +47,15 @@ public class MainMenuController {
         stage.setMaximized(true);
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.show();
         fileController = new FileController();
         initMainController();
     }
 
     private void start(){
+        GameSituation.getInstance().resetVar();
+        GameSituation.getInstance().resetScore();
         preBossGameController = new PreBossGameController(scene,primaryScreenBounds.getWidth(),primaryScreenBounds.getHeight());
         ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) ->{
             preBossGameController.setWidth(stage.getWidth());
@@ -62,6 +67,7 @@ public class MainMenuController {
 
     private void startBoss() {
         bossGameController = new BossGameController(scene, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
+
     }
 
     private void saveGame(){

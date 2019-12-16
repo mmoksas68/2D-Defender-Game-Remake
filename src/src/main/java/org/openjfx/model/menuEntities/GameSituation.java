@@ -17,6 +17,7 @@ public class GameSituation implements Serializable {
     private BooleanProperty isBossFinished;
     private BooleanProperty isFirstCraftDied;
     private BooleanProperty isSecondCraftDied;
+    private BooleanProperty twoPlayerSingleShip;
 
     private static GameSituation gameSituation;
 
@@ -27,7 +28,6 @@ public class GameSituation implements Serializable {
         spacecraft1 = 1;
         spacecraft2 = 0;
         isSinglePlayer = false;
-        resetVar();
     }
 
     public static GameSituation getInstance(){
@@ -48,6 +48,7 @@ public class GameSituation implements Serializable {
         this.isBossFinishedSuccessfully = new SimpleBooleanProperty(false);
         this.isFirstCraftDied = new SimpleBooleanProperty(false);
         this.isSecondCraftDied = new SimpleBooleanProperty(false);
+        this.twoPlayerSingleShip = new SimpleBooleanProperty(false);
     }
 
     public void resetScore(){
@@ -143,7 +144,8 @@ public class GameSituation implements Serializable {
         this.isPreBossFinished.set(isPreBossFinished);
     }
 
-    public boolean isIsFirstCraftDied() {
+
+    public boolean isFirstCraftDied() {
         return isFirstCraftDied.get();
     }
 
@@ -155,7 +157,7 @@ public class GameSituation implements Serializable {
         this.isFirstCraftDied.set(isFirstCraftDied);
     }
 
-    public boolean isIsSecondCraftDied() {
+    public boolean isSecondCraftDied() {
         return isSecondCraftDied.get();
     }
 
@@ -165,5 +167,17 @@ public class GameSituation implements Serializable {
 
     public void setIsSecondCraftDied(boolean isSecondCraftDied) {
         this.isSecondCraftDied.set(isSecondCraftDied);
+    }
+
+    public boolean isTwoPlayerSingleShip() {
+        return twoPlayerSingleShip.get();
+    }
+
+    public BooleanProperty twoPlayerSingleShipProperty() {
+        return twoPlayerSingleShip;
+    }
+
+    public void setTwoPlayerSingleShip(boolean twoPlayerSingleShip) {
+        this.twoPlayerSingleShip.set(twoPlayerSingleShip);
     }
 }
