@@ -1,12 +1,16 @@
 package org.openjfx.controller.preBossSceneControllers;
 
+import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.commonEntities.FiringBehavior.SpacecraftGun;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
 import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.utilization.PositionHelper;
+import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 import org.openjfx.view.gameSceneView.preBossSceneView.PreBossMapView;
 
 public class SpacecraftController {
+    private BossMapView bossMapView;
+    private BossMap bossMap;
     private PreBossMapView preBossMapView;
     private PreBossMap preBossMap;
     private Spacecraft spacecraft;
@@ -24,6 +28,24 @@ public class SpacecraftController {
         this.preBossMap = preBossMap;
     }
 
+    public SpacecraftController (Spacecraft spacecraft, BossMapView bossMapView, BossMap bossMap) {
+        this.spacecraft = spacecraft;
+        this.bossMapView = bossMapView;
+        this.bossMap = bossMap;
+    }
+
+    public void getInputs() {
+        double xDirection = rightKeyPressed ? 1 : ( leftKeyPressed ? -1 : 0);
+        double yDirection = downKeyPressed ? -1 : ( upKeyPressed ? 1 : 0);
+        double multiplier = 1 / Math.sqrt( Math.pow( xDirection,2) + Math.pow( yDirection, 2));
+        if ( xDirection != 0 || yDirection != 0) {
+            bossMap.getSpacecraft1().moveToDirection(bossMap.getSpacecraft1().getVelocity(),xDirection * multiplier, yDirection * multiplier);
+        }
+        ((SpacecraftGun)spacecraft.getSpacecraftGun()).setFiring(fireKeyPressed);
+
+        fireBulletBossMap();
+
+    }
     public void checkInputs(){
 
             spacecraft.setMoving(false);
@@ -89,6 +111,9 @@ public class SpacecraftController {
 
     }
 
+    private void fireBulletBossMap () {
+        spacecraft.getSpacecraftGun().gunTimer(bossMap);
+    }
     private void fireBullet(){
         spacecraft.getSpacecraftGun().gunTimer(preBossMap);
     }
@@ -142,6 +167,9 @@ public class SpacecraftController {
 
     private void doHyperJump(){
 
+    }
+    public BossMapView getBossMapView() {
+        return bossMapView;
     }
 
     public PreBossMapView getPreBossMapView() {

@@ -7,15 +7,15 @@ import org.openjfx.model.commonEntities.Bullet.Bullet;
 
 public abstract class Boss extends LocatableObject {
 
-    private static double initialX = 1000;
+    private static double initialX = 1250;
     private static double initialY = 250;
     private double velocity;
     private double bullet_prob;
-    private double gunPower;
+    private int gunPower;
     private double gunFrequency;
     private int gunPeriod;
     private int gunTimer;
-    private int bulletVelocity;
+    private double bulletVelocity;
 
     public Boss( double velocity, double hitBoxWidth, double hitBoxHeight, int healthPoint) {
         super( new Location(initialX,initialY), hitBoxWidth, hitBoxHeight, healthPoint);
@@ -24,11 +24,11 @@ public abstract class Boss extends LocatableObject {
 
     public double getVelocity() { return velocity; }
 
-    public double getGunPower() {
+    public int getGunPower() {
         return gunPower;
     }
 
-    public void setGunPower(double gunPower) {
+    public void setGunPower(int gunPower) {
         this.gunPower = gunPower;
     }
 
@@ -40,18 +40,18 @@ public abstract class Boss extends LocatableObject {
         this.gunPeriod = gunPeriod;
     }
 
-    public int getBulletVelocity() {
+    public double getBulletVelocity() {
         return bulletVelocity;
     }
 
-    public void setBulletVelocity(int bulletVelocity) {
+    public void setBulletVelocity(double bulletVelocity) {
         this.bulletVelocity = bulletVelocity;
     }
 
 
-   /* public Bullet fireBullet() {
-        return new Bullet( new Location( 1000, 250) , 10, 10, 10, 1, -1, 0);
-    }*/
+    public Bullet fireBullet() {
+        return new Bullet( new Location( getLocation().getPositionX(), getLocation().getPositionY()), gunPower,bulletVelocity,-1.0,0.0 );
+    }
 
     public double getBullet_prob() {
         return bullet_prob;

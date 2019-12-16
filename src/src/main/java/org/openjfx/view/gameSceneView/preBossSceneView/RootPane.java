@@ -2,6 +2,7 @@ package org.openjfx.view.gameSceneView.preBossSceneView;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 import org.openjfx.view.gameSceneView.preBossSceneView.TopBar.TopBarView;
 
 import java.io.FileInputStream;
@@ -10,6 +11,7 @@ import java.io.FileNotFoundException;
 public class RootPane extends BorderPane {
     private PreBossMapView preBossMapView1;
     private PreBossMapView preBossMapView2;
+    private BossMapView bossMapView;
     private TopBarView topBarView;
 
     private static BackgroundImage image;
@@ -20,6 +22,18 @@ public class RootPane extends BorderPane {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+    public RootPane ( double width, double height) {
+        setMaxSize(width,height);
+        setPrefSize(width,height);
+        topBarView = new TopBarView(width, height*1.5/10);
+
+        bossMapView = new BossMapView(width, height*8.8/10);
+        setCenter(this.bossMapView);
+
+        setTop(topBarView);
+       /* Background background = new Background(image);
+        setBackground(background);*/
     }
 
     public RootPane(double width, double height, boolean isSinglePlayer) {
@@ -39,11 +53,14 @@ public class RootPane extends BorderPane {
 
         setTop(topBarView);
 
-        Background background = new Background(image);
+       Background background = new Background(image);
         setBackground(background);
     }
 
 
+    public BossMapView getBossMapView() {
+        return bossMapView;
+    }
     public PreBossMapView getPreBossMapView1() {
         return preBossMapView1;
     }

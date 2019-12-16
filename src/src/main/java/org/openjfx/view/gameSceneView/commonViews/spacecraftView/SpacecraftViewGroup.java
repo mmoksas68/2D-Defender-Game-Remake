@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import org.openjfx.assetManager.Assets;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
+import org.openjfx.utilization.ModelToView;
 import org.openjfx.utilization.ModelToViewSpaceCraft;
 
 import java.util.List;
@@ -24,6 +25,32 @@ public class SpacecraftViewGroup {
         spacecraftView.setSmooth(true);
         flame = new Flame();
         refresh(modelToViewSpaceCraft,  viewLeft,  scaleW,  scaleH);
+    }
+    public SpacecraftViewGroup( ModelToViewSpaceCraft modelToViewSpaceCraft, double scaleW, double scaleH) {
+        Assets assets = Assets.getInstance();
+        List<Image> spacecraft = assets.getPreBossAssets().getSpacecraft();
+        spacecraftView = new ImageView(spacecraft.get(modelToViewSpaceCraft.getChoosenPicNo()));
+        spacecraftView.setCacheHint(CacheHint.SPEED);
+        spacecraftView.setCache(true);
+        spacecraftView.setSmooth(true);
+        flame = new Flame();
+        refresh( modelToViewSpaceCraft, scaleW, scaleH);
+
+    }
+    public void refresh(ModelToViewSpaceCraft modelToViewSpaceCraft, double scaleW, double scaleH) {
+        spacecraftView.setTranslateX( modelToViewSpaceCraft.getLocationX()*scaleW);
+        spacecraftView.setTranslateY( modelToViewSpaceCraft.getLocationY()*scaleH);
+        spacecraftView.setFitHeight(modelToViewSpaceCraft.getHitboxHeight()*scaleH );
+        spacecraftView.setFitWidth(modelToViewSpaceCraft.getHitboxWidth()*scaleW);
+
+        flame.setTranslateY(spacecraftView.getTranslateY());
+        flame.setFitHeight(spacecraftView.getFitHeight());
+        flame.setFitWidth(spacecraftView.getFitWidth());
+
+        if(modelToViewSpaceCraft.isMoving())
+            flame.setVisible(true);
+        else
+            flame.setVisible(false);
     }
 
     public void refresh(ModelToViewSpaceCraft modelToViewSpaceCraft, double viewLeft, double scaleW, double scaleH){

@@ -42,7 +42,7 @@ public class BossController {
             //  for ( GameObject specialAbility: bossController.getSpecialAbility())
             //   map.checkCollisions( specialAbility);
            // algorithm.clockTick();
-            System.out.println(  bossMap.getSpacecraft().getHealthPoint());
+            System.out.println(  bossMap.getSpacecraft1().getHealthPoint());
         }
         algorithm.shoot();
     }
