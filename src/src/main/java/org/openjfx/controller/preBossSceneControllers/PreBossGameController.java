@@ -206,15 +206,14 @@ public class PreBossGameController {
     }
 
     private void refreshMap() {
-
         preBossMapController.checkMapSituation();
+        scoreCalculator();
         refreshAndReflectBuff();
         refreshAndReflectBullet();
         refreshAndReflectEnemy();
         refreshAndReflectMeteor();
         refreshAndReflectStations();
         refreshAndReflectScore();
-        scoreCalculator();
         refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
         if(!isSinglePlayer)
             refreshAndReflectSpacecraft(spacecraftController2.getSpacecraft());
@@ -227,7 +226,6 @@ public class PreBossGameController {
             ModelToViewEnemy modelToViewEnemy = new ModelToViewEnemy(enemy);
             if (enemy.isDead()) {
                 toBeDeleted.add(enemy.getID());
-                gameSituation.setScore(gameSituation.getScore()+Tier1Enemy.SCORE_POINT);
                 spacecraftController1.getPreBossMapView().addExplodeAnimation(new ModelToView(enemy));
                 if (!isSinglePlayer)
                     spacecraftController2.getPreBossMapView().addExplodeAnimation(new ModelToView(enemy));

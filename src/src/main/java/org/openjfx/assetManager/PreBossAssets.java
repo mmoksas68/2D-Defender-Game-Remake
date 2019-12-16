@@ -21,7 +21,7 @@ public class PreBossAssets {
 
     PreBossAssets(){
         try {
-            enemyStation = new Image(FileController.getFileStream("assets/images/buildings/allybuilding.png"));
+            enemyStation = new Image(FileController.getFileStream("assets/images/buildings/enemybuilding2t1.png"));
             tier1unevolved = new Image(FileController.getFileStream("assets/images/enemy.png"));
             spacecraft.add(new Image(FileController.getFileStream("assets/images/Spaceship_01_BLUE.png")));
             spacecraft.add(new Image(FileController.getFileStream("assets/images/Spaceship_01_GREEN.png")));
