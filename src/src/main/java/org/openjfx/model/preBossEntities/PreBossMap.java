@@ -43,9 +43,11 @@ public class PreBossMap implements Serializable {
 
     private void initMap() {
             spacecraft1 = new Spacecraft(new Location(4960, 390));
-        if(!isSinglePlayer)
+            spacecraft1.setChoosenPicNo(0);
+        if(!isSinglePlayer) {
             spacecraft2 = new Spacecraft(new Location(4960, 520));
-
+            spacecraft2.setChoosenPicNo(1);
+        }
         for (int i=0; i < 50 ; i++){
             double x = Math.random()*PreBossMap.MAP_WIDTH;
             double y = Math.random()*PreBossMap.MAP_HEIGHT;

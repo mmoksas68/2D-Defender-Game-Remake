@@ -24,26 +24,28 @@ public class RadarView extends Pane {
 
     public void refresh(RadarObject obj){
         ImageView imageView = null;
-        if(radarObjects.containsKey(obj.getID()) ){
 
+        if(radarObjects.containsKey(obj.getID()) ){
             imageView = radarObjects.get(obj.getID());
             if(obj.isDead()){
                 getChildren().remove(imageView);
                 radarObjects.remove(obj.getID());
-            }else
-                imageView.setFitWidth(50*scaleW);
-                imageView.setFitHeight(50*scaleH);
-                imageView.setTranslateX(obj.getLocation().getPositionX()/ PreBossMap.MAP_WIDTH * getPrefWidth());
-                imageView.setTranslateY(obj.getLocation().getPositionY()/ PreBossMap.MAP_HEIGHT * getPrefHeight());
+            }else {
+                imageView.setFitWidth(25 * scaleW);
+                imageView.setFitHeight(25 * scaleH);
+                imageView.setTranslateX(obj.getLocation().getPositionX() / PreBossMap.MAP_WIDTH * getPrefWidth());
+                imageView.setTranslateY(obj.getLocation().getPositionY() / PreBossMap.MAP_HEIGHT * getPrefHeight());
+            }
         } else if(!obj.isDead()){
             if(obj.getType().equals(RadarTypes.Spacecraft))
-                imageView = new ImageView(Assets.getInstance().getPreBossAssets().getSpacecraft());
+                imageView = new ImageView(Assets.getInstance().getPreBossAssets().getRadarSpacecraft());
             else if(obj.getType().equals(RadarTypes.Enemy))
-                imageView = new ImageView(Assets.getInstance().getPreBossAssets().getTier1unevolved());
+                imageView = new ImageView(Assets.getInstance().getPreBossAssets().getRadarEnemy());
             else if(obj.getType().equals(RadarTypes.Station))
-                imageView = new ImageView(Assets.getInstance().getPreBossAssets().getEnemyStation());
-            imageView.setFitWidth(50*scaleW);
-            imageView.setFitHeight(50*scaleH);
+                imageView = new ImageView(Assets.getInstance().getPreBossAssets().getRadarEnemySpaceStation());
+
+            imageView.setFitWidth(25*scaleW);
+            imageView.setFitHeight(25*scaleH);
             imageView.setTranslateX(obj.getLocation().getPositionX()/ PreBossMap.MAP_WIDTH * getPrefWidth());
             imageView.setTranslateY(obj.getLocation().getPositionY()/ PreBossMap.MAP_HEIGHT * getPrefHeight());
             imageView.setSmooth(true);

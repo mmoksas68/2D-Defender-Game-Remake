@@ -37,6 +37,7 @@ public class Spacecraft extends LocatableObject {
     private boolean isMoving;
     private FiringBehavior spacecraftGun;
     private GunTypes gunTypes;
+    private int choosenPicNo;
 
     public Spacecraft(Location location) {
         super(location, WIDTH, HEIGHT, MAX_HEALTH);
@@ -121,5 +122,13 @@ public class Spacecraft extends LocatableObject {
 
     public void setMoving(boolean moving) {
         isMoving = moving;
+    }
+
+    public int getChoosenPicNo() {
+        return choosenPicNo;
+    }
+
+    public void setChoosenPicNo(int choosenPicNo) {
+        this.choosenPicNo = choosenPicNo;
     }
 }
