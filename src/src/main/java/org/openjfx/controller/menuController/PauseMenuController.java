@@ -35,6 +35,8 @@ public class PauseMenuController {
         pauseMenu = new PauseMenu();
         primaryScene = scene;
         stage = new Stage();
+        stage.initOwner(scene.getWindow());
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         this.scene = new Scene(pauseMenu,350,150);
         stage.setScene(this.scene);
         stage.initStyle(StageStyle.UNDECORATED);
@@ -49,26 +51,25 @@ public class PauseMenuController {
     PauseMenuController(Scene scene, BossGameController bossGameController, MainMenu mainMenu){
         this.mainMenu = mainMenu;
         this.bossGameController = bossGameController;
+        gameSituation = GameSituation.getInstance();
+        isSavePressed = new SimpleBooleanProperty(false);
         pauseMenu = new PauseMenu();
         primaryScene = scene;
         stage = new Stage();
-        this.scene = new Scene(pauseMenu,350,150);
-        stage.initOwner(primaryScene.getWindow());
-
-
-        stage.setScene(this.scene);
-
+        stage.initOwner(scene.getWindow());
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-
+        this.scene = new Scene(pauseMenu,350,150);
+        stage.setScene(this.scene);
         stage.initStyle(StageStyle.UNDECORATED);
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        stage.initOwner(primaryScene.getWindow());
         stage.show();
-
         initPauseMenuController();
     }
 
     private void resume() {
         stage.close();
-        if (!gameSituation.isIsPreBossFinished()){ //game infodan bakarak karar verecek şimdilik gameInfoyu koymadım diye böyle
+        if (!(preBossGameController == null) && !gameSituation.isIsPreBossFinished()){ //game infodan bakarak karar verecek şimdilik gameInfoyu koymadım diye böyle
             preBossGameController.getScene().getRoot().setEffect(null);
             preBossGameController.getAnimationTimer().start();
             preBossGameController.setGameOn(true);

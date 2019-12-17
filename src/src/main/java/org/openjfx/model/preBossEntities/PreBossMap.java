@@ -5,6 +5,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import org.openjfx.model.commonEntities.Buff.Buff;
 import org.openjfx.model.commonEntities.Location;
+import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.preBossEntities.Enemy.Tier1Enemy;
 import org.openjfx.model.preBossEntities.Station.EnemyStation;
 import org.openjfx.model.preBossEntities.Station.Station;
@@ -43,10 +44,10 @@ public class PreBossMap implements Serializable {
 
     private void initMap() {
             spacecraft1 = new Spacecraft(new Location(4960, 390));
-            spacecraft1.setChoosenPicNo(0);
+            spacecraft1.setChoosenPicNo(GameSituation.getInstance().getSpacecraft1());
         if(!isSinglePlayer) {
             spacecraft2 = new Spacecraft(new Location(4960, 520));
-            spacecraft2.setChoosenPicNo(1);
+            spacecraft2.setChoosenPicNo(GameSituation.getInstance().getSpacecraft2());
         }
         for (int i=0; i < 50 ; i++){
             double x = Math.random()*PreBossMap.MAP_WIDTH;
@@ -99,6 +100,10 @@ public class PreBossMap implements Serializable {
 
     public void deleteEnemy(long ID) {
         enemies.remove(ID);
+    }
+
+    public void deleteSpacecraft1(){
+        spacecraft1 = null;
     }
 
     public void addStation(Station station) {

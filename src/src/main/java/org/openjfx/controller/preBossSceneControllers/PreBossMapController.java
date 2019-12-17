@@ -5,6 +5,7 @@ import org.openjfx.model.commonEntities.FiringBehavior.EnemyGun;
 import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
+import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.preBossEntities.Enemy.Enemy;
 import org.openjfx.model.preBossEntities.Enemy.EnemyDestinations;
 import org.openjfx.model.preBossEntities.Enemy.Tier2Enemy;
@@ -21,9 +22,11 @@ public class PreBossMapController {
     private List<Enemy> firingEnemies = new ArrayList<>();
     private List<Enemy> rushingEnemies = new ArrayList<>();
     private boolean isSinglePlayer;
+    private GameSituation gameSituation;
 
     public PreBossMapController(boolean isSinglePlayer) {
         preBossMap = new PreBossMap(isSinglePlayer);
+        gameSituation = GameSituation.getInstance();
         this.isSinglePlayer = isSinglePlayer;
     }
 
@@ -36,7 +39,7 @@ public class PreBossMapController {
             checkCollision(bullet, preBossMap.getEnemies());
             checkCollision(bullet, preBossMap.getStations());
             checkCollision(bullet, Collections.singletonMap(preBossMap.getSpacecraft1().getID(), preBossMap.getSpacecraft1()));
-            if(!isSinglePlayer)
+            if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
                 checkCollision(bullet, Collections.singletonMap(preBossMap.getSpacecraft2().getID(), preBossMap.getSpacecraft2()));
 
             bullet.moveToDirection(bullet.getVelocity(), bullet.getDirectionX(), bullet.getDirectionY());
@@ -53,7 +56,7 @@ public class PreBossMapController {
             enemy.setDestinationType(EnemyDestinations.RandomLocation);
             //checkCollision(enemy, preBossMap.getStations());
             checkCollision(enemy, Collections.singletonMap(preBossMap.getSpacecraft1().getID(), preBossMap.getSpacecraft1()));
-            if(!isSinglePlayer)
+            if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
                 checkCollision(enemy, Collections.singletonMap(preBossMap.getSpacecraft2().getID(), preBossMap.getSpacecraft2()));
 
             wonderAround(enemy);

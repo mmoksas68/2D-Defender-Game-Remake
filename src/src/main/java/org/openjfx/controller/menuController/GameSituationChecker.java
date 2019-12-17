@@ -18,9 +18,8 @@ public class GameSituationChecker {
     private GameSituation gameSituation;
     private Settings settings;
     private BooleanProperty isPaused, isEnd;
-    private BossGameController bossController;
     private PreBossGameController preBossGameController;
-    BossGameController bossGameController;
+    private BossGameController bossGameController;
     private GameSaveObj gameSaveObj;
     private Scene scene;
 
@@ -39,6 +38,8 @@ public class GameSituationChecker {
 
     private void startGame(boolean newGame){
         if(newGame){
+            GameSituation.getInstance().resetVar();
+            GameSituation.getInstance().resetScore();
             preBossGameController = new PreBossGameController(scene, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
             ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) ->{
                 preBossGameController.setWidth(scene.getWindow().getWidth());
@@ -48,15 +49,17 @@ public class GameSituationChecker {
             scene.getWindow().heightProperty().addListener(stageSizeListener);
         }
         else{
+            gameSituation.setIsPreBossFinishedSuccessfully(true);
+            gameSituation.setIsBossFinished(false);
+            this.bossGameController = new BossGameController(scene, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
             //if(gameSituation)
                 //preBossGameController = new PreBossGameController(gameSaveObj.getPreBossMap())
         }
-
         ifPaused();
     }
 
     private void ifPaused(){
-        if (gameSituation.isIsPreBossFinished() == false) {
+        if (!(preBossGameController == null) && !gameSituation.isIsPreBossFinished()) {
             ChangeListener<Boolean> gameOnChangeListener = (observable, oldValue, newValue) -> {
                 if (preBossGameController.gameOnChangeProperty().get()) {
                     if (preBossGameController.isGameOn()) {
@@ -70,7 +73,7 @@ public class GameSituationChecker {
             };
             preBossGameController.gameOnChangeProperty().addListener(gameOnChangeListener);
         }
-        else if(gameSituation.isIsBossFinished() == false) {
+        if(!(bossGameController == null) && !gameSituation.isIsBossFinished()) {
             ChangeListener<Boolean> gameOnChangeListener2 = (observable, oldValue, newValue) -> {
                 if (bossGameController.gameOnChangeProperty().get()) {
                     if (bossGameController.isGameOn()) {
@@ -85,6 +88,8 @@ public class GameSituationChecker {
             bossGameController.getGameOnChange().addListener(gameOnChangeListener2);
         }
     }
+
+
 
     private void changePreBossToBoss(){
 
@@ -119,7 +124,7 @@ public class GameSituationChecker {
     }
 
     public BossGameController getBossGameController(){
-        return bossController;
+        return bossGameController;
     }
 
     public void restartTheLevel(){
@@ -130,6 +135,7 @@ public class GameSituationChecker {
     }
 
     public void setIsPaused(boolean b) {
+        isPaused.set(b);
     }
 
     public void setIsEnd(boolean b) {

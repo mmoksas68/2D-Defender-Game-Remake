@@ -45,24 +45,27 @@ public class PreBossMapView extends Pane {
     private double layoutScaleWidth;
     private double layoutScaleHeight;
     private double sliderAccelerationSpeed = 0;
+    private double widthSize;
+    private double heightSize;
 
     public PreBossMapView(double widthSize, double heightSize, boolean isSinglePlayer) {
         setPrefSize(widthSize, heightSize);
         //setMinSize(widthSize, heightSize);
-
-        if(isSinglePlayer){
-            layoutScaleWidth = widthSize / 1920.0;
-            layoutScaleHeight = heightSize / (PreBossMap.MAP_HEIGHT);
-        }else{
-            layoutScaleWidth = widthSize / 1920.0;
-            layoutScaleHeight = heightSize / (PreBossMap.MAP_HEIGHT);
-        }
+        this.widthSize = widthSize;
+        this.heightSize = heightSize;
+        layoutScaleWidth = widthSize / 1920.0;
+        layoutScaleHeight = heightSize / (PreBossMap.MAP_HEIGHT);
 
         setStyle("-fx-border-color : white; -fx-border-width : 0 0 1 0");
     }
 
     public PreBossMapView(Node... nodes) {
         super(nodes);
+    }
+
+    public void refreshScale(){
+        layoutScaleWidth = widthSize / 1920.0;
+        layoutScaleHeight = heightSize / (PreBossMap.MAP_HEIGHT);
     }
 
     public void refreshEnemy(ModelToViewEnemy modelToViewEnemy){
@@ -106,6 +109,10 @@ public class PreBossMapView extends Pane {
         if(spacecraftViewGroup1 != null){
            spacecraftViewGroup = spacecraftViewGroup1;
            spacecraftViewGroup.refresh(modelToViewSpaceCraft, sliderLeft, layoutScaleWidth, layoutScaleHeight);
+            if(modelToViewSpaceCraft.isDead()){
+                getChildren().remove(spacecraftViewGroup.getFlame());
+                getChildren().remove(spacecraftViewGroup.getSpacecraftView());
+            }
         } else {
             spacecraftViewGroup = new SpacecraftViewGroup(modelToViewSpaceCraft, sliderLeft, layoutScaleWidth, layoutScaleHeight);
             spacecraftViewGroup1 = spacecraftViewGroup;
@@ -118,6 +125,10 @@ public class PreBossMapView extends Pane {
         if(spacecraftViewGroup2 != null){
            spacecraftViewGroup = spacecraftViewGroup2;
            spacecraftViewGroup.refresh(modelToViewSpaceCraft, sliderLeft, layoutScaleWidth, layoutScaleHeight);
+            if(modelToViewSpaceCraft.isDead()){
+                getChildren().remove(spacecraftViewGroup.getFlame());
+                getChildren().remove(spacecraftViewGroup.getSpacecraftView());
+            }
         } else {
             spacecraftViewGroup = new SpacecraftViewGroup(modelToViewSpaceCraft, sliderLeft, layoutScaleWidth, layoutScaleHeight);
             spacecraftViewGroup2 = spacecraftViewGroup;
@@ -278,5 +289,13 @@ public class PreBossMapView extends Pane {
 
     public void setSliderAccelerationSpeed(double sliderAccelerationSpeed) {
         this.sliderAccelerationSpeed = sliderAccelerationSpeed;
+    }
+
+    public void setWidthSize(double widthSize){
+        this.widthSize = widthSize;
+    }
+
+    public void setHeightSize(double heightSize){
+        this.heightSize = heightSize;
     }
 }

@@ -8,12 +8,15 @@ import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.openjfx.controller.bossSceneControllers.BossGameController;
 import org.openjfx.controller.preBossSceneControllers.PreBossGameController;
 import org.openjfx.fileManager.FileController;
+import org.openjfx.model.menuEntities.GameSituation;
+import org.openjfx.model.menuEntities.PassedLevelInfo;
 import org.openjfx.model.menuEntities.*;
 import org.openjfx.view.menuView.*;
 
@@ -25,6 +28,7 @@ public class MainMenuController {
     private MenuSceneContainer menuSceneContainer;
     private PreBossGameController preBossGameController;
     private BossGameController bossGameController;
+
     private HighScoreInfo highScore;
     private GameSituation gameSituation;
     private Settings settings;
@@ -56,7 +60,7 @@ public class MainMenuController {
 
 
     private void nextInSpacecraftScreen(){
-        if(gameSituation.isIsSinglePlayer())
+        if(gameSituation.isSinglePlayer())
             scene.setRoot(menuSceneContainer.getLevelSelection());
         else
             scene.setRoot(menuSceneContainer.getSpacecraftSelection2());
@@ -71,7 +75,7 @@ public class MainMenuController {
     }
 
     private void backInLevelScreen(){
-        if(gameSituation.isIsSinglePlayer())
+        if(gameSituation.isSinglePlayer())
             scene.setRoot(menuSceneContainer.getSpacecraftSelection1());
         else
             scene.setRoot(menuSceneContainer.getSpacecraftSelection2());
@@ -118,6 +122,7 @@ public class MainMenuController {
    private void resume(){
        isResumePressed.setValue(true);
    }
+
 
 
 /*

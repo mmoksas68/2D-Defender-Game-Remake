@@ -55,15 +55,19 @@ public class MainController {
     private void initMainController(){
         menuController = new MainMenuController(scene);
         ChangeListener<Boolean> newGameListener = (observable, oldValue, newValue) ->{
-            menuController.setIsGameStartPressed(false);
-            initGameSituationChecker(true);
-            saveGame();
+            if(menuController.getIsGameStartPressed().get()) {
+                menuController.setIsGameStartPressed(false);
+                initGameSituationChecker(true);
+                saveGame();
+            }
         };
         menuController.getIsGameStartPressed().addListener(newGameListener);
 
         ChangeListener<Boolean> resumeListener = (observable, oldValue, newValue) ->{
-            menuController.setIsResumePressed(false);
-            initGameSituationChecker(false);
+            if(menuController.getIsResumePressed().get()) {
+                menuController.setIsResumePressed(false);
+                initGameSituationChecker(false);
+            }
         };
         menuController.getIsResumePressed().addListener(resumeListener);
 
@@ -96,15 +100,17 @@ public class MainController {
         gameSituationChecker.getIsPaused().addListener(pauseGameListener);
     }
     private void initPauseMenuController(){
-        System.out.println("aybuke");
-        if(gameSituation.isIsPreBossFinished())
+        if(gameSituation.isIsPreBossFinishedSuccessfully()) {
             pauseMenuController = new PauseMenuController(scene, gameSituationChecker.getBossGameController(), menuController.getMainMenu());
+        }
         else
             pauseMenuController = new PauseMenuController(scene, gameSituationChecker.getPreBossGameController(), menuController.getMainMenu());
 
         ChangeListener<Boolean> saveGameListener = (observable, oldValue, newValue) ->{
-            pauseMenuController.setIsSavePressed(false);
-            fileController.saveGame();
+            if (pauseMenuController.getIsSavePressed().get()) {
+                pauseMenuController.setIsSavePressed(false);
+                fileController.saveGame();
+            }
         };
         pauseMenuController.getIsSavePressed().addListener(saveGameListener);
     }
