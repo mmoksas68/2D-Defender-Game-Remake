@@ -1,7 +1,9 @@
 package org.openjfx.view.gameSceneView.preBossSceneView;
 
+import javafx.animation.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.util.Duration;
 import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.view.gameSceneView.preBossSceneView.TopBar.TopBarView;
@@ -69,7 +71,13 @@ public class RootPane extends BorderPane {
         return bossMapView;
     }
     
-    public void twoPlayerOneShipScreen(PreBossMapView myView){
+    public void twoPlayerOneShipScreen(PreBossMapView myView, AnimationTimer animationTimer){
+        animationTimer.stop();
+        Timeline timeline = new Timeline();
+        KeyValue kv = new KeyValue(preBossMapView1.translateYProperty(), 8.8, Interpolator.EASE_IN);
+        KeyFrame kf = new KeyFrame(Duration.seconds(10), kv);
+        timeline.getKeyFrames().add(kf);
+        timeline.play();
         setCenter(null);
         setBottom(null);
         preBossMapView1 = myView;
@@ -78,7 +86,7 @@ public class RootPane extends BorderPane {
         preBossMapView1.refreshScale();
         setCenter(preBossMapView1);
         preBossMapView2 = null;
-
+        animationTimer.start();
     }
     public PreBossMapView getPreBossMapView1() {
         return preBossMapView1;
