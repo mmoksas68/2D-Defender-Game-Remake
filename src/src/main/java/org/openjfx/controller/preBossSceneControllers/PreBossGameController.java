@@ -52,7 +52,6 @@ public class PreBossGameController {
         this.height = initHeight;
         preBossMapController = new PreBossMapController(isSinglePlayer);
         spacecraftController1 = new SpacecraftController(preBossMapController.getPreBossMap().getSpacecraft1(), rootPane.getPreBossMapView1(), preBossMapController.getPreBossMap());
-
         if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
             spacecraftController2 = new SpacecraftController(preBossMapController.getPreBossMap().getSpacecraft2(), rootPane.getPreBossMapView2(), preBossMapController.getPreBossMap());
         scene.setRoot(rootPane);
@@ -67,6 +66,7 @@ public class PreBossGameController {
 
     private void timerPulse(){
         refreshMap();
+
         spacecraftController1.checkInputs();
         if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
             spacecraftController2.checkInputs();
@@ -82,8 +82,8 @@ public class PreBossGameController {
         else {
             keysForBoth();
         }
-        initListeners();
         animationTimer.start();
+        initListeners();
     }
 
     private void initListeners(){
@@ -101,6 +101,7 @@ public class PreBossGameController {
             }
             rootPane.twoPlayerOneShipScreen(spacecraftController1.getPreBossMapView());
         };
+        gameSituation.twoPlayerSingleShipProperty().addListener(isFirstDied);
         gameSituation.twoPlayerSingleShipProperty().addListener(isFirstDied);
     }
 

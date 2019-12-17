@@ -1,15 +1,17 @@
 package org.openjfx.controller.menuController;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import org.openjfx.controller.preBossSceneControllers.PreBossGameController;
 import org.openjfx.controller.bossSceneControllers.BossGameController;
+import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.view.menuView.MainMenu;
 import org.openjfx.view.menuView.PauseMenu;
 
@@ -22,11 +24,15 @@ public class PauseMenuController {
     private PreBossGameController preBossGameController;
     private BossGameController bossGameController;
     private MainMenu mainMenu;
-
+    private BooleanProperty isSavePressed;
+    private GameSituation gameSituation;
 
     PauseMenuController(Scene scene, PreBossGameController preBossGameController, MainMenu mainMenu){
+        System.out.println("doru");
         this.mainMenu = mainMenu;
         this.preBossGameController = preBossGameController;
+        gameSituation = GameSituation.getInstance();
+        isSavePressed = new SimpleBooleanProperty(false);
         pauseMenu = new PauseMenu();
         primaryScene = scene;
         stage = new Stage();
@@ -35,14 +41,19 @@ public class PauseMenuController {
         this.scene = new Scene(pauseMenu,350,150);
         stage.setScene(this.scene);
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.show();
 
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        stage.initOwner(primaryScene.getWindow());
+
+        stage.show();
         initPauseMenuController();
     }
 
     PauseMenuController(Scene scene, BossGameController bossGameController, MainMenu mainMenu){
         this.mainMenu = mainMenu;
         this.bossGameController = bossGameController;
+        gameSituation = GameSituation.getInstance();
+        isSavePressed = new SimpleBooleanProperty(false);
         pauseMenu = new PauseMenu();
         primaryScene = scene;
         stage = new Stage();
@@ -51,19 +62,20 @@ public class PauseMenuController {
         this.scene = new Scene(pauseMenu,350,150);
         stage.setScene(this.scene);
         stage.initStyle(StageStyle.UNDECORATED);
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        stage.initOwner(primaryScene.getWindow());
         stage.show();
-
         initPauseMenuController();
     }
 
     private void resume() {
         stage.close();
-        if (preBossGameController != null){ //game infodan bakarak karar verecek şimdilik gameInfoyu koymadım diye böyle
+        if (!(preBossGameController == null) && !gameSituation.isIsPreBossFinished()){ //game infodan bakarak karar verecek şimdilik gameInfoyu koymadım diye böyle
             preBossGameController.getScene().getRoot().setEffect(null);
-        preBossGameController.getAnimationTimer().start();
-        preBossGameController.setGameOn(true);
+            preBossGameController.getAnimationTimer().start();
+            preBossGameController.setGameOn(true);
         }
-        if (bossGameController != null){ //game infodan bakarak karar verecek şimdilik gameInfoyu koymadım diye böyle
+        else if (!gameSituation.isIsBossFinished()){ //game infodan bakarak karar verecek şimdilik gameInfoyu koymadım diye böyle
             bossGameController.getScene().getRoot().setEffect(null);
             bossGameController.getAnimationTimer().start();
             bossGameController.setGameOn(true);
@@ -78,8 +90,13 @@ public class PauseMenuController {
     }
 
     private void save(){
-
+        isSavePressed.setValue(true);
     }
+
+    public BooleanProperty getIsSavePressed(){
+        return isSavePressed;
+    }
+
 
     /* ----------------------------------------------------------------------------------------
     --------------------------------------------------------------------------------------------
@@ -116,5 +133,9 @@ public class PauseMenuController {
                 System.exit(0);
             }
         });
+    }
+
+    public void setIsSavePressed(boolean b) {
+        isSavePressed.setValue(b);
     }
 }
