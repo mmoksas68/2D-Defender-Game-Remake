@@ -1,5 +1,7 @@
 package org.openjfx.controller.bossSceneControllers.BossBehaviourManager;
 
+import org.openjfx.model.bossEntities.Boss.BossTwo;
+import org.openjfx.model.bossEntities.BossAbility.Rocket;
 import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.bossEntities.BossAbility.Marker;
 import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
@@ -7,27 +9,28 @@ import org.openjfx.view.gameSceneView.bossSceneView.bossAbilityViews.MarkerView;
 
 import java.util.ArrayList;
 
-public class BossTwoBehaviour extends BossDefaultBehaviour implements BossBehaviourAlgorithm {
+public class BossTwoBehaviour extends BossDefaultBehaviour {
     private ArrayList<Marker> markers;
-    private ArrayList<MarkerView> markerViews;
+    private  ArrayList<Rocket> rockets;
 
-    public BossTwoBehaviour(BossMap bossMap, BossMapView bossMapView) {
-        super(bossMap, bossMapView);
+    public BossTwoBehaviour(BossMap bossMap) {
+        super(bossMap);
         markers = new ArrayList<>();
-        markerViews = new ArrayList<>();
     }
 
-   /*  @Override
+     @Override
    public void useSpecialAbility()  {
         BossTwo boss = (BossTwo) bossMap.getBoss();
         if ( Math.random() < boss.getROCKET_FREQ() ) {
-            markers = boss.sendRockets( 550,500);
+            markers = boss.markAreas( (bossMap.getBoss().getLocation().getPositionX() -2*Marker.radius),(BossMap.MAP_HEIGHT- Marker.radius));
             for ( Marker marker: markers) {
-                MarkerView mw = new MarkerView( marker.getLocation().getPositionX(), marker.getLocation().getPositionY(),marker.getHitBoxWidth(),marker.getHitBoxHeight());
-                bossMapView.addMarkerView( mw);
-                markerViews.add( mw);
+               bossMap.addSpecialAbility( marker);
             }
-            abilityTimer = 1.5;         // Don't forget to start timer!!!!!
+            rockets = boss.getRockets();
+            for ( Rocket rocket : rockets) {
+                bossMap.addSpecialAbility( rocket);
+            }
+            startAbilityTimer( 2.0);        // Don't forget to start timer!!!!!
         }
 
     }
@@ -35,11 +38,20 @@ public class BossTwoBehaviour extends BossDefaultBehaviour implements BossBehavi
     public void clockTick() {
         abilityTimer = abilityTimer - 0.016;
         if ( abilityTimer <= 0) {
-            for (MarkerView markerView : markerViews) {
-                bossMapView.deleteMarkerView(markerView);
+            for (Marker marker : markers) {
+                marker.setDead(true);
+
             }
-            markerViews.clear();
+            for ( Rocket rocket : rockets)
+                rocket.setDead( true);
+
+             ( (BossTwo) bossMap.getBoss()).clearRockets();
         }
 
-    }*/
+    }
+
+    @Override
+    public void startAbilityTimer(double time) {
+        abilityTimer = time;
+    }
 }

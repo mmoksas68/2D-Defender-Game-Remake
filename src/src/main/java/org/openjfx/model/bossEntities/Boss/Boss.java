@@ -1,5 +1,6 @@
 package org.openjfx.model.bossEntities.Boss;
 
+import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.Bullet.Bullet;
@@ -7,8 +8,8 @@ import org.openjfx.model.commonEntities.Bullet.Bullet;
 
 public abstract class Boss extends LocatableObject {
 
-    private static double initialX = 1250;
-    private static double initialY = 250;
+    private static double initialX = BossMap.MAP_WIDTH - BossMap.MAP_WIDTH /8;
+    private static double initialY = BossMap.MAP_HEIGHT /2;
     private double velocity;
     private double bullet_prob;
     private int gunPower;

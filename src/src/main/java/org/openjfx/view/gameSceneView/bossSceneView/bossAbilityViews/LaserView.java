@@ -2,22 +2,15 @@ package org.openjfx.view.gameSceneView.bossSceneView.bossAbilityViews;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.openjfx.utilization.ModelToViewSpecialAbility;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class LaserView extends ImageView {
-    public  LaserView (double x, double y, double width, double height) throws FileNotFoundException {
-        Image image = new Image( new FileInputStream("resources/bossLaser.png"));
+public class LaserView extends SpecialAbilityView {
+    private static String resource = "resources/bossLaser.png";
+    public LaserView(ModelToViewSpecialAbility modelToViewSpecialAbility, double scaleW, double scaleH)  {
+        super( modelToViewSpecialAbility , resource, scaleW, scaleH);
+    }
 
-        setImage( image);
-        setFitWidth( width);
-        setFitHeight( height);
-        setTranslateX( x);
-        setTranslateY(y);
-    }
-    public void refreshLaser (double currentX, double currentY) {
-        setTranslateX( currentX);
-        setTranslateY( currentY);
-    }
 }

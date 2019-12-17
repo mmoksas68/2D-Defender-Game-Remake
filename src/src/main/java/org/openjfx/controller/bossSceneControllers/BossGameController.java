@@ -8,15 +8,13 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import org.openjfx.controller.SoundController;
 import org.openjfx.controller.preBossSceneControllers.SpacecraftController;
+import org.openjfx.model.bossEntities.BossAbility.SpecialAbility;
 import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.bossEntities.Boss.Boss;
 import org.openjfx.model.commonEntities.Bullet.Bullet;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
 import org.openjfx.model.menuEntities.GameSituation;
-import org.openjfx.utilization.ModelToView;
-import org.openjfx.utilization.ModelToViewBoss;
-import org.openjfx.utilization.ModelToViewBullet;
-import org.openjfx.utilization.ModelToViewSpaceCraft;
+import org.openjfx.utilization.*;
 import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 import org.openjfx.view.gameSceneView.preBossSceneView.RootPane;
 import org.openjfx.view.gameSceneView.preBossSceneView.TopBar.radarView.RadarObject;
@@ -51,8 +49,8 @@ public class BossGameController  {
         gameSituation = GameSituation.getInstance();
         this.scene = scene;
         rootPane = new RootPane(initWidth, initHeight);
-        bossMapController = new BossMapController( new BossMap( 1, true));
-        bossController = new BossController( 1, bossMapController.getBossMap(), rootPane.getBossMapView());
+        bossMapController = new BossMapController( new BossMap( 3, true));
+        bossController = new BossController( bossMapController.getBossMap().getLevel(), bossMapController.getBossMap());
         this.width = initWidth;
         this.height = initHeight;
         spacecraftController1 = new SpacecraftController(bossMapController.getBossMap().getSpacecraft1(), rootPane.getBossMapView(),bossMapController.getBossMap());
@@ -121,6 +119,7 @@ public class BossGameController  {
         refreshAndReflectScore();
         refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
         refresAndReflectBoss();
+        refreshAndReflectSpecialAbility();
     }
 
     private void scoreCalculator () {
@@ -156,6 +155,18 @@ public class BossGameController  {
         rootPane.getBossMapView().refreshBossView( new ModelToViewBoss( bossMapController.getBossMap().getBoss()));
     }
 
+    private void refreshAndReflectSpecialAbility () {
+        ArrayList <Long> toBeDeleted = new ArrayList<>();
+        for (SpecialAbility specialAbility : bossMapController.getBossMap().getSpecialAbilities().values()) {
+            if ( specialAbility.isDead()) {
+                toBeDeleted.add( specialAbility.getID());
+            }
+            rootPane.getBossMapView().refreshSpecialAbilityView( new ModelToViewSpecialAbility( specialAbility));
+        }
+        for (Long id : toBeDeleted) {
+            bossMapController.getBossMap().getSpecialAbilities().remove( id);
+        }
+    }
     public Scene getScene() {
         return scene;
     }

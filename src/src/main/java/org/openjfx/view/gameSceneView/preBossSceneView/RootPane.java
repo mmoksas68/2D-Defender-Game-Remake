@@ -36,7 +36,7 @@ public class RootPane extends BorderPane {
         setCenter(this.bossMapView);
 
         setTop(topBarView);
-       /* Background background = new Background(image);
+      /*  Background background = new Background(image);
         setBackground(background);*/
     }
 

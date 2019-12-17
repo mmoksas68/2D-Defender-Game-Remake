@@ -8,7 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class BossOneView extends ImageView {
-    public  BossOneView (ModelToViewBoss modelToViewBoss)  {
+    public  BossOneView (ModelToViewBoss modelToViewBoss, double scaleW, double scaleH)  {
         Image image = null;
         try {
             image = new Image( new FileInputStream("resources/boss2.png"));
@@ -16,15 +16,13 @@ public class BossOneView extends ImageView {
             e.printStackTrace();
         }
         setImage ( image);
-        setFitWidth( modelToViewBoss.getHitboxWidth());
-        setFitHeight( modelToViewBoss.getHitboxHeight());
-        setTranslateX( modelToViewBoss.getLocationX());
-        setTranslateY( modelToViewBoss.getLocationY());
+        refresh(modelToViewBoss,  scaleW,  scaleH);
+
     }
-    public void refresh (ModelToViewBoss modelToViewBoss) {
-        setTranslateX( modelToViewBoss.getLocationX());
-        setTranslateY( modelToViewBoss.getLocationY());
-        setFitWidth( modelToViewBoss.getHitboxWidth());
-        setFitHeight( modelToViewBoss.getHitboxHeight());
+    public void refresh (ModelToViewBoss modelToViewBoss, double scaleW, double scaleH) {
+        setTranslateX( modelToViewBoss.getLocationX()*scaleW);
+        setTranslateY( modelToViewBoss.getLocationY()*scaleH);
+        setFitWidth( modelToViewBoss.getHitboxWidth()*scaleW);
+        setFitHeight( modelToViewBoss.getHitboxHeight()*scaleH);
     }
 }

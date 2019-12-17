@@ -1,20 +1,16 @@
 package org.openjfx.model.bossEntities.BossAbility;
 
+import org.openjfx.controller.bossSceneControllers.abilityBehaviourManager.DefaultAbilityAlgorithm;
+import org.openjfx.model.bossEntities.Boss.Boss;
+import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
 
-public class Marker extends LocatableObject {
-    private double damage;
-    public Marker(Location location, double radius, double damage) {
-        super( location, radius, radius, 1000);
-        this.damage = damage;
-    }
-
-    public double getDamage() {
-        return damage;
-    }
-
-    public void setDamage(double damage) {
-        this.damage = damage;
+public class Marker extends SpecialAbility {
+    public static double radius = BossMap.MAP_WIDTH /15;
+    private static int healthPoint = Integer.MAX_VALUE;
+    public Marker(Location location) {
+        super( location, radius, radius, healthPoint);
+        setAbilityBehaviourAlgorithm( new DefaultAbilityAlgorithm( this));
     }
 }

@@ -1,28 +1,27 @@
 package org.openjfx.controller.bossSceneControllers.BossBehaviourManager;
 
+import org.openjfx.model.bossEntities.Boss.Boss;
+import org.openjfx.model.bossEntities.Boss.BossThree;
 import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.bossEntities.BossAbility.LittleBoss;
 import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 import org.openjfx.view.gameSceneView.bossSceneView.bossAbilityViews.LittleBossView;
 
-public class BossThreeBehaviour  extends BossDefaultBehaviour implements BossBehaviourAlgorithm {
+public class BossThreeBehaviour  extends BossDefaultBehaviour {
     LittleBoss littleBoss;
-    LittleBossView littleBossView;
 
-    public BossThreeBehaviour(BossMap bossMap, BossMapView bossMapView) {
-        super( bossMap, bossMapView);
+    public BossThreeBehaviour(BossMap bossMap) {
+        super( bossMap);
     }
 
- /*   @Override
+     @Override
     public void useSpecialAbility()  {
         Boss boss = bossMap.getBoss();
         if( Math.random() < ((BossThree)boss).getLITTLE_BOSS_FREQ() ) {
             littleBoss = ((BossThree)boss).sendLittleBoss();
-            abilityTimer = 1.0;
-            littleBossView = new LittleBossView( littleBoss.getLocation().getPositionX(), littleBoss.getLocation().getPositionY(), littleBoss.getHitBoxWidth(), littleBoss.getHitBoxHeight());
-            bossMap.getLittleBosses().add(littleBoss);
-            bossMapView.addLittleBossView(littleBossView);
+            bossMap.addSpecialAbility( littleBoss);
         }
+
     }
 
     @Override
@@ -30,8 +29,12 @@ public class BossThreeBehaviour  extends BossDefaultBehaviour implements BossBeh
         abilityTimer = abilityTimer - 0.016;
         //mapView.refreshLittleBoss(littleBossView, littleBoss.getLocation().getPositionX(), littleBoss.getLocation().getPositionY());
         if( littleBoss.getHitNumber() == 3) {
-            bossMap.getLittleBosses().remove(littleBoss);
-            bossMapView.removeLittleBossView( littleBossView);
+            littleBoss.setDead( true);
         }
-    }*/
+    }
+
+    @Override
+    public void startAbilityTimer(double time) {
+        abilityTimer = 1.0;
+    }
 }
