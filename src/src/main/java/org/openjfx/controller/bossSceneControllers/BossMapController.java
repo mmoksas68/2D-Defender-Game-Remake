@@ -1,5 +1,9 @@
 package org.openjfx.controller.bossSceneControllers;
 
+import org.openjfx.controller.bossSceneControllers.abilityBehaviourManager.AbilityBehaviourAlgorithm;
+import org.openjfx.controller.bossSceneControllers.abilityBehaviourManager.DefaultAbilityAlgorithm;
+import org.openjfx.controller.bossSceneControllers.abilityBehaviourManager.LittleBossAbilityAlgorithm;
+import org.openjfx.model.bossEntities.BossAbility.SpecialAbility;
 import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.commonEntities.Bullet.Bullet;
 import org.openjfx.model.preBossEntities.PreBossMap;
@@ -8,7 +12,7 @@ import java.util.Collections;
 
 public class BossMapController {
     private BossMap bossMap;
-
+    private AbilityBehaviourAlgorithm abilityBehaviourAlgorithm;
     public BossMapController(BossMap bossMap) {
         this.bossMap = bossMap;
     }
@@ -23,10 +27,14 @@ public class BossMapController {
 
             bullet.moveToDirection(bullet.getVelocity(), bullet.getDirectionX(), bullet.getDirectionY());
             bullet.setDistanceTravelled( bullet.getDistanceTravelled() + bullet.getVelocity());
-            if(bullet.getDistanceTravelled() > Bullet.MAX_DISTANCE)
+            if(bullet.getDistanceTravelled() > BossMap.MAP_WIDTH)
             {
                 bullet.setDead(true);
             }
+        }
+
+        for (SpecialAbility specialAbility : bossMap.getSpecialAbilities().values()) {
+            specialAbility.getAbilityBehaviourAlgorithm().moveSpecialAbility( );
         }
 
     }

@@ -2,25 +2,22 @@ package org.openjfx.view.gameSceneView.bossSceneView.bossAbilityViews;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.openjfx.utilization.ModelToViewSpecialAbility;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class LittleBossView extends ImageView {
+public class LittleBossView extends SpecialAbilityView {
 
-    public LittleBossView( double x, double y, double width, double height) throws FileNotFoundException {
-        Image image = new Image( new FileInputStream("resources/boss1.png"));
-
-        setImage( image);
-        setFitHeight( width);
-        setFitHeight( height);
-        setTranslateX( x);
-        setTranslateY( y);
+    private static String resource = "resources/boss1.png";
+    public LittleBossView(ModelToViewSpecialAbility modelToViewSpecialAbility, double scaleW, double scaleH)  {
+        super( modelToViewSpecialAbility , resource, scaleW, scaleH);
     }
-
-    public void refreshLittleBoss (double currentX, double currentY) {
-        setTranslateX( currentX);
-        setTranslateY( currentY);
+    @Override
+    public void refresh(ModelToViewSpecialAbility modelToViewSpecialAbility, double scaleW, double scaleH) {
+     //   double rotateAmount = Math.asin( -modelToViewSpecialAbility.getXdir());
+        setRotate( getRotate() + 25);
+        super.refresh( modelToViewSpecialAbility, scaleW, scaleH);
     }
 
 }

@@ -1,42 +1,34 @@
 package org.openjfx.model.bossEntities.BossAbility;
 
+import org.openjfx.controller.bossSceneControllers.abilityBehaviourManager.LittleBossAbilityAlgorithm;
+import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
 
-public class LittleBoss extends LocatableObject {
-    private int damage;
+public class LittleBoss extends SpecialAbility {
+    private static int damage = 50;
+    private static double hitBoxWidth = BossMap.MAP_WIDTH /30;
+    private static double hitBoxHeight = BossMap.MAP_WIDTH /30;
+    private static int healthPoint = 50;
+    private static double velocity = 10.0;
     private int hitNumber;
-    private double xDir;
-    private double yDir;
-
     public LittleBoss(Location location) {
-        super(location, 10, 50, 50);
-        this.damage = 50;
+        super(location, hitBoxWidth, hitBoxHeight, healthPoint);
+        setDamage( damage);
+        setVelocity( velocity);
         this.hitNumber = 0;
-        xDir = - Math.random();
+        setxDir(- Math.random());
         if( (int)(Math.random() * 2) == 0)
-            yDir = -Math.random();
+            setyDir( Math.random());
         else
-            yDir = Math.random();
+            setyDir( Math.random());
+
+        setAbilityBehaviourAlgorithm( new LittleBossAbilityAlgorithm( this));
     }
 
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
 
     public int getHitNumber() { return hitNumber; }
 
     public void setHitNumber(int hitNumber) { this.hitNumber = hitNumber; }
 
-    public double getXDir() { return xDir; }
-
-    public void setXDir( double xDir) { this.xDir = xDir; }
-
-    public double getYDir() { return yDir; }
-
-    public void setYDir( double yDir) { this.yDir = yDir; }
 }
