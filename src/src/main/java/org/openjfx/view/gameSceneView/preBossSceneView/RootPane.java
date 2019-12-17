@@ -1,15 +1,18 @@
 package org.openjfx.view.gameSceneView.preBossSceneView;
 
 import javafx.animation.*;
+import javafx.beans.property.DoubleProperty;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
+import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.view.gameSceneView.preBossSceneView.TopBar.TopBarView;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.security.Key;
 
 public class RootPane extends BorderPane {
     private PreBossMapView preBossMapView1;
@@ -71,22 +74,38 @@ public class RootPane extends BorderPane {
         return bossMapView;
     }
     
-    public void twoPlayerOneShipScreen(PreBossMapView myView, AnimationTimer animationTimer){
-        animationTimer.stop();
+    public void twoPlayerOneShipScreen(PreBossMapView myView){
         Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(preBossMapView1.translateYProperty(), 8.8, Interpolator.EASE_IN);
-        KeyFrame kf = new KeyFrame(Duration.seconds(10), kv);
-        timeline.getKeyFrames().add(kf);
-        timeline.play();
+        KeyFrame kf;
+        KeyFrame kf2;
+        KeyFrame kf3;
         setCenter(null);
         setBottom(null);
-        preBossMapView1 = myView;
-        preBossMapView1.setWidthSize(width);
-        preBossMapView1.setHeightSize(height*8.8/10);
-        preBossMapView1.refreshScale();
-        setCenter(preBossMapView1);
-        preBossMapView2 = null;
-        animationTimer.start();
+        if(GameSituation.getInstance().isFirstCraftDied()){
+            preBossMapView2 = myView;
+            setBottom(preBossMapView2);
+            KeyValue keyValue = new KeyValue(preBossMapView2.getLayoutHeight(), (height*8.8/10) / PreBossMap.MAP_HEIGHT, Interpolator.EASE_IN);
+            KeyValue keyValue2 = new KeyValue(preBossMapView2.translateYProperty(), (-height*4.4/10), Interpolator.EASE_IN);
+            kf = new KeyFrame(Duration.seconds(2.5), keyValue);
+            kf2 = new KeyFrame(Duration.seconds(2.5), keyValue2);
+            preBossMapView2.setStyle(null);
+        }
+        else{
+            preBossMapView1 = myView;
+            setCenter(preBossMapView1);
+            KeyValue keyValue = new KeyValue(preBossMapView1.getLayoutHeight(), (height*8.8/10) / PreBossMap.MAP_HEIGHT, Interpolator.EASE_IN);
+            KeyValue keyValue2 = new KeyValue(preBossMapView1.translateYProperty(), 0, Interpolator.EASE_IN);
+            kf = new KeyFrame(Duration.seconds(2.5), keyValue);
+            kf2 = new KeyFrame(Duration.seconds(2.5), keyValue2);
+        }
+
+        kf3 = new KeyFrame(Duration.seconds(2.5), e -> {
+        });
+        timeline.getKeyFrames().add(kf);
+        timeline.getKeyFrames().add(kf2);
+        timeline.getKeyFrames().add(kf3);
+        timeline.play();
+
     }
     public PreBossMapView getPreBossMapView1() {
         return preBossMapView1;

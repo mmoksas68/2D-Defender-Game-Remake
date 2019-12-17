@@ -71,7 +71,7 @@ public class PreBossGameController {
                 spacecraftController2 = null;
                 keysFor1();
             }
-            rootPane.twoPlayerOneShipScreen(spacecraftController1.getPreBossMapView(), animationTimer);
+            rootPane.twoPlayerOneShipScreen(spacecraftController1.getPreBossMapView());
         };
         gameSituation.twoPlayerSingleShipProperty().addListener(isFirstDied);
     }

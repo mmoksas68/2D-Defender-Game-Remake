@@ -1,5 +1,8 @@
 package org.openjfx.view.gameSceneView.preBossSceneView;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -43,19 +46,19 @@ public class PreBossMapView extends Pane {
     private SpacecraftViewGroup spacecraftViewGroup2 = null;
     private double sliderLeft = 4000;
     private double layoutScaleWidth;
-    private double layoutScaleHeight;
+    private DoubleProperty layoutScaleHeight;
     private double sliderAccelerationSpeed = 0;
     private double widthSize;
-    private double heightSize;
+    private DoubleProperty heightSize;
 
     public PreBossMapView(double widthSize, double heightSize, boolean isSinglePlayer) {
-        setPrefSize(widthSize, heightSize);
-        //setMinSize(widthSize, heightSize);
+        this.heightSize = new SimpleDoubleProperty();
         this.widthSize = widthSize;
-        this.heightSize = heightSize;
+        this.heightSize.set(heightSize);
+        setPrefSize(widthSize, this.heightSize.get());
         layoutScaleWidth = widthSize / 1920.0;
-        layoutScaleHeight = heightSize / (PreBossMap.MAP_HEIGHT);
-
+        layoutScaleHeight = new SimpleDoubleProperty();
+        layoutScaleHeight.set(this.heightSize.get() / (PreBossMap.MAP_HEIGHT));
         setStyle("-fx-border-color : white; -fx-border-width : 0 0 1 0");
     }
 
@@ -65,8 +68,10 @@ public class PreBossMapView extends Pane {
 
     public void refreshScale(){
         layoutScaleWidth = widthSize / 1920.0;
-        layoutScaleHeight = heightSize / (PreBossMap.MAP_HEIGHT);
+        layoutScaleHeight.setValue(heightSize.get() / (PreBossMap.MAP_HEIGHT));
     }
+
+
 
     public void refreshEnemy(ModelToViewEnemy modelToViewEnemy){
         EnemyViewGroup enemyViewGroup;
@@ -77,9 +82,9 @@ public class PreBossMapView extends Pane {
                 getChildren().remove(enemyViewGroup.getHealthBar());
                 enemies.remove(modelToViewEnemy.getID());
             }else
-            enemyViewGroup.refresh(modelToViewEnemy, sliderLeft, layoutScaleWidth, layoutScaleHeight);
+            enemyViewGroup.refresh(modelToViewEnemy, sliderLeft, layoutScaleWidth, layoutScaleHeight.get());
         } else if(!modelToViewEnemy.isDead()){
-            enemyViewGroup = new EnemyViewGroup(modelToViewEnemy, sliderLeft, layoutScaleWidth, layoutScaleHeight);
+            enemyViewGroup = new EnemyViewGroup(modelToViewEnemy, sliderLeft, layoutScaleWidth, layoutScaleHeight.get());
             getChildren().add(enemyViewGroup.getEnemyView());
             getChildren().add(enemyViewGroup.getHealthBar());
             enemies.put(modelToViewEnemy.getID(), enemyViewGroup);
@@ -95,10 +100,10 @@ public class PreBossMapView extends Pane {
                 getChildren().remove(bullet);
                 bullets.remove(modelToViewBullet.getID());
             }else {
-                bullet.refresh(modelToViewBullet, sliderLeft, layoutScaleWidth, layoutScaleHeight );
+                bullet.refresh(modelToViewBullet, sliderLeft, layoutScaleWidth, layoutScaleHeight.get() );
             }
         } else if(!modelToViewBullet.isDead()){
-            bullet = new BulletView(modelToViewBullet, sliderLeft, layoutScaleWidth, layoutScaleHeight);
+            bullet = new BulletView(modelToViewBullet, sliderLeft, layoutScaleWidth, layoutScaleHeight.get());
             bullets.put(modelToViewBullet.getID(), bullet);
             getChildren().add(bullet);
         }
@@ -108,13 +113,13 @@ public class PreBossMapView extends Pane {
         SpacecraftViewGroup spacecraftViewGroup;
         if(spacecraftViewGroup1 != null){
            spacecraftViewGroup = spacecraftViewGroup1;
-           spacecraftViewGroup.refresh(modelToViewSpaceCraft, sliderLeft, layoutScaleWidth, layoutScaleHeight);
+           spacecraftViewGroup.refresh(modelToViewSpaceCraft, sliderLeft, layoutScaleWidth, layoutScaleHeight.get());
             if(modelToViewSpaceCraft.isDead()){
                 getChildren().remove(spacecraftViewGroup.getFlame());
                 getChildren().remove(spacecraftViewGroup.getSpacecraftView());
             }
         } else {
-            spacecraftViewGroup = new SpacecraftViewGroup(modelToViewSpaceCraft, sliderLeft, layoutScaleWidth, layoutScaleHeight);
+            spacecraftViewGroup = new SpacecraftViewGroup(modelToViewSpaceCraft, sliderLeft, layoutScaleWidth, layoutScaleHeight.get());
             spacecraftViewGroup1 = spacecraftViewGroup;
             getChildren().add(spacecraftViewGroup.getSpacecraftView());
             getChildren().add(spacecraftViewGroup.getFlame());
@@ -124,13 +129,13 @@ public class PreBossMapView extends Pane {
         SpacecraftViewGroup spacecraftViewGroup;
         if(spacecraftViewGroup2 != null){
            spacecraftViewGroup = spacecraftViewGroup2;
-           spacecraftViewGroup.refresh(modelToViewSpaceCraft, sliderLeft, layoutScaleWidth, layoutScaleHeight);
+           spacecraftViewGroup.refresh(modelToViewSpaceCraft, sliderLeft, layoutScaleWidth, layoutScaleHeight.get());
             if(modelToViewSpaceCraft.isDead()){
                 getChildren().remove(spacecraftViewGroup.getFlame());
                 getChildren().remove(spacecraftViewGroup.getSpacecraftView());
             }
         } else {
-            spacecraftViewGroup = new SpacecraftViewGroup(modelToViewSpaceCraft, sliderLeft, layoutScaleWidth, layoutScaleHeight);
+            spacecraftViewGroup = new SpacecraftViewGroup(modelToViewSpaceCraft, sliderLeft, layoutScaleWidth, layoutScaleHeight.get());
             spacecraftViewGroup2 = spacecraftViewGroup;
             getChildren().add(spacecraftViewGroup.getSpacecraftView());
             getChildren().add(spacecraftViewGroup.getFlame());
@@ -148,9 +153,9 @@ public class PreBossMapView extends Pane {
                 getChildren().remove(enemyStationViewGroup.getHealthBar());
                 stations.remove(modelToViewStation.getID());
             }else
-            enemyStationViewGroup.refresh(modelToViewStation, sliderLeft, layoutScaleWidth, layoutScaleHeight);
+            enemyStationViewGroup.refresh(modelToViewStation, sliderLeft, layoutScaleWidth, layoutScaleHeight.get());
         } else {
-            enemyStationViewGroup = new EnemyStationViewGroup(modelToViewStation, sliderLeft, layoutScaleWidth, layoutScaleHeight);
+            enemyStationViewGroup = new EnemyStationViewGroup(modelToViewStation, sliderLeft, layoutScaleWidth, layoutScaleHeight.get());
             getChildren().add(enemyStationViewGroup.getEnemyStationView());
             getChildren().add(enemyStationViewGroup.getHealthBar());
             stations.put(modelToViewStation.getID(), enemyStationViewGroup);
@@ -158,7 +163,7 @@ public class PreBossMapView extends Pane {
     }
 
     public void addExplodeAnimation(ModelToView modelToView){
-        ExplodeAnimation explodeAnimation = new ExplodeAnimation(modelToView, sliderLeft, layoutScaleWidth, layoutScaleHeight);
+        ExplodeAnimation explodeAnimation = new ExplodeAnimation(modelToView, sliderLeft, layoutScaleWidth, layoutScaleHeight.get());
         explodeAnimations.put(modelToView.getID(), explodeAnimation);
         explodeAnimation.setImageViewTimer(1);
         getChildren().add(explodeAnimation.getImageViewList()[0]);
@@ -273,11 +278,15 @@ public class PreBossMapView extends Pane {
     }
 
     public double getLayoutScaleHeight() {
+        return layoutScaleHeight.get();
+    }
+
+    public DoubleProperty getLayoutHeight(){
         return layoutScaleHeight;
     }
 
     public void setLayoutScaleHeight(double layoutScaleHeight) {
-        this.layoutScaleHeight = layoutScaleHeight / 1080;
+        this.layoutScaleHeight.set(layoutScaleHeight / PreBossMap.MAP_HEIGHT);
         setPrefWidth(layoutScaleHeight);
         Background background = new Background(image);
         this.setBackground(background);
@@ -296,6 +305,10 @@ public class PreBossMapView extends Pane {
     }
 
     public void setHeightSize(double heightSize){
-        this.heightSize = heightSize;
+        this.heightSize.set(heightSize);
+    }
+
+    public DoubleProperty heightSize(){
+        return heightSize;
     }
 }
