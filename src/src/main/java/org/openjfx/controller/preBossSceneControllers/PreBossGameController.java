@@ -71,7 +71,7 @@ public class PreBossGameController {
                 spacecraftController2 = null;
                 keysFor1();
             }
-            rootPane.twoPlayerOneShipScreen(spacecraftController1.getPreBossMapView());
+            rootPane.twoPlayerOneShipScreen(spacecraftController1.getPreBossMapView(), animationTimer);
         };
         gameSituation.twoPlayerSingleShipProperty().addListener(isFirstDied);
     }
@@ -246,7 +246,6 @@ public class PreBossGameController {
         for (var station : preBossMapController.getPreBossMap().getStations().values()) {
             if (station.isDead()) {
                 gameSituation.setScore(gameSituation.getScore() + EnemyStation.SCORE_POINT);
-                animationTimer.stop();
             }
         }
         for (var enemy : preBossMapController.getPreBossMap().getEnemies().values()) {
@@ -311,7 +310,6 @@ public class PreBossGameController {
                     spacecraftController1.setFireKeyPressed(false);
                     break;
                 case ESCAPE:
-                    animationTimer.stop();
                     gameOnChange.set(true);
                     break;
             }
@@ -360,7 +358,6 @@ public class PreBossGameController {
                     spacecraftController1.setFireKeyPressed(false);
                     break;
                 case ESCAPE:
-                    animationTimer.stop();
                     gameOnChange.set(true);
                     break;
             }
@@ -442,7 +439,6 @@ public class PreBossGameController {
                     spacecraftController1.setFireKeyPressed(false);
                     break;
                 case ESCAPE:
-                    animationTimer.stop();
                     gameOnChange.set(true);
                     break;
             }
