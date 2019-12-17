@@ -22,11 +22,9 @@ public class BossOne extends Boss {
         setBulletVelocity( bulletVelocity);
     }
 
-    public Laser sendLaserIndicator() {
-        return new Laser( new Location( 0,getLocation().getPositionY()+getHitBoxHeight()/2-5),getLocation().getPositionX(),3,0);
-    }
     public Laser sendLaser () {
-        return new Laser( new Location( 0,getLocation().getPositionY()+getHitBoxHeight()/2-25 ) ,getLocation().getPositionX(),50,laserDamage);
+        double laserWidth = getLocation().getPositionX();
+        return new Laser( new Location( 0,getLocation().getPositionY() + getHitBoxHeight()/2), laserWidth);
     }
 
     public double getLASER_FREQ() {

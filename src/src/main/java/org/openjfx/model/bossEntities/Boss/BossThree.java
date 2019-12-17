@@ -8,9 +8,15 @@ public class BossThree extends Boss {
     private static final int hitBoxWidth = 150;
     private static final int hitBoxHeight = 150;
     private static final int MAX_HEALTH_POINT = 1000;
+    private static int gunPower = 10;
+    private static double bulletVelocity = 10.0;
+    private static double gunFrequency = 0.05;
 
     public BossThree () {
         super ( 3, hitBoxWidth, hitBoxHeight, MAX_HEALTH_POINT);
+        setGunFrequency( gunFrequency);
+        setGunPower( gunPower);
+        setBulletVelocity( bulletVelocity);
     }
 
     public double getLITTLE_BOSS_FREQ() {

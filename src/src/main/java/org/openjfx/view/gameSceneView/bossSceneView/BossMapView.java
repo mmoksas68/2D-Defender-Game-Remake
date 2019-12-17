@@ -1,26 +1,23 @@
 package org.openjfx.view.gameSceneView.bossSceneView;
 
-import javafx.scene.CacheHint;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import org.openjfx.model.bossEntities.Boss.Boss;
+import org.openjfx.model.bossEntities.BossAbility.LittleBoss;
+import org.openjfx.model.bossEntities.BossAbility.SpecialAbility;
 import org.openjfx.model.bossEntities.BossMap;
-import org.openjfx.utilization.ModelToView;
-import org.openjfx.utilization.ModelToViewBoss;
-import org.openjfx.utilization.ModelToViewBullet;
-import org.openjfx.utilization.ModelToViewSpaceCraft;
+import org.openjfx.utilization.*;
+import org.openjfx.view.gameSceneView.bossSceneView.bossAbilityViews.*;
 import org.openjfx.view.gameSceneView.bossSceneView.bossViews.BossOneView;
 import org.openjfx.view.gameSceneView.commonViews.bulletView.BulletView;
 import org.openjfx.view.gameSceneView.commonViews.spacecraftView.SpacecraftViewGroup;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 public class BossMapView extends AnchorPane {
     private static BackgroundImage image;
     private java.util.Map<Long, BulletView> bullets = new HashMap<Long, BulletView>();
+    private java.util.Map <Long, ImageView> specialAbilities= new HashMap<>();
     private SpacecraftViewGroup spacecraftViewGroup1 = null;
     private SpacecraftViewGroup spacecraftViewGroup2 = null;
     private double layoutScaleWidth;
@@ -74,14 +71,53 @@ public class BossMapView extends AnchorPane {
         BossOneView bossOneView;
         if ( currentNodes.containsKey( modelToViewBoss.getID())) {
             bossOneView = (BossOneView) currentNodes.get( modelToViewBoss.getID());
-            bossOneView.refresh( modelToViewBoss);
+            bossOneView.refresh( modelToViewBoss, layoutScaleWidth, layoutScaleHeight);
         }
         else {
-            bossOneView = new BossOneView( modelToViewBoss);
+            bossOneView = new BossOneView( modelToViewBoss, layoutScaleWidth, layoutScaleHeight);
             currentNodes.put( modelToViewBoss.getID(), bossOneView);
             getChildren().add( bossOneView);
         }
     }
+    public void refreshSpecialAbilityView( ModelToViewSpecialAbility modelToViewSpecialAbility) {
+        SpecialAbilityView specialAbilityView;
+        if ( currentNodes.containsKey( modelToViewSpecialAbility.getID())) {
+            specialAbilityView = getType( modelToViewSpecialAbility);
+            if ( modelToViewSpecialAbility.isDead()) {
+                getChildren().remove( specialAbilityView);
+                specialAbilities.remove( specialAbilityView);
+            }else {
+                specialAbilityView.refresh(modelToViewSpecialAbility, layoutScaleWidth, layoutScaleHeight);
+            }
+        }
+        else {
+            specialAbilityView = createView( modelToViewSpecialAbility);
+            currentNodes.put( modelToViewSpecialAbility.getID(), specialAbilityView);
+            getChildren().add( specialAbilityView);
+        }
+    }
+    private SpecialAbilityView getType(ModelToViewSpecialAbility modelToViewSpecialAbility) {
+        if ( modelToViewSpecialAbility.isLaser())
+            return (LaserView) currentNodes.get( modelToViewSpecialAbility.getID() );
+        else  if ( modelToViewSpecialAbility.isMarker())
+            return (MarkerView) currentNodes.get( modelToViewSpecialAbility.getID());
+        else if ( modelToViewSpecialAbility.isRocket())
+            return (RocketView) currentNodes.get( modelToViewSpecialAbility.getID());
+        else if ( modelToViewSpecialAbility.isLittleBoss())
+            return  (LittleBossView) currentNodes.get( modelToViewSpecialAbility.getID());
 
+        return null;
+    }
+    private SpecialAbilityView createView (ModelToViewSpecialAbility modelToViewSpecialAbility) {
+        if ( modelToViewSpecialAbility.isLaser())
+            return new LaserView( modelToViewSpecialAbility, layoutScaleWidth, layoutScaleHeight);
+        else  if ( modelToViewSpecialAbility.isMarker())
+            return new MarkerView( modelToViewSpecialAbility, layoutScaleWidth, layoutScaleHeight);
+        else if ( modelToViewSpecialAbility.isRocket())
+               return new RocketView( modelToViewSpecialAbility, layoutScaleWidth, layoutScaleHeight);
+        else if ( modelToViewSpecialAbility.isLittleBoss())
+            return  new LittleBossView( modelToViewSpecialAbility, layoutScaleWidth, layoutScaleHeight);
+        return null;
+    }
 }
 

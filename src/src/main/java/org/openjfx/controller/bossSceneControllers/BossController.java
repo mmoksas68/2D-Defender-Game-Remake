@@ -1,32 +1,30 @@
 package org.openjfx.controller.bossSceneControllers;
 
 import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossOneBehaviour;
+import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossBehaviourAlgorithm;
 import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossThreeBehaviour;
 import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossTwoBehaviour;
-import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossBehaviourAlgorithm;
 import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 
 public class BossController {
     private BossBehaviourAlgorithm algorithm;
     private BossMap bossMap;
-    private BossMapView bossMapView;
-    public BossController(int level, BossMap bossMap, BossMapView bossMapView) {
+    public BossController(int level, BossMap bossMap) {
         this.bossMap = bossMap;
-        this.bossMapView = bossMapView;
         selectAlgorithm( level);
     }
 
     private  void  selectAlgorithm ( int level) {
         switch (level) {
             case 1:
-                algorithm = new BossOneBehaviour( bossMap, bossMapView);
+                algorithm = new BossOneBehaviour( bossMap);
                 break;
             case 2:
-                algorithm = new BossTwoBehaviour( bossMap, bossMapView);
+                algorithm = new BossTwoBehaviour( bossMap);
                 break;
             case 3:
-                algorithm = new BossThreeBehaviour( bossMap, bossMapView);
+                algorithm = new BossThreeBehaviour( bossMap);
                 break;
             default:
                 break;
@@ -35,14 +33,13 @@ public class BossController {
     public void behave()  {
         if ( algorithm.getAbilityTimer() <= 0.0) {
             algorithm.moveBoss();
-           // algorithm.useSpecialAbility();
+            algorithm.useSpecialAbility();
 
         }
         else {
             //  for ( GameObject specialAbility: bossController.getSpecialAbility())
             //   map.checkCollisions( specialAbility);
-           // algorithm.clockTick();
-            System.out.println(  bossMap.getSpacecraft1().getHealthPoint());
+            algorithm.clockTick();
         }
         algorithm.shoot();
     }
