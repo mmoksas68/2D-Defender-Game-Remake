@@ -81,6 +81,7 @@ public class MainController {
             menuController.setIsQuitPressed(false);
             fileController.saveGame();
             stage.close();
+            System.exit(0);
         };
         menuController.getIsQuitPressed().addListener(quitListener);
     }
