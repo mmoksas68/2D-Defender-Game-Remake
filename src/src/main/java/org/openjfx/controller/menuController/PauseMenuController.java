@@ -28,7 +28,6 @@ public class PauseMenuController {
     private GameSituation gameSituation;
 
     PauseMenuController(Scene scene, PreBossGameController preBossGameController, MainMenu mainMenu){
-        System.out.println("doru");
         this.mainMenu = mainMenu;
         this.preBossGameController = preBossGameController;
         gameSituation = GameSituation.getInstance();

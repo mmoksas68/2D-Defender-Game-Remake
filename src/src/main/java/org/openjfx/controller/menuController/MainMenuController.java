@@ -60,7 +60,7 @@ public class MainMenuController {
 
 
     private void nextInSpacecraftScreen(){
-        if(gameSituation.isIsSinglePlayer())
+        if(gameSituation.isSinglePlayer())
             scene.setRoot(menuSceneContainer.getLevelSelection());
         else
             scene.setRoot(menuSceneContainer.getSpacecraftSelection2());
@@ -75,7 +75,7 @@ public class MainMenuController {
     }
 
     private void backInLevelScreen(){
-        if(gameSituation.isIsSinglePlayer())
+        if(gameSituation.isSinglePlayer())
             scene.setRoot(menuSceneContainer.getSpacecraftSelection1());
         else
             scene.setRoot(menuSceneContainer.getSpacecraftSelection2());

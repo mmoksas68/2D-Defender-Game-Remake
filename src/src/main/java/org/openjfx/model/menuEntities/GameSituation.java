@@ -89,7 +89,7 @@ public class GameSituation implements Serializable {
         this.spacecraft2 = spacecraft2;
     }
 
-    public boolean isIsSinglePlayer() {
+    public boolean isSinglePlayer() {
         return isSinglePlayer;
     }
 
@@ -97,10 +97,8 @@ public class GameSituation implements Serializable {
         isSinglePlayer = singlePlayer;
     }
 
-
     public boolean isIsBossFinished() {
         return isBossFinished.get();
-
     }
 
     public BooleanProperty isBossFinishedProperty() {
@@ -184,12 +182,6 @@ public class GameSituation implements Serializable {
         this.twoPlayerSingleShip.set(twoPlayerSingleShip);
     }
 
-    public void setIsSinglePlayer(boolean b){
-        isSinglePlayer = b;
-    }
 
 
-    public boolean isSinglePlayer() {
-        return isSinglePlayer;
-    }
 }

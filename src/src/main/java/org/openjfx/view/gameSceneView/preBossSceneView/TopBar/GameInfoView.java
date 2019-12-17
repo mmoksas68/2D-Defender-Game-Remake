@@ -41,7 +41,6 @@ public class GameInfoView extends Pane {
 
         borderPane.setCenter(score);
         getChildren().add(borderPane);
-        System.out.println(gameSituation.getScore());
 
         setStyle("-fx-border-color : white; -fx-border-width : 0 0 1 0");
     }

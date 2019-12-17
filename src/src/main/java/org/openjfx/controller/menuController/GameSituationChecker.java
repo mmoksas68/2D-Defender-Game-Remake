@@ -38,6 +38,8 @@ public class GameSituationChecker {
 
     private void startGame(boolean newGame){
         if(newGame){
+            GameSituation.getInstance().resetVar();
+            GameSituation.getInstance().resetScore();
             preBossGameController = new PreBossGameController(scene, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
             ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) ->{
                 preBossGameController.setWidth(scene.getWindow().getWidth());
@@ -45,7 +47,6 @@ public class GameSituationChecker {
             };
             scene.getWindow().widthProperty().addListener(stageSizeListener);
             scene.getWindow().heightProperty().addListener(stageSizeListener);
-
         }
         else{
             gameSituation.setIsPreBossFinishedSuccessfully(true);
