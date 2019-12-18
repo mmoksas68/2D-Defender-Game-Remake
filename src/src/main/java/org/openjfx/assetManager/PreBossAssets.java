@@ -12,6 +12,7 @@ public class PreBossAssets {
 
     private List<Image> station = new ArrayList<>();
     private Image tier1unevolved;
+    private Image tier1evolved;
     private List<Image> spacecraft = new ArrayList<>();
     private Image bullet;
     private Image radarEnemy;
@@ -24,6 +25,7 @@ public class PreBossAssets {
             station.add(new Image(FileController.getFileStream("assets/images/buildings/enemybuilding2t1.png")));
             station.add(new Image(FileController.getFileStream("assets/images/buildings/enemybuilding2t3.png")));
             tier1unevolved = new Image(FileController.getFileStream("assets/images/enemy.png"));
+            tier1evolved = new Image(FileController.getFileStream("assets/images/evolvedTier1.png"));
             spacecraft.add(new Image(FileController.getFileStream("assets/images/Spaceship_01_BLUE.png")));
             spacecraft.add(new Image(FileController.getFileStream("assets/images/Spaceship_01_GREEN.png")));
             spacecraft.add(new Image(FileController.getFileStream("assets/images/Spaceship_01_PURPLE.png")));
@@ -62,5 +64,13 @@ public class PreBossAssets {
 
     public Image getRadarEnemy() {
         return radarEnemy;
+    }
+
+    public Image getTier1evolved() {
+        return tier1evolved;
+    }
+
+    public void setTier1evolved(Image tier1evolved) {
+        this.tier1evolved = tier1evolved;
     }
 }

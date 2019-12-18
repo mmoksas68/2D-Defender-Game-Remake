@@ -328,8 +328,12 @@ public class PreBossGameController {
                 case ESCAPE:
                     gameOnChange.set(true);
                     break;
+                case NUMPAD2:
+                    spacecraftController1.activateSmartBomb();
+                    break;
             }
         });
+
     }
 
     private void keysFor2(){
@@ -375,6 +379,9 @@ public class PreBossGameController {
                     break;
                 case ESCAPE:
                     gameOnChange.set(true);
+                    break;
+                case X:
+                    spacecraftController1.activateSmartBomb();
                     break;
             }
         });
@@ -439,6 +446,9 @@ public class PreBossGameController {
                 case SPACE:
                     spacecraftController2.setFireKeyPressed(false);
                     break;
+                case X:
+                    spacecraftController2.activateSmartBomb();
+                    break;
                 case UP:
                     spacecraftController1.setUpKeyPressed(false);
                     break;
@@ -456,6 +466,9 @@ public class PreBossGameController {
                     break;
                 case ESCAPE:
                     gameOnChange.set(true);
+                    break;
+                case NUMPAD2:
+                    spacecraftController1.activateSmartBomb();
                     break;
             }
         });

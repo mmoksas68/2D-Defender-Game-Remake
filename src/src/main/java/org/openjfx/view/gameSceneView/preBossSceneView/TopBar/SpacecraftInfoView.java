@@ -36,6 +36,7 @@ public class SpacecraftInfoView extends BorderPane {
         hbox.setSpacing(10);
         createHealthBar();
         createHyperJumpBar();
+        createBombStock();
         this.setLeft(hbox);
     }
 
@@ -44,6 +45,8 @@ public class SpacecraftInfoView extends BorderPane {
         healthBar.setProgress(health);
         double energy = (double) modelToSpacecraftInfoView.getHyperJumpBattery() / Spacecraft.MAX_HYPERJUMP_ENERGY;
         hyperJump.setProgress(energy);
+        int bombCount = modelToSpacecraftInfoView.getSmartBombCount();
+        smartBombStock.setText(bombCount+"");
     }
 
     private void createLabel(String str){
@@ -67,5 +70,11 @@ public class SpacecraftInfoView extends BorderPane {
         hyperJump.setStyle("-fx-background-color: white;");
         hyperJump.setMinSize(width/3, height/10);
         hbox.getChildren().add(hyperJump);
+    }
+
+    private void createBombStock(){
+        smartBombStock = new Label();
+        smartBombStock.setStyle("-fx-background-color: white; -fx-border-style: solid");
+        hbox.getChildren().add(smartBombStock);
     }
 }
