@@ -47,6 +47,12 @@ public class SpacecraftInfoView extends BorderPane {
         hyperJump.setProgress(energy);
         int bombCount = modelToSpacecraftInfoView.getSmartBombCount();
         smartBombStock.setText(bombCount+"");
+        if(hyperJump.getProgress() > 0.25){
+            hyperJump.setStyle("-fx-background-color: white; -fx-accent: green;");
+        }
+        else{
+            hyperJump.setStyle("-fx-background-color: white; -fx-accent: grey;");
+        }
     }
 
     private void createLabel(String str){
@@ -67,7 +73,7 @@ public class SpacecraftInfoView extends BorderPane {
 
     private void createHyperJumpBar(){
         hyperJump = new ProgressBar(0.5);
-        hyperJump.setStyle("-fx-background-color: white;");
+        hyperJump.setStyle("-fx-background-color: white; -fx-accent: grey;");
         hyperJump.setMinSize(width/3, height/10);
         hbox.getChildren().add(hyperJump);
     }

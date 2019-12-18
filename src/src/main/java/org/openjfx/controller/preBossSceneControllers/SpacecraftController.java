@@ -3,6 +3,7 @@ package org.openjfx.controller.preBossSceneControllers;
 import javafx.geometry.Pos;
 import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.commonEntities.FiringBehavior.SpacecraftGun;
+import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
 import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.utilization.PositionHelper;
@@ -189,8 +190,19 @@ public class SpacecraftController {
         }
     }
 
-    private void doHyperJump(){
-
+    public void doHyperJump(){
+        if(spacecraft.getHyperJumpBattery() > 25){
+            if(spacecraft.isDirectionLeft() && (spacecraft.getLocation().getPositionX()- 20 * spacecraft.getHyperJumpBattery() > 0)){
+                spacecraft.setLocation(new Location(spacecraft.getLocation().getPositionX() - 20 * spacecraft.getHyperJumpBattery(), spacecraft.getLocation().getPositionY()));
+                preBossMapView.setSliderLeft(preBossMapView.getSliderLeft() - 20 * spacecraft.getHyperJumpBattery());
+                spacecraft.setHyperJumpBattery(0);
+            }
+            else if (!spacecraft.isDirectionLeft() && spacecraft.getLocation().getPositionX() + 20 * spacecraft.getHyperJumpBattery() < PreBossMap.MAP_WIDTH){
+                spacecraft.setLocation(new Location(spacecraft.getLocation().getPositionX() + 20 * spacecraft.getHyperJumpBattery(), spacecraft.getLocation().getPositionY()));
+                preBossMapView.setSliderLeft(preBossMapView.getSliderLeft() + 20 * spacecraft.getHyperJumpBattery());
+                spacecraft.setHyperJumpBattery(0);
+            }
+        }
     }
     public BossMapView getBossMapView() {
         return bossMapView;

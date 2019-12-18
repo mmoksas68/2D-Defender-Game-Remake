@@ -109,18 +109,17 @@ public class PreBossGameController {
 
     private void refreshMap() {
         preBossMapController.checkMapSituation();
-        increaseScore();
-        decreaseScore();
+        refreshAndReflectScore();
         refreshAndReflectBuff();
         refreshAndReflectBullet();
         refreshAndReflectEnemy();
         refreshAndReflectMeteor();
         refreshAndReflectStations();
-        refreshAndReflectScore();
         refreshSpacecraftGameInfo();
         refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
         if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
             refreshAndReflectSpacecraft(spacecraftController2.getSpacecraft());
+        updateHyperJumpBattery();
     }
 
 
@@ -143,7 +142,7 @@ public class PreBossGameController {
 
         for (var it : toBeDeleted) {
             preBossMapController.getPreBossMap().deleteEnemy(it);
-            SoundController.explosion();
+            //SoundController.explosion();
         }
     }
 
@@ -218,7 +217,7 @@ public class PreBossGameController {
 
         for (var it : toBeDeleted) {
             preBossMapController.getPreBossMap().deleteStation(it);
-            SoundController.explosion();
+            //SoundController.explosion();
         }
     }
 
@@ -246,7 +245,8 @@ public class PreBossGameController {
     }
 
     private void refreshAndReflectScore() {
-
+        increaseScore();
+        decreaseScore();
         rootPane.getTopBarView().getRightView().refresh();
     }
 
@@ -255,6 +255,24 @@ public class PreBossGameController {
     }
 
     public void pause(){
+
+    }
+
+    private void updateHyperJumpBattery(){
+        Spacecraft spacecraft1 = spacecraftController1.getSpacecraft();
+        spacecraft1.setBatteryTimer(spacecraft1.getBatteryTimer() + 1);
+        spacecraft1.setBatteryTimer(spacecraft1.getBatteryTimer() % Spacecraft.HYPERJUMP_PERIOD);
+        if(spacecraft1.getHyperJumpBattery() < Spacecraft.MAX_HYPERJUMP_ENERGY && spacecraft1.getBatteryTimer() == 0){
+            spacecraft1.setHyperJumpBattery(spacecraft1.getHyperJumpBattery() + 1);
+        }
+        if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip()){
+            Spacecraft spacecraft2 = spacecraftController2.getSpacecraft();
+            spacecraft2.setBatteryTimer(spacecraft2.getBatteryTimer()+1);
+            spacecraft2.setBatteryTimer(spacecraft2.getBatteryTimer() % Spacecraft.HYPERJUMP_PERIOD);
+            if(spacecraft2.getHyperJumpBattery() < Spacecraft.MAX_HYPERJUMP_ENERGY && spacecraft2.getBatteryTimer() == 0){
+                spacecraft2.setHyperJumpBattery(spacecraft2.getHyperJumpBattery()+1);
+            }
+        }
 
     }
 
@@ -331,6 +349,8 @@ public class PreBossGameController {
                 case NUMPAD2:
                     spacecraftController1.activateSmartBomb();
                     break;
+                case NUMPAD1:
+                    spacecraftController1.doHyperJump();
             }
         });
 
@@ -382,6 +402,9 @@ public class PreBossGameController {
                     break;
                 case X:
                     spacecraftController1.activateSmartBomb();
+                    break;
+                case Z:
+                    spacecraftController1.doHyperJump();
                     break;
             }
         });
@@ -448,6 +471,9 @@ public class PreBossGameController {
                     break;
                 case X:
                     spacecraftController2.activateSmartBomb();
+                    break;
+                case Z:
+                    spacecraftController2.doHyperJump();
                     break;
                 case UP:
                     spacecraftController1.setUpKeyPressed(false);
