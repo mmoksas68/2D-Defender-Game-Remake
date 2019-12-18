@@ -117,7 +117,7 @@ public class PreBossGameController {
         refreshAndReflectMeteor();
         refreshAndReflectStations();
         refreshAndReflectScore();
-        refreshHealthBar();
+        refreshSpacecraftGameInfo();
         refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
         if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
             refreshAndReflectSpacecraft(spacecraftController2.getSpacecraft());
@@ -230,7 +230,7 @@ public class PreBossGameController {
 
     }
 
-    private void refreshHealthBar(){
+    private void refreshSpacecraftGameInfo(){
         if((gameSituation.isTwoPlayerSingleShip() && gameSituation.isSecondCraftDied())|| isSinglePlayer || !gameSituation.isTwoPlayerSingleShip()){
             ModelToSpacecraftInfoView modelToSpacecraftInfoView1 = new ModelToSpacecraftInfoView(spacecraftController1.getSpacecraft());
             rootPane.getTopBarView().getSpacecraftInfoView1().refresh(modelToSpacecraftInfoView1);

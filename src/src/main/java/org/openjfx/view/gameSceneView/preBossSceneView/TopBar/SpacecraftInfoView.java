@@ -42,6 +42,8 @@ public class SpacecraftInfoView extends BorderPane {
     public void refresh(ModelToSpacecraftInfoView modelToSpacecraftInfoView){
         double health = (double) modelToSpacecraftInfoView.getHP() /Spacecraft.MAX_HEALTH;
         healthBar.setProgress(health);
+        double energy = (double) modelToSpacecraftInfoView.getHyperJumpBattery() / Spacecraft.MAX_HYPERJUMP_ENERGY;
+        hyperJump.setProgress(energy);
     }
 
     private void createLabel(String str){

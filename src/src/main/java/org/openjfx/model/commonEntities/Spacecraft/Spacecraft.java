@@ -26,6 +26,7 @@ public class Spacecraft extends LocatableObject {
     public static final int INIT_GUNPERIOD = 15;
     public static final double INIT_VELOCITY = 10;
     public static final int INIT_BULLET_DAMAGE = 10;
+    public static final int MAX_HYPERJUMP_ENERGY = 100;
 
     private double velocity;
     private int smartBombStock;
@@ -46,7 +47,7 @@ public class Spacecraft extends LocatableObject {
         isShieldActive = false;
         shieldTimer = 0;
         isDirectionLeft = false;
-        hyperJumpBattery = 100;
+        hyperJumpBattery = MAX_HYPERJUMP_ENERGY;
         batteryTimer = 0;
         isMoving = false;
         spacecraftGun = new SpacecraftGun(INIT_GUNPERIOD, INIT_BULLET_DAMAGE, 0, BULLET_VELOCITY, this);
