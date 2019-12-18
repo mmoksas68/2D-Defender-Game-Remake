@@ -14,11 +14,17 @@ public class TopBarView extends BorderPane {
 
     public TopBarView(double width, double height) {
         leftView = new VBox();
-        spacecraftInfoView1 = new SpacecraftInfoView("PLAYER 1",width*3/10, height/2);
-        leftView.getChildren().add(spacecraftInfoView1);
+
         if(!GameSituation.getInstance().isSinglePlayer()){
+            spacecraftInfoView1 = new SpacecraftInfoView("PLAYER 1",width*3/10, height/2);
+            spacecraftInfoView1.setStyle(null);
+            leftView.getChildren().add(spacecraftInfoView1);
             spacecraftInfoView2 = new SpacecraftInfoView("PLAYER 2",width*3/10, height/2);
             leftView.getChildren().add(spacecraftInfoView2);
+        }
+        else{
+            spacecraftInfoView1 = new SpacecraftInfoView("PLAYER 1",width*3/10, height);
+            leftView.getChildren().add(spacecraftInfoView1);
         }
         middleView = new RadarView(width*4/10, height);
         rightView = new GameInfoView(width*3/10, height);
