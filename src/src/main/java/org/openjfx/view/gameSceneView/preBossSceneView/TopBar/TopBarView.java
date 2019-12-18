@@ -1,16 +1,25 @@
 package org.openjfx.view.gameSceneView.preBossSceneView.TopBar;
 
 import javafx.scene.layout.*;
+import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.view.gameSceneView.preBossSceneView.TopBar.radarView.RadarView;
 
 public class TopBarView extends BorderPane {
-    private SpacecraftInfoView leftView;
+    private SpacecraftInfoView spacecraftInfoView1;
+    private SpacecraftInfoView spacecraftInfoView2;
+    private VBox leftView;
     private RadarView middleView;
     private GameInfoView rightView;
 
     public TopBarView(double width, double height) {
-        leftView = new SpacecraftInfoView(width*3/10, height);
+        leftView = new VBox();
+        spacecraftInfoView1 = new SpacecraftInfoView("PLAYER 1",width*3/10, height/2);
+        leftView.getChildren().add(spacecraftInfoView1);
+        if(!GameSituation.getInstance().isSinglePlayer()){
+            spacecraftInfoView2 = new SpacecraftInfoView("PLAYER 2",width*3/10, height/2);
+            leftView.getChildren().add(spacecraftInfoView2);
+        }
         middleView = new RadarView(width*4/10, height);
         rightView = new GameInfoView(width*3/10, height);
         setCenter(middleView);
@@ -18,7 +27,7 @@ public class TopBarView extends BorderPane {
         setRight(rightView);
     }
 
-    public SpacecraftInfoView getLeftView() {
+    public VBox getLeftView() {
         return leftView;
     }
 
@@ -30,6 +39,14 @@ public class TopBarView extends BorderPane {
         return rightView;
     }
 
+
+    public SpacecraftInfoView getSpacecraftInfoView1(){
+        return spacecraftInfoView1;
+    }
+
+    public SpacecraftInfoView getSpacecraftInfoView2(){
+        return spacecraftInfoView2;
+    }
 
    public void setWidth(double width){
     }
