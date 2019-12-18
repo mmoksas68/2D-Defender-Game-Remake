@@ -10,6 +10,7 @@ public class EnemyStation extends Station{
     public static final int LEVEL1_PRODUCE_PERIOD = 750;
     public static final int LEVEL2_PRODUCE_PERIOD = 500;
     public static final int LEVEL3_PRODUCE_PERIOD = 250;
+    public static final int PIC_NO = 0;
 
     private EnemyFactory enemyFactory;
     private int produceTimer = 0;
@@ -18,7 +19,7 @@ public class EnemyStation extends Station{
     private GameSituation gameSituation;
 
     public EnemyStation(Location location) {
-        super(location, MAX_HEALTH);
+        super(location, MAX_HEALTH, PIC_NO);
         gameSituation = GameSituation.getInstance();
         level = gameSituation.getLevel();
         enemyFactory = new EnemyFactory();

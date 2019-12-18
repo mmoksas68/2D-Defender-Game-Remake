@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 public class BuffView extends ImageView {
     public BuffView(ModelToViewBuff modelToViewBuff, double viewLeft, double scaleW, double scaleH) {
         Assets assets = Assets.getInstance();
-        setImage(assets.getPreBossAssets().getEnemyStation());
+        setImage(assets.getPreBossAssets().getEnemyStation().get(0));
         setCacheHint(CacheHint.SPEED);
         setCache(true);
         setSmooth(true);

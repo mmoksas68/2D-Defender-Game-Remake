@@ -13,6 +13,7 @@ import org.openjfx.model.preBossEntities.Enemy.Tier2Enemy;
 import org.openjfx.model.preBossEntities.Meteor.Meteor;
 import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.model.preBossEntities.Station.EnemyStation;
+import org.openjfx.model.preBossEntities.Station.EvolvedEnemyStation;
 import org.openjfx.utilization.PositionHelper;
 
 import java.util.ArrayList;
@@ -70,7 +71,9 @@ public class PreBossMapController {
 
         for (var enemyStation : preBossMap.getStations().values()){
             if(enemyStation instanceof EnemyStation)
-                spawnEnemy((EnemyStation) enemyStation);
+                spawnSimpleEnemy((EnemyStation) enemyStation);
+            if(enemyStation instanceof EvolvedEnemyStation)
+                spawnEvolvedEnemy((EvolvedEnemyStation) enemyStation);
         }
 
     }
@@ -139,12 +142,22 @@ public class PreBossMapController {
         }
     }
 
-    private void spawnEnemy(EnemyStation enemyStation){
+    private void spawnSimpleEnemy(EnemyStation enemyStation){
         enemyStation.setProduceTimer(enemyStation.getProduceTimer()+1);
         enemyStation.setProduceTimer(enemyStation.getProduceTimer() % enemyStation.getProducePeriod());
         Location location = new Location(enemyStation.getLocation().getPositionX()+1,enemyStation.getLocation().getPositionY()+1);
         if(enemyStation.getProduceTimer() == 0){
             Enemy enemy = enemyStation.getEnemyFactory().produceEnemy(EnemyTypes.tier1unevolved, location);
+            preBossMap.getEnemies().put(enemy.getID(), enemy);
+        }
+    }
+
+    private void spawnEvolvedEnemy(EvolvedEnemyStation enemyStation){
+        enemyStation.setProduceTimer(enemyStation.getProduceTimer()+1);
+        enemyStation.setProduceTimer(enemyStation.getProduceTimer() % enemyStation.getProducePeriod());
+        Location location = new Location(enemyStation.getLocation().getPositionX()+1,enemyStation.getLocation().getPositionY()+1);
+        if(enemyStation.getProduceTimer() == 0){
+            Enemy enemy = enemyStation.getEnemyFactory().produceEnemy(EnemyTypes.tier1evolved, location);
             preBossMap.getEnemies().put(enemy.getID(), enemy);
         }
     }

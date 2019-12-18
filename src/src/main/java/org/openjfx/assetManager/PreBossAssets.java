@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PreBossAssets {
 
-    private Image enemyStation;
+    private List<Image> station = new ArrayList<>();
     private Image tier1unevolved;
     private List<Image> spacecraft = new ArrayList<>();
     private Image bullet;
@@ -21,7 +21,8 @@ public class PreBossAssets {
 
     PreBossAssets(){
         try {
-            enemyStation = new Image(FileController.getFileStream("assets/images/buildings/enemybuilding2t1.png"));
+            station.add(new Image(FileController.getFileStream("assets/images/buildings/enemybuilding2t1.png")));
+            station.add(new Image(FileController.getFileStream("assets/images/buildings/enemybuilding2t3.png")));
             tier1unevolved = new Image(FileController.getFileStream("assets/images/enemy.png"));
             spacecraft.add(new Image(FileController.getFileStream("assets/images/Spaceship_01_BLUE.png")));
             spacecraft.add(new Image(FileController.getFileStream("assets/images/Spaceship_01_GREEN.png")));
@@ -35,8 +36,8 @@ public class PreBossAssets {
         }
     }
 
-    public Image getEnemyStation() {
-        return enemyStation;
+    public List<Image> getEnemyStation() {
+        return station;
     }
 
     public Image getTier1unevolved() {

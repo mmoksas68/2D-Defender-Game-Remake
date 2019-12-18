@@ -8,6 +8,7 @@ import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.preBossEntities.Enemy.Tier1Enemy;
 import org.openjfx.model.preBossEntities.Station.EnemyStation;
+import org.openjfx.model.preBossEntities.Station.EvolvedEnemyStation;
 import org.openjfx.model.preBossEntities.Station.Station;
 import org.openjfx.model.commonEntities.Bullet.Bullet;
 import org.openjfx.model.preBossEntities.Enemy.Enemy;
@@ -90,6 +91,26 @@ public class PreBossMap implements Serializable {
             }
             enemyStation.setLocation(new Location(x,y));
             addStation(enemyStation);
+        }
+        for (int i=0; i < 2 ; i++){
+            double x = Math.random()*PreBossMap.MAP_WIDTH;
+            double y = Math.random()*PreBossMap.MAP_HEIGHT;
+            Station evolvedEnemyStation = new EvolvedEnemyStation(new Location(x,y), GameSituation.getInstance().getLevel());
+            PositionHelper helper = new PositionHelper(evolvedEnemyStation);
+            if(helper.getRight() >= PreBossMap.MAP_WIDTH){
+                x -= 100;
+            }
+            if(helper.getLeft() <= 0){
+                x += 100;
+            }
+            if(helper.getTop() <= 0){
+                y += 100;
+            }
+            if(helper.getBottom() >= PreBossMap.MAP_HEIGHT){
+                y -= 100;
+            }
+            evolvedEnemyStation.setLocation(new Location(x,y));
+            addStation(evolvedEnemyStation);
         }
     }
 

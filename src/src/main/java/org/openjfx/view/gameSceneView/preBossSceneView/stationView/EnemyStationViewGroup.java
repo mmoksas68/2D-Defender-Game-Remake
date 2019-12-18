@@ -13,7 +13,7 @@ public class EnemyStationViewGroup {
 
     public EnemyStationViewGroup(ModelToViewStation modelToViewStation, double viewLeft, double scaleW, double scaleH){
         Assets assets = Assets.getInstance();
-        enemyStationView = new ImageView(assets.getPreBossAssets().getEnemyStation());
+        enemyStationView = new ImageView(assets.getPreBossAssets().getEnemyStation().get(modelToViewStation.getPicNo()));
         enemyStationView.setCacheHint(CacheHint.SPEED);
         enemyStationView.setCache(true);
         enemyStationView.setSmooth(true);

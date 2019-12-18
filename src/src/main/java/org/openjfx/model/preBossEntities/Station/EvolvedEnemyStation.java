@@ -9,12 +9,14 @@ import java.util.Map;
 public class EvolvedEnemyStation extends Station{
     public static final int MAX_HEALTH = 50;
     public static final int SCORE_POINT = 5;
-    public static final int LEVEL1_PRODUCE_PERIOD = 100;
-    public static final int LEVEL2_PRODUCE_PERIOD = 75;
-    public static final int LEVEL3_PRODUCE_PERIOD = 50;
+    public static final int LEVEL1_PRODUCE_PERIOD = 750;
+    public static final int LEVEL2_PRODUCE_PERIOD = 500;
+    public static final int LEVEL3_PRODUCE_PERIOD = 250;
     public static final int LEVEL1_HOSTING_DURATION = 100;
     public static final int LEVEL2_HOSTING_DURATION = 75;
     public static final int LEVEL3_HOSTING_DURATION = 50;
+    public static final int PIC_NO = 1;
+
     private EnemyFactory enemyFactory;
     private int produceTimer = 0;
     private int producePeriod;
@@ -24,7 +26,8 @@ public class EvolvedEnemyStation extends Station{
     private Map<Long, Integer> elapsedTimes = new HashMap<>();
 
     public EvolvedEnemyStation(Location location, int level) {
-        super(location, MAX_HEALTH);
+        super(location, MAX_HEALTH, PIC_NO);
+        enemyFactory = new EnemyFactory();
         producePeriod = level == 1 ? LEVEL1_PRODUCE_PERIOD : (level == 2 ? LEVEL2_PRODUCE_PERIOD : (level == 3 ? LEVEL3_PRODUCE_PERIOD : 0));
         hostingDuration =  level == 1 ? LEVEL1_HOSTING_DURATION : (level == 2 ? LEVEL2_HOSTING_DURATION : (level == 3 ? LEVEL3_HOSTING_DURATION : 0));
     }

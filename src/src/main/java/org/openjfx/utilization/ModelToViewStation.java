@@ -8,6 +8,7 @@ public class ModelToViewStation extends ModelToView{
     private StationTypes type;
     private int health;
     private int maxHealth;
+    private int picNo;
 
     public ModelToViewStation(Station station) {
         super(station);
@@ -22,7 +23,7 @@ public class ModelToViewStation extends ModelToView{
             this.type = StationTypes.EvolvedEnemyStation;
             this.maxHealth = EnemyStation.MAX_HEALTH;
         }
-
+        picNo = station.getPicNo();
     }
 
     public StationTypes getType() {
@@ -47,5 +48,13 @@ public class ModelToViewStation extends ModelToView{
 
     public void setMaxHealth(int maxHealth) {
         this.maxHealth = maxHealth;
+    }
+
+    public int getPicNo() {
+        return picNo;
+    }
+
+    public void setPicNo(int picNo) {
+        this.picNo = picNo;
     }
 }

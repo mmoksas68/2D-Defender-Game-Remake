@@ -8,7 +8,7 @@ import org.openjfx.utilization.ModelToViewMeteor;
 public class MeteorView extends ImageView {
     public MeteorView(ModelToViewMeteor modelToViewMeteor, double viewLeft, double scaleW, double scaleH) {
         Assets assets = Assets.getInstance();
-        setImage(assets.getPreBossAssets().getEnemyStation());
+        setImage(assets.getPreBossAssets().getEnemyStation().get(0));
         setCacheHint(CacheHint.SPEED);
         setCache(true);
         setSmooth(true);
