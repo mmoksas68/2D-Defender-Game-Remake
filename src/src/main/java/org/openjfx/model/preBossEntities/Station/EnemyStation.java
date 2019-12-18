@@ -7,9 +7,9 @@ import org.openjfx.model.menuEntities.GameSituation2;
 public class EnemyStation extends Station{
     public static final int MAX_HEALTH = 50;
     public static final int SCORE_POINT = 5;
-    public static final int LEVEL1_PRODUCE_PERIOD = 100;
-    public static final int LEVEL2_PRODUCE_PERIOD = 75;
-    public static final int LEVEL3_PRODUCE_PERIOD = 50;
+    public static final int LEVEL1_PRODUCE_PERIOD = 750;
+    public static final int LEVEL2_PRODUCE_PERIOD = 500;
+    public static final int LEVEL3_PRODUCE_PERIOD = 250;
 
     private EnemyFactory enemyFactory;
     private int produceTimer = 0;
@@ -21,6 +21,7 @@ public class EnemyStation extends Station{
         super(location, MAX_HEALTH);
         gameSituation = GameSituation.getInstance();
         level = gameSituation.getLevel();
+        enemyFactory = new EnemyFactory();
         producePeriod = level == 1 ? LEVEL1_PRODUCE_PERIOD : (level == 2 ? LEVEL2_PRODUCE_PERIOD : (level == 3 ? LEVEL3_PRODUCE_PERIOD : 0));
     }
 

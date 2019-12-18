@@ -8,9 +8,11 @@ import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.preBossEntities.Enemy.Enemy;
 import org.openjfx.model.preBossEntities.Enemy.EnemyDestinations;
+import org.openjfx.model.preBossEntities.Enemy.EnemyTypes;
 import org.openjfx.model.preBossEntities.Enemy.Tier2Enemy;
 import org.openjfx.model.preBossEntities.Meteor.Meteor;
 import org.openjfx.model.preBossEntities.PreBossMap;
+import org.openjfx.model.preBossEntities.Station.EnemyStation;
 import org.openjfx.utilization.PositionHelper;
 
 import java.util.ArrayList;
@@ -64,6 +66,11 @@ public class PreBossMapController {
                 ((EnemyGun)enemy.getFiringBehavior()).setFiring(enemy.getDestinationType().equals(EnemyDestinations.Spacecraft));
 
             enemy.getFiringBehavior().gunTimer(preBossMap);
+        }
+
+        for (var enemyStation : preBossMap.getStations().values()){
+            if(enemyStation instanceof EnemyStation)
+                spawnEnemy((EnemyStation) enemyStation);
         }
 
     }
@@ -129,6 +136,16 @@ public class PreBossMapController {
                 }
                 enemy.setChangeDirectionTimer(enemy.getChangeDirectionTimer() + 1);
             }
+        }
+    }
+
+    private void spawnEnemy(EnemyStation enemyStation){
+        enemyStation.setProduceTimer(enemyStation.getProduceTimer()+1);
+        enemyStation.setProduceTimer(enemyStation.getProduceTimer() % enemyStation.getProducePeriod());
+        Location location = new Location(enemyStation.getLocation().getPositionX()+1,enemyStation.getLocation().getPositionY()+1);
+        if(enemyStation.getProduceTimer() == 0){
+            Enemy enemy = enemyStation.getEnemyFactory().produceEnemy(EnemyTypes.tier1unevolved, location);
+            preBossMap.getEnemies().put(enemy.getID(), enemy);
         }
     }
 
