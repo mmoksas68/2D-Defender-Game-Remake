@@ -32,4 +32,6 @@ public class Rocket extends SpecialAbility{
     public void setDestinationY(double destinationY) {
         this.destinationY = destinationY;
     }
+
+
 }

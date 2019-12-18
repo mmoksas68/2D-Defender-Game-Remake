@@ -29,6 +29,8 @@ public class BossTwoBehaviour extends BossDefaultBehaviour {
             rockets = boss.getRockets();
             for ( Rocket rocket : rockets) {
                 bossMap.addSpecialAbility( rocket);
+                for( Marker marker: markers)
+                    marker.setIsRocketFired(true);
             }
             startAbilityTimer( 2.0);        // Don't forget to start timer!!!!!
         }

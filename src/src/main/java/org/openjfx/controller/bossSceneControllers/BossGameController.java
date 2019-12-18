@@ -182,7 +182,7 @@ public class BossGameController  {
             rootPane.getBossMapView().refreshSpecialAbilityView( new ModelToViewSpecialAbility( specialAbility));
         }
         for (Long id : toBeDeleted) {
-            bossMapController.getBossMap().getSpecialAbilities().remove( id);
+            bossMapController.getBossMap().removeSpecialAbility(id);
         }
     }
     public Scene getScene() {
