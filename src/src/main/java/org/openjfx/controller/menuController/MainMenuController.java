@@ -74,6 +74,8 @@ public class MainMenuController {
 
     private void nextInSpacecraftScreen2(){
         scene.setRoot(menuSceneContainer.getLevelSelection());
+
+        gameSituation.setSpacecraft2(menuSceneContainer.getSpacecraftSelection2().getSelectedItem());
     }
 
     private void backInLevelScreen(){

@@ -28,10 +28,9 @@ public class GameSituationChecker {
     public GameSituationChecker(Scene scene, boolean newGame){
         this.scene = scene;
         gameSituation = GameSituation.getInstance();
-
         isPaused = new SimpleBooleanProperty(false);
         isEnd = new SimpleBooleanProperty(false);
-        
+        gameSituation.resetVar();
         initGameListeners();
         startGame(newGame);
     }
@@ -140,5 +139,8 @@ public class GameSituationChecker {
     }
 
     public void setIsEnd(boolean b) {
+        isEnd.set(b);
     }
+
+
 }

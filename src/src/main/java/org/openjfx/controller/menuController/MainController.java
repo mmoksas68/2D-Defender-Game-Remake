@@ -55,30 +55,37 @@ public class MainController {
     private void initMainController(){
         menuController = new MainMenuController(scene);
         ChangeListener<Boolean> newGameListener = (observable, oldValue, newValue) ->{
-            menuController.setIsGameStartPressed(false);
-            initGameSituationChecker(true);
-            saveGame();
+            if(menuController.getIsGameStartPressed().get()) {
+                menuController.setIsGameStartPressed(false);
+                initGameSituationChecker(true);
+                saveGame();
+            }
         };
         menuController.getIsGameStartPressed().addListener(newGameListener);
 
         ChangeListener<Boolean> resumeListener = (observable, oldValue, newValue) ->{
-            menuController.setIsResumePressed(false);
-            initGameSituationChecker(false);
-
+            if(menuController.getIsResumePressed().get()) {
+                menuController.setIsResumePressed(false);
+                initGameSituationChecker(false);
+            }
         };
         menuController.getIsResumePressed().addListener(resumeListener);
 
         ChangeListener<Boolean> saveSettingsListener = (observable, oldValue, newValue) ->{
-            menuController.setIsSaveSettingsPressed(false);
-            fileController.saveKeys();
+            if(menuController.getIsSaveSettingsPressed().get()) {
+                menuController.setIsSaveSettingsPressed(false);
+                fileController.saveKeys();
+            }
         };
         menuController.getIsSaveSettingsPressed().addListener(saveSettingsListener);
 
         ChangeListener<Boolean> quitListener = (observable, oldValue, newValue) ->{
-            menuController.setIsQuitPressed(false);
-            fileController.saveGame();
-            stage.close();
-            System.exit(0);
+            if(menuController.getIsQuitPressed().get()) {
+                menuController.setIsQuitPressed(false);
+                fileController.saveGame();
+                stage.close();
+                System.exit(0);
+            }
         };
         menuController.getIsQuitPressed().addListener(quitListener);
     }
@@ -86,14 +93,18 @@ public class MainController {
     private void initGameSituationChecker(boolean newGame){
         gameSituationChecker = new GameSituationChecker(scene, newGame);
         ChangeListener<Boolean> endGameListener = (observable, oldValue, newValue) ->{
-            gameSituationChecker.setIsEnd(false);
-            initEndGameMenuController();
+            if(gameSituationChecker.getIsEnd().get()) {
+                gameSituationChecker.setIsEnd(false);
+                initEndGameMenuController();
+            }
         };
         gameSituationChecker.getIsEnd().addListener(endGameListener);
 
         ChangeListener<Boolean> pauseGameListener = (observable, oldValue, newValue) ->{
-            gameSituationChecker.setIsPaused(false);
-            initPauseMenuController();
+            if(gameSituationChecker.getIsPaused().get()) {
+                gameSituationChecker.setIsPaused(false);
+                initPauseMenuController();
+            }
         };
         gameSituationChecker.getIsPaused().addListener(pauseGameListener);
     }
@@ -116,27 +127,35 @@ public class MainController {
     private void initEndGameMenuController(){
         endGameMenuController = new EndGameMenuController(scene, menuController.getMainMenu());
         ChangeListener<Boolean> highScoreListener = (observable, oldValue, newValue) ->{
-            endGameMenuController.setIsHighScoreChanged(false);
-            fileController.saveHighScores();
+            if(endGameMenuController.getIsHighScoreChanged().get()) {
+                endGameMenuController.setIsHighScoreChanged(false);
+                fileController.saveHighScores();
+            }
         };
         endGameMenuController.getIsHighScoreChanged().addListener(highScoreListener);
 
         ChangeListener<Boolean> passedLevelListener = (observable, oldValue, newValue) ->{
-            endGameMenuController.setIsPassedLevelInfoChanged(false);
-            fileController.savePassedLevelInfo();
+            if(endGameMenuController.getIsPassedLevelInfoChanged().get()) {
+                endGameMenuController.setIsPassedLevelInfoChanged(false);
+                fileController.savePassedLevelInfo();
+            }
         };
         endGameMenuController.getIsPassedLevelInfoChanged().addListener(passedLevelListener);
 
         ChangeListener<Boolean> restartListener = (observable, oldValue, newValue) ->{
-            endGameMenuController.setIsRestartPressed(false);
-            gameSituationChecker.restartTheLevel();
-            menuController.enablePassedLevels();
+            if(endGameMenuController.getIsRestartPressed().get()) {
+                endGameMenuController.setIsRestartPressed(false);
+                gameSituationChecker.restartTheLevel();
+                menuController.enablePassedLevels();
+            }
         };
         endGameMenuController.getIsRestartPressed().addListener(restartListener);
 
         ChangeListener<Boolean> nextLevelListener = (observable, oldValue, newValue) ->{
-            endGameMenuController.setIsNextLevelPressed(false);
-            gameSituationChecker.startNextLevel();
+            if(endGameMenuController.getIsNextLevelPressed().get()) {
+                endGameMenuController.setIsNextLevelPressed(false);
+                gameSituationChecker.startNextLevel();
+            }
         };
         endGameMenuController.getIsNextLevelPressed().addListener(nextLevelListener);
     }
