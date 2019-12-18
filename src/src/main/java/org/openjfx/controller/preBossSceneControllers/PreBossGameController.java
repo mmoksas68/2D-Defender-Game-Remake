@@ -300,6 +300,10 @@ public class PreBossGameController {
             }
     }
 
+    private void showWhereToGo(){
+
+    }
+
     //#############################################################################################################
 
     private void keysFor1(){
@@ -492,6 +496,9 @@ public class PreBossGameController {
                     break;
                 case ESCAPE:
                     gameOnChange.set(true);
+                    break;
+                case NUMPAD1:
+                    spacecraftController1.doHyperJump();
                     break;
                 case NUMPAD2:
                     spacecraftController1.activateSmartBomb();

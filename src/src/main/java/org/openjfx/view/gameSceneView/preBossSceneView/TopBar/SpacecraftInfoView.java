@@ -3,6 +3,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -64,7 +65,7 @@ public class SpacecraftInfoView extends BorderPane {
     }
 
     private void createHealthBar(){
-        healthBar = new ProgressBar(0.5);
+        healthBar = new ProgressBar();
         healthBar.setStyle("-fx-background-color: white; -fx-accent: red;");
         healthBar.setMinSize(width/3, height/10);
         hbox.getChildren().add(healthBar);
@@ -72,7 +73,7 @@ public class SpacecraftInfoView extends BorderPane {
 
 
     private void createHyperJumpBar(){
-        hyperJump = new ProgressBar(0.5);
+        hyperJump = new ProgressBar();
         hyperJump.setStyle("-fx-background-color: white; -fx-accent: grey;");
         hyperJump.setMinSize(width/3, height/10);
         hbox.getChildren().add(hyperJump);
