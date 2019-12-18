@@ -1,13 +1,18 @@
 package org.openjfx.view.menuView;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import org.openjfx.assetManager.Assets;
+import org.openjfx.assetManager.MenuAssets;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainMenu extends VBox {
+public class MainMenu extends HBox {
 
     private final static int MENU_BTN_START_X = 750;
     private final static int MENU_BTN_START_Y = 50;
@@ -23,10 +28,19 @@ public class MainMenu extends VBox {
     private FiyuvButton scoresBtn;
     private FiyuvButton exitBtn;
     private FiyuvButton resumeBtn;
+    private ImageView gameLogo;
+    private VBox vbox;
 
     public MainMenu(){
+        vbox = new VBox();
+        gameLogo = new ImageView(Assets.getInstance().getMenuAssets().getGameLogo());
+        gameLogo.setFitHeight(300);
+        gameLogo.setFitWidth(400);
         menuButtons = new ArrayList<>();
-        setAlignment(Pos.CENTER);
+        this.setAlignment(Pos.CENTER);
+        vbox.setAlignment(Pos.CENTER_LEFT);
+        this.getChildren().addAll(vbox, gameLogo);
+        this.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
         createButtons();
     }
 
@@ -46,7 +60,7 @@ public class MainMenu extends VBox {
         btn.setLayoutX(MENU_BTN_START_X);
         btn.setLayoutY(MENU_BTN_START_Y + menuButtons.size() * 100);
         menuButtons.add(btn);
-        getChildren().add(btn);
+        vbox.getChildren().add(btn);
     }
 
     private void createSinglePlayerBtn(){

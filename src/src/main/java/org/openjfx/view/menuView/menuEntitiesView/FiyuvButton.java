@@ -84,6 +84,11 @@ public class FiyuvButton extends Button {
         setLayoutY(getLayoutY() - 4);
     }
 
+    public double getSize(){
+        return this.getWidth();
+    }
+
+
     private void initializeButtonListeners() {
         setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override

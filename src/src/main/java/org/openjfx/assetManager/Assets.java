@@ -3,11 +3,14 @@ package org.openjfx.assetManager;
 public class Assets {
     private static Assets assets = null;
     private PreBossAssets preBossAssets;
+    private MenuAssets menuAssets;
 
 
     private Assets()
     {
+
         preBossAssets = new PreBossAssets();
+        menuAssets = new MenuAssets();
     }
 
     public static Assets getInstance()
@@ -25,6 +28,8 @@ public class Assets {
     public void setPreBossAssets(PreBossAssets preBossAssets) {
         this.preBossAssets = preBossAssets;
     }
+
+    public MenuAssets getMenuAssets(){return menuAssets;}
 
 
 }

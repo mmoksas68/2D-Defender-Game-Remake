@@ -55,19 +55,16 @@ public class MainController {
     private void initMainController(){
         menuController = new MainMenuController(scene);
         ChangeListener<Boolean> newGameListener = (observable, oldValue, newValue) ->{
-            if(menuController.getIsGameStartPressed().get()) {
-                menuController.setIsGameStartPressed(false);
-                initGameSituationChecker(true);
-                saveGame();
-            }
+            menuController.setIsGameStartPressed(false);
+            initGameSituationChecker(true);
+            saveGame();
         };
         menuController.getIsGameStartPressed().addListener(newGameListener);
 
         ChangeListener<Boolean> resumeListener = (observable, oldValue, newValue) ->{
-            if(menuController.getIsResumePressed().get()) {
-                menuController.setIsResumePressed(false);
-                initGameSituationChecker(false);
-            }
+            menuController.setIsResumePressed(false);
+            initGameSituationChecker(false);
+
         };
         menuController.getIsResumePressed().addListener(resumeListener);
 
@@ -132,6 +129,7 @@ public class MainController {
         ChangeListener<Boolean> restartListener = (observable, oldValue, newValue) ->{
             endGameMenuController.setIsRestartPressed(false);
             gameSituationChecker.restartTheLevel();
+            menuController.enablePassedLevels();
         };
         endGameMenuController.getIsRestartPressed().addListener(restartListener);
 

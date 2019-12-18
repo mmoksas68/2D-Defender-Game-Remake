@@ -25,6 +25,7 @@ public class PreBossAssets {
             tier1unevolved = new Image(FileController.getFileStream("assets/images/enemy.png"));
             spacecraft.add(new Image(FileController.getFileStream("assets/images/Spaceship_01_BLUE.png")));
             spacecraft.add(new Image(FileController.getFileStream("assets/images/Spaceship_01_GREEN.png")));
+            spacecraft.add(new Image(FileController.getFileStream("assets/images/Spaceship_01_PURPLE.png")));
             bullet = new Image(FileController.getFileStream("assets/images/bullet.png"));
             radarEnemySpaceStation = new Image(FileController.getFileStream("assets/images/enemySpaceStation.png"));
             radarSpacecraft = new Image(FileController.getFileStream("assets/images/radar_spacecraft.png"));
