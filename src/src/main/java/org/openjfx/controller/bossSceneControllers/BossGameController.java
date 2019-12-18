@@ -36,7 +36,7 @@ public class BossGameController  {
     private BooleanProperty gameOnChange = new SimpleBooleanProperty(false);
     private int scoreDecayTimer = 0;
     private final int SCORE_DECAY_PERIOD = 30000;
-    private boolean isSinglePlayer = false;
+    private boolean isSinglePlayer;
     private AnimationTimer animationTimer = new AnimationTimer() {
         @Override
         public void handle(long l) {
@@ -53,6 +53,7 @@ public class BossGameController  {
         bossController = new BossController( bossMapController.getBossMap().getLevel(), bossMapController.getBossMap());
         this.width = initWidth;
         this.height = initHeight;
+        isSinglePlayer = gameSituation.isSinglePlayer();
         spacecraftController1 = new SpacecraftController(bossMapController.getBossMap().getSpacecraft1(), rootPane.getBossMapView(),bossMapController.getBossMap());
         scene.setRoot( rootPane);
         initGame();
@@ -113,6 +114,7 @@ public class BossGameController  {
     private void refreshMap() {
         bossMapController.checkMapSituation();
         scoreCalculator();
+        refreshSpacecraftGameInfo();
         refreshAndReflectBuff();
         refreshAndReflectBullet();
         refreshAndReflectMeteor();
@@ -145,8 +147,24 @@ public class BossGameController  {
 
     }
     private void refreshAndReflectScore() {
-
+        rootPane.getTopBarView().getRightView().refresh();
     }
+
+    private void refreshSpacecraftGameInfo(){
+        if((gameSituation.isTwoPlayerSingleShip() && gameSituation.isSecondCraftDied())|| isSinglePlayer || !gameSituation.isTwoPlayerSingleShip()){
+            ModelToSpacecraftInfoView modelToSpacecraftInfoView1 = new ModelToSpacecraftInfoView(spacecraftController1.getSpacecraft());
+            rootPane.getTopBarView().getSpacecraftInfoView1().refresh(modelToSpacecraftInfoView1);
+        }
+        if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip()){
+            ModelToSpacecraftInfoView modelToSpacecraftInfoView2 = new ModelToSpacecraftInfoView(spacecraftController2.getSpacecraft());
+            rootPane.getTopBarView().getSpacecraftInfoView2().refresh(modelToSpacecraftInfoView2);
+        }
+        if(!isSinglePlayer && gameSituation.isTwoPlayerSingleShip() && gameSituation.isFirstCraftDied()){
+            ModelToSpacecraftInfoView modelToSpacecraftInfoView2 = new ModelToSpacecraftInfoView(spacecraftController1.getSpacecraft());
+            rootPane.getTopBarView().getSpacecraftInfoView2().refresh(modelToSpacecraftInfoView2);
+        }
+    }
+
     private void refreshAndReflectSpacecraft(Spacecraft spacecraft) {
         rootPane.getBossMapView().refreshSpacecraftMain( new ModelToViewSpaceCraft(spacecraft));
         rootPane.getTopBarView().getMiddleView().refresh(new RadarObject(spacecraft));

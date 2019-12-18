@@ -49,6 +49,7 @@ public class GameSituationChecker {
             scene.getWindow().heightProperty().addListener(stageSizeListener);
         }
         else{
+            gameSituation.setSinglePlayer(true);
             gameSituation.setIsPreBossFinishedSuccessfully(true);
             gameSituation.setIsBossFinished(false);
             this.bossGameController = new BossGameController(scene, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
