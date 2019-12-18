@@ -32,7 +32,7 @@ public class MainMenuController {
     private HighScoreInfo highScore;
     private GameSituation gameSituation;
     private Settings settings;
-    private PassedLevelInfo passedLevelInfo;
+    private PassedLevelInfo passedLevelInfo = PassedLevelInfo.getInstance();
     private BooleanProperty isGameStartPressed, isSaveSettingsPressed, isQuitPressed, isResumePressed;
 
 
@@ -64,6 +64,8 @@ public class MainMenuController {
             scene.setRoot(menuSceneContainer.getLevelSelection());
         else
             scene.setRoot(menuSceneContainer.getSpacecraftSelection2());
+
+        gameSituation.setSpacecraft1(menuSceneContainer.getSpacecraftSelection1().getSelectedItem());
     }
 
     private void backInSpacecraftScreen2(){
@@ -90,11 +92,12 @@ public class MainMenuController {
     }
 
     private void settings(){
-        scene.setRoot(menuSceneContainer.getCredits());
+        scene.setRoot(menuSceneContainer.getSettings());
     }
 
     private void saveSettings(){
         isSaveSettingsPressed.setValue(true);
+        settings.setVolume(menuSceneContainer.getSettings().getVolume());
     }
 
     private void highScores(){
@@ -274,13 +277,18 @@ ON CLICK
             }
         });
 
-
     }
 
     public MainMenu getMainMenu(){
         return menuSceneContainer.getMainMenu();
     }
 
+    public void enablePassedLevels(){
+        if(passedLevelInfo.isLevel1())
+            menuSceneContainer.getLevelSelection().enableLevel2();
+        if(passedLevelInfo.isLevel2())
+            menuSceneContainer.getLevelSelection().enableLevel3();
+    }
 
     public BooleanProperty getIsGameStartPressed(){
         return isGameStartPressed;

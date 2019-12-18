@@ -13,12 +13,12 @@ public class FiyuvBottomMenu extends HBox {
     private FiyuvButton button1, button2;
     private ArrayList<FiyuvButton> buttonList;
     public FiyuvBottomMenu(String ...buttonName){
-
+        double width = primaryScreenBounds.getWidth();
         buttonList = new ArrayList<FiyuvButton>();
         createButtons(buttonName);
 
         this.setAlignment(Pos.CENTER);
-        this.setSpacing(primaryScreenBounds.getWidth()/2);
+        this.setSpacing( (width - buttonList.get(0).getSize()*2 )* 7 / 12);
     }
 
     private void createButtons(String ...buttonName){

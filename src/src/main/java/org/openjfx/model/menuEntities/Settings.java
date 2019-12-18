@@ -23,7 +23,7 @@ public class Settings implements Serializable {
     private KeyCode hyperJump2;
     private KeyCode smartBomb2;
     private int background;
-    private int volume;
+    private double volume;
 
 
     private Settings() {
@@ -162,11 +162,11 @@ public class Settings implements Serializable {
         this.background = background;
     }
 
-    public int getVolume() {
+    public double getVolume() {
         return volume;
     }
 
-    public void setVolume(int volume) {
+    public void setVolume(double volume) {
         this.volume = volume;
     }
 

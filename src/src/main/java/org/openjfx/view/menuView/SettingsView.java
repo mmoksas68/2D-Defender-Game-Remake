@@ -1,82 +1,142 @@
 package org.openjfx.view.menuView;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import org.openjfx.assetManager.Assets;
+import org.openjfx.model.menuEntities.Settings;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvBottomMenu;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvButton;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvHeadingLabel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SettingsView extends VBox {
+
+    private List<Image> images = Assets.getInstance().getMenuAssets().getColorOptions();
     private Slider volumeSlider;
     private Label player1Label, player2Label;
     private GridPane gridPane;
-    private TextField up1KeySel, down1KeySel, right1KeySel, left1KeySel,
-            hyperjump1KeySel, smartbomb1KeySel;
-    private TextField up2KeySel, down2KeySel, right2KeySel, left2KeySel,
-            hyperjump2KeySel, smartbomb2KeySel;
-
-    private Label settingsLabel;
+    private TextField up1KeySel, down1KeySel, right1KeySel, left1KeySel, hyperjump1KeySel, smartbomb1KeySel;
+    private TextField up2KeySel, down2KeySel, right2KeySel, left2KeySel, hyperjump2KeySel, smartbomb2KeySel;
     private Label upLabel, downLabel, rightLabel, leftLabel, hyperjumpLabel, smartbombLabel;
-    ImageView[] imageViews;
-   // private SelectionView selectionView;
-    private FiyuvBottomMenu hBox;
-    private VBox vbox;
-    private TextField player1Inputs[], player2Inputs[];
+    private HBox radioButtons, hBoxImages;
+    private double width, height;
+    private FiyuvBottomMenu bottomMenu;
+    private RadioButton selection1Button, selection2Button, selection3Button;
+    private ToggleGroup group;
+    private FiyuvHeadingLabel headingLabel;
+    private ArrayList<ImageView> imageViews;
+    private VBox vboxForVolumeAndColors, vboxSelectionView;
+    private HBox hboxForGridPaneAndVBox;
+    private  Label keySelection, colorSelection, volumeLabel;
 
-    public SettingsView(){
-        imageViews = new ImageView[3];
-        imageViews[0] = new ImageView(new Image("file:assets/images/colors/color1.jpg"));
-        imageViews[1] = new ImageView(new Image("file:assets/images/colors/color2.png"));
-        imageViews[2] = new ImageView(new Image("file:assets/images/colors/color3.jpg"));
-        //this.setAlignment(Pos.CENTER);
-        createSettingsLabel();
+    private Settings settings = Settings.getInstance();
+
+    public SettingsView(double width, double height){
+        this.width = width;
+        this.height = height;
+
+        vboxSelectionView = new VBox();
+        vboxForVolumeAndColors = new VBox();
+        hboxForGridPaneAndVBox = new HBox();
+
+        bottomMenu = new FiyuvBottomMenu("Menu", "Save");
+
+        volumeSlider = new Slider();
+        volumeLabel = new Label("Volume");
+        colorSelection = new Label("Menu Themes");
+
+        VBox volume = new VBox();
+        volume.getChildren().addAll(volumeLabel, volumeSlider);
+        volume.setAlignment(Pos.CENTER);
+        volume.setSpacing(height / 20);
+
         createGridPane();
-        createVolumeSlider();
-        createButtonHBox();
-        vbox = new VBox();
-        //selectionView = new SelectionView(imageViews, 1200, 100);
+        createSelectionView();
 
-        vbox.getChildren().add(volumeSlider);
-        //vbox.getChildren().addAll(volumeSlider, selectionView);
-        HBox hbox2 = new HBox();
-        hbox2.getChildren().addAll(gridPane, vbox);
-        this.getChildren().addAll(settingsLabel, hbox2, hBox);
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setPrefSize(1200, 200);
+        VBox vBox = new VBox();
+        vBox.setAlignment(Pos.CENTER);
 
-        this.setSpacing(50);
+
+        keySelection = new Label("Key Selection");
+
+        vBox.getChildren().addAll(keySelection, gridPane);
+        vBox.setSpacing(height / 30);
+
+        volumeSlider.setValue(settings.getVolume());
+
+        vboxForVolumeAndColors.getChildren().addAll(vboxSelectionView, volume);
+        hboxForGridPaneAndVBox.getChildren().addAll(vBox, vboxForVolumeAndColors);
+
+        hboxForGridPaneAndVBox.setAlignment(Pos.CENTER);
+        vboxForVolumeAndColors.setAlignment(Pos.CENTER);
+        vboxSelectionView.setAlignment(Pos.CENTER);
+
+        vboxForVolumeAndColors.setSpacing(height / 5);
+
+        this.getChildren().addAll(headingLabel, hboxForGridPaneAndVBox, bottomMenu);
+        gridPane.setAlignment(Pos.CENTER_LEFT);
+        gridPane.setPrefSize(width / 2, height / 2 );
+        this.setSpacing(height / 8);
+        this.setAlignment(Pos.CENTER);
+        this.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
+        this.setPadding(new Insets(width / 13, width / 13, width / 13, width / 13));
+
     }
 
-    private void createButtonHBox(){
-        hBox = new FiyuvBottomMenu("Menu", "Save");
+    private void createSelectionView(){
 
+        radioButtons = new HBox();
+        hBoxImages = new HBox();
 
-        //createButtons();
-        //hBox.getChildren().addAll(backButton, saveButton);
+        selection1Button = new RadioButton();
+        selection2Button = new RadioButton();
+        selection3Button = new RadioButton();
+        selection1Button.setToggleGroup(group);
+        selection2Button.setToggleGroup(group);
+        selection3Button.setToggleGroup(group);
+
+        selection1Button.setSelected(true);
+
+        headingLabel = new FiyuvHeadingLabel("Settings");
+
+        radioButtons.getChildren().addAll(selection1Button, selection2Button, selection3Button);
+
+        imageViews = new ArrayList<ImageView>();
+        for(int i = 0; i < images.size(); i++){
+            ImageView imageView = new ImageView(images.get(i));
+            imageViews.add(i, imageView);
+            hBoxImages.getChildren().add(imageView);
+        }
+
+        radioButtons.setAlignment(Pos.CENTER);
+        hBoxImages.setAlignment(Pos.CENTER);
+
+        for (ImageView imageView : imageViews) {
+            imageView.setFitWidth(width / 15);
+            imageView.setFitWidth(width / 15);
+        }
+        for (ImageView imageView : imageViews) {
+            imageView.setFitHeight(width / 15);
+            imageView.setFitHeight(width / 15);
+        }
+
+        radioButtons.setSpacing(width/8);
+        hBoxImages.setSpacing(width/15);
+
+        vboxSelectionView.setSpacing(height / 20);
+
+        vboxSelectionView.getChildren().addAll(colorSelection, hBoxImages, radioButtons);
+
     }
 
-    private void createVolumeSlider(){
-        volumeSlider = new Slider(0, 100, 50);
-    }
-
-    private void createSettingsLabel(){
-        settingsLabel = new FiyuvHeadingLabel("SETTINGS");
-        //    settingsLabel.setFont(new Font("Arial Bold", 85));
-        //  settingsLabel.textFillProperty();
-        //settingsLabel.setPrefSize(800,200);
-        // settingsLabel.setAlignment(Pos.CENTER);
-        // settingsLabel.setTextFill(Color.WHITE);
-        //settingsLabel.setBackground(new Background(new BackgroundFill(Color.DARKRED, CornerRadii.EMPTY, Insets.EMPTY)));
-    }
 
     private void createGridPane(){
         gridPane = new GridPane();
@@ -86,6 +146,14 @@ public class SettingsView extends VBox {
         addLabelsIntoGridPane();
         addPlayer1KeysIntoGridPane();
         addPlayer2KeysIntoGridPane();
+
+        ColumnConstraints column0 = new ColumnConstraints();
+        column0.setPercentWidth(20);
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setPercentWidth(35);
+        ColumnConstraints column2 = new ColumnConstraints();
+        column2.setPercentWidth(35);
+        gridPane.getColumnConstraints().addAll(column0, column1, column2);
     }
 
     private void createLabelsForGridPane(){
@@ -152,29 +220,18 @@ public class SettingsView extends VBox {
             gridPane.add(item, column, row);
     }
 
-   /* public void createHBoxForColorOptions(){
 
-    }
-
-    public void createHBoxForRadioButtons(){
-
-    }
-
-    public void createRadioButtons(){
-        radioButton1 = new RadioButton();
-        radioButton2 = new RadioButton();
-        radioButton3 = new RadioButton();
-    }
-
-    public addRadioButtonsIntoHBox(){
-    }
-*/
    public FiyuvButton getSaveButton(){
-       return hBox.getButton2();
+       return bottomMenu.getButton2();
    }
 
    public FiyuvButton getMenuButton(){
-       return hBox.getButton1();
+       return bottomMenu.getButton1();
+   }
+
+
+   public double getVolume(){
+        return volumeSlider.getValue();
    }
 
 }

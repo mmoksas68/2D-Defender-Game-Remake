@@ -70,7 +70,13 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\menuAssets" />
+      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\images" />
+      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\images\buildings" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.openjfx.view.menuView" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images" />
@@ -184,8 +190,8 @@
       <workItem from="1576585271028" duration="23004000" />
       <workItem from="1576485609204" duration="16673000" />
       <workItem from="1576523231630" duration="2523000" />
-      <workItem from="1576607350546" duration="1279000" />
-      <workItem from="1576616773755" duration="4415000" />
+      <workItem from="1576618441377" duration="13025000" />
+      <workItem from="1576666014165" duration="311000" />
     </task>
     <servers />
   </component>

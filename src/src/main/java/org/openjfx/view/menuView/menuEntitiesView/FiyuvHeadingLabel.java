@@ -1,16 +1,54 @@
 package org.openjfx.view.menuView.menuEntitiesView;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 public class FiyuvHeadingLabel extends Label {
-    public FiyuvHeadingLabel(String text){
-       // setPrefHeight(400);
-        //setPrefWidth(600);
-        setPadding(new Insets(40,40,40,40));
+
+    private final String FONT_PATH = "assets/userInterfaceResources/kenvector_future.ttf";
+    private Background background;
+    public FiyuvHeadingLabel(String text, double width, double height){
+        setPrefHeight(height);
+        setPrefWidth(width);
+        ///setPadding(new Insets(40,40,40,40));
         setText(text);
         setWrapText(true);
-        setFont(Font.font("Blue", 23));
+        try {
+            setFont(Font.loadFont(new FileInputStream(FONT_PATH), 45));
+        } catch (FileNotFoundException e) {
+            setFont(Font.font("Verdana", 45));
+        }
+
+        this.setTextFill(Color.web("#0076a3"));
     }
+
+    public FiyuvHeadingLabel(String text){
+        setPrefHeight(100);
+        setPrefWidth(800);
+
+        setAlignment(Pos.CENTER);
+        ///setPadding(new Insets(40,40,40,40));
+        setText(text);
+        setWrapText(true);
+
+        try {
+            setFont(Font.loadFont(new FileInputStream(FONT_PATH), 45));
+        } catch (FileNotFoundException e) {
+            setFont(Font.font("Verdana", 45));
+        }
+
+        this.setTextFill(Color.web("#0076a3"));
+
+
+    }
+
+
 }
