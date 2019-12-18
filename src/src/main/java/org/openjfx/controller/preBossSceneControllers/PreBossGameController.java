@@ -33,7 +33,7 @@ public class PreBossGameController {
     private boolean gameOn = true;
     private BooleanProperty gameOnChange = new SimpleBooleanProperty(false);
     private int scoreDecayTimer = 0;
-    private final int SCORE_DECAY_PERIOD = 30000;
+    private final int SCORE_DECAY_PERIOD = 750;
     private boolean isSinglePlayer;
 
     private AnimationTimer animationTimer = new AnimationTimer() {
