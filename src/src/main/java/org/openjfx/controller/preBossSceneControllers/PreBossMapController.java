@@ -146,7 +146,7 @@ public class PreBossMapController {
     private void spawnSimpleEnemy(EnemyStation enemyStation){
         enemyStation.setProduceTimer(enemyStation.getProduceTimer()+1);
         enemyStation.setProduceTimer(enemyStation.getProduceTimer() % enemyStation.getProducePeriod());
-        Location location = new Location(enemyStation.getLocation().getPositionX()+1,enemyStation.getLocation().getPositionY()+1);
+        Location location = new Location(enemyStation.getLocation().getPositionX(),enemyStation.getLocation().getPositionY());
         if(enemyStation.getProduceTimer() == 0){
             Enemy enemy = enemyStation.getEnemyFactory().produceEnemy(EnemyTypes.tier1unevolved, location);
             preBossMap.getEnemies().put(enemy.getID(), enemy);
@@ -156,7 +156,7 @@ public class PreBossMapController {
     private void spawnEvolvedEnemy(EvolvedEnemyStation enemyStation){
         enemyStation.setProduceTimer(enemyStation.getProduceTimer()+1);
         enemyStation.setProduceTimer(enemyStation.getProduceTimer() % enemyStation.getProducePeriod());
-        Location location = new Location(enemyStation.getLocation().getPositionX()+1,enemyStation.getLocation().getPositionY()+1);
+        Location location = new Location(enemyStation.getLocation().getPositionX(),enemyStation.getLocation().getPositionY());
         if(enemyStation.getProduceTimer() == 0){
             Enemy enemy = enemyStation.getEnemyFactory().produceEnemy(EnemyTypes.tier1evolved, location);
             preBossMap.getEnemies().put(enemy.getID(), enemy);

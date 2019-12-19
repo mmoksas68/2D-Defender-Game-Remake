@@ -15,10 +15,12 @@ public class PreBossAssets {
     private Image tier1evolved;
     private List<Image> spacecraft = new ArrayList<>();
     private Image bullet;
+    private List<Image> smartBombCount = new ArrayList<>();
     private Image radarEnemy;
     private Image radarEnemySpaceStation;
     private Image radarSpacecraft;
     private Image radarMeteor;
+    private List<Image> gameInfoIcons = new ArrayList<>();
 
     PreBossAssets(){
         try {
@@ -33,6 +35,16 @@ public class PreBossAssets {
             radarEnemySpaceStation = new Image(FileController.getFileStream("assets/images/enemySpaceStation.png"));
             radarSpacecraft = new Image(FileController.getFileStream("assets/images/radar_spacecraft.png"));
             radarEnemy = new Image(FileController.getFileStream("assets/images/enemyRadar.png"));
+
+            smartBombCount.add(null);
+            smartBombCount.add(new Image(FileController.getFileStream("assets/images/bombs/singleBomb.png")));
+            smartBombCount.add(new Image(FileController.getFileStream("assets/images/bombs/doubleBomb.png")));
+            smartBombCount.add(new Image(FileController.getFileStream("assets/images/bombs/tripleBomb.png")));
+
+            gameInfoIcons.add(new Image(FileController.getFileStream("assets/images/gameInfoIcons/scoreIcon.png")));
+            gameInfoIcons.add(new Image(FileController.getFileStream("assets/images/gameInfoIcons/monster.png")));
+            gameInfoIcons.add(new Image(FileController.getFileStream("assets/images/gameInfoIcons/space-station.png")));
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -72,5 +84,13 @@ public class PreBossAssets {
 
     public void setTier1evolved(Image tier1evolved) {
         this.tier1evolved = tier1evolved;
+    }
+
+    public List<Image> getSmartBombImg(){
+        return smartBombCount;
+    }
+
+    public List<Image> getGameInfoIcons(){
+        return  gameInfoIcons;
     }
 }

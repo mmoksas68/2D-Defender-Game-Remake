@@ -22,6 +22,9 @@ import org.openjfx.view.gameSceneView.preBossSceneView.TopBar.radarView.RadarObj
 import java.util.ArrayList;
 
 public class PreBossGameController {
+    private final int SCORE_DECAY_PERIOD = 750;
+    private final int SCORE_DECREASE = 5;
+
     private RootPane rootPane;
     private Scene scene;
     private double width;
@@ -33,7 +36,6 @@ public class PreBossGameController {
     private boolean gameOn = true;
     private BooleanProperty gameOnChange = new SimpleBooleanProperty(false);
     private int scoreDecayTimer = 0;
-    private final int SCORE_DECAY_PERIOD = 750;
     private boolean isSinglePlayer;
 
     private AnimationTimer animationTimer = new AnimationTimer() {
@@ -109,7 +111,7 @@ public class PreBossGameController {
 
     private void refreshMap() {
         preBossMapController.checkMapSituation();
-        refreshAndReflectScore();
+        refreshAndReflectGameInfo();
         refreshAndReflectBuff();
         refreshAndReflectBullet();
         refreshAndReflectEnemy();
@@ -244,10 +246,11 @@ public class PreBossGameController {
         }
     }
 
-    private void refreshAndReflectScore() {
+    private void refreshAndReflectGameInfo() {
         increaseScore();
         decreaseScore();
-        rootPane.getTopBarView().getRightView().refresh();
+        rootPane.getTopBarView().getRightView().refresh(new ModelToGameInfoView(gameSituation.getScore(),
+                preBossMapController.getPreBossMap().getEnemies().size(), preBossMapController.getPreBossMap().getStations().size()));
     }
 
     public void resume(){
@@ -293,16 +296,13 @@ public class PreBossGameController {
             scoreDecayTimer++;
             scoreDecayTimer = scoreDecayTimer % SCORE_DECAY_PERIOD;
             if (scoreDecayTimer == 0) {
-                if (gameSituation.getScore() > 5)
-                    gameSituation.setScore(gameSituation.getScore() - 5);
+                if (gameSituation.getScore() > SCORE_DECREASE)
+                    gameSituation.setScore(gameSituation.getScore() - SCORE_DECREASE);
                 else
                     gameSituation.setScore(0);
             }
     }
 
-    private void showWhereToGo(){
-
-    }
 
     //#############################################################################################################
 

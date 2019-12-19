@@ -24,7 +24,7 @@ public class RadarView extends Pane {
         setPrefSize(width, height);
         scaleW = width / 1920;
         scaleH = height / 1080;
-        setStyle("-fx-border-color : white; -fx-border-width : 0 1 1 1");
+        setStyle("-fx-border-color : white; -fx-border-width : 0 1 1 1;");
     }
 
     public void refresh(RadarObject obj){
