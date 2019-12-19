@@ -44,6 +44,7 @@ public class MainMenuController {
         isSaveSettingsPressed = new SimpleBooleanProperty(false);
         isQuitPressed = new SimpleBooleanProperty(false);
         isResumePressed = new SimpleBooleanProperty(false);
+        settings = Settings.getInstance();
         initButtonListeners();
         gameSituation = GameSituation.getInstance();
     }

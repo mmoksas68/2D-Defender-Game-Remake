@@ -14,6 +14,7 @@ import org.openjfx.model.preBossEntities.Meteor.Meteor;
 import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.model.preBossEntities.Station.EnemyStation;
 import org.openjfx.model.preBossEntities.Station.EvolvedEnemyStation;
+import org.openjfx.model.preBossEntities.Station.Station;
 import org.openjfx.utilization.PositionHelper;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class PreBossMapController {
 
         for (var enemy : preBossMap.getEnemies().values()) {
             enemy.setDestinationType(EnemyDestinations.RandomLocation);
-            //checkCollision(enemy, preBossMap.getStations());
+            //isEnterEvolvedStation(enemy, preBossMap.getStations());
             checkCollision(enemy, Collections.singletonMap(preBossMap.getSpacecraft1().getID(), preBossMap.getSpacecraft1()));
             if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
                 checkCollision(enemy, Collections.singletonMap(preBossMap.getSpacecraft2().getID(), preBossMap.getSpacecraft2()));
@@ -145,7 +146,7 @@ public class PreBossMapController {
     private void spawnSimpleEnemy(EnemyStation enemyStation){
         enemyStation.setProduceTimer(enemyStation.getProduceTimer()+1);
         enemyStation.setProduceTimer(enemyStation.getProduceTimer() % enemyStation.getProducePeriod());
-        Location location = new Location(enemyStation.getLocation().getPositionX()+1,enemyStation.getLocation().getPositionY()+1);
+        Location location = new Location(enemyStation.getLocation().getPositionX(),enemyStation.getLocation().getPositionY());
         if(enemyStation.getProduceTimer() == 0){
             Enemy enemy = enemyStation.getEnemyFactory().produceEnemy(EnemyTypes.tier1unevolved, location);
             preBossMap.getEnemies().put(enemy.getID(), enemy);
@@ -155,12 +156,25 @@ public class PreBossMapController {
     private void spawnEvolvedEnemy(EvolvedEnemyStation enemyStation){
         enemyStation.setProduceTimer(enemyStation.getProduceTimer()+1);
         enemyStation.setProduceTimer(enemyStation.getProduceTimer() % enemyStation.getProducePeriod());
-        Location location = new Location(enemyStation.getLocation().getPositionX()+1,enemyStation.getLocation().getPositionY()+1);
+        Location location = new Location(enemyStation.getLocation().getPositionX(),enemyStation.getLocation().getPositionY());
         if(enemyStation.getProduceTimer() == 0){
             Enemy enemy = enemyStation.getEnemyFactory().produceEnemy(EnemyTypes.tier1evolved, location);
             preBossMap.getEnemies().put(enemy.getID(), enemy);
         }
     }
+
+    private  void isEnterEvolvedStation(LocatableObject obj, java.util.Map<Long, Station> list) {
+        PositionHelper objHelper = new PositionHelper(obj);
+        for(var station : list.values()){
+            PositionHelper stationHelper = new PositionHelper(station);
+            if(PositionHelper.isThereACollision(objHelper, stationHelper)){
+                if(obj instanceof Enemy && station instanceof EvolvedEnemyStation){
+                    ((Enemy) obj).setEvolved(true); //= ((EvolvedEnemyStation) station).getEnemyFactory().produceEnemy(EnemyTypes.tier1evolved, new Location(station.getLocation().getPositionX(), station.getLocation().getPositionY()));
+                }
+            }
+        }
+    }
+
 
     private void useSmartBomb(Spacecraft spacecraft){
 

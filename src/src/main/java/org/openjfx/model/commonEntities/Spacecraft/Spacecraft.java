@@ -17,7 +17,8 @@ public class Spacecraft extends LocatableObject {
     public static final double WIDTH = 120;
     public static final double HEIGHT = 90;
     public static final int MAX_SMARTBOMB = 3;
-    public static final int SMARTBOMB_RADIUS = 5;
+    public static final int SMARTBOMB_DAMAGE = 100;
+    public static final int SMARTBOMB_RADIUS = 800;
     public static final double MAX_VELOCITY = 90;
     public static final double SHIELD_DURATION = 90;
     public static final double BULLET_VELOCITY = 30;
@@ -27,6 +28,7 @@ public class Spacecraft extends LocatableObject {
     public static final double INIT_VELOCITY = 10;
     public static final int INIT_BULLET_DAMAGE = 10;
     public static final int MAX_HYPERJUMP_ENERGY = 100;
+    public static final int HYPERJUMP_PERIOD = 50;
 
     private double velocity;
     private int smartBombStock;

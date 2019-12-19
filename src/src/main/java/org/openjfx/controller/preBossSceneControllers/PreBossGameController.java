@@ -22,6 +22,9 @@ import org.openjfx.view.gameSceneView.preBossSceneView.TopBar.radarView.RadarObj
 import java.util.ArrayList;
 
 public class PreBossGameController {
+    private final int SCORE_DECAY_PERIOD = 750;
+    private final int SCORE_DECREASE = 5;
+
     private RootPane rootPane;
     private Scene scene;
     private double width;
@@ -33,7 +36,6 @@ public class PreBossGameController {
     private boolean gameOn = true;
     private BooleanProperty gameOnChange = new SimpleBooleanProperty(false);
     private int scoreDecayTimer = 0;
-    private final int SCORE_DECAY_PERIOD = 750;
     private boolean isSinglePlayer;
 
     private AnimationTimer animationTimer = new AnimationTimer() {
@@ -109,18 +111,17 @@ public class PreBossGameController {
 
     private void refreshMap() {
         preBossMapController.checkMapSituation();
-        increaseScore();
-        decreaseScore();
+        refreshAndReflectGameInfo();
         refreshAndReflectBuff();
         refreshAndReflectBullet();
         refreshAndReflectEnemy();
         refreshAndReflectMeteor();
         refreshAndReflectStations();
-        refreshAndReflectScore();
         refreshSpacecraftGameInfo();
         refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
         if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
             refreshAndReflectSpacecraft(spacecraftController2.getSpacecraft());
+        updateHyperJumpBattery();
     }
 
 
@@ -143,7 +144,7 @@ public class PreBossGameController {
 
         for (var it : toBeDeleted) {
             preBossMapController.getPreBossMap().deleteEnemy(it);
-            SoundController.explosion();
+            //SoundController.explosion();
         }
     }
 
@@ -218,7 +219,7 @@ public class PreBossGameController {
 
         for (var it : toBeDeleted) {
             preBossMapController.getPreBossMap().deleteStation(it);
-            SoundController.explosion();
+            //SoundController.explosion();
         }
     }
 
@@ -245,9 +246,11 @@ public class PreBossGameController {
         }
     }
 
-    private void refreshAndReflectScore() {
-
-        rootPane.getTopBarView().getRightView().refresh();
+    private void refreshAndReflectGameInfo() {
+        increaseScore();
+        decreaseScore();
+        rootPane.getTopBarView().getRightView().refresh(new ModelToGameInfoView(gameSituation.getScore(),
+                preBossMapController.getPreBossMap().getEnemies().size(), preBossMapController.getPreBossMap().getStations().size()));
     }
 
     public void resume(){
@@ -255,6 +258,24 @@ public class PreBossGameController {
     }
 
     public void pause(){
+
+    }
+
+    private void updateHyperJumpBattery(){
+        Spacecraft spacecraft1 = spacecraftController1.getSpacecraft();
+        spacecraft1.setBatteryTimer(spacecraft1.getBatteryTimer() + 1);
+        spacecraft1.setBatteryTimer(spacecraft1.getBatteryTimer() % Spacecraft.HYPERJUMP_PERIOD);
+        if(spacecraft1.getHyperJumpBattery() < Spacecraft.MAX_HYPERJUMP_ENERGY && spacecraft1.getBatteryTimer() == 0){
+            spacecraft1.setHyperJumpBattery(spacecraft1.getHyperJumpBattery() + 1);
+        }
+        if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip()){
+            Spacecraft spacecraft2 = spacecraftController2.getSpacecraft();
+            spacecraft2.setBatteryTimer(spacecraft2.getBatteryTimer()+1);
+            spacecraft2.setBatteryTimer(spacecraft2.getBatteryTimer() % Spacecraft.HYPERJUMP_PERIOD);
+            if(spacecraft2.getHyperJumpBattery() < Spacecraft.MAX_HYPERJUMP_ENERGY && spacecraft2.getBatteryTimer() == 0){
+                spacecraft2.setHyperJumpBattery(spacecraft2.getHyperJumpBattery()+1);
+            }
+        }
 
     }
 
@@ -275,12 +296,13 @@ public class PreBossGameController {
             scoreDecayTimer++;
             scoreDecayTimer = scoreDecayTimer % SCORE_DECAY_PERIOD;
             if (scoreDecayTimer == 0) {
-                if (gameSituation.getScore() > 5)
-                    gameSituation.setScore(gameSituation.getScore() - 5);
+                if (gameSituation.getScore() > SCORE_DECREASE)
+                    gameSituation.setScore(gameSituation.getScore() - SCORE_DECREASE);
                 else
                     gameSituation.setScore(0);
             }
     }
+
 
     //#############################################################################################################
 
@@ -328,8 +350,14 @@ public class PreBossGameController {
                 case ESCAPE:
                     gameOnChange.set(true);
                     break;
+                case NUMPAD2:
+                    spacecraftController1.activateSmartBomb();
+                    break;
+                case NUMPAD1:
+                    spacecraftController1.doHyperJump();
             }
         });
+
     }
 
     private void keysFor2(){
@@ -375,6 +403,12 @@ public class PreBossGameController {
                     break;
                 case ESCAPE:
                     gameOnChange.set(true);
+                    break;
+                case X:
+                    spacecraftController1.activateSmartBomb();
+                    break;
+                case Z:
+                    spacecraftController1.doHyperJump();
                     break;
             }
         });
@@ -439,6 +473,12 @@ public class PreBossGameController {
                 case SPACE:
                     spacecraftController2.setFireKeyPressed(false);
                     break;
+                case X:
+                    spacecraftController2.activateSmartBomb();
+                    break;
+                case Z:
+                    spacecraftController2.doHyperJump();
+                    break;
                 case UP:
                     spacecraftController1.setUpKeyPressed(false);
                     break;
@@ -456,6 +496,12 @@ public class PreBossGameController {
                     break;
                 case ESCAPE:
                     gameOnChange.set(true);
+                    break;
+                case NUMPAD1:
+                    spacecraftController1.doHyperJump();
+                    break;
+                case NUMPAD2:
+                    spacecraftController1.activateSmartBomb();
                     break;
             }
         });

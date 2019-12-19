@@ -11,10 +11,14 @@ import org.openjfx.utilization.ModelToViewEnemy;
 public class EnemyViewGroup {
     private ImageView enemyView;
     private Rectangle healthBar;
-
+    private Assets assets = Assets.getInstance();
+    private ImageView evolved = new ImageView(assets.getPreBossAssets().getTier1evolved());
+    private ImageView unevolved = new ImageView(assets.getPreBossAssets().getTier1unevolved());;
     public EnemyViewGroup(ModelToViewEnemy modelToViewEnemy, double viewLeft, double scaleW, double scaleH){
-        Assets assets = Assets.getInstance();
-        enemyView = new ImageView(assets.getPreBossAssets().getTier1unevolved());
+        if(modelToViewEnemy.getIsEvolved())
+            enemyView = evolved;
+        else
+            enemyView = unevolved;
         enemyView.setCacheHint(CacheHint.SPEED);
         enemyView.setCache(true);
         enemyView.setSmooth(true);
@@ -31,6 +35,9 @@ public class EnemyViewGroup {
         healthBar.setWidth(((double)modelToViewEnemy.getHealth()/modelToViewEnemy.getMaxHealth()*enemyView.getFitWidth()/2));
         healthBar.setTranslateX((enemyView.getTranslateX() + enemyView.getFitWidth()/4));
         healthBar.setTranslateY((enemyView.getTranslateY() + enemyView.getFitHeight()));
+        if(modelToViewEnemy.getIsEvolved()){
+            enemyView = evolved;
+        }
     }
 
     public ImageView getEnemyView() {
