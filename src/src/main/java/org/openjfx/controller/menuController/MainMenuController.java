@@ -87,6 +87,7 @@ public class MainMenuController {
     }
 
     private void start(){
+        gameSituation.setLevel(menuSceneContainer.getLevelSelection().getSelectedItem()+2); //şimdilik level level bakmak için ekledim +2 yi
         isGameStartPressed.setValue(true);
     }
 

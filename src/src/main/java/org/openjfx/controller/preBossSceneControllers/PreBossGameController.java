@@ -5,12 +5,8 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Scene;
-import javafx.scene.effect.GaussianBlur;
-import org.openjfx.controller.SoundController;
-import org.openjfx.controller.menuController.PauseMenuController;
+import javafx.util.Duration;
 import org.openjfx.model.menuEntities.GameSituation;
-import org.openjfx.model.menuEntities.GameSituation2;
-import org.openjfx.model.preBossEntities.Enemy.Enemy;
 import org.openjfx.model.preBossEntities.Enemy.Tier1Enemy;
 import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
@@ -22,8 +18,9 @@ import org.openjfx.view.gameSceneView.preBossSceneView.TopBar.radarView.RadarObj
 import java.util.ArrayList;
 
 public class PreBossGameController {
-    private final int SCORE_DECAY_PERIOD = 750;
+    private final int SCORE_DECAY_SECOND = 10;
     private final int SCORE_DECREASE = 5;
+    private Timeline scoreTimeline;
 
     private RootPane rootPane;
     private Scene scene;
@@ -103,8 +100,8 @@ public class PreBossGameController {
         else {
             keysForBoth();
         }
-
         animationTimer.start();
+        decreaseScore();
     }
 
 
@@ -248,7 +245,6 @@ public class PreBossGameController {
 
     private void refreshAndReflectGameInfo() {
         increaseScore();
-        decreaseScore();
         rootPane.getTopBarView().getRightView().refresh(new ModelToGameInfoView(gameSituation.getScore(),
                 preBossMapController.getPreBossMap().getEnemies().size(), preBossMapController.getPreBossMap().getStations().size()));
     }
@@ -293,14 +289,15 @@ public class PreBossGameController {
     }
 
     private void decreaseScore(){
-            scoreDecayTimer++;
-            scoreDecayTimer = scoreDecayTimer % SCORE_DECAY_PERIOD;
-            if (scoreDecayTimer == 0) {
+
+            scoreTimeline = new Timeline(new KeyFrame(Duration.seconds(SCORE_DECAY_SECOND), ae -> {
                 if (gameSituation.getScore() > SCORE_DECREASE)
                     gameSituation.setScore(gameSituation.getScore() - SCORE_DECREASE);
                 else
                     gameSituation.setScore(0);
-            }
+            }));
+            scoreTimeline.setCycleCount(Timeline.INDEFINITE);
+            scoreTimeline.play();
     }
 
 
@@ -542,6 +539,10 @@ public class PreBossGameController {
     public void setHeight(double height) {
         this.height = height;
      //   rootPane.setHeight(height);
+    }
+
+    public Timeline getScoreTimeline(){
+        return scoreTimeline;
     }
 
     public GameSituation getGameSituation() {

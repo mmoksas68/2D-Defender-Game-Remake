@@ -56,7 +56,16 @@ public class PositionHelper {
             return true;
     }
 
-    public static Location createLocation(PositionHelper helper){
+    public static Location createLocationInsideMap(){ //it assigns location for locatableObjects far away from spacecrafts initial position
+        double x = Math.random()*PreBossMap.MAP_WIDTH;
+        double y = Math.random()*PreBossMap.MAP_HEIGHT;
+        while (x < 5760 && x > 4160){
+            x = Math.random()*PreBossMap.MAP_WIDTH;
+        }
+        return new Location(x,y);
+    }
+
+    public static Location fixLocationBoundry(PositionHelper helper){ //it fixes location if initial location of object is on the boundries of map.
         double x = helper.getLeft();
         double y = helper.getTop();
         if(helper.getRight() >= PreBossMap.MAP_WIDTH){

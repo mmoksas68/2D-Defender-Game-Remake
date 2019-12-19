@@ -30,13 +30,50 @@ public class EnemyFactory {
         return myEnemy;
     }
 
-    public Enemy randomProduction(boolean isEvolved, Location location){
+    public Enemy randomProduction(int level, boolean isEvolved, Location location){
         Enemy enemy = null;
-        if(isEvolved){
-
-        }
-        else{
-
+        double random = Math.random()*6;
+        switch (level){
+            case 1:
+                if(isEvolved){
+                    enemy = produceEnemy(EnemyTypes.tier1evolved, location);
+                }
+                else {
+                    enemy = produceEnemy(EnemyTypes.tier1unevolved, location);
+                }
+                break;
+            case 2:
+                if(isEvolved){
+                    if(random > 3)
+                        enemy = produceEnemy(EnemyTypes.tier1evolved, location);
+                    else
+                        enemy = produceEnemy(EnemyTypes.tier2evolved, location);
+                }
+                else {
+                    if(random < 3)
+                        enemy = produceEnemy(EnemyTypes.tier1unevolved, location);
+                    else
+                        enemy = produceEnemy(EnemyTypes.tier2unevolved, location);
+                }
+                break;
+            case 3:
+                if(isEvolved){
+                    if(random < 2)
+                        enemy = produceEnemy(EnemyTypes.tier1evolved, location);
+                    else if(random > 4)
+                        enemy = produceEnemy(EnemyTypes.tier2evolved, location);
+                    else
+                        enemy = produceEnemy(EnemyTypes.tier3evolved, location);
+                }
+                else{
+                    if(random < 2)
+                        enemy = produceEnemy(EnemyTypes.tier1unevolved, location);
+                    else if(random > 4)
+                        enemy = produceEnemy(EnemyTypes.tier2unevolved, location);
+                    else
+                        enemy = produceEnemy(EnemyTypes.tier3unevolved, location);
+                }
+                break;
         }
         return enemy;
     }

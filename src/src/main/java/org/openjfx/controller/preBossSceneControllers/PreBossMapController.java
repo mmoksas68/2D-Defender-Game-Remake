@@ -11,7 +11,6 @@ import org.openjfx.model.preBossEntities.Meteor.Meteor;
 import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.model.preBossEntities.Station.EnemyStation;
 import org.openjfx.model.preBossEntities.Station.EvolvedEnemyStation;
-import org.openjfx.model.preBossEntities.Station.Station;
 import org.openjfx.utilization.PositionHelper;
 
 import java.util.ArrayList;
@@ -26,8 +25,8 @@ public class PreBossMapController {
     private GameSituation gameSituation;
 
     public PreBossMapController(boolean isSinglePlayer) {
-        preBossMap = new PreBossMap(isSinglePlayer);
         gameSituation = GameSituation.getInstance();
+        preBossMap = new PreBossMap(gameSituation.getLevel() , isSinglePlayer);
         this.isSinglePlayer = isSinglePlayer;
     }
 
@@ -172,13 +171,44 @@ public class PreBossMapController {
         }
     }
 
+    private void explodeTier2(LocatableObject obj){
+        PositionHelper p = new PositionHelper(obj);
+        for(var enemy : preBossMap.getEnemies().values()){
+            PositionHelper enemyHelper = new PositionHelper(enemy);
+            if(PositionHelper.isInRadar(p, enemyHelper, ((Tier2Enemy) obj).getImpactRadius())){
+                enemy.setHealthPoint(enemy.getHealthPoint()-Tier2Enemy.CLASHING_DAMAGE);
+                if(enemy.getHealthPoint() <= 0){
+                    enemy.setDead(true);
+                }
+            }
+        }
+        for(var station : preBossMap.getStations().values()){
+            PositionHelper stationHelper = new PositionHelper(station);
+            if(PositionHelper.isInRadar(p, stationHelper, ((Tier2Enemy) obj).getImpactRadius())){
+                station.setHealthPoint(station.getHealthPoint()-Tier2Enemy.CLASHING_DAMAGE);
+                if(station.getHealthPoint() <= 0){
+                    station.setDead(true);
+                }
+            }
+        }
+        PositionHelper p1 = new PositionHelper(preBossMap.getSpacecraft1());
+        if(PositionHelper.isInRadar(p,p1,((Tier2Enemy) obj).getImpactRadius())){
+            preBossMap.getSpacecraft1().setHealthPoint(preBossMap.getSpacecraft1().getHealthPoint() - Tier2Enemy.CLASHING_DAMAGE);
+        }
+        if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip()){
+            PositionHelper p2 = new PositionHelper(preBossMap.getSpacecraft2());
+            if(PositionHelper.isInRadar(p,p2,((Tier2Enemy) obj).getImpactRadius())) {
+                preBossMap.getSpacecraft2().setHealthPoint(preBossMap.getSpacecraft2().getHealthPoint() - Tier2Enemy.CLASHING_DAMAGE);
+            }
+        }
+    }
 
     private void spawnSimpleEnemy(EnemyStation enemyStation){
         enemyStation.setProduceTimer(enemyStation.getProduceTimer()+1);
         enemyStation.setProduceTimer(enemyStation.getProduceTimer() % enemyStation.getProducePeriod());
         Location location = new Location(enemyStation.getLocation().getPositionX(),enemyStation.getLocation().getPositionY());
         if(enemyStation.getProduceTimer() == 0){
-            Enemy enemy = enemyStation.getEnemyFactory().produceEnemy(EnemyTypes.tier1unevolved, location);
+            Enemy enemy = enemyStation.getEnemyFactory().randomProduction(gameSituation.getLevel(), false, location);
             preBossMap.getEnemies().put(enemy.getID(), enemy);
         }
     }
@@ -188,55 +218,10 @@ public class PreBossMapController {
         enemyStation.setProduceTimer(enemyStation.getProduceTimer() % enemyStation.getProducePeriod());
         Location location = new Location(enemyStation.getLocation().getPositionX(),enemyStation.getLocation().getPositionY());
         if(enemyStation.getProduceTimer() == 0){
-            Enemy enemy = enemyStation.getEnemyFactory().produceEnemy(EnemyTypes.tier1evolved, location);
+            Enemy enemy = enemyStation.getEnemyFactory().randomProduction(gameSituation.getLevel(), true, location);
             preBossMap.getEnemies().put(enemy.getID(), enemy);
         }
     }
-
-    private  void isEnterEvolvedStation(LocatableObject obj, java.util.Map<Long, Station> list) {
-        PositionHelper objHelper = new PositionHelper(obj);
-        for(var station : list.values()){
-            PositionHelper stationHelper = new PositionHelper(station);
-            if(PositionHelper.isThereACollision(objHelper, stationHelper)){
-                if(obj instanceof Enemy && station instanceof EvolvedEnemyStation){
-                    ((Enemy) obj).setEvolved(true); //= ((EvolvedEnemyStation) station).getEnemyFactory().produceEnemy(EnemyTypes.tier1evolved, new Location(station.getLocation().getPositionX(), station.getLocation().getPositionY()));
-                }
-            }
-        }
-    }
-
-    private void explodeTier2(LocatableObject obj){
-        PositionHelper p = new PositionHelper(obj);
-        for(var enemy : preBossMap.getEnemies().values()){
-            PositionHelper enemyHelper = new PositionHelper(enemy);
-            if(PositionHelper.isInRadar(p, enemyHelper, Tier2Enemy.IMPACT_RADIUS)){
-                enemy.setHealthPoint(enemy.getHealthPoint()-Tier2Enemy.CLASHING_DAMAGE);
-                if(enemy.getHealthPoint() <= 0){
-                    enemy.setDead(true);
-                }
-            }
-        }
-        for(var station : preBossMap.getStations().values()){
-            PositionHelper stationHelper = new PositionHelper(station);
-            if(PositionHelper.isInRadar(p, stationHelper, Tier2Enemy.IMPACT_RADIUS)){
-                station.setHealthPoint(station.getHealthPoint()-Tier2Enemy.CLASHING_DAMAGE);
-                if(station.getHealthPoint() <= 0){
-                    station.setDead(true);
-                }
-            }
-        }
-        PositionHelper p1 = new PositionHelper(preBossMap.getSpacecraft1());
-        if(PositionHelper.isInRadar(p,p1,Tier2Enemy.IMPACT_RADIUS)){
-            preBossMap.getSpacecraft1().setHealthPoint(preBossMap.getSpacecraft1().getHealthPoint() - Tier2Enemy.CLASHING_DAMAGE);
-        }
-        if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip()){
-            PositionHelper p2 = new PositionHelper(preBossMap.getSpacecraft2());
-            if(PositionHelper.isInRadar(p,p2,Tier2Enemy.IMPACT_RADIUS)) {
-                preBossMap.getSpacecraft2().setHealthPoint(preBossMap.getSpacecraft2().getHealthPoint() - Tier2Enemy.CLASHING_DAMAGE);
-            }
-        }
-    }
-
 
     private void useSmartBomb(Spacecraft spacecraft){
 

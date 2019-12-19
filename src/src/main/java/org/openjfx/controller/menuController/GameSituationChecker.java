@@ -64,6 +64,7 @@ public class GameSituationChecker {
                 if (preBossGameController.gameOnChangeProperty().get()) {
                     if (preBossGameController.isGameOn()) {
                         preBossGameController.getAnimationTimer().stop();
+                        preBossGameController.getScoreTimeline().stop();
                         preBossGameController.setGameOn(false);
                         preBossGameController.getScene().getRoot().setEffect(new GaussianBlur());
                         isPaused.setValue(true);

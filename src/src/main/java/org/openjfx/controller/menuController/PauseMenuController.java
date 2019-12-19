@@ -72,6 +72,7 @@ public class PauseMenuController {
         if (!(preBossGameController == null) && !gameSituation.isIsPreBossFinished()){ //game infodan bakarak karar verecek şimdilik gameInfoyu koymadım diye böyle
             preBossGameController.getScene().getRoot().setEffect(null);
             preBossGameController.getAnimationTimer().start();
+            preBossGameController.getScoreTimeline().play();
             preBossGameController.setGameOn(true);
         }
         else if (!gameSituation.isIsBossFinished()){ //game infodan bakarak karar verecek şimdilik gameInfoyu koymadım diye böyle

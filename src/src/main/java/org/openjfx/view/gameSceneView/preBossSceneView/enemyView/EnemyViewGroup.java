@@ -70,7 +70,7 @@ public class EnemyViewGroup {
             enemyView = unevolvedTier2;
         }
         else if(modelToViewEnemy.getType().equals(EnemyTypes.tier2evolved)){
-
+            enemyView = unevolvedTier2;
         }
         else if(modelToViewEnemy.getType().equals(EnemyTypes.tier3unevolved)){
 
@@ -81,7 +81,7 @@ public class EnemyViewGroup {
     }
 
     private void changeDirectionOfView(ModelToViewEnemy modelToViewEnemy){
-        if(modelToViewEnemy.getType().equals(EnemyTypes.tier2unevolved)){
+        if(modelToViewEnemy.getType().equals(EnemyTypes.tier2unevolved) || modelToViewEnemy.getType().equals(EnemyTypes.tier2evolved)){
             double x = modelToViewEnemy.getDestinationX();
             double y = modelToViewEnemy.getDestinationY();
             if(!modelToViewEnemy.isRushing()){

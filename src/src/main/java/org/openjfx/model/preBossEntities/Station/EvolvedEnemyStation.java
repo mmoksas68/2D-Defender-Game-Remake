@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class EvolvedEnemyStation extends Station{
     public static final int MAX_HEALTH = 50;
-    public static final int SCORE_POINT = 5;
+    public static final int SCORE_POINT = 100;
     public static final int LEVEL1_PRODUCE_PERIOD = 750;
     public static final int LEVEL2_PRODUCE_PERIOD = 500;
     public static final int LEVEL3_PRODUCE_PERIOD = 250;
