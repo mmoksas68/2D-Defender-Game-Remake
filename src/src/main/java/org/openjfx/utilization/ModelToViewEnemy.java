@@ -10,6 +10,7 @@ public class ModelToViewEnemy extends ModelToView{
     private int health;
     private int maxHealth;
     private boolean isEvolved; //for picture
+    private boolean isRushing;
 
     public ModelToViewEnemy(Enemy enemy) {
         super(enemy);
@@ -27,6 +28,7 @@ public class ModelToViewEnemy extends ModelToView{
             this.type = enemy.isEvolved() ?  EnemyTypes.tier2evolved  : EnemyTypes.tier2unevolved ;
             this.maxHealth = enemy.isEvolved() ? Tier2Enemy.MAX_HEALTH*2 : Tier2Enemy.MAX_HEALTH;
             this.isEvolved = enemy.isEvolved();
+            this.isRushing = ((Tier2Enemy) enemy).isRushing();
         }else if( enemy instanceof Tier3Enemy)
         {
             this.type = enemy.isEvolved() ?  EnemyTypes.tier3evolved  : EnemyTypes.tier3unevolved ;
@@ -83,5 +85,13 @@ public class ModelToViewEnemy extends ModelToView{
 
     public void setIsEvolved(boolean isEvolved) {
         this.isEvolved = isEvolved;
+    }
+
+    public boolean isRushing() {
+        return isRushing;
+    }
+
+    public void setRushing(boolean rushing) {
+        isRushing = rushing;
     }
 }

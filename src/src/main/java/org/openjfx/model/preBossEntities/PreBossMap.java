@@ -4,9 +4,11 @@ import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import org.openjfx.model.commonEntities.Buff.Buff;
+import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.preBossEntities.Enemy.Tier1Enemy;
+import org.openjfx.model.preBossEntities.Enemy.Tier2Enemy;
 import org.openjfx.model.preBossEntities.Station.EnemyStation;
 import org.openjfx.model.preBossEntities.Station.EvolvedEnemyStation;
 import org.openjfx.model.preBossEntities.Station.Station;
@@ -50,66 +52,37 @@ public class PreBossMap implements Serializable {
             spacecraft2 = new Spacecraft(new Location(4960, 520));
             spacecraft2.setChoosenPicNo(GameSituation.getInstance().getSpacecraft2());
         }
-        for (int i=0; i < 50 ; i++){
-            double x = Math.random()*PreBossMap.MAP_WIDTH;
-            double y = Math.random()*PreBossMap.MAP_HEIGHT;
+        double x, y;
+        for (int i=0; i < 0 ; i++){
+            x = Math.random()*PreBossMap.MAP_WIDTH;
+            y = Math.random()*PreBossMap.MAP_HEIGHT;
             Tier1Enemy enemy = new Tier1Enemy(new Location(x,y), false);
             PositionHelper helper = new PositionHelper(enemy);
-            helper.isInside(enemy.getHitBoxWidth(), enemy.getHitBoxHeight());
-            if(helper.getRight() >= PreBossMap.MAP_WIDTH){
-                x -= 100;
-            }
-            if(helper.getLeft() <= 0){
-                x += 100;
-            }
-            if(helper.getTop() <= 0){
-                y += 100;
-            }
-            if(helper.getBottom() >= PreBossMap.MAP_HEIGHT){
-                y -= 100;
-            }
-            enemy.setLocation(new Location(x,y));
+            enemy.setLocation(PositionHelper.createLocation(helper));
             addEnemy(enemy);
-
         }
-        for (int i=0; i < 5 ; i++){
-            double x = Math.random()*PreBossMap.MAP_WIDTH;
-            double y = Math.random()*PreBossMap.MAP_HEIGHT;
+        for (int i = 0; i < 10; i++){
+            x = Math.random()*PreBossMap.MAP_WIDTH;
+            y = Math.random()*PreBossMap.MAP_HEIGHT;
+            Tier2Enemy enemy = new Tier2Enemy(new Location(x,y), false);
+            PositionHelper helper = new PositionHelper(enemy);
+            enemy.setLocation(PositionHelper.createLocation(helper));
+            addEnemy(enemy);
+        }
+        for (int i=0; i < 5; i++){
+            x = Math.random()*PreBossMap.MAP_WIDTH;
+            y = Math.random()*PreBossMap.MAP_HEIGHT;
             EnemyStation enemyStation = new EnemyStation(new Location(x,y));
             PositionHelper helper = new PositionHelper(enemyStation);
-            if(helper.getRight() >= PreBossMap.MAP_WIDTH){
-                x -= 100;
-            }
-            if(helper.getLeft() <= 0){
-                x += 100;
-            }
-            if(helper.getTop() <= 0){
-                y += 100;
-            }
-            if(helper.getBottom() >= PreBossMap.MAP_HEIGHT){
-                y -= 100;
-            }
-            enemyStation.setLocation(new Location(x,y));
+            enemyStation.setLocation(PositionHelper.createLocation(helper));
             addStation(enemyStation);
         }
         for (int i=0; i < 2 ; i++){
-            double x = Math.random()*PreBossMap.MAP_WIDTH;
-            double y = Math.random()*PreBossMap.MAP_HEIGHT;
+            x = Math.random()*PreBossMap.MAP_WIDTH;
+            y = Math.random()*PreBossMap.MAP_HEIGHT;
             Station evolvedEnemyStation = new EvolvedEnemyStation(new Location(x,y), GameSituation.getInstance().getLevel());
             PositionHelper helper = new PositionHelper(evolvedEnemyStation);
-            if(helper.getRight() >= PreBossMap.MAP_WIDTH){
-                x -= 100;
-            }
-            if(helper.getLeft() <= 0){
-                x += 100;
-            }
-            if(helper.getTop() <= 0){
-                y += 100;
-            }
-            if(helper.getBottom() >= PreBossMap.MAP_HEIGHT){
-                y -= 100;
-            }
-            evolvedEnemyStation.setLocation(new Location(x,y));
+            evolvedEnemyStation.setLocation(PositionHelper.createLocation(helper));
             addStation(evolvedEnemyStation);
         }
     }

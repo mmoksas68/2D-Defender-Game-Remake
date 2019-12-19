@@ -1,6 +1,8 @@
 package org.openjfx.utilization;
 
 import org.openjfx.model.commonEntities.LocatableObject;
+import org.openjfx.model.commonEntities.Location;
+import org.openjfx.model.preBossEntities.PreBossMap;
 
 public class PositionHelper {
     private double left;
@@ -43,6 +45,33 @@ public class PositionHelper {
         }
         else
             return true;
+    }
+
+    public boolean isInsideTurnableObj(LocatableObject locatableObject, double maxWidth, double maxHeight){
+        double amount = locatableObject.getHitBoxWidth()/4;
+        if (top < amount | bottom+amount > maxHeight | right+amount > maxWidth | left < amount){
+            return false;
+        }
+        else
+            return true;
+    }
+
+    public static Location createLocation(PositionHelper helper){
+        double x = helper.getLeft();
+        double y = helper.getTop();
+        if(helper.getRight() >= PreBossMap.MAP_WIDTH){
+            x -= 100;
+        }
+        if(helper.getLeft() <= 0){
+            x += 100;
+        }
+        if(helper.getTop() <= 0){
+            y += 100;
+        }
+        if(helper.getBottom() >= PreBossMap.MAP_HEIGHT){
+            y -= 100;
+        }
+        return new Location(x,y);
     }
 
     public double getLeft() {

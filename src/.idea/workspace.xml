@@ -58,7 +58,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/images/gameInfoIcons" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/images/spacecrafts" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -73,18 +73,18 @@
       <recent name="org.openjfx.view.menuView" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\spacecrafts" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\gameInfoIcons" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\bombs" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\src\main\java\org\openjfx\model\menuEntities" />
-      <recent name="C:\Users\kosed\Desktop\cs319\src\main\java\org\openjfx\view" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\spacecrafts" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\gameInfoIcons" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\bombs" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets\menuAssets" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\images" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -193,6 +193,8 @@
       <workItem from="1576523231630" duration="2523000" />
       <workItem from="1576618441377" duration="13025000" />
       <workItem from="1576666014165" duration="311000" />
+      <workItem from="1576753701953" duration="4612000" />
+      <workItem from="1576768440651" duration="15117000" />
     </task>
     <servers />
   </component>

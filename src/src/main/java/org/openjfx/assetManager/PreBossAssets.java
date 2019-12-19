@@ -3,7 +3,6 @@ package org.openjfx.assetManager;
 import javafx.scene.image.Image;
 import org.openjfx.fileManager.FileController;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +20,7 @@ public class PreBossAssets {
     private Image radarSpacecraft;
     private Image radarMeteor;
     private List<Image> gameInfoIcons = new ArrayList<>();
+    private Image tier2unevolved;
 
     PreBossAssets(){
         try {
@@ -45,6 +45,7 @@ public class PreBossAssets {
             gameInfoIcons.add(new Image(FileController.getFileStream("assets/images/gameInfoIcons/monster.png")));
             gameInfoIcons.add(new Image(FileController.getFileStream("assets/images/gameInfoIcons/space-station.png")));
 
+            tier2unevolved = new Image(FileController.getFileStream("assets/images/spacecrafts/bomber.png"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -93,4 +94,9 @@ public class PreBossAssets {
     public List<Image> getGameInfoIcons(){
         return  gameInfoIcons;
     }
+
+    public Image getTier2unevolved() {
+        return tier2unevolved;
+    }
+
 }

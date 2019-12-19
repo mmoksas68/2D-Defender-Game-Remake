@@ -5,20 +5,24 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import javafx.scene.transform.Rotate;
 import org.openjfx.assetManager.Assets;
+import org.openjfx.model.preBossEntities.Enemy.EnemyDestinations;
+import org.openjfx.model.preBossEntities.Enemy.EnemyTypes;
 import org.openjfx.utilization.ModelToViewEnemy;
 
 public class EnemyViewGroup {
     private ImageView enemyView;
     private Rectangle healthBar;
     private Assets assets = Assets.getInstance();
-    private ImageView evolved = new ImageView(assets.getPreBossAssets().getTier1evolved());
-    private ImageView unevolved = new ImageView(assets.getPreBossAssets().getTier1unevolved());;
+
+    private ImageView evolvedTier1 = new ImageView(assets.getPreBossAssets().getTier1evolved());
+    private ImageView unevolvedTier1 = new ImageView(assets.getPreBossAssets().getTier1unevolved());
+    private ImageView unevolvedTier2 = new ImageView(assets.getPreBossAssets().getTier2unevolved());
+
+
     public EnemyViewGroup(ModelToViewEnemy modelToViewEnemy, double viewLeft, double scaleW, double scaleH){
-        if(modelToViewEnemy.getIsEvolved())
-            enemyView = evolved;
-        else
-            enemyView = unevolved;
+        chooseEnemyView(modelToViewEnemy);
         enemyView.setCacheHint(CacheHint.SPEED);
         enemyView.setCache(true);
         enemyView.setSmooth(true);
@@ -35,9 +39,8 @@ public class EnemyViewGroup {
         healthBar.setWidth(((double)modelToViewEnemy.getHealth()/modelToViewEnemy.getMaxHealth()*enemyView.getFitWidth()/2));
         healthBar.setTranslateX((enemyView.getTranslateX() + enemyView.getFitWidth()/4));
         healthBar.setTranslateY((enemyView.getTranslateY() + enemyView.getFitHeight()));
-        if(modelToViewEnemy.getIsEvolved()){
-            enemyView = evolved;
-        }
+        chooseEnemyView(modelToViewEnemy);
+        changeDirectionOfView(modelToViewEnemy);
     }
 
     public ImageView getEnemyView() {
@@ -54,6 +57,52 @@ public class EnemyViewGroup {
 
     public void setHealthBar(Rectangle healthBar) {
         this.healthBar = healthBar;
+    }
+
+    private void chooseEnemyView(ModelToViewEnemy modelToViewEnemy){
+        if(modelToViewEnemy.getType().equals(EnemyTypes.tier1unevolved)){
+            enemyView = unevolvedTier1;
+        }
+        else if(modelToViewEnemy.getType().equals(EnemyTypes.tier1evolved)){
+            enemyView = evolvedTier1;
+        }
+        else if(modelToViewEnemy.getType().equals(EnemyTypes.tier2unevolved)){
+            enemyView = unevolvedTier2;
+        }
+        else if(modelToViewEnemy.getType().equals(EnemyTypes.tier2evolved)){
+
+        }
+        else if(modelToViewEnemy.getType().equals(EnemyTypes.tier3unevolved)){
+
+        }
+        else if(modelToViewEnemy.getType().equals(EnemyTypes.tier3evolved)){
+
+        }
+    }
+
+    private void changeDirectionOfView(ModelToViewEnemy modelToViewEnemy){
+        if(modelToViewEnemy.getType().equals(EnemyTypes.tier2unevolved)){
+            double x = modelToViewEnemy.getDestinationX();
+            double y = modelToViewEnemy.getDestinationY();
+            if(!modelToViewEnemy.isRushing()){
+                x = 0;
+                y = 0;
+            }
+            double angle = Math.atan(x/y);
+            Double ang = new Double(angle);
+            if(!ang.isNaN() && !ang.isInfinite()){
+                if(ang*180/Math.PI == 0 || ang*180/Math.PI == 90 || ang*180/Math.PI == -90 || ang*180/Math.PI == 180){
+                    enemyView.setRotate(90);
+                }
+                else {
+                    enemyView.setRotate(90 - (ang * 180 / Math.PI));
+                }
+            }
+            else{
+                enemyView.setRotate(0);
+            }
+
+        }
     }
 
 }

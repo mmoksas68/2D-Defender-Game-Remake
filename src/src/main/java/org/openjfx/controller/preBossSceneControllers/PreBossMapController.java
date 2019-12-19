@@ -6,10 +6,7 @@ import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
 import org.openjfx.model.menuEntities.GameSituation;
-import org.openjfx.model.preBossEntities.Enemy.Enemy;
-import org.openjfx.model.preBossEntities.Enemy.EnemyDestinations;
-import org.openjfx.model.preBossEntities.Enemy.EnemyTypes;
-import org.openjfx.model.preBossEntities.Enemy.Tier2Enemy;
+import org.openjfx.model.preBossEntities.Enemy.*;
 import org.openjfx.model.preBossEntities.Meteor.Meteor;
 import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.model.preBossEntities.Station.EnemyStation;
@@ -58,12 +55,14 @@ public class PreBossMapController {
 
         for (var enemy : preBossMap.getEnemies().values()) {
             enemy.setDestinationType(EnemyDestinations.RandomLocation);
-            //isEnterEvolvedStation(enemy, preBossMap.getStations());
             checkCollision(enemy, Collections.singletonMap(preBossMap.getSpacecraft1().getID(), preBossMap.getSpacecraft1()));
             if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
                 checkCollision(enemy, Collections.singletonMap(preBossMap.getSpacecraft2().getID(), preBossMap.getSpacecraft2()));
-
-            wonderAround(enemy);
+            if(!(enemy instanceof Tier2Enemy) || !((Tier2Enemy)enemy).isRushing())
+                wonderAround(enemy);
+            if(enemy instanceof Tier2Enemy && ((Tier2Enemy) enemy).isRushing()) {
+                rushIntoSpacecraft((Tier2Enemy) enemy);
+            }
             if(!(enemy instanceof Tier2Enemy))
                 ((EnemyGun)enemy.getFiringBehavior()).setFiring(enemy.getDestinationType().equals(EnemyDestinations.Spacecraft));
 
@@ -87,13 +86,23 @@ public class PreBossMapController {
             PositionHelper iteratorHelper = new PositionHelper(iterator);
 
             if(obj instanceof Enemy && iterator instanceof Spacecraft && PositionHelper.isInRadar(objHelper, iteratorHelper, ((Enemy) obj).getRadarRadius())){
+                if(!(obj instanceof Tier2Enemy) || (!((Tier2Enemy) obj).isRushing()))
                 ((Enemy) obj).setDestinationLocation(
-                        new Location(
-                                iteratorHelper.getMiddlePointX() - objHelper.getMiddlePointX(),
-                                iteratorHelper.getMiddlePointY() - objHelper.getMiddlePointY()
-                        ));
+                    new Location(
+                            iteratorHelper.getMiddlePointX() - objHelper.getMiddlePointX(),
+                            iteratorHelper.getMiddlePointY() - objHelper.getMiddlePointY()
+                    ));
 
-                ((Enemy) obj).setDestinationType(EnemyDestinations.Spacecraft);
+                if(!(obj instanceof Tier2Enemy)) //If obj is not tier2
+                    ((Enemy) obj).setDestinationType(EnemyDestinations.Spacecraft);
+
+                if(obj instanceof Tier2Enemy){ //if obj is tier2
+                    if(!((Tier2Enemy) obj).isRushing()){
+                        ((Enemy) obj).setDestinationType(EnemyDestinations.Spacecraft);
+                        ((Tier2Enemy) obj).setRushing(true);
+                    }
+
+                }
             }
 
             if (PositionHelper.isThereACollision(objHelper, iteratorHelper)) {
@@ -101,14 +110,18 @@ public class PreBossMapController {
 
                 if (obj instanceof Bullet)
                     iterator.setHealthPoint(iterator.getHealthPoint() - ((Bullet) obj).getDamage());
-                else if (obj instanceof Enemy)
+                else if (obj instanceof Tier1Enemy || obj instanceof Tier3Enemy)
                     iterator.setHealthPoint(iterator.getHealthPoint() - ((EnemyGun)((Enemy) obj).getFiringBehavior()).getBulletDamage());
                 else if (obj instanceof Meteor)
                     iterator.setHealthPoint(iterator.getHealthPoint() - ((Meteor) obj).getDamage());
-
+                else if (obj instanceof Tier2Enemy){
+                    explodeTier2(obj);
+                }
                 if (iterator.getHealthPoint() <= 0)
                     iterator.setDead(true);
             }
+
+
         }
     }
 
@@ -120,8 +133,8 @@ public class PreBossMapController {
             PositionHelper enemyPosition = new PositionHelper(enemy);
             if(enemyPosition.isInside(PreBossMap.MAP_WIDTH, PreBossMap.MAP_HEIGHT)) {
                 if (enemy.getChangeDirectionTimer() == 0) {
-                    randomX = 5 * (Math.random() - 0.5);
-                    randomY = 5 * (Math.random() - 0.5);
+                    randomX = 2 * (Math.random() - 0.5);
+                    randomY = 2 * (Math.random() - 0.5);
                     enemy.setDestinationLocation(new Location(randomX, randomY));
                 }
                 enemy.setChangeDirectionTimer(enemy.getChangeDirectionTimer() + 1);
@@ -142,6 +155,23 @@ public class PreBossMapController {
             }
         }
     }
+
+    private void rushIntoSpacecraft(Tier2Enemy enemy){
+        enemy.setRushingTimer(enemy.getRushingTimer() + 1);
+        enemy.setRushingTimer(enemy.getRushingTimer() % Tier2Enemy.RUSHING_DURATION);
+        if (enemy.getRushingTimer() == 0) {
+            enemy.setDestinationType(EnemyDestinations.RandomLocation);
+            enemy.setRushing(false);
+        }
+        PositionHelper enemyHelper = new PositionHelper(enemy);
+        if(enemyHelper.isInsideTurnableObj(enemy,PreBossMap.MAP_WIDTH, PreBossMap.MAP_HEIGHT)) {
+            enemy.moveToDirection(enemy.getVelocity() * 2, enemy.getDestinationLocation().getPositionX(), -enemy.getDestinationLocation().getPositionY());
+        }
+        else {
+            enemy.setRushingTimer(Tier2Enemy.RUSHING_DURATION-1);
+        }
+    }
+
 
     private void spawnSimpleEnemy(EnemyStation enemyStation){
         enemyStation.setProduceTimer(enemyStation.getProduceTimer()+1);
@@ -175,14 +205,43 @@ public class PreBossMapController {
         }
     }
 
+    private void explodeTier2(LocatableObject obj){
+        PositionHelper p = new PositionHelper(obj);
+        for(var enemy : preBossMap.getEnemies().values()){
+            PositionHelper enemyHelper = new PositionHelper(enemy);
+            if(PositionHelper.isInRadar(p, enemyHelper, Tier2Enemy.IMPACT_RADIUS)){
+                enemy.setHealthPoint(enemy.getHealthPoint()-Tier2Enemy.CLASHING_DAMAGE);
+                if(enemy.getHealthPoint() <= 0){
+                    enemy.setDead(true);
+                }
+            }
+        }
+        for(var station : preBossMap.getStations().values()){
+            PositionHelper stationHelper = new PositionHelper(station);
+            if(PositionHelper.isInRadar(p, stationHelper, Tier2Enemy.IMPACT_RADIUS)){
+                station.setHealthPoint(station.getHealthPoint()-Tier2Enemy.CLASHING_DAMAGE);
+                if(station.getHealthPoint() <= 0){
+                    station.setDead(true);
+                }
+            }
+        }
+        PositionHelper p1 = new PositionHelper(preBossMap.getSpacecraft1());
+        if(PositionHelper.isInRadar(p,p1,Tier2Enemy.IMPACT_RADIUS)){
+            preBossMap.getSpacecraft1().setHealthPoint(preBossMap.getSpacecraft1().getHealthPoint() - Tier2Enemy.CLASHING_DAMAGE);
+        }
+        if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip()){
+            PositionHelper p2 = new PositionHelper(preBossMap.getSpacecraft2());
+            if(PositionHelper.isInRadar(p,p2,Tier2Enemy.IMPACT_RADIUS)) {
+                preBossMap.getSpacecraft2().setHealthPoint(preBossMap.getSpacecraft2().getHealthPoint() - Tier2Enemy.CLASHING_DAMAGE);
+            }
+        }
+    }
+
 
     private void useSmartBomb(Spacecraft spacecraft){
 
     }
 
-    private void rushIntoSpacecraft(){
-
-    }
 
     public PreBossMap getPreBossMap() {
         return preBossMap;
