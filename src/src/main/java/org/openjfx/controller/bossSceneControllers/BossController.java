@@ -37,8 +37,6 @@ public class BossController {
 
         }
         else {
-            //  for ( GameObject specialAbility: bossController.getSpecialAbility())
-            //   map.checkCollisions( specialAbility);
             algorithm.clockTick();
         }
         algorithm.shoot();

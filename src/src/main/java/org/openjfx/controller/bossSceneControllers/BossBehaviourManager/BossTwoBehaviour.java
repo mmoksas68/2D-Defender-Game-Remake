@@ -29,16 +29,20 @@ public class BossTwoBehaviour extends BossDefaultBehaviour {
             rockets = boss.getRockets();
             for ( Rocket rocket : rockets) {
                 bossMap.addSpecialAbility( rocket);
-                for( Marker marker: markers)
-                    marker.setIsRocketFired(true);
             }
-            startAbilityTimer( 2.0);        // Don't forget to start timer!!!!!
+            startAbilityTimer( 2.5);        // Don't forget to start timer!!!!!
         }
 
     }
     @Override
     public void clockTick() {
         abilityTimer = abilityTimer - 0.016;
+        if ( !markers.get(0).getIsRocketFired()) {
+            if (rockets.get(0).isDead()) {
+                for (Marker marker : markers)
+                    marker.activate();
+            }
+        }
         if ( abilityTimer <= 0) {
             for (Marker marker : markers) {
                 marker.setDead(true);

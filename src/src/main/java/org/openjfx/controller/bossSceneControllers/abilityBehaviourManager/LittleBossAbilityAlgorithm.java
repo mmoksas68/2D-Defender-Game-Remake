@@ -15,7 +15,6 @@ public class LittleBossAbilityAlgorithm implements AbilityBehaviourAlgorithm {
        double MAX_HEIGHT = BossMap.MAP_HEIGHT;
             LittleBoss littleBoss = (LittleBoss) specialAbility;
             littleBoss.moveWithVelocityVector( littleBoss.getVelocity(), littleBoss.getxDir(), littleBoss.getyDir());
-          //  map.checkCollisions(littleBoss);
             if( littleBoss.getHitNumber() == 4) {
                 littleBoss.setDead( true);
             }

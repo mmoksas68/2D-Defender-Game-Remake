@@ -106,5 +106,13 @@ public class BossMap {
     public int getLevel() {
         return level;
     }
+
+    public void setSpacecraft1(Spacecraft spacecraft1) {
+        this.spacecraft1 = spacecraft1;
+    }
+
+    public void setSpacecraft2(Spacecraft spacecraft2) {
+        this.spacecraft2 = spacecraft2;
+    }
 }
 

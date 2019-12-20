@@ -1,5 +1,6 @@
 package org.openjfx.view.gameSceneView.bossSceneView.bossViews;
 
+import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.openjfx.utilization.ModelToViewBoss;

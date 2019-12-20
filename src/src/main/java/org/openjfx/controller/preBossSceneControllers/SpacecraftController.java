@@ -28,12 +28,14 @@ public class SpacecraftController {
         this.spacecraft = spacecraft;
         this.preBossMapView = preBossMapView;
         this.preBossMap = preBossMap;
+        bossMap = null;
     }
 
     public SpacecraftController (Spacecraft spacecraft, BossMapView bossMapView, BossMap bossMap) {
         this.spacecraft = spacecraft;
         this.bossMapView = bossMapView;
         this.bossMap = bossMap;
+        preBossMap = null;
     }
 
     public void getInputs() {
@@ -43,9 +45,10 @@ public class SpacecraftController {
         if ( xDirection != 0 || yDirection != 0) {
             spacecraft.moveToDirection(bossMap.getSpacecraft1().getVelocity(),xDirection * multiplier, yDirection * multiplier);
         }
+
         ((SpacecraftGun)spacecraft.getSpacecraftGun()).setFiring(fireKeyPressed);
 
-        fireBulletBossMap();
+        fireBullet();
 
     }
     public void checkInputs(){
@@ -112,12 +115,11 @@ public class SpacecraftController {
             preBossMapView.refreshExplodeAnimations();
 
     }
-
-    private void fireBulletBossMap () {
-        spacecraft.getSpacecraftGun().gunTimer(bossMap);
-    }
     private void fireBullet(){
-        spacecraft.getSpacecraftGun().gunTimer(preBossMap);
+        if ( bossMap == null)
+            spacecraft.getSpacecraftGun().gunTimer(preBossMap);
+        else
+            spacecraft.getSpacecraftGun().gunTimer(bossMap);
     }
 
     private void move(double accelerationSpeedChange, double constraint, double directionX, double directionY){
@@ -166,7 +168,6 @@ public class SpacecraftController {
     public void activateSmartBomb(){
 
         if(spacecraft.getSmartBombStock() > 0){
-
             spacecraft.setSmartBombStock(spacecraft.getSmartBombStock()-1);
             PositionHelper spacecraftHelper = new PositionHelper(spacecraft);
             for(var enemy : preBossMap.getEnemies().values()){
@@ -206,6 +207,10 @@ public class SpacecraftController {
     }
     public BossMapView getBossMapView() {
         return bossMapView;
+    }
+
+    public BossMap getBossMap() {
+        return bossMap;
     }
 
     public PreBossMapView getPreBossMapView() {
