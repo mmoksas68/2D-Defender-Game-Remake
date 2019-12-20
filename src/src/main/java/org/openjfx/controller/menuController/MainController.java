@@ -1,8 +1,4 @@
 package org.openjfx.controller.menuController;
-
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
@@ -73,6 +69,7 @@ public class MainController {
 
         ChangeListener<Boolean> saveSettingsListener = (observable, oldValue, newValue) ->{
             if(menuController.getIsSaveSettingsPressed().get()) {
+
                 menuController.setIsSaveSettingsPressed(false);
                 fileController.saveKeys();
             }

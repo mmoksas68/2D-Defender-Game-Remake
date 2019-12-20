@@ -1,11 +1,11 @@
 package org.openjfx.view.menuView;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import org.openjfx.assetManager.Assets;
@@ -13,7 +13,7 @@ import org.openjfx.model.menuEntities.Settings;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvBottomMenu;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvButton;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvHeadingLabel;
-
+import org.openjfx.view.menuView.menuEntitiesView.KeyTextField;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +23,7 @@ public class SettingsView extends VBox {
     private Slider volumeSlider;
     private Label player1Label, player2Label;
     private GridPane gridPane;
-    private TextField up1KeySel, down1KeySel, right1KeySel, left1KeySel, hyperjump1KeySel, smartbomb1KeySel;
-    private TextField up2KeySel, down2KeySel, right2KeySel, left2KeySel, hyperjump2KeySel, smartbomb2KeySel;
-    private Label upLabel, downLabel, rightLabel, leftLabel, hyperjumpLabel, smartbombLabel;
+    private Label upLabel, downLabel, rightLabel, leftLabel, hyperjumpLabel, smartbombLabel, fireLabel;
     private HBox radioButtons, hBoxImages;
     private double width, height;
     private FiyuvBottomMenu bottomMenu;
@@ -36,7 +34,7 @@ public class SettingsView extends VBox {
     private VBox vboxForVolumeAndColors, vboxSelectionView;
     private HBox hboxForGridPaneAndVBox;
     private  Label keySelection, colorSelection, volumeLabel;
-
+    private KeyTextField[] player1Keys, player2Keys;
     private Settings settings = Settings.getInstance();
 
     public SettingsView(double width, double height){
@@ -87,7 +85,7 @@ public class SettingsView extends VBox {
         this.setSpacing(height / 8);
         this.setAlignment(Pos.CENTER);
         this.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
-        this.setPadding(new Insets(width / 13, width / 13, width / 13, width / 13));
+        this.getStyleClass().add("menu-root");
 
     }
 
@@ -95,6 +93,8 @@ public class SettingsView extends VBox {
 
         radioButtons = new HBox();
         hBoxImages = new HBox();
+
+        group = new ToggleGroup();
 
         selection1Button = new RadioButton();
         selection2Button = new RadioButton();
@@ -161,6 +161,7 @@ public class SettingsView extends VBox {
         player2Label = new Label("Player 2");
         upLabel = new Label("UP: ");
         downLabel = new Label("DOWN: ");
+        fireLabel = new Label("FIRE: ");
         rightLabel = new Label("RIGHT: ");
         leftLabel = new Label("LEFT: ");
         hyperjumpLabel = new Label("HYPER JUMP: ");
@@ -175,44 +176,52 @@ public class SettingsView extends VBox {
         addItemIntoGridPane(downLabel, 0, 2);
         addItemIntoGridPane(rightLabel, 0 , 3);
         addItemIntoGridPane(leftLabel, 0, 4);
-        addItemIntoGridPane(hyperjumpLabel, 0 , 5);
-        addItemIntoGridPane(smartbombLabel, 0, 6);
+        addItemIntoGridPane(fireLabel, 0, 5);
+        addItemIntoGridPane(hyperjumpLabel, 0 , 6);
+        addItemIntoGridPane(smartbombLabel, 0, 7);
     }
 
-    private void createTextFieldsForPlayer1Keys(){
-        up1KeySel = new TextField("\u2191");
-        down1KeySel = new TextField("\u2193");
-        right1KeySel = new TextField("\u2192");
-        left1KeySel = new TextField("\u2190");
-        hyperjump1KeySel = new TextField("1");
-        smartbomb1KeySel = new TextField("2");
+    private void createTextFieldsForPlayer1Keys() {
+        player1Keys = new KeyTextField[7];
+        player1Keys[0] = new KeyTextField(settings.getUp());
+        player1Keys[1] = new KeyTextField(settings.getDown());
+        player1Keys[2] = new KeyTextField(settings.getRight());
+        player1Keys[3] = new KeyTextField(settings.getLeft());
+        player1Keys[4] = new KeyTextField(settings.getFire());
+        player1Keys[5] = new KeyTextField(settings.getHyperJump());
+        player1Keys[6] = new KeyTextField(settings.getSmartBomb());
     }
     private void createTextFieldsForPlayer2Keys(){
-        up2KeySel = new TextField("W");
-        down2KeySel = new TextField("S");
-        right2KeySel = new TextField("D");
-        left2KeySel = new TextField("A");
-        hyperjump2KeySel = new TextField("Z");
-        smartbomb2KeySel = new TextField("X");
+        player2Keys = new KeyTextField[7];
+        player2Keys[0] = new KeyTextField(settings.getUp2());
+        player2Keys[1] = new KeyTextField(settings.getDown2());
+        player2Keys[2]  = new KeyTextField(settings.getRight2());
+        player2Keys[3] = new KeyTextField(settings.getLeft2());
+        player2Keys[4] = new KeyTextField(settings.getFire2());
+        player2Keys[5]  = new KeyTextField(settings.getHyperJump2());
+        player2Keys[6] = new KeyTextField(settings.getSmartBomb2());
+
     }
 
 
     private void addPlayer1KeysIntoGridPane(){
-        addItemIntoGridPane(up1KeySel, 1, 1);
-        addItemIntoGridPane(down1KeySel, 1, 2);
-        addItemIntoGridPane(right1KeySel, 1, 3);
-        addItemIntoGridPane(left1KeySel, 1, 4);
-        addItemIntoGridPane(hyperjump1KeySel, 1, 5);
-        addItemIntoGridPane(smartbomb1KeySel, 1, 6);
+        addItemIntoGridPane(player1Keys[0], 1, 1);
+        addItemIntoGridPane(player1Keys[1], 1, 2);
+        addItemIntoGridPane(player1Keys[2], 1, 3);
+        addItemIntoGridPane(player1Keys[3], 1, 4);
+        addItemIntoGridPane(player1Keys[4], 1, 5);
+        addItemIntoGridPane(player1Keys[5], 1, 6);
+        addItemIntoGridPane(player1Keys[6], 1, 7);
     }
 
     private void addPlayer2KeysIntoGridPane(){
-        addItemIntoGridPane(up2KeySel, 2, 1);
-        addItemIntoGridPane(down2KeySel, 2, 2);
-        addItemIntoGridPane(right2KeySel, 2, 3);
-        addItemIntoGridPane(left2KeySel, 2, 4);
-        addItemIntoGridPane(hyperjump2KeySel, 2, 5);
-        addItemIntoGridPane(smartbomb2KeySel, 2, 6);
+        addItemIntoGridPane(player2Keys[0], 2, 1);
+        addItemIntoGridPane(player2Keys[1], 2, 2);
+        addItemIntoGridPane(player2Keys[2], 2, 3);
+        addItemIntoGridPane(player2Keys[3], 2, 4);
+        addItemIntoGridPane(player2Keys[4], 2, 5);
+        addItemIntoGridPane(player2Keys[5], 2, 6);
+        addItemIntoGridPane(player2Keys[6], 2, 7);
     }
 
     private void addItemIntoGridPane(Node item, int column, int row){
@@ -229,9 +238,76 @@ public class SettingsView extends VBox {
        return bottomMenu.getButton1();
    }
 
+   public KeyCode getUp(){
+        return player1Keys[0].getKeyCode();
+   }
+
+   public KeyCode getDown(){
+       return player1Keys[1].getKeyCode();
+   }
+
+   public KeyCode getRight(){
+       return player1Keys[2].getKeyCode();
+   }
+
+   public KeyCode getLeft(){
+       return player1Keys[3].getKeyCode();
+   }
+
+    public KeyCode getFire(){
+        return player1Keys[4].getKeyCode();
+    }
+
+
+   public KeyCode getHyperJump(){
+       return player1Keys[5].getKeyCode();
+   }
+
+   public KeyCode getSmartBomb(){
+       return player1Keys[6].getKeyCode();
+   }
+
+    public KeyCode getUp2(){
+        return player2Keys[0].getKeyCode();
+    }
+
+    public KeyCode getDown2(){
+        return player2Keys[1].getKeyCode();
+    }
+
+    public KeyCode getRight2(){
+        return player2Keys[2].getKeyCode();
+    }
+
+    public KeyCode getLeft2(){
+        return player2Keys[3].getKeyCode();
+    }
+
+    public KeyCode getFire2(){
+        return player2Keys[4].getKeyCode();
+    }
+
+    public KeyCode getHyperJump2(){
+        return player2Keys[5].getKeyCode();
+    }
+
+    public KeyCode getSmartBomb2(){
+        return player2Keys[6].getKeyCode();
+    }
+
 
    public double getVolume(){
         return volumeSlider.getValue();
    }
+
+   public int getSelectedTheme(){
+        if(selection1Button.isSelected())
+            return 0;
+        else if(selection2Button.isSelected())
+            return 1;
+        else
+            return 2;
+   }
+
 
 }

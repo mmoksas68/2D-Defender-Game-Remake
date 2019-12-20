@@ -1,0 +1,32 @@
+.button{
+    -fx-background-image:url("../assets/menuAssets/red_button00.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+    -fx-font-family: "Verdana";
+    -fx-font-size: 23;
+    -fx-pref-width: 200;
+    -fx-pref-height: 49;
+    -fx-alignment: center-left;
+    -fx-text-alignment: left;
+    -fx-background-position: center;
+    -fx-text-fill: black;
+}
+
+.button:pressed {
+    -fx-background-image: url("../assets/menuAssets/red_button01.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-pref-height: 45px;
+    -fx-background-size: 100% 100%;
+}
+
+.button:hover{
+    -fx-effect: dropshadow(three-pass-box, BLACK, 10, 0,0,0);
+    -fx-text-fill: #dedec5;
+}
+
+.menu-root{
+    -fx-background-color: beige;
+    -fx-padding: 40,40,40,40;
+}
+

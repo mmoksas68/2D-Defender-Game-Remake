@@ -1,0 +1,36 @@
+.button{
+    -fx-font-family: "Copperplate Gothic Bold";
+    -fx-background-image: url("../assets/menuAssets/BUTTON.png");
+    -fx-background-size: 100% 100%;
+    -fx-font-size: 25;
+    -fx-pref-width: 300;
+    -fx-pref-height: 60;
+    -fx-alignment: center-left;
+    -fx-text-alignment: left;
+    -fx-border-color: transparent;
+    -fx-text-fill: rgb(212, 96, 61);
+    -fx-background-color: transparent;
+}
+
+.button:pressed {
+    -fx-background-image: url("../assets/menuAssets/BUTTON.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-pref-height: 55;
+    -fx-background-size: 100% 100%;
+}
+
+.button:hover{
+    -fx-background-image: url("../assets/menuAssets/BUTTON.png");
+    -fx-effect: dropshadow(gaussian, BLACK, 30, 0,0,0);
+    -fx-text-fill: rgba(240, 255, 28, 0.99);
+}
+
+.menu-root{
+    -fx-background-color: rgba(65, 0, 14, 0.92);
+    -fx-padding: 40,40,40,40;
+}
+
+.heading-label{
+    -fx-text-fill: rgba(248, 255, 178, 0.59);
+}

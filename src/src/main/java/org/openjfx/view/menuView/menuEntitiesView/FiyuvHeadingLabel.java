@@ -13,12 +13,12 @@ import java.io.FileNotFoundException;
 
 public class FiyuvHeadingLabel extends Label {
 
-    private final String FONT_PATH = "assets/userInterfaceResources/kenvector_future.ttf";
+    //private final String FONT_PATH = "assets/userInterfaceResources/kenvector_future.ttf";
+    private final String FONT_PATH = "assets/userInterfaceResources/font.ttf";
     private Background background;
     public FiyuvHeadingLabel(String text, double width, double height){
         setPrefHeight(height);
         setPrefWidth(width);
-        ///setPadding(new Insets(40,40,40,40));
         setText(text);
         setWrapText(true);
         try {
@@ -26,8 +26,7 @@ public class FiyuvHeadingLabel extends Label {
         } catch (FileNotFoundException e) {
             setFont(Font.font("Verdana", 45));
         }
-
-        this.setTextFill(Color.web("#0076a3"));
+        this.getStyleClass().add("heading-label");
     }
 
     public FiyuvHeadingLabel(String text){
@@ -39,16 +38,11 @@ public class FiyuvHeadingLabel extends Label {
         setText(text);
         setWrapText(true);
 
-        try {
+       try {
             setFont(Font.loadFont(new FileInputStream(FONT_PATH), 45));
         } catch (FileNotFoundException e) {
             setFont(Font.font("Verdana", 45));
-        }
-
-        this.setTextFill(Color.web("#0076a3"));
-
-
+       }
+        this.getStyleClass().add("heading-label");
     }
-
-
 }

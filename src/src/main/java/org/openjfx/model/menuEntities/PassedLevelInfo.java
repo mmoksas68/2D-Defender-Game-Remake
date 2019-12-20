@@ -24,28 +24,30 @@ public class PassedLevelInfo implements Serializable {
         passedLevelInfo = passedLevelInfo2;
     }
 
+    public boolean getIsLevelPassed(int level){
+        if(level == 1)
+            return level1;
+        else if(level == 2)
+            return level2;
+        else if(level == 3)
+            return level3;
 
-    public boolean isLevel1() {
-        return level1;
+        return false;
+
     }
 
-    public void setLevel1(boolean level1) {
-        this.level1 = level1;
+    public void setLevelPassed(int level, boolean isPassed)
+    {
+        if(level == 1){
+            this.level1 = isPassed;
+        }
+        else if(level == 2){
+            this.level2 = isPassed;
+        }
+        else if(level == 3){
+            this.level3 = isPassed;
+        }
     }
 
-    public boolean isLevel2() {
-        return level2;
-    }
 
-    public void setLevel2(boolean level2) {
-        this.level2 = level2;
-    }
-
-    public boolean isLevel3() {
-        return level3;
-    }
-
-    public void setLevel3(boolean level3) {
-        this.level3 = level3;
-    }
 }

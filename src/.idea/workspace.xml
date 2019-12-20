@@ -29,8 +29,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="CSS File" />
         <option value="Class" />
+        <option value="package-info" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -63,14 +64,25 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="project.structure.side.proportion" value="0.24252874" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\javafx\IdeaProjects\CS319\src\src" />
+      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\sounds" />
+      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\userInterfaceResources" />
+      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\menuAssets" />
+      <recent name="C:\javafx\IdeaProjects\CS319\src\assets" />
+    </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
       <recent name="org.openjfx.view.menuView" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\spacecrafts" />
@@ -78,13 +90,6 @@
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\bombs" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\src\main\java\org\openjfx\model\menuEntities" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\spacecrafts" />
-      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\gameInfoIcons" />
-      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\bombs" />
-      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\menuAssets" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -189,17 +194,6 @@
       <workItem from="1576512848406" duration="13700000" />
       <workItem from="1576527127218" duration="720000" />
       <workItem from="1576585271028" duration="23004000" />
-      <workItem from="1576671676394" duration="8984000" />
-      <workItem from="1576682908751" duration="415000" />
-      <workItem from="1576693521409" duration="983000" />
-      <workItem from="1576699172231" duration="906000" />
-      <workItem from="1576736192435" duration="595000" />
-      <workItem from="1576748283058" duration="1256000" />
-      <workItem from="1576757500332" duration="266000" />
-      <workItem from="1576775248117" duration="1430000" />
-      <workItem from="1576780075886" duration="1209000" />
-      <workItem from="1576821818768" duration="33000" />
-      <workItem from="1576840539146" duration="1973000" />
     </task>
     <servers />
   </component>
