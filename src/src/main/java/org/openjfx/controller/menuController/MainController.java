@@ -96,7 +96,7 @@ public class MainController {
         gameSituationChecker.getIsEnd().addListener(endGameListener);
 
         ChangeListener<Boolean> pauseGameListener = (observable, oldValue, newValue) ->{
-            if(gameSituationChecker.getIsEnd().getValue()) {
+            if(gameSituationChecker.getIsPaused().getValue()) {
                 gameSituationChecker.setIsPaused(false);
                 initPauseMenuController();
             }

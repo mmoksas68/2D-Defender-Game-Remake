@@ -29,6 +29,7 @@ public class PauseMenu extends VBox {
     private SaveButton saveBtn;
 
     public PauseMenu(){
+
         menuButtons = new ArrayList<>();
         setStyle("-fx-background-color: rgba(255, 255, 255, 0.8); -fx-border-radius: 25px");
         setAlignment(Pos.CENTER);
