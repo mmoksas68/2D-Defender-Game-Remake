@@ -59,6 +59,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/images/spacecrafts" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/aiproject" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -189,12 +190,17 @@
       <workItem from="1576512848406" duration="13700000" />
       <workItem from="1576527127218" duration="720000" />
       <workItem from="1576585271028" duration="23004000" />
-      <workItem from="1576485609204" duration="16673000" />
-      <workItem from="1576523231630" duration="2523000" />
-      <workItem from="1576618441377" duration="13025000" />
-      <workItem from="1576666014165" duration="311000" />
-      <workItem from="1576753701953" duration="4612000" />
-      <workItem from="1576768440651" duration="25616000" />
+      <workItem from="1576671676394" duration="8984000" />
+      <workItem from="1576682908751" duration="415000" />
+      <workItem from="1576693521409" duration="983000" />
+      <workItem from="1576699172231" duration="906000" />
+      <workItem from="1576736192435" duration="595000" />
+      <workItem from="1576748283058" duration="1256000" />
+      <workItem from="1576757500332" duration="266000" />
+      <workItem from="1576775248117" duration="1430000" />
+      <workItem from="1576780075886" duration="1209000" />
+      <workItem from="1576821818768" duration="33000" />
+      <workItem from="1576840539146" duration="1973000" />
     </task>
     <servers />
   </component>
@@ -273,5 +279,16 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="656" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576394971790" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/module-info.java</url>
+          <line>3</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

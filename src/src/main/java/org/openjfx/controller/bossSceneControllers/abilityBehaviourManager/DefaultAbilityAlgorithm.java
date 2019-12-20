@@ -8,6 +8,6 @@ public  class DefaultAbilityAlgorithm implements AbilityBehaviourAlgorithm {
        this.specialAbility = specialAbility;
    }
     public void moveSpecialAbility() {
-        specialAbility.moveToDirection( specialAbility.getVelocity(), specialAbility.getxDir(), specialAbility.getyDir());
+        specialAbility.moveWithVelocityVector( specialAbility.getVelocity(), specialAbility.getxDir(), specialAbility.getyDir());
     }
 }

@@ -41,7 +41,7 @@ public class SpacecraftController {
         double yDirection = downKeyPressed ? -1 : ( upKeyPressed ? 1 : 0);
         double multiplier = 1 / Math.sqrt( Math.pow( xDirection,2) + Math.pow( yDirection, 2));
         if ( xDirection != 0 || yDirection != 0) {
-            bossMap.getSpacecraft1().moveToDirection(bossMap.getSpacecraft1().getVelocity(),xDirection * multiplier, yDirection * multiplier);
+            spacecraft.moveToDirection(bossMap.getSpacecraft1().getVelocity(),xDirection * multiplier, yDirection * multiplier);
         }
         ((SpacecraftGun)spacecraft.getSpacecraftGun()).setFiring(fireKeyPressed);
 

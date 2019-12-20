@@ -17,11 +17,11 @@ public class LittleBoss extends SpecialAbility {
         setDamage( damage);
         setVelocity( velocity);
         this.hitNumber = 0;
-        setxDir(- Math.random());
+        setxDir(- (Math.random()));
         if( (int)(Math.random() * 2) == 0)
             setyDir( Math.random());
         else
-            setyDir( Math.random());
+            setyDir( -Math.random());
 
         setAbilityBehaviourAlgorithm( new LittleBossAbilityAlgorithm( this));
     }

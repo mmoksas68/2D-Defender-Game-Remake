@@ -1,5 +1,6 @@
 package org.openjfx.controller.bossSceneControllers;
 
+import org.openjfx.controller.SoundController;
 import org.openjfx.controller.bossSceneControllers.abilityBehaviourManager.AbilityBehaviourAlgorithm;
 import org.openjfx.controller.bossSceneControllers.abilityBehaviourManager.DefaultAbilityAlgorithm;
 import org.openjfx.controller.bossSceneControllers.abilityBehaviourManager.LittleBossAbilityAlgorithm;
@@ -18,7 +19,7 @@ import java.util.Collections;
 
 public class BossMapController {
     private BossMap bossMap;
-    private AbilityBehaviourAlgorithm abilityBehaviourAlgorithm;
+
     public BossMapController(BossMap bossMap) {
         this.bossMap = bossMap;
     }
@@ -36,6 +37,24 @@ public class BossMapController {
 
         for (SpecialAbility specialAbility : bossMap.getSpecialAbilities().values()) {
             specialAbility.getAbilityBehaviourAlgorithm().moveSpecialAbility( );
+            double topSpacecraft = getBossMap().getSpacecraft1().getLocation().getPositionY();
+            double bottomSpacecraft = topSpacecraft + getBossMap().getSpacecraft1().getHitBoxHeight();
+            double topMarker = specialAbility.getLocation().getPositionY();
+            double bottomMarker = topMarker + specialAbility.getHitBoxHeight();
+            double leftSpacecraft = getBossMap().getSpacecraft1().getLocation().getPositionX();
+            double rightSpacecraft = leftSpacecraft + getBossMap().getSpacecraft1().getHitBoxWidth();
+            double leftMarker = specialAbility.getLocation().getPositionX();
+            double rightMarker = leftMarker + specialAbility.getHitBoxWidth();
+
+            if ( !(bottomSpacecraft < topMarker || topSpacecraft > bottomMarker ||
+                    rightSpacecraft < leftMarker || leftSpacecraft > rightMarker)   ) {
+                bossMap.getSpacecraft1().setHealthPoint(getBossMap().getSpacecraft1().getHealthPoint() - specialAbility.getDamage());
+                System.out.println( bossMap.getSpacecraft1().getHealthPoint());
+                if ( specialAbility.getDamage() != 0)
+                SoundController.explosion();
+            }
+
+
         }
 
         // Check collisions between game entities

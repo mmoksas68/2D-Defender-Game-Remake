@@ -29,8 +29,8 @@ public class BossTwo extends Boss {
     }
 
     private Marker createMarker (double maxX, double maxY) {
-        double markerX =  Math.random() * maxX;
-        double markerY =  Math.random() * maxY;
+        double markerX = Math.random() * maxX;
+        double markerY = Math.random() * maxY;
         Marker marker = new Marker( new Location( markerX, markerY));
         Rocket rocket = new Rocket( new Location( getLocation().getPositionX() + getHitBoxWidth()/2, getLocation().getPositionY() + getHitBoxHeight()/2 ));
         double yLength =  markerY - rocket.getLocation().getPositionY();

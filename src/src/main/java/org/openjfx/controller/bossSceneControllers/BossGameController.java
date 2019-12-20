@@ -47,20 +47,27 @@ public class BossGameController  {
 
     public BossGameController(Scene scene, double initWidth, double initHeight) {
         gameSituation = GameSituation.getInstance();
+        isSinglePlayer = gameSituation.isSinglePlayer();
         this.scene = scene;
         rootPane = new RootPane(initWidth, initHeight);
-        bossMapController = new BossMapController( new BossMap( 3, true));
+        bossMapController = new BossMapController( new BossMap( 2, isSinglePlayer));
         bossController = new BossController( bossMapController.getBossMap().getLevel(), bossMapController.getBossMap());
         this.width = initWidth;
         this.height = initHeight;
-        isSinglePlayer = gameSituation.isSinglePlayer();
+
+
+
         spacecraftController1 = new SpacecraftController(bossMapController.getBossMap().getSpacecraft1(), rootPane.getBossMapView(),bossMapController.getBossMap());
+        if (!isSinglePlayer)
+            spacecraftController2 = new SpacecraftController( bossMapController.getBossMap().getSpacecraft2(), rootPane.getBossMapView(), bossMapController.getBossMap());
         scene.setRoot( rootPane);
         initGame();
     }
     private void timerPulse() {
         refreshMap();
         spacecraftController1.getInputs();
+        if ( !isSinglePlayer)
+            spacecraftController2.getInputs();
         bossController.behave();
     }
     private void initGame() {
@@ -81,6 +88,22 @@ public class BossGameController  {
                     break;
                 case ALT_GRAPH:
                     spacecraftController1.setFireKeyPressed(true);
+                    break;
+
+                case W:
+                    spacecraftController2.setUpKeyPressed(true);
+                    break;
+                case S:
+                    spacecraftController2.setDownKeyPressed(true);
+                    break;
+                case A:
+                    spacecraftController2.setLeftKeyPressed(true);
+                    break;
+                case D:
+                    spacecraftController2.setRightKeyPressed(true);
+                    break;
+                case SPACE:
+                    spacecraftController2.setFireKeyPressed(true);
                     break;
             }
         });
@@ -105,8 +128,24 @@ public class BossGameController  {
                 case ESCAPE:
                     gameOnChange.set(true);
                     break;
+                case W:
+                    spacecraftController2.setUpKeyPressed(false);
+                    break;
+                case S:
+                    spacecraftController2.setDownKeyPressed(false);
+                    break;
+                case A:
+                    spacecraftController2.setLeftKeyPressed(false);
+                    break;
+                case D:
+                    spacecraftController2.setRightKeyPressed(false);
+                    break;
+                case SPACE:
+                    spacecraftController2.setFireKeyPressed(false);
+                    break;
             }
         });
+
 
         animationTimer.start();
     }
@@ -120,6 +159,8 @@ public class BossGameController  {
         refreshAndReflectMeteor();
         refreshAndReflectScore();
         refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
+        if ( !isSinglePlayer)
+            refreshAndReflectSpacecraft( spacecraftController2.getSpacecraft());
         refresAndReflectBoss();
         refreshAndReflectSpecialAbility();
     }
@@ -136,7 +177,7 @@ public class BossGameController  {
             if (bullet.isDead()) {
                 toBeDeleted.add(bullet.getID());
             }
-            spacecraftController1.getBossMapView().refreshBullet(new ModelToViewBullet(bullet));
+            rootPane.getBossMapView().refreshBullet(new ModelToViewBullet(bullet));
 
         }
         for (var it : toBeDeleted) {
@@ -166,8 +207,14 @@ public class BossGameController  {
     }
 
     private void refreshAndReflectSpacecraft(Spacecraft spacecraft) {
-        rootPane.getBossMapView().refreshSpacecraftMain( new ModelToViewSpaceCraft(spacecraft));
-        rootPane.getTopBarView().getMiddleView().refresh(new RadarObject(spacecraft));
+        if ( spacecraft.getID() == spacecraftController1.getSpacecraft().getID()) {
+            rootPane.getBossMapView().refreshSpacecraftMain(new ModelToViewSpaceCraft(spacecraft));
+            rootPane.getTopBarView().getMiddleView().refresh(new RadarObject(spacecraft));
+        }
+        else if ( spacecraft.getID() == spacecraftController2.getSpacecraft().getID()) {
+            rootPane.getBossMapView().refreshSpacecraftSecondary( new ModelToViewSpaceCraft( spacecraft));
+            rootPane.getTopBarView().getMiddleView().refresh( new RadarObject( spacecraft));
+        }
     }
     private void refresAndReflectBoss() {
         rootPane.getBossMapView().refreshBossView( new ModelToViewBoss( bossMapController.getBossMap().getBoss()));

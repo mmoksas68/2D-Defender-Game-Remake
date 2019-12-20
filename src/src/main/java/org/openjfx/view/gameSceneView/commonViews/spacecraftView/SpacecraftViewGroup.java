@@ -47,6 +47,7 @@ public class SpacecraftViewGroup {
         flame.setFitHeight(spacecraftView.getFitHeight());
         flame.setFitWidth(spacecraftView.getFitWidth());
 
+
         if(modelToViewSpaceCraft.isMoving())
             flame.setVisible(true);
         else

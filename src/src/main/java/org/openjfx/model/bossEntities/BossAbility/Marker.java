@@ -13,7 +13,11 @@ public class Marker extends SpecialAbility {
     public Marker(Location location) {
         super( location, radius, radius, healthPoint);
         setAbilityBehaviourAlgorithm( new DefaultAbilityAlgorithm( this));
+
         isRocketFired = false;
+
+        setDamage( 50);
+
     }
 
     public boolean getIsRocketFired() {

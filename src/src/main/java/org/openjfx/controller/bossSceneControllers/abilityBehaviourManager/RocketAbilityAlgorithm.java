@@ -15,7 +15,7 @@ public class RocketAbilityAlgorithm implements AbilityBehaviourAlgorithm {
         if ( rocket.getLocation().getPositionX() <= rocket.getDestinationX() + Marker.radius/2)
             rocket.setDead( true);
         else
-        rocket.moveToDirection( rocket.getVelocity(), rocket.getxDir(),rocket.getyDir());
+        rocket.moveWithVelocityVector( rocket.getVelocity(), rocket.getxDir(),rocket.getyDir());
 
     }
 }
