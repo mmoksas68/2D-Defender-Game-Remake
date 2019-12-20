@@ -30,16 +30,17 @@ public class BossMap {
     private java.util.Map<Long, Bullet> bullets = new HashMap<Long, Bullet>();
     private java.util.Map <Long, SpecialAbility> specialAbilities = new HashMap<>();
 
+
     public BossMap(int level, boolean isSinglePlayer) {
         this.level = level;
         this.isSinglePlayer = isSinglePlayer;
         initMap();
     }
     private void initMap() {
-        spacecraft1 = new Spacecraft( new Location( 0 ,450));
+        spacecraft1 = new Spacecraft( new Location( 0 ,200));
         spacecraft1.setChoosenPicNo( 0);
         if ( !isSinglePlayer) {
-            spacecraft2 = new Spacecraft(new Location(0, 800));
+            spacecraft2 = new Spacecraft(new Location(0, 600));
             spacecraft2.setChoosenPicNo( 1);
         }
         switch ( level) {

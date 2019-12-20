@@ -51,6 +51,23 @@ public class BossMapView extends AnchorPane {
         }
     }
 
+    public void refreshSpacecraftSecondary(ModelToViewSpaceCraft modelToViewSpaceCraft){
+        SpacecraftViewGroup spacecraftViewGroup;
+        if(spacecraftViewGroup2 != null){
+            spacecraftViewGroup = spacecraftViewGroup2;
+            spacecraftViewGroup.refresh(modelToViewSpaceCraft, layoutScaleWidth, layoutScaleHeight);
+            if(modelToViewSpaceCraft.isDead()){
+                getChildren().remove(spacecraftViewGroup.getFlame());
+                getChildren().remove(spacecraftViewGroup.getSpacecraftView());
+            }
+        } else {
+            spacecraftViewGroup = new SpacecraftViewGroup(modelToViewSpaceCraft, layoutScaleWidth, layoutScaleHeight);
+            spacecraftViewGroup2 = spacecraftViewGroup;
+            getChildren().add(spacecraftViewGroup.getSpacecraftView());
+            getChildren().add(spacecraftViewGroup.getFlame());
+        }
+    }
+
     public void refreshBullet(ModelToViewBullet modelToViewBullet){
         BulletView bullet;
         if(bullets.containsKey(modelToViewBullet.getID())){

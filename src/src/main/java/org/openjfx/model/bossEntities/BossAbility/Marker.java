@@ -12,5 +12,6 @@ public class Marker extends SpecialAbility {
     public Marker(Location location) {
         super( location, radius, radius, healthPoint);
         setAbilityBehaviourAlgorithm( new DefaultAbilityAlgorithm( this));
+        setDamage( 50);
     }
 }

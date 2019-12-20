@@ -7,7 +7,7 @@ public class Rocket extends SpecialAbility{
     private static double hitBoxHeight = 25;
     private static double hitBoxWidth = 25;
     private static int healthPoint = 200;
-    private static int damage = 50;
+    private static int damage = 0;
 
     private double destinationX;
     private double destinationY;

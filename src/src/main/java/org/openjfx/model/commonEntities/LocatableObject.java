@@ -119,4 +119,11 @@ public abstract class LocatableObject {
             moveDown(amountY);
     }
 
+    public void moveWithVelocityVector(double velocity, double xComponent, double yCompenent) {
+        if ( xComponent != 0 && yCompenent != 0) {
+            location.setPositionX(location.getPositionX() + xComponent *velocity );
+            location.setPositionY(location.getPositionY() + yCompenent * -velocity);
+        }
+    }
+
 }
