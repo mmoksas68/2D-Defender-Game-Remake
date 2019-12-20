@@ -6,6 +6,7 @@ import org.openjfx.model.commonEntities.Location;
 public class Buff extends LocatableObject {
     public static final double WIDTH = 0.03;
     public static final double HEIGHT = 0.05;
+    public static final double BOSSMAP_VELOCITY = 10;
     private BuffTypes buffType;
 
     public Buff(Location location, BuffTypes buffType) {

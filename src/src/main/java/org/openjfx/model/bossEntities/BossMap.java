@@ -23,6 +23,7 @@ public class BossMap {
     public static double MAP_WIDTH = primaryScreenBounds.getWidth();
 
     private int level;
+
     private boolean isSinglePlayer;
     private Boss boss;
     private Spacecraft spacecraft1;
@@ -114,5 +115,8 @@ public class BossMap {
     public void setSpacecraft2(Spacecraft spacecraft2) {
         this.spacecraft2 = spacecraft2;
     }
+
+    public boolean isSinglePlayer() { return isSinglePlayer; }
+
 }
 
