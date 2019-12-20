@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.openjfx.controller.SoundController;
 import org.openjfx.controller.bossSceneControllers.BossGameController;
 import org.openjfx.controller.preBossSceneControllers.PreBossGameController;
 import org.openjfx.fileManager.FileController;
@@ -34,6 +35,7 @@ public class MainMenuController {
     private Settings settings;
     private PassedLevelInfo passedLevelInfo = PassedLevelInfo.getInstance();
     private BooleanProperty isGameStartPressed, isSaveSettingsPressed, isQuitPressed, isResumePressed;
+    private int theme;
 
 
     public MainMenuController(Scene scene) {
@@ -46,16 +48,44 @@ public class MainMenuController {
         isResumePressed = new SimpleBooleanProperty(false);
         initButtonListeners();
         gameSituation = GameSituation.getInstance();
+        settings = Settings.getInstance();
+
+        theme = settings.getTheme();
+
+        if(theme == 0)
+            scene.getStylesheets().add("file:cssFiles/theme1");
+        else if(theme == 1)
+            scene.getStylesheets().add("file:cssFiles/theme2");
+        else
+            scene.getStylesheets().add("file:cssFiles/theme3.css");
+    }
+
+    private void setTheme(){
+        theme = settings.getTheme();
+        if(theme == 0) {
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add("file:cssFiles/theme1");
+        }
+        else if(theme == 1) {
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add("file:cssFiles/theme2");
+        }
+        else {
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add("file:cssFiles/theme3.css");
+        }
     }
 
     private void playSinglePlayer(){
         gameSituation.setSinglePlayer(true);
         scene.setRoot(menuSceneContainer.getSpacecraftSelection1());
+        SoundController.buttonClick();
     }
 
     private void playTwoPlayer(){
         gameSituation.setSinglePlayer(false);
         scene.setRoot(menuSceneContainer.getSpacecraftSelection1());
+        SoundController.buttonClick();
     }
 
 
@@ -65,18 +95,22 @@ public class MainMenuController {
         else
             scene.setRoot(menuSceneContainer.getSpacecraftSelection2());
 
+        SoundController.buttonClick();
         gameSituation.setSpacecraft1(menuSceneContainer.getSpacecraftSelection1().getSelectedItem());
     }
 
     private void backInSpacecraftScreen2(){
+        SoundController.buttonClick();
         scene.setRoot(menuSceneContainer.getSpacecraftSelection1());
     }
 
     private void nextInSpacecraftScreen2(){
+        SoundController.buttonClick();
         scene.setRoot(menuSceneContainer.getLevelSelection());
     }
 
     private void backInLevelScreen(){
+        SoundController.buttonClick();
         if(gameSituation.isSinglePlayer())
             scene.setRoot(menuSceneContainer.getSpacecraftSelection1());
         else
@@ -84,36 +118,60 @@ public class MainMenuController {
     }
 
     private void start(){
+        SoundController.buttonClick();
         isGameStartPressed.setValue(true);
     }
 
     private void howToPlay(){
+        SoundController.buttonClick();
         scene.setRoot(menuSceneContainer.getHowToPlay());
     }
 
     private void settings(){
+        SoundController.buttonClick();
         scene.setRoot(menuSceneContainer.getSettings());
     }
 
     private void saveSettings(){
-        isSaveSettingsPressed.setValue(true);
+        SoundController.buttonClick();
         settings.setVolume(menuSceneContainer.getSettings().getVolume());
+        settings.setUp(menuSceneContainer.getSettings().getUp());
+        settings.setDown(menuSceneContainer.getSettings().getDown());
+        settings.setRight(menuSceneContainer.getSettings().getRight());
+        settings.setLeft(menuSceneContainer.getSettings().getLeft());
+        settings.setHyperJump(menuSceneContainer.getSettings().getHyperJump());
+        settings.setSmartBomb(menuSceneContainer.getSettings().getSmartBomb());
+        settings.setUp2(menuSceneContainer.getSettings().getUp2());
+        settings.setDown2(menuSceneContainer.getSettings().getDown2());
+        settings.setRight2(menuSceneContainer.getSettings().getRight2());
+        settings.setLeft2(menuSceneContainer.getSettings().getLeft2());
+        settings.setHyperJump2(menuSceneContainer.getSettings().getHyperJump2());
+        settings.setSmartBomb2(menuSceneContainer.getSettings().getSmartBomb2());
+        settings.setFire(menuSceneContainer.getSettings().getFire());
+        settings.setFire2(menuSceneContainer.getSettings().getFire2());
+        settings.setTheme(menuSceneContainer.getSettings().getSelectedTheme());
+        setTheme();
+        isSaveSettingsPressed.setValue(true);
     }
 
     private void highScores(){
+        SoundController.buttonClick();
         scene.setRoot(menuSceneContainer.getHighScoresView());
     }
 
 
     private void credits(){
+        SoundController.buttonClick();
         scene.setRoot(menuSceneContainer.getCredits());
     }
 
     private void quit(){
+        SoundController.buttonClick();
         isQuitPressed.setValue(true);
     }
 
     private void backToMenu(){
+        SoundController.buttonClick();
         scene.setRoot(menuSceneContainer.getMainMenu());
     }
 
@@ -123,6 +181,7 @@ public class MainMenuController {
     */
 
    private void resume(){
+       SoundController.buttonClick();
        isResumePressed.setValue(true);
    }
 
@@ -284,9 +343,9 @@ ON CLICK
     }
 
     public void enablePassedLevels(){
-        if(passedLevelInfo.isLevel1())
+        if(passedLevelInfo.getIsLevelPassed(1))
             menuSceneContainer.getLevelSelection().enableLevel2();
-        if(passedLevelInfo.isLevel2())
+        if(passedLevelInfo.getIsLevelPassed(2))
             menuSceneContainer.getLevelSelection().enableLevel3();
     }
 

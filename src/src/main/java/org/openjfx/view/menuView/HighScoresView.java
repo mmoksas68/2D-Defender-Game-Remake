@@ -8,10 +8,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import org.openjfx.model.menuEntities.HighScore;
 import org.openjfx.model.menuEntities.HighScoreInfo;
-import org.openjfx.view.menuView.menuEntitiesView.FiyuvBottomMenu;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvButton;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvHeadingLabel;
-//import org.openjfx.view.menuEntitiesView.FiyuvHeadingLabel;
 
 public class HighScoresView extends VBox {
 
@@ -30,14 +28,12 @@ public class HighScoresView extends VBox {
 
     public HighScoresView(){
 
-        //this.getStylesheets().add("Style1.css");
         highScores = HighScoreInfo.getInstance();
 
         createColumns();
         createTables();
 
         menuButton = new FiyuvButton("Menu");
-
         tabPane = new TabPane();
         level1 = new Tab("Level 1 Scores");
         level2 = new Tab("Level 2 Scores");
@@ -47,9 +43,6 @@ public class HighScoresView extends VBox {
         heading = new FiyuvHeadingLabel("High Scores");
         this.getChildren().add(heading);
         heading.setAlignment(Pos.CENTER);
-
-        VBox vBox = new VBox();
-        VBox vBox2 = new VBox();
 
         HBox hBoxLevel1 = new HBox();
         HBox hBoxLevel2 = new HBox();
@@ -90,7 +83,7 @@ public class HighScoresView extends VBox {
 
         this.setAlignment(Pos.CENTER);
         this.setSpacing(100);
-        this.setPadding(new Insets(40,40,40,40));
+        this.getStyleClass().add("menu-root");
 
         //tabPane.getStyleClass().add("Style1.css");
 
@@ -158,7 +151,7 @@ public class HighScoresView extends VBox {
 
     }
 
-    public FiyuvButton getMenuButton(){
+    public Button getMenuButton(){
         return menuButton;
     }
 

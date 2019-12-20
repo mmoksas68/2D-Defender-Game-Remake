@@ -6,15 +6,17 @@ import org.openjfx.view.menuView.menuEntitiesView.FiyuvButton;
 
 public class HowToPlay extends BorderPane {
 
-    FiyuvBottomMenu bottomMenu;
+    FiyuvButton button;
 
     public HowToPlay(){
-        bottomMenu = new FiyuvBottomMenu("Menu");
-        this.getChildren().add(bottomMenu);
+        button = new FiyuvButton("Menu");
+        this.setBottom(button);
+        this.getStyleClass().add("menu-root");
     }
 
 
     public FiyuvButton getMenuButton(){
-        return bottomMenu.getButton1();
+        return button;
     }
+
 }

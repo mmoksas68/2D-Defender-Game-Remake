@@ -1,8 +1,4 @@
 package org.openjfx.controller.menuController;
-
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
@@ -55,30 +51,38 @@ public class MainController {
     private void initMainController(){
         menuController = new MainMenuController(scene);
         ChangeListener<Boolean> newGameListener = (observable, oldValue, newValue) ->{
-            menuController.setIsGameStartPressed(false);
-            initGameSituationChecker(true);
-            saveGame();
+            if(menuController.getIsGameStartPressed().getValue()) {
+                menuController.setIsGameStartPressed(false);
+                initGameSituationChecker(true);
+                saveGame();
+            }
         };
         menuController.getIsGameStartPressed().addListener(newGameListener);
 
         ChangeListener<Boolean> resumeListener = (observable, oldValue, newValue) ->{
-            menuController.setIsResumePressed(false);
-            initGameSituationChecker(false);
+            if(menuController.getIsResumePressed().getValue()) {
+                menuController.setIsResumePressed(false);
+                initGameSituationChecker(false);
+            }
 
         };
         menuController.getIsResumePressed().addListener(resumeListener);
 
         ChangeListener<Boolean> saveSettingsListener = (observable, oldValue, newValue) ->{
-            menuController.setIsSaveSettingsPressed(false);
-            fileController.saveKeys();
+            if(menuController.getIsSaveSettingsPressed().getValue()) {
+                menuController.setIsSaveSettingsPressed(false);
+                fileController.saveKeys();
+            }
         };
         menuController.getIsSaveSettingsPressed().addListener(saveSettingsListener);
 
         ChangeListener<Boolean> quitListener = (observable, oldValue, newValue) ->{
-            menuController.setIsQuitPressed(false);
-            fileController.saveGame();
-            stage.close();
-            System.exit(0);
+            if(menuController.getIsQuitPressed().getValue()) {
+                menuController.setIsQuitPressed(false);
+                fileController.saveGame();
+                stage.close();
+                System.exit(0);
+            }
         };
         menuController.getIsQuitPressed().addListener(quitListener);
     }
@@ -92,8 +96,10 @@ public class MainController {
         gameSituationChecker.getIsEnd().addListener(endGameListener);
 
         ChangeListener<Boolean> pauseGameListener = (observable, oldValue, newValue) ->{
-            gameSituationChecker.setIsPaused(false);
-            initPauseMenuController();
+            if(gameSituationChecker.getIsEnd().getValue()) {
+                gameSituationChecker.setIsPaused(false);
+                initPauseMenuController();
+            }
         };
         gameSituationChecker.getIsPaused().addListener(pauseGameListener);
     }

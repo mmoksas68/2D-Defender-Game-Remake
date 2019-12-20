@@ -95,18 +95,17 @@ public class LevelSelection extends VBox {
 
         this.getChildren().addAll(headingLabel, hBoxLevelLabels, hBoxImages, radioButtons, bottomMenu);
         this.setAlignment(Pos.CENTER);
+        this.getStyleClass().add("menu-root");
     }
 
     private void disableRadioButtons(){
-        if(!passedLevelInfo.isLevel1()) {
+        if(!passedLevelInfo.getIsLevelPassed(1)) {
             selection2Button.setDisable(true);
             selection3Button.setDisable(true);
         }
-        else if(!passedLevelInfo.isLevel2())
+        else if(!passedLevelInfo.getIsLevelPassed(2))
             selection3Button.setDisable(true);
-
     }
-
 
     private void designView() {
         for (ImageView imageView : imageViews) {
@@ -123,7 +122,6 @@ public class LevelSelection extends VBox {
         hBoxImages.setSpacing(width/6);
 
 
-        this.setPadding(new Insets(width/ 13, width / 13, width/13, width / 13));
         this.setSpacing(height/15);
     }
 

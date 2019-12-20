@@ -29,8 +29,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="CSS File" />
         <option value="Class" />
+        <option value="package-info" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -69,14 +70,19 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\menuAssets" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\images" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\images\buildings" />
-      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images" />
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
       <recent name="org.openjfx.view.menuView" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\sounds" />
+      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\userInterfaceResources" />
+      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\menuAssets" />
+      <recent name="C:\javafx\IdeaProjects\CS319\src\assets" />
+      <recent name="C:\javafx\IdeaProjects\CS319\src\cssFiles" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images" />
@@ -192,6 +198,9 @@
       <workItem from="1576523231630" duration="2523000" />
       <workItem from="1576618441377" duration="13025000" />
       <workItem from="1576666014165" duration="311000" />
+      <workItem from="1576682486601" duration="18090000" />
+      <workItem from="1576714792165" duration="2062000" />
+      <workItem from="1576777610677" duration="28274000" />
     </task>
     <servers />
   </component>

@@ -66,6 +66,7 @@ public class SpacecraftSelection extends VBox {
 
         this.getChildren().addAll(headingLabel, hBoxImages, radioButtons, bottomMenu);
         this.setAlignment(Pos.CENTER);
+        this.getStyleClass().add("menu-root");
     }
 
     private void designView() {
@@ -81,8 +82,6 @@ public class SpacecraftSelection extends VBox {
         radioButtons.setSpacing(width/3);
         hBoxImages.setSpacing(width/5);
 
-
-        this.setPadding(new Insets(width/ 13, width / 13, width/13, width / 13));
         this.setSpacing(height/15);
     }
 

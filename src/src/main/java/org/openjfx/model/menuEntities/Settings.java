@@ -3,6 +3,7 @@ package org.openjfx.model.menuEntities;
 import javafx.scene.input.KeyCode;
 
 import java.io.Serializable;
+import java.security.Key;
 
 public class Settings implements Serializable {
 
@@ -22,11 +23,30 @@ public class Settings implements Serializable {
     private KeyCode fire2;
     private KeyCode hyperJump2;
     private KeyCode smartBomb2;
-    private int background;
+    private int theme;
     private double volume;
 
 
     private Settings() {
+        up = KeyCode.UP;
+        down = KeyCode.DOWN;
+        right = KeyCode.RIGHT;
+        left = KeyCode.LEFT;
+        fire = KeyCode.NUMPAD1;
+        hyperJump = KeyCode.NUMPAD2;
+        smartBomb = KeyCode.NUMPAD3;
+
+        up2 = KeyCode.W;
+        down2 = KeyCode.S;
+        right2 = KeyCode.D;
+        left2 = KeyCode.A;
+        fire2 = KeyCode.SPACE;
+        hyperJump2 = KeyCode.Z;
+        smartBomb2 = KeyCode.X;
+
+        volume = 50;
+
+        theme = 0;
     }
 
     public static Settings getInstance(){
@@ -154,12 +174,12 @@ public class Settings implements Serializable {
         this.smartBomb2 = smartBomb2;
     }
 
-    public int getBackground() {
-        return background;
+    public int getTheme() {
+        return theme;
     }
 
-    public void setBackground(int background) {
-        this.background = background;
+    public void setTheme(int theme) {
+        this.theme = theme;
     }
 
     public double getVolume() {

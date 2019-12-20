@@ -40,8 +40,10 @@ public class MainMenu extends HBox {
         this.setAlignment(Pos.CENTER);
         vbox.setAlignment(Pos.CENTER_LEFT);
         this.getChildren().addAll(vbox, gameLogo);
-        this.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
+        //this.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
         createButtons();
+        this.setSpacing(100);
+        this.getStyleClass().add("menu-root");
     }
 
     private void createButtons(){

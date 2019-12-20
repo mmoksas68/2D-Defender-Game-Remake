@@ -56,4 +56,75 @@ public class HighScoreInfo implements Serializable{
     public ObservableList<HighScore>[] getLevel3Scores() {
         return level3Scores;
     }
+
+    public boolean updateScores(int level, boolean isSinglePlayer, int score) {
+        int playerNumber = 1;
+        if (!isSinglePlayer)
+            playerNumber = 2;
+
+        int number = 1;
+        if(score > getScore(playerNumber, level, 1))
+            return setScore(playerNumber, level, 1, score) ;
+        else if(score > getScore(playerNumber, level, 2))
+            return setScore(playerNumber, level, 2, score) ;
+        else if(score > getScore(playerNumber, level, 1))
+            return setScore(playerNumber, level, 1, score) ;
+        else if(score > getScore(playerNumber, level, 1))
+            return setScore(playerNumber, level, 1, score);
+        else if(score > getScore(playerNumber, level, 1))
+            return setScore(playerNumber, level, 1, score) ;
+        else if(score > getScore(playerNumber, level, 1))
+            return setScore(playerNumber, level, 1, score) ;
+        else if(score > getScore(playerNumber, level, 1))
+            return setScore(playerNumber, level, 1, score) ;
+        else if(score > getScore(playerNumber, level, 1))
+            return setScore(playerNumber, level, 1, score);
+        else if(score > getScore(playerNumber, level, 1))
+            return setScore(playerNumber, level, 1, score) ;
+        else if (score > getScore(playerNumber, level, 1))
+            return setScore(playerNumber, level, 1, score) ;
+        else if(score > getScore(playerNumber, level, 1))
+            return setScore(playerNumber, level, 1, score) ;
+        else if (score > getScore(playerNumber, level, 1))
+            return setScore(playerNumber, level, 1, score) ;
+
+        return false;
+
+    }
+
+
+    private int getScore(int playerNumber, int level, int number){
+        if(level == 1){
+            return level1Scores[playerNumber - 1].get(number - 1).getScore();
+        }
+
+        else if(level == 2){
+            return level2Scores[playerNumber - 1].get(number - 1).getScore();
+        }
+
+        else if(level == 3){
+            return level3Scores[playerNumber - 1].get(number - 1).getScore();
+        }
+        return 0;
+    }
+
+    private boolean setScore(int playerNumber, int level, int number, int score){
+        if(level == 1){
+            level1Scores[playerNumber - 1].set(number - 1,  new HighScore(number, score));
+            return true;
+        }
+
+        else if(level == 2){
+            level2Scores[playerNumber - 1 ].set(number - 1,  new HighScore(number, score));
+            return true;
+        }
+
+        else if(level == 3){
+            level3Scores[playerNumber - 1].set(number - 1, new HighScore(number, score));
+            return true;
+        }
+        return false;
+    }
+
+
 }
