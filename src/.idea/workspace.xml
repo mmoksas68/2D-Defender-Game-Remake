@@ -70,12 +70,15 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images" />
+      <recent name="C:\Users\kosed\Desktop\Combined\src\src\main\java\org\openjfx\model\menuEntities" />
+      <recent name="C:\Users\kosed\Desktop\cs319\src\main\java\org\openjfx\view" />
+      <recent name="C:\Users\kosed\Desktop\cs319\src\main\java\org\openjfx\view\entities" />
+      <recent name="C:\Users\kosed\Desktop\cs319\src\main\java\org\openjfx\controller" />
+    </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="org.openjfx.view.menuView.menuEntitiesView" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
-      <recent name="org.openjfx.view.menuView" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets\sounds" />
@@ -84,12 +87,9 @@
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\cssFiles" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images" />
-      <recent name="C:\Users\kosed\Desktop\Combined\src\src\main\java\org\openjfx\model\menuEntities" />
-      <recent name="C:\Users\kosed\Desktop\cs319\src\main\java\org\openjfx\view" />
-      <recent name="C:\Users\kosed\Desktop\cs319\src\main\java\org\openjfx\view\entities" />
-      <recent name="C:\Users\kosed\Desktop\cs319\src\main\java\org\openjfx\controller" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
+      <recent name="org.openjfx.view.menuView" />
     </key>
   </component>
   <component name="RunDashboard">

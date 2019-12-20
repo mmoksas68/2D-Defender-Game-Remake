@@ -5,6 +5,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 public class HighScoreInfo implements Serializable{
 
@@ -16,7 +17,7 @@ public class HighScoreInfo implements Serializable{
 
         level1Scores = new ObservableList[2];
         level2Scores = new ObservableList[2];
-        level3Scores = new ObservableList[3];
+        level3Scores = new ObservableList[2];
 
         for(int i = 0; i < 2; i++){
             level1Scores[i] = FXCollections.observableArrayList();
@@ -29,8 +30,6 @@ public class HighScoreInfo implements Serializable{
             }
 
         }
-
-        level1Scores[0].set(1,new HighScore(5, 10));
 
     }
 
@@ -58,72 +57,68 @@ public class HighScoreInfo implements Serializable{
     }
 
     public boolean updateScores(int level, boolean isSinglePlayer, int score) {
-        int playerNumber = 1;
+        int index = 0;
         if (!isSinglePlayer)
-            playerNumber = 2;
+            index = 1;
 
-        int number = 1;
-        if(score > getScore(playerNumber, level, 1))
-            return setScore(playerNumber, level, 1, score) ;
-        else if(score > getScore(playerNumber, level, 2))
-            return setScore(playerNumber, level, 2, score) ;
-        else if(score > getScore(playerNumber, level, 1))
-            return setScore(playerNumber, level, 1, score) ;
-        else if(score > getScore(playerNumber, level, 1))
-            return setScore(playerNumber, level, 1, score);
-        else if(score > getScore(playerNumber, level, 1))
-            return setScore(playerNumber, level, 1, score) ;
-        else if(score > getScore(playerNumber, level, 1))
-            return setScore(playerNumber, level, 1, score) ;
-        else if(score > getScore(playerNumber, level, 1))
-            return setScore(playerNumber, level, 1, score) ;
-        else if(score > getScore(playerNumber, level, 1))
-            return setScore(playerNumber, level, 1, score);
-        else if(score > getScore(playerNumber, level, 1))
-            return setScore(playerNumber, level, 1, score) ;
-        else if (score > getScore(playerNumber, level, 1))
-            return setScore(playerNumber, level, 1, score) ;
-        else if(score > getScore(playerNumber, level, 1))
-            return setScore(playerNumber, level, 1, score) ;
-        else if (score > getScore(playerNumber, level, 1))
-            return setScore(playerNumber, level, 1, score) ;
+        if(level == 1){
+            if (score > level1Scores[index].get(9).getScore()) {
+                HighScore highScore = addScore(index, level, score);
+                if (highScore != null) {
+                    Comparator<HighScore> comparator = Comparator.comparingInt(HighScore::getScore);
+                    FXCollections.sort(level1Scores[index], comparator);
+                    level1Scores[index].remove(10);
+                    highScore.setRanking(level1Scores[index].indexOf(highScore) + 1);
+                    return true;
+                }
+            }
+        }
 
+        else if(level == 2){
+            if (score > level2Scores[index].get(9).getScore()) {
+                HighScore highScore = addScore(index, level, score);
+                if (highScore != null) {
+                    Comparator<HighScore> comparator = Comparator.comparingInt(HighScore::getScore);
+                    FXCollections.sort(level2Scores[index], comparator);
+                    level2Scores[index].remove(10);
+                    highScore.setRanking(level2Scores[index].indexOf(highScore) + 1);
+                    return true;
+                }
+            }
+        }
+        else if(level == 3){
+            if (score > level3Scores[index].get(9).getScore()) {
+                HighScore highScore = addScore(index, level, score);
+                if (highScore != null) {
+                    Comparator<HighScore> comparator = Comparator.comparingInt(HighScore::getScore);
+                    FXCollections.sort(level3Scores[index], comparator);
+                    level3Scores[index].remove(10);
+                    highScore.setRanking(level3Scores[index].indexOf(highScore) + 1);
+                    return true;
+                }
+            }
+        }
         return false;
 
     }
 
-
-    private int getScore(int playerNumber, int level, int number){
+    private HighScore addScore(int index, int level, int score){
+        HighScore highScore = new HighScore(score);
         if(level == 1){
-            return level1Scores[playerNumber - 1].get(number - 1).getScore();
+            level1Scores[index].add(highScore);
+            return highScore;
         }
 
         else if(level == 2){
-            return level2Scores[playerNumber - 1].get(number - 1).getScore();
+            level2Scores[index].add(highScore);
+            return highScore;
         }
 
         else if(level == 3){
-            return level3Scores[playerNumber - 1].get(number - 1).getScore();
+            level3Scores[index].add(highScore);
+            return highScore;
         }
-        return 0;
-    }
-
-    private boolean setScore(int playerNumber, int level, int number, int score){
-        if(level == 1){
-            level1Scores[playerNumber - 1].set(number - 1,  new HighScore(number, score));
-            return true;
-        }
-
-        else if(level == 2){
-            level2Scores[playerNumber - 1 ].set(number - 1,  new HighScore(number, score));
-            return true;
-        }
-
-        else if(level == 3){
-            level3Scores[playerNumber - 1].set(number - 1, new HighScore(number, score));
-            return true;
-        }
-        return false;
+        return null;
     }
 
 

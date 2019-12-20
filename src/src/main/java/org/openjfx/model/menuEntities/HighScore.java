@@ -9,11 +9,21 @@ public class HighScore {
         this.score = score;
     }
 
+    public HighScore(int score){
+        this.score = score;
+    }
+
+
     public int getScore(){
         return score;
     }
 
 
     public int getRanking() {return ranking;}
+
+
+    public  void setRanking(int ranking){
+        this.ranking = ranking;
+    }
 
 }
