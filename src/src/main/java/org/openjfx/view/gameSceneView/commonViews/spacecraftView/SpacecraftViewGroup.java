@@ -43,6 +43,17 @@ public class SpacecraftViewGroup {
         spacecraftView.setFitHeight(modelToViewSpaceCraft.getHitboxHeight()*scaleH );
         spacecraftView.setFitWidth(modelToViewSpaceCraft.getHitboxWidth()*scaleW);
 
+        if(modelToViewSpaceCraft.isDirectionLeft()){
+            spacecraftView.setRotate(-180);
+            flame.setRotate(-90);
+            flame.setTranslateX((spacecraftView.getTranslateX() + spacecraftView.getFitWidth()/3));
+        }
+        else{
+            spacecraftView.setRotate(0);
+            flame.setRotate(90);
+            flame.setTranslateX((spacecraftView.getTranslateX() - spacecraftView.getFitWidth()/3));
+        }
+
         flame.setTranslateY(spacecraftView.getTranslateY());
         flame.setFitHeight(spacecraftView.getFitHeight());
         flame.setFitWidth(spacecraftView.getFitWidth());

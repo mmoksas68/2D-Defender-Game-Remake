@@ -41,8 +41,8 @@ public class RootPane extends BorderPane {
         setCenter(this.bossMapView);
 
         setTop(topBarView);
-      /*  Background background = new Background(image);
-        setBackground(background);*/
+        Background background = new Background(image);
+        setBackground(background);
     }
 
     public RootPane(double width, double height, boolean isSinglePlayer) {
