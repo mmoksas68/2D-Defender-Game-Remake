@@ -65,6 +65,24 @@ public class BossGameController  {
         initGame();
         initListeners();
     }
+
+    public BossGameController(BossMap bossMap, Scene scene, double initWidth, double initHeight) {
+        this.scene = scene;
+        rootPane = new RootPane(initWidth, initHeight);
+        bossMapController = new BossMapController(bossMap);
+        bossController = new BossController( bossMapController.getBossMap().getLevel(), bossMapController.getBossMap());
+        this.width = initWidth;
+        this.height = initHeight;
+
+        spacecraftController1 = new SpacecraftController(bossMapController.getBossMap().getSpacecraft1(), rootPane.getBossMapView(),bossMapController.getBossMap());
+        if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
+            spacecraftController2 = new SpacecraftController( bossMapController.getBossMap().getSpacecraft2(), rootPane.getBossMapView(), bossMapController.getBossMap());
+        scene.setRoot(rootPane);
+        initGame();
+        initListeners();
+    }
+
+
         public void initListeners(){
             ChangeListener<Boolean> isFirstDied = (observable, oldValue, newValue) -> {
                 if(gameSituation.isFirstCraftDied()){
@@ -399,6 +417,9 @@ public class BossGameController  {
     public BooleanProperty getGameOnChange() {
         return gameOnChange;
     }
+
+
+    public BossMapController getBossMapController() {return bossMapController;}
 }
 
  /*   double [] boundArray = { moveright, moveleft, moveup, movedown};

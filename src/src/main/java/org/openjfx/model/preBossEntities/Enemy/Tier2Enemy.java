@@ -3,6 +3,8 @@ package org.openjfx.model.preBossEntities.Enemy;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.FiringBehavior.NoGun;
 
+import java.io.Serializable;
+
 public class Tier2Enemy extends Enemy {
     public static final double WIDTH = 100;
     public static final double HEIGHT = 60;

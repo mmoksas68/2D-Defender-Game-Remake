@@ -55,7 +55,7 @@ public class FileController {
         try {
 
             //If you want to use saved game change directory
-            fis = new FileInputStream(new File("gameData/game.txt"));
+            fis = new FileInputStream(new File("gameData/gameSave.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -130,7 +130,8 @@ public class FileController {
             e.printStackTrace();
         }
         try {
-            Settings.setInstance((Settings) ois.readObject());
+            Settings settings = Settings.getInstance();
+            settings.setInstance((Settings) ois.readObject());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -180,6 +181,7 @@ public class FileController {
     }
 
     public void loadPassedLevelInfo(){
+        PassedLevelInfo passedLevelInfo = PassedLevelInfo.getInstance();
         try {
             fis = new FileInputStream(new File("gameData/levelInfo.txt"));
         } catch (FileNotFoundException e) {
@@ -243,6 +245,7 @@ public class FileController {
     public void loadHighScores(){
         try {
             fis = new FileInputStream(new File("gameData/highScores.txt"));
+            System.out.println("load");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
