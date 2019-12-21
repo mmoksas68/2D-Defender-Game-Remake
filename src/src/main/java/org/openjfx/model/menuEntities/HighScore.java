@@ -1,6 +1,8 @@
 package org.openjfx.model.menuEntities;
 
-public class HighScore {
+import java.io.Serializable;
+
+public class HighScore implements Serializable {
 
     private int ranking, score;
 

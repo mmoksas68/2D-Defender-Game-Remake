@@ -28,6 +28,7 @@ public class Settings implements Serializable {
 
 
     private Settings() {
+
         /*up = KeyCode.UP;
         down = KeyCode.DOWN;
         right = KeyCode.RIGHT;
@@ -47,6 +48,7 @@ public class Settings implements Serializable {
         volume = 50;
 
         theme = 0; */
+
     }
 
     public static Settings getInstance(){

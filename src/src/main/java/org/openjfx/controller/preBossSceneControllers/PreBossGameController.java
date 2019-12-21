@@ -163,7 +163,6 @@ public class PreBossGameController {
 
 
     private void refreshAndReflectSpacecraft(Spacecraft spacecraft){
-
         if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip()){
 
             if(spacecraft.getID() == spacecraftController1.getSpacecraft().getID())
@@ -190,6 +189,10 @@ public class PreBossGameController {
 
         else{
             spacecraftController1.getPreBossMapView().refreshSpacecraftMain( new ModelToViewSpaceCraft(spacecraft));
+            if(spacecraftController1.getPreBossMap().getSpacecraft1().isDead()){
+                gameSituation.setIsPreBossFinished(true);
+                animationTimer.stop();
+            }
         }
 
 

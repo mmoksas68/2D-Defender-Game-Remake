@@ -1,36 +1,34 @@
 package org.openjfx.model.menuEntities;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 public class HighScoreInfo implements Serializable{
 
-    private ObservableList<HighScore> level1Scores[], level2Scores[], level3Scores[];
+    private ArrayList<HighScore> level1Scores[], level2Scores[], level3Scores[];
     private static HighScoreInfo highScoreInfo;
 
 
     private HighScoreInfo() {
 
-        level1Scores = new ObservableList[2];
-        level2Scores = new ObservableList[2];
-        level3Scores = new ObservableList[2];
+        level1Scores = new ArrayList[2];
+        level2Scores = new ArrayList[2];
+        level3Scores = new ArrayList[2];
 
         for(int i = 0; i < 2; i++){
-            level1Scores[i] = FXCollections.observableArrayList();
-            level2Scores[i] = FXCollections.observableArrayList();
-            level3Scores[i] = FXCollections.observableArrayList();
+            level1Scores[i] = new ArrayList<>();
+            level2Scores[i] = new ArrayList<>();
+            level3Scores[i] = new ArrayList<>();
             for(int j = 0; j < 10; j++){
                 level1Scores[i].add(new HighScore(j+1, 0));
                 level2Scores[i].add(new HighScore(j+1, 0));
                 level3Scores[i].add(new HighScore(j+1, 0));
             }
-
         }
-
     }
 
     public static HighScoreInfo getInstance(){
@@ -45,15 +43,29 @@ public class HighScoreInfo implements Serializable{
     }
 
     public ObservableList<HighScore>[] getLevel1Scores(){
-        return level1Scores;
+        ObservableList<HighScore>[] level1 = new ObservableList[2];
+        level1[0] = FXCollections.observableList(level1Scores[0]);
+        level1[1] = FXCollections.observableList(level1Scores[1]);
+
+        return level1;
     }
 
     public ObservableList<HighScore>[] getLevel2Scores() {
-        return level2Scores;
+        ObservableList<HighScore>[] level2 = new ObservableList[2];
+
+        level2[0] = FXCollections.observableList(level1Scores[0]);
+        level2[1] = FXCollections.observableList(level1Scores[1]);
+
+        return level2;
     }
 
     public ObservableList<HighScore>[] getLevel3Scores() {
-        return level3Scores;
+        ObservableList<HighScore>[] level3 = new ObservableList[2];
+
+        level3[0] = FXCollections.observableList(level1Scores[0]);
+        level3[1] = FXCollections.observableList(level1Scores[1]);
+
+        return level3;
     }
 
     public boolean updateScores(int level, boolean isSinglePlayer, int score) {
@@ -66,7 +78,7 @@ public class HighScoreInfo implements Serializable{
                 HighScore highScore = addScore(index, level, score);
                 if (highScore != null) {
                     Comparator<HighScore> comparator = Comparator.comparingInt(HighScore::getScore);
-                    FXCollections.sort(level1Scores[index], comparator);
+                    Collections.sort(level1Scores[index], comparator);
                     level1Scores[index].remove(10);
                     highScore.setRanking(level1Scores[index].indexOf(highScore) + 1);
                     return true;
@@ -79,7 +91,7 @@ public class HighScoreInfo implements Serializable{
                 HighScore highScore = addScore(index, level, score);
                 if (highScore != null) {
                     Comparator<HighScore> comparator = Comparator.comparingInt(HighScore::getScore);
-                    FXCollections.sort(level2Scores[index], comparator);
+                    Collections.sort(level2Scores[index], comparator);
                     level2Scores[index].remove(10);
                     highScore.setRanking(level2Scores[index].indexOf(highScore) + 1);
                     return true;
@@ -91,7 +103,7 @@ public class HighScoreInfo implements Serializable{
                 HighScore highScore = addScore(index, level, score);
                 if (highScore != null) {
                     Comparator<HighScore> comparator = Comparator.comparingInt(HighScore::getScore);
-                    FXCollections.sort(level3Scores[index], comparator);
+                    Collections.sort(level3Scores[index], comparator);
                     level3Scores[index].remove(10);
                     highScore.setRanking(level3Scores[index].indexOf(highScore) + 1);
                     return true;

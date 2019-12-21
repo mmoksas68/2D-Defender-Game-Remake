@@ -6,6 +6,8 @@ import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.preBossEntities.Enemy.Enemy;
 import org.openjfx.utilization.PositionHelper;
 
+import java.io.Serializable;
+
 public class EnemyGun extends SimpleGun{
     private Enemy enemy;
 

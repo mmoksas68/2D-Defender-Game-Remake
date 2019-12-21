@@ -4,8 +4,10 @@ import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.Buff.BuffTypes;
 import org.openjfx.model.commonEntities.FiringBehavior.FiringBehavior;
 
+import java.io.Serializable;
 
-public abstract class Enemy extends LocatableObject {
+
+public abstract class Enemy extends LocatableObject{
     private double velocity;
     private int radarRadius;
     private Location destinationLocation;

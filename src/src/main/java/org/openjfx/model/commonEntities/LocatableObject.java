@@ -2,6 +2,7 @@ package org.openjfx.model.commonEntities;
 
 import java.io.Serializable;
 
+
 public abstract class LocatableObject implements Serializable {
 
     private Location location;

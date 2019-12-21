@@ -5,8 +5,10 @@ import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
 import org.openjfx.utilization.PositionHelper;
 
+import java.io.Serializable;
 
-public class SpacecraftGun extends SimpleGun {
+
+public class SpacecraftGun extends SimpleGun implements Serializable {
 
 
     private Spacecraft spacecraft;

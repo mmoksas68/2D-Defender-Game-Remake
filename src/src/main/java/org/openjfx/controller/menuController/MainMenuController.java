@@ -28,14 +28,14 @@ public class MainMenuController {
     private Scene scene;
     private MenuSceneContainer menuSceneContainer;
     private PreBossGameController preBossGameController;
-    private BossGameController bossGameController;
 
     private HighScoreInfo highScore;
     private GameSituation gameSituation;
     private Settings settings;
     private PassedLevelInfo passedLevelInfo = PassedLevelInfo.getInstance();
-    private BooleanProperty isGameStartPressed, isSaveSettingsPressed, isQuitPressed, isResumePressed;
+    private BooleanProperty isGameStartPressed, isSaveSettingsPressed, isQuitPressed, isResumePressed, isBossScene;
     private int theme;
+    private BossGameController bossGameController;
 
 
     public MainMenuController(Scene scene) {
@@ -50,15 +50,9 @@ public class MainMenuController {
         initButtonListeners();
         gameSituation = GameSituation.getInstance();
         settings = Settings.getInstance();
+        isBossScene = new SimpleBooleanProperty(false);
 
-        theme = settings.getTheme();
-
-        if(theme == 0)
-            scene.getStylesheets().add("file:cssFiles/theme1");
-        else if(theme == 1)
-            scene.getStylesheets().add("file:cssFiles/theme2");
-        else
-            scene.getStylesheets().add("file:cssFiles/theme3.css");
+        setTheme();
     }
 
     private void setTheme(){
@@ -239,6 +233,13 @@ ON CLICK
             }
         });
 
+        menuSceneContainer.getMainMenu().getBossSceneButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                isBossScene.set(true);
+            }
+        });
+
 
         menuSceneContainer.getMainMenu().getExitBtn().setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -386,4 +387,10 @@ ON CLICK
     public void setIsResumePressed(boolean b) {
         isResumePressed.setValue(b);
     }
+
+
+    public void setIsBossScene(boolean b){isBossScene.set(b);}
+
+    public BooleanProperty getIsBossScene(){return isBossScene;}
+
 }

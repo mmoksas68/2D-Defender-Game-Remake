@@ -4,6 +4,8 @@ import org.openjfx.model.commonEntities.FiringBehavior.NoGun;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.FiringBehavior.EnemyGun;
 
+import java.io.Serializable;
+
 public class Tier1Enemy extends Enemy{
     public static final double WIDTH = 100;
     public static final double HEIGHT = 60;

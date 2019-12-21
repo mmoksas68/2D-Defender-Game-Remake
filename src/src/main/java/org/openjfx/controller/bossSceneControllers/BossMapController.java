@@ -29,6 +29,10 @@ public class BossMapController {
             }
         }
 
+        for(var specialAbility: bossMap.getSpecialAbilities().values()){
+            specialAbility.getAbilityBehaviourAlgorithm().moveSpecialAbility();
+        }
+
 
         // Check collisions between game entities
         checkCollision( bossMap.getSpacecraft1(), bossMap.getBullets());
@@ -54,9 +58,9 @@ public class BossMapController {
                         obj.setHealthPoint(obj.getHealthPoint() - ((Bullet) iterator).getDamage());
                         iterator.setDead(true);
                     }
-                    else if( iterator instanceof Laser){
-                        obj.setHealthPoint(obj.getHealthPoint() - ((Laser) iterator).getDamage());
-                        if ( ((Laser) iterator).getDamage() != 0)
+                    else if( iterator instanceof SpecialAbility){
+                        obj.setHealthPoint(obj.getHealthPoint() - ((SpecialAbility) iterator).getDamage());
+                        if ( ((SpecialAbility) iterator).getDamage() != 0)
                             SoundController.explosion();
                     }
 /* TO BE IMPLEMENTED
@@ -71,7 +75,7 @@ public class BossMapController {
                 }
 
                 if (obj.getHealthPoint() <= 0)
-                    iterator.setDead(true);
+                    obj.setDead(true);
             }
         }
     }

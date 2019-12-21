@@ -15,6 +15,7 @@ public class FireView extends ImageView {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
         setImage( image);
         setTranslateX( 30);
         setTranslateY( 50);
