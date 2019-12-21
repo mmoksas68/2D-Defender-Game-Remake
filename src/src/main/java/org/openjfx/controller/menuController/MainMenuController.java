@@ -128,29 +128,37 @@ public class MainMenuController {
 
     private void settings(){
         SoundController.buttonClick();
+        menuSceneContainer.getSettings().initializeSettingsView();
         scene.setRoot(menuSceneContainer.getSettings());
     }
 
     private void saveSettings(){
         SoundController.buttonClick();
-        settings.setVolume(menuSceneContainer.getSettings().getVolume());
-        settings.setUp(menuSceneContainer.getSettings().getUp());
-        settings.setDown(menuSceneContainer.getSettings().getDown());
-        settings.setRight(menuSceneContainer.getSettings().getRight());
-        settings.setLeft(menuSceneContainer.getSettings().getLeft());
-        settings.setHyperJump(menuSceneContainer.getSettings().getHyperJump());
-        settings.setSmartBomb(menuSceneContainer.getSettings().getSmartBomb());
-        settings.setUp2(menuSceneContainer.getSettings().getUp2());
-        settings.setDown2(menuSceneContainer.getSettings().getDown2());
-        settings.setRight2(menuSceneContainer.getSettings().getRight2());
-        settings.setLeft2(menuSceneContainer.getSettings().getLeft2());
-        settings.setHyperJump2(menuSceneContainer.getSettings().getHyperJump2());
-        settings.setSmartBomb2(menuSceneContainer.getSettings().getSmartBomb2());
-        settings.setFire(menuSceneContainer.getSettings().getFire());
-        settings.setFire2(menuSceneContainer.getSettings().getFire2());
-        settings.setTheme(menuSceneContainer.getSettings().getSelectedTheme());
-        setTheme();
-        isSaveSettingsPressed.setValue(true);
+
+        if(menuSceneContainer.getSettings().isAllKeysDistinct()) {
+            settings.setVolume(menuSceneContainer.getSettings().getVolume());
+            settings.setUp(menuSceneContainer.getSettings().getUp());
+            settings.setDown(menuSceneContainer.getSettings().getDown());
+            settings.setRight(menuSceneContainer.getSettings().getRight());
+            settings.setLeft(menuSceneContainer.getSettings().getLeft());
+            settings.setHyperJump(menuSceneContainer.getSettings().getHyperJump());
+            settings.setSmartBomb(menuSceneContainer.getSettings().getSmartBomb());
+            settings.setUp2(menuSceneContainer.getSettings().getUp2());
+            settings.setDown2(menuSceneContainer.getSettings().getDown2());
+            settings.setRight2(menuSceneContainer.getSettings().getRight2());
+            settings.setLeft2(menuSceneContainer.getSettings().getLeft2());
+            settings.setHyperJump2(menuSceneContainer.getSettings().getHyperJump2());
+            settings.setSmartBomb2(menuSceneContainer.getSettings().getSmartBomb2());
+            settings.setFire(menuSceneContainer.getSettings().getFire());
+            settings.setFire2(menuSceneContainer.getSettings().getFire2());
+            settings.setTheme(menuSceneContainer.getSettings().getSelectedTheme());
+            setTheme();
+            isSaveSettingsPressed.setValue(true);
+        }
+
+        else
+            menuSceneContainer.getSettings().giveError();
+
     }
 
     private void highScores(){
@@ -342,6 +350,13 @@ ON CLICK
             }
         });
 
+        menuSceneContainer.getSettings().getDefaultSettings().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                menuSceneContainer.getSettings().setDefaultKeys();
+            }
+        });
+
     }
 
     public MainMenu getMainMenu(){
@@ -393,4 +408,7 @@ ON CLICK
 
     public BooleanProperty getIsBossScene(){return isBossScene;}
 
+    public SettingsView getSettingsView() {
+        return menuSceneContainer.getSettings();
+    }
 }

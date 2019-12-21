@@ -1,4 +1,4 @@
-.button{
+.fiyuv-button{
     -fx-font-family: "Copperplate Gothic Bold";
     -fx-font-size: 25;
     -fx-pref-width: 300;
@@ -10,12 +10,12 @@
     -fx-background-color: transparent;
 }
 
-.button:pressed {
+.fiyuv-button:pressed {
     -fx-pref-height: 55;
     -fx-background-size: 100% 100%;
 }
 
-.button:hover{
+.fiyuv-button:hover{
     -fx-effect: dropshadow(gaussian, BLACK, 10, 0,0,0);
     -fx-text-fill: white;
 }

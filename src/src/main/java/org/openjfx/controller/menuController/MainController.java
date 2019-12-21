@@ -48,10 +48,10 @@ public class MainController {
     private void loadInitialElements(){
         fileController.loadHighScores();
         fileController.loadKeys();
+        fileController.loadPassedLevelInfo();
     }
 
     private void loadGameElements(){
-        fileController.loadPassedLevelInfo();
         //fileController.loadGame(); //Burayı kaldır Doğukan
     }
 
@@ -59,7 +59,7 @@ public class MainController {
         menuController = new MainMenuController(scene);
         ChangeListener<Boolean> newGameListener = (observable, oldValue, newValue) ->{
             if(menuController.getIsGameStartPressed().get()) {
-                //gameSituation = GameSituation.getInstance();
+                gameSituation = GameSituation.getInstance();
                 passedLevelInfo = PassedLevelInfo.getInstance();
                 gameSaveObj = GameSaveObj.getInstance();
                 menuController.setIsGameStartPressed(false);
@@ -89,7 +89,7 @@ public class MainController {
         ChangeListener<Boolean> quitListener = (observable, oldValue, newValue) ->{
             if(menuController.getIsQuitPressed().get()) {
                 menuController.setIsQuitPressed(false);
-                //fileController.saveGame();  //burayı da kaldır
+                fileController.saveGame();  //burayı da kaldır
                 stage.close();
                 System.exit(0);
             }
@@ -149,15 +149,15 @@ public class MainController {
     }
     private void initPauseMenuController(){
         if(gameSituation.isIsPreBossFinishedSuccessfully()) {
-            pauseMenuController = new PauseMenuController(scene, gameSituationChecker.getBossGameController(), menuController.getMainMenu());
+            pauseMenuController = new PauseMenuController(scene, gameSituationChecker.getBossGameController(), menuController.getMainMenu(), menuController.getSettingsView());
         }
         else
-            pauseMenuController = new PauseMenuController(scene, gameSituationChecker.getPreBossGameController(), menuController.getMainMenu());
+            pauseMenuController = new PauseMenuController(scene, gameSituationChecker.getPreBossGameController(), menuController.getMainMenu(), menuController.getSettingsView());
 
         ChangeListener<Boolean> saveGameListener = (observable, oldValue, newValue) ->{
             if (pauseMenuController.getIsSavePressed().get()) {
                 pauseMenuController.setIsSavePressed(false);
-                fileController.saveGame(); //burayı da
+                fileController.saveGame();
             }
         };
         pauseMenuController.getIsSavePressed().addListener(saveGameListener);
@@ -206,6 +206,7 @@ public class MainController {
             public void run(){
                 GameSaveObj.getInstance().setPreBossMap(gameSituationChecker.getPreBossMap());
                 GameSaveObj.getInstance().setBossMap(gameSituationChecker.getBossMap());
+                GameSaveObj.getInstance().setGameSituation(GameSituation.getInstance());
                 fileController.saveGame();
             }
         };

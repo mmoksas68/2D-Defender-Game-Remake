@@ -1,4 +1,5 @@
 package org.openjfx.view.menuView;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -8,6 +9,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.StageStyle;
 import org.openjfx.assetManager.Assets;
 import org.openjfx.model.menuEntities.Settings;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvBottomMenu;
@@ -15,6 +18,7 @@ import org.openjfx.view.menuView.menuEntitiesView.FiyuvButton;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvHeadingLabel;
 import org.openjfx.view.menuView.menuEntitiesView.KeyTextField;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class SettingsView extends VBox {
@@ -36,6 +40,7 @@ public class SettingsView extends VBox {
     private  Label keySelection, colorSelection, volumeLabel;
     private KeyTextField[] player1Keys, player2Keys;
     private Settings settings = Settings.getInstance();
+    private Button defaultSettings;
 
     public SettingsView(double width, double height){
         this.width = width;
@@ -46,6 +51,10 @@ public class SettingsView extends VBox {
         hboxForGridPaneAndVBox = new HBox();
 
         bottomMenu = new FiyuvBottomMenu("Menu", "Save");
+
+        defaultSettings = new Button("Default Keys");
+        defaultSettings.setPrefWidth(200);
+        defaultSettings.setPrefHeight(50);
 
         volumeSlider = new Slider();
         volumeLabel = new Label("Volume");
@@ -79,7 +88,11 @@ public class SettingsView extends VBox {
 
         vboxForVolumeAndColors.setSpacing(height / 5);
 
-        this.getChildren().addAll(headingLabel, hboxForGridPaneAndVBox, bottomMenu);
+        HBox hbox = new HBox();
+        hbox.getChildren().add(defaultSettings);
+
+        this.getChildren().addAll(headingLabel, hboxForGridPaneAndVBox,hbox, bottomMenu);
+        hbox.setAlignment(Pos.BOTTOM_LEFT);
         gridPane.setAlignment(Pos.CENTER_LEFT);
         gridPane.setPrefSize(width / 2, height / 2 );
         this.setSpacing(height / 8);
@@ -203,6 +216,40 @@ public class SettingsView extends VBox {
 
     }
 
+    private void setTextFieldsForPlayer1Keys() {
+        player1Keys[0].setKeyCode(settings.getUp());
+        player1Keys[1].setKeyCode(settings.getDown());
+        player1Keys[2].setKeyCode(settings.getRight());
+        player1Keys[3].setKeyCode(settings.getLeft());
+        player1Keys[4].setKeyCode(settings.getFire());
+        player1Keys[5].setKeyCode(settings.getHyperJump());
+        player1Keys[6].setKeyCode(settings.getSmartBomb());
+    }
+
+    private void setTextFieldsForPlayer2Keys(){
+        player2Keys[0].setKeyCode(settings.getUp2());
+        player2Keys[1].setKeyCode(settings.getDown2());
+        player2Keys[2].setKeyCode(settings.getRight2());
+        player2Keys[3].setKeyCode(settings.getLeft2());
+        player2Keys[4].setKeyCode(settings.getFire2());
+        player2Keys[5].setKeyCode(settings.getHyperJump2());
+        player2Keys[6].setKeyCode(settings.getSmartBomb2());
+
+    }
+
+
+    public void initializeSettingsView(){
+        setTextFieldsForPlayer1Keys();
+        setTextFieldsForPlayer2Keys();
+        volumeSlider.setValue(settings.getVolume());
+        if(settings.getTheme() == 0)
+            selection1Button.setSelected(true);
+        else if(settings.getTheme() ==  1)
+            selection2Button.setSelected(true);
+        else
+            selection3Button.setSelected(true);
+    }
+
 
     private void addPlayer1KeysIntoGridPane(){
         addItemIntoGridPane(player1Keys[0], 1, 1);
@@ -295,6 +342,8 @@ public class SettingsView extends VBox {
         return player2Keys[6].getKeyCode();
     }
 
+    public Button getDefaultSettings(){return defaultSettings;}
+
 
    public double getVolume(){
         return volumeSlider.getValue();
@@ -309,5 +358,55 @@ public class SettingsView extends VBox {
             return 2;
    }
 
+   public boolean isAllKeysDistinct(){
+       HashSet<KeyCode> foundObjects = new HashSet<>();
+       for(KeyTextField keyField: player1Keys){
+           KeyCode code = keyField.getKeyCode();
+           if(foundObjects.contains(code)){
+               return false;
+           }
+           foundObjects.add(code);
+       }
+
+       for(KeyTextField keyField: player2Keys){
+           KeyCode code = keyField.getKeyCode();
+           if(foundObjects.contains(code)){
+               return false;
+           }
+           foundObjects.add(code);
+       }
+       return true;
+   }
+
+
+   public void giveError(){
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setContentText("Keys can not have same value!");
+        a.initStyle(StageStyle.DECORATED);
+        a.initOwner(this.getScene().getWindow());
+        a.initModality(Modality.APPLICATION_MODAL);
+        a.setTitle("Key Settings!");
+
+        //a.setOnCloseRequest(EventHandler<Close>);
+        a.show();
+   }
+
+
+    public void setDefaultKeys() {
+        player1Keys[0].setKeyCode(KeyCode.UP);
+        player1Keys[1].setKeyCode(KeyCode.DOWN);
+        player1Keys[2].setKeyCode(KeyCode.RIGHT);
+        player1Keys[3].setKeyCode(KeyCode.LEFT);
+        player1Keys[4].setKeyCode(KeyCode.NUMPAD1);
+        player1Keys[5].setKeyCode(KeyCode.NUMPAD2);
+        player1Keys[6].setKeyCode(KeyCode.NUMPAD3);
+        player2Keys[0].setKeyCode(KeyCode.W);
+        player2Keys[1].setKeyCode(KeyCode.S);
+        player2Keys[2].setKeyCode(KeyCode.D);
+        player2Keys[3].setKeyCode(KeyCode.A);
+        player2Keys[4].setKeyCode(KeyCode.SPACE);
+        player2Keys[5].setKeyCode(KeyCode.Z);
+        player2Keys[6].setKeyCode(KeyCode.X);
+    }
 
 }

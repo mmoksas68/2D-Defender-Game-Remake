@@ -62,4 +62,17 @@ public class GameSaveObj implements Serializable {
     public void setPreBossMap(PreBossMap preBossMap) {
         this.preBossMap = preBossMap;
     }
+
+    public void setGameSituation(GameSituation instance) {
+        this.gameSituation = gameSituation;
+    }
+
+    public GameSituation getGameSituation(){
+        return gameSituation;
+    }
+
+
+
+
+
 }

@@ -1,57 +1,62 @@
 package org.openjfx.view.menuView;
-
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.openjfx.model.menuEntities.GameSituation;
-import org.openjfx.view.menuView.menuEntitiesView.ExitButton;
-import org.openjfx.view.menuView.menuEntitiesView.RestartButton;
-import org.openjfx.view.menuView.menuEntitiesView.ResumeButton;
-import org.openjfx.view.menuView.menuEntitiesView.SaveButton;
+import org.openjfx.view.menuView.menuEntitiesView.GameButtons;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class EndGameMenuView extends VBox {
-    private Scene scene;
-    private ResumeButton nextLevelBtn;
-    private ExitButton menuBtn;
-    private RestartButton restartBtn;
-    private Label successfulLabel, unsuccessfulLabel, scoreLabel;
+    private Button nextLevelBtn;
+    private Button menuBtn;
+    private Button restartBtn;
+    private Label scoreLabel;
     private GameSituation gameSituation = GameSituation.getInstance();
 
     public EndGameMenuView(){
-        setStyle("-fx-background-color: rgba(255, 255, 255, 0.8); -fx-border-radius: 25px");
         setAlignment(Pos.CENTER);
-        getChildren().add(new Label("Paused"));
+        ImageView image1 = new ImageView();
+        image1.getStyleClass().add("header-win-image");
 
-        successfulLabel = new Label("Congratulations!");
-        unsuccessfulLabel = new Label("Game over!");
+        ImageView image2 = new ImageView();
+        image2.getStyleClass().add("header-lose-image");
 
         scoreLabel = new Label("Score: " + gameSituation.getScore());
 
+        scoreLabel.getStyleClass().add("score-label");
+
+
         if(gameSituation.isIsBossFinishedSuccessfully())
-            this.getChildren().add(successfulLabel);
+            this.getChildren().add(image1);
         else
-            this.getChildren().add(unsuccessfulLabel);
+            this.getChildren().add(image2);
 
         this.getChildren().add(scoreLabel);
-
         createButtons();
     }
 
     private void createButtons(){
-        nextLevelBtn = new ResumeButton();
-        menuBtn = new ExitButton();
-        restartBtn = new RestartButton();
-        FlowPane flowPane = new FlowPane(menuBtn, restartBtn, nextLevelBtn);
-        flowPane.setAlignment(Pos.CENTER);
-        flowPane.setPadding(new Insets(10,100,10,100));
-        getChildren().add(flowPane);
+        nextLevelBtn = new GameButtons();
+        menuBtn = new GameButtons();
+        restartBtn = new GameButtons();
+        HBox hbox = new HBox(menuBtn, restartBtn);
+
+
+        nextLevelBtn.getStyleClass().add("next-level-button");
+        menuBtn.getStyleClass().add("menu-button");
+        restartBtn.getStyleClass().add("restart-button");
+
+        if(gameSituation.isIsBossFinishedSuccessfully())
+            hbox.getChildren().add(nextLevelBtn);
+
+        hbox.setAlignment(Pos.CENTER);
+        hbox.setSpacing(20);
+        //hbox.setPadding(new Insets(10,100,10,100));
+        getChildren().add(hbox);
     }
 
     public Button getRestartButton(){return restartBtn;}

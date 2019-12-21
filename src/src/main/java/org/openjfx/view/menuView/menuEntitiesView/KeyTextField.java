@@ -55,4 +55,9 @@ public class KeyTextField extends TextField {
         return keyCode;
     }
 
+    public void setKeyCode(KeyCode keyCode) {
+        this.keyCode = keyCode;
+        this.setText(keyCode.toString());
+    }
+
 }
