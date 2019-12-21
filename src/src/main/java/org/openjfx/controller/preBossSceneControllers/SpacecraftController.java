@@ -28,6 +28,7 @@ public class SpacecraftController {
         this.spacecraft = spacecraft;
         this.preBossMapView = preBossMapView;
         this.preBossMap = preBossMap;
+        this.preBossMapView.setSliderLeft(spacecraft.getLocation().getPositionX()-960);
         bossMap = null;
     }
 
