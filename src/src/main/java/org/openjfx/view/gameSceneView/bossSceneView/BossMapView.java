@@ -44,6 +44,10 @@ public class BossMapView extends AnchorPane {
         if(spacecraftViewGroup1 != null){
             spacecraftViewGroup = spacecraftViewGroup1;
             spacecraftViewGroup.refresh(modelToViewSpaceCraft, layoutScaleWidth, layoutScaleHeight);
+            if(modelToViewSpaceCraft.isDead()){
+                getChildren().remove(spacecraftViewGroup.getFlame());
+                getChildren().remove(spacecraftViewGroup.getSpacecraftView());
+            }
         } else {
             spacecraftViewGroup = new SpacecraftViewGroup(modelToViewSpaceCraft, layoutScaleWidth, layoutScaleHeight);
             spacecraftViewGroup1 = spacecraftViewGroup;
