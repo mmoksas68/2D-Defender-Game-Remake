@@ -28,6 +28,7 @@ public class MainMenu extends HBox {
     private FiyuvButton scoresBtn;
     private FiyuvButton exitBtn;
     private FiyuvButton resumeBtn;
+    private  FiyuvButton bossSceneButton;
     private ImageView gameLogo;
     private VBox vbox;
 
@@ -40,7 +41,6 @@ public class MainMenu extends HBox {
         this.setAlignment(Pos.CENTER);
         vbox.setAlignment(Pos.CENTER_LEFT);
         this.getChildren().addAll(vbox, gameLogo);
-        //this.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
         createButtons();
         this.setSpacing(100);
         this.getStyleClass().add("menu-root");
@@ -53,9 +53,10 @@ public class MainMenu extends HBox {
         createSettingsBtn();
         createCreditsBtn();
         createScoresBtn();
+        createResumeBtn();
         createExitBtn();
 
-        createResumeBtn();
+        createBossSceneButton();
     }
 
     private void addMenuButton(FiyuvButton btn){
@@ -105,6 +106,11 @@ public class MainMenu extends HBox {
         addMenuButton(resumeBtn);
     }
 
+    private void createBossSceneButton(){
+        bossSceneButton = new FiyuvButton("Boss Scene Button");
+        addMenuButton(bossSceneButton);
+    }
+
     public FiyuvButton getSinglePlayerBtn(){
         return singlePlayerBtn;
     }
@@ -132,4 +138,6 @@ public class MainMenu extends HBox {
     }
 
     public FiyuvButton getResumeBtn(){return resumeBtn;}
+
+    public FiyuvButton getBossSceneButton(){return bossSceneButton;}
 }

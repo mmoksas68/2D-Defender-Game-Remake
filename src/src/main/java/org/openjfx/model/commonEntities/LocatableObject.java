@@ -1,6 +1,8 @@
 package org.openjfx.model.commonEntities;
 
-public abstract class LocatableObject {
+import java.io.Serializable;
+
+public abstract class LocatableObject implements Serializable{
 
     private Location location;
     private double hitBoxWidth;

@@ -69,7 +69,7 @@ public class EndGameMenuController {
     }
 
     private void exit(){
-        scene.setRoot(mainMenuView);
+        primaryScene.setRoot(mainMenuView);
         stage.close();
     }
 

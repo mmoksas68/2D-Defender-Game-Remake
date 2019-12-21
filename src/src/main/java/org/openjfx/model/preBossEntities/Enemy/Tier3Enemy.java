@@ -5,7 +5,7 @@ import org.openjfx.model.commonEntities.FiringBehavior.EnemyGun;
 
 import java.util.ArrayList;
 
-public class Tier3Enemy extends Enemy {
+public class Tier3Enemy extends Enemy{
 
         public static final double WIDTH = 100;
         public static final double HEIGHT = 60;

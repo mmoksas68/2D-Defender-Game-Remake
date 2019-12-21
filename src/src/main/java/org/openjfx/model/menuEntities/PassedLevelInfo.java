@@ -11,6 +11,11 @@ public class PassedLevelInfo implements Serializable {
     private boolean level3;
 
     private PassedLevelInfo(){
+
+        //These should be false actually. When a new game is started, we should be able to use default values, otherwise load this from file.
+        level1 = true;
+        level2 = true;
+        level3 = true;
     }
 
     public static PassedLevelInfo getInstance(){
@@ -48,6 +53,5 @@ public class PassedLevelInfo implements Serializable {
             this.level3 = isPassed;
         }
     }
-
 
 }

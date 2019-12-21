@@ -1,6 +1,8 @@
 package org.openjfx.model.commonEntities;
 
-public class Location {
+import java.io.Serializable;
+
+public class Location implements Serializable {
     private double positionX;
     private double positionY;
 
