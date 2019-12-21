@@ -20,11 +20,10 @@ public class GameSituation implements Serializable {
     private BooleanProperty isSecondCraftDied;
     private BooleanProperty twoPlayerSingleShip;
 
-
     private static GameSituation gameSituation;
 
     private GameSituation(){
-
+        resetVar();
     }
 
     public static GameSituation getInstance(){
@@ -32,10 +31,6 @@ public class GameSituation implements Serializable {
             gameSituation = new GameSituation();
         }
         return gameSituation;
-    }
-
-    public static void setInstance(GameSituation gameSituation){
-        GameSituation.gameSituation = gameSituation;
     }
 
     public void resetVar(){

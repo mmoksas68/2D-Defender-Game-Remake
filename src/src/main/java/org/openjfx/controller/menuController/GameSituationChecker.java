@@ -71,11 +71,12 @@ public class GameSituationChecker {
             scene.getWindow().heightProperty().addListener(stageSizeListener);
         }
         else{
-            if(!gameSituation.isIsPreBossFinished())
+            gameSituation.resetVar();
+            System.out.println("in game situation  " + GameSaveObj.getInstance().getPreBossMap());
+            if(!gameSituation.isIsPreBossFinished() && !gameSituation.isIsPreBossFinishedSuccessfully())
                 preBossGameController = new PreBossGameController(GameSaveObj.getInstance().getPreBossMap(), scene, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
-            else if(!gameSituation.isIsBossFinished())
+            else if(!gameSituation.isIsBossFinished() && !gameSituation.isIsBossFinishedSuccessfully())
                 bossGameController = new BossGameController(GameSaveObj.getInstance().getBossMap(), scene, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
-
         }
         ifPaused();
         ifEnd();

@@ -11,6 +11,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import org.openjfx.controller.preBossSceneControllers.PreBossGameController;
 import org.openjfx.controller.bossSceneControllers.BossGameController;
+import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.menuEntities.GameSaveObj;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.view.menuView.MainMenu;
@@ -100,6 +101,8 @@ public class PauseMenuController {
             gameSaveObj.setBossMap(null);
             gameSaveObj.setPreBossMap(preBossGameController.getPreBossMapController().getPreBossMap());
         }
+        gameSaveObj.setLastSavedID(LocatableObject.getCurrentID());
+        System.out.println("in paıse" + LocatableObject.getCurrentID());
         gameSaveObj.setGameSituation(gameSituation);
         isSavePressed.setValue(true);
     }

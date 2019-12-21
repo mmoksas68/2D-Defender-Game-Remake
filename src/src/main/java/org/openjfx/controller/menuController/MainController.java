@@ -53,18 +53,19 @@ public class MainController {
     private void loadInitialElements(){
         fileController.loadHighScores();
         fileController.loadKeys();
+        fileController.loadPassedLevelInfo();
     }
 
     private void loadGameElements() {
-        fileController.loadPassedLevelInfo();
-        //fileController.loadGame(); //Burayı kaldır Doğukan
+        fileController.loadGame(); //Burayı kaldır Doğukan
     }
 
     private void initMainController(){
         menuController = new MainMenuController(scene);
         ChangeListener<Boolean> newGameListener = (observable, oldValue, newValue) ->{
             if(menuController.getIsGameStartPressed().get()) {
-                //gameSituation = GameSituation.getInstance();
+                gameSituation = GameSituation.getInstance();
+                System.out.println(gameSituation.isSinglePlayer() + "in main");
                 passedLevelInfo = PassedLevelInfo.getInstance();
                 gameSaveObj = GameSaveObj.getInstance();
                 menuController.setIsGameStartPressed(false);
@@ -75,6 +76,7 @@ public class MainController {
 
         ChangeListener<Boolean> resumeListener = (observable, oldValue, newValue) ->{
             if(menuController.getIsResumePressed().get()) {
+                gameSituation = GameSituation.getInstance();
                 menuController.setIsResumePressed(false);
                 loadGameElements();
                 initGameSituationChecker(false);

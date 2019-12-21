@@ -1,5 +1,6 @@
 package org.openjfx.fileManager;
 
+import javafx.beans.property.BooleanProperty;
 import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.menuEntities.*;
 import org.openjfx.model.preBossEntities.PreBossMap;
@@ -21,6 +22,7 @@ public class FileController {
 
     public void saveGame(){
         GameSaveObj gameSaveObj = GameSaveObj.getInstance();
+        System.out.println(gameSaveObj.getGameSituation());
         try {
             fos = new FileOutputStream(new File("gameData/gameSave.txt"));
         } catch (FileNotFoundException e) {
@@ -50,6 +52,7 @@ public class FileController {
     }
 
     public boolean loadGame(){
+
         try {
             //If you want to use saved game change directory
             fis = new FileInputStream(new File("gameData/gameSave.txt"));
@@ -59,14 +62,27 @@ public class FileController {
         try {
             ois = new ObjectInputStream(fis);
         } catch (IOException e) {
-
             System.out.println("EXCEPTION CATCHED");
             e.printStackTrace();
         }
         try {
-           GameSaveObj.setInstance((GameSaveObj) ois.readObject());
-           LocatableObject.setCurrentID(GameSaveObj.getInstance().getLastSavedID());
-           return true;
+            GameSaveObj.setInstance((GameSaveObj) ois.readObject());
+            GameSituation gameSituation = GameSituation.getInstance();
+            gameSituation.setLevel(GameSaveObj.getInstance().getGameSituation().getLevel());
+            gameSituation.setScore(GameSaveObj.getInstance().getGameSituation().getScore());
+            gameSituation.setSpacecraft1(GameSaveObj.getInstance().getGameSituation().getSpacecraft1());
+            gameSituation.setSpacecraft2(GameSaveObj.getInstance().getGameSituation().getSpacecraft2());
+            gameSituation.setSinglePlayer(GameSaveObj.getInstance().getGameSituation().isSinglePlayer());
+            gameSituation.setIsPreBossFinished(GameSaveObj.getInstance().getGameSituation().isIsPreBossFinished());
+            gameSituation.setIsPreBossFinishedSuccessfully(GameSaveObj.getInstance().getGameSituation().isIsPreBossFinishedSuccessfully());
+            gameSituation.setIsBossFinishedSuccessfully(GameSaveObj.getInstance().getGameSituation().isIsBossFinishedSuccessfully());
+            gameSituation.setIsBossFinished(GameSaveObj.getInstance().getGameSituation().isIsBossFinished());
+            gameSituation.setIsFirstCraftDied(GameSaveObj.getInstance().getGameSituation().isFirstCraftDied());
+            gameSituation.setIsSecondCraftDied(GameSaveObj.getInstance().getGameSituation().isSecondCraftDied());
+            gameSituation.setTwoPlayerSingleShip(GameSaveObj.getInstance().getGameSituation().isTwoPlayerSingleShip());
+            LocatableObject.setCurrentID(GameSaveObj.getInstance().getLastSavedID());
+            System.out.println(GameSaveObj.getInstance().getLastSavedID() +  "in file");
+            return true;
         } catch (IOException e) {
             System.out.println("no saved game");
             return false;

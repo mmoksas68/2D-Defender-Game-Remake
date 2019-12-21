@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Scene;
 import javafx.util.Duration;
+import org.openjfx.model.menuEntities.GameSaveObj;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.preBossEntities.Enemy.Tier1Enemy;
 import org.openjfx.model.preBossEntities.PreBossMap;
@@ -57,6 +58,23 @@ public class PreBossGameController {
         initGame();
         initListeners();
     }
+    public PreBossGameController(PreBossMap preBossMap, Scene scene, double initWidth, double initHeight) {
+        this.scene = scene;
+        gameSituation = GameSituation.getInstance();
+        isSinglePlayer = gameSituation.isSinglePlayer();
+        rootPane = new RootPane(initWidth,initHeight,isSinglePlayer);
+        this.width = initWidth;
+        this.height = initHeight;
+        preBossMapController = new PreBossMapController(preBossMap);
+        isSinglePlayer = gameSituation.isSinglePlayer();
+        spacecraftController1 = new SpacecraftController(preBossMapController.getPreBossMap().getSpacecraft1(), rootPane.getPreBossMapView1(), preBossMapController.getPreBossMap());
+        if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
+            spacecraftController2 = new SpacecraftController(preBossMapController.getPreBossMap().getSpacecraft2(), rootPane.getPreBossMapView2(), preBossMapController.getPreBossMap());
+        scene.setRoot(rootPane);
+        initGame();
+        initListeners();
+    }
+
     public void initListeners(){
         ChangeListener<Boolean> isFirstDied = (observable, oldValue, newValue) -> {
             if(gameSituation.isFirstCraftDied()){
@@ -76,10 +94,7 @@ public class PreBossGameController {
     }
 
 
-    public PreBossGameController(PreBossMap preBossMap, Scene scene, double initWidth, double initHeight) {
-        this.scene = scene;
-        preBossMapController = new PreBossMapController(preBossMap);
-    }
+
 
     private void timerPulse(){
 

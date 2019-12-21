@@ -17,9 +17,7 @@ public class GameSaveObj implements Serializable {
 
 
     private GameSaveObj(){
-        preBossMap = null;
-        bossMap = null;
-        gameSituation = GameSituation.getInstance();
+
     }
 
     public static GameSaveObj getInstance(){
