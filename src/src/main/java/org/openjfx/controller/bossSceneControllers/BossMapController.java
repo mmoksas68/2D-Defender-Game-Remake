@@ -60,6 +60,8 @@ public class BossMapController {
                     }
                     else if( iterator instanceof SpecialAbility){
                         obj.setHealthPoint(obj.getHealthPoint() - ((SpecialAbility) iterator).getDamage());
+                        if( iterator instanceof LittleBoss)
+                            iterator.setDead(true);
                     }
 /* TO BE IMPLEMENTED
                     else if( iterator instanceof Buff){

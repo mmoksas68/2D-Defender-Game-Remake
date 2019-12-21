@@ -18,12 +18,12 @@ public class LittleBossAbilityAlgorithm implements AbilityBehaviourAlgorithm {
             if( littleBoss.getHitNumber() == 4) {
                 littleBoss.setDead( true);
             }
-            else if ( littleBoss.getLocation().getPositionX() >= MAX_WIDTH || littleBoss.getLocation().getPositionX() < 0 ) {
+            else if ( littleBoss.getLocation().getPositionX() + littleBoss.getHitBoxWidth() >= MAX_WIDTH || littleBoss.getLocation().getPositionX() < 0 ) {
                 littleBoss.setHitNumber( littleBoss.getHitNumber() + 1);
                 littleBoss.setxDir( - littleBoss.getxDir());
                 littleBoss.setyDir( littleBoss.getyDir());
             }
-            else if( littleBoss.getLocation().getPositionY() >= MAX_HEIGHT || littleBoss.getLocation().getPositionY() < 0  ){
+            else if( littleBoss.getLocation().getPositionY() + littleBoss.getHitBoxHeight() >= MAX_HEIGHT || littleBoss.getLocation().getPositionY() < 0  ){
                 littleBoss.setHitNumber( littleBoss.getHitNumber() + 1);
                 littleBoss.setxDir( littleBoss.getxDir());
                 littleBoss.setyDir( - littleBoss.getyDir());

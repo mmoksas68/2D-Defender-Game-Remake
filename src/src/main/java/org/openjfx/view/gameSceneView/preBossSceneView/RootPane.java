@@ -1,24 +1,24 @@
 package org.openjfx.view.gameSceneView.preBossSceneView;
 
 import javafx.animation.*;
-import javafx.beans.property.DoubleProperty;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 import org.openjfx.model.menuEntities.GameSituation;
+import org.openjfx.view.gameSceneView.bossSceneView.topBar.BossTopBarView;
 import org.openjfx.view.gameSceneView.preBossSceneView.TopBar.TopBarView;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.security.Key;
 
 public class RootPane extends BorderPane {
     private PreBossMapView preBossMapView1;
     private PreBossMapView preBossMapView2;
     private BossMapView bossMapView;
     private TopBarView topBarView;
+    private BossTopBarView bossTopBarView;
 
     private double height;
     private double width;
@@ -35,12 +35,12 @@ public class RootPane extends BorderPane {
     public RootPane ( double width, double height) {
         setMaxSize(width,height);
         setPrefSize(width,height);
-        topBarView = new TopBarView(width, height*1.5/10);
+        bossTopBarView = new BossTopBarView(width, height*1.5/10);
 
         bossMapView = new BossMapView(width, height*8.8/10);
         setCenter(this.bossMapView);
 
-        setTop(topBarView);
+        setTop(bossTopBarView);
         Background background = new Background(image);
         setBackground(background);
     }
@@ -64,7 +64,7 @@ public class RootPane extends BorderPane {
 
         setTop(topBarView);
 
-       Background background = new Background(image);
+        Background background = new Background(image);
         setBackground(background);
     }
 
@@ -121,6 +121,10 @@ public class RootPane extends BorderPane {
 
     public TopBarView getTopBarView() {
         return topBarView;
+    }
+
+    public BossTopBarView getBossTopBarView(){
+        return bossTopBarView;
     }
 
  /*   public void setWidth(double width){
