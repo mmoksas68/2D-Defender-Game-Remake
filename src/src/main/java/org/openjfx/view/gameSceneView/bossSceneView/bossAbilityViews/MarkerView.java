@@ -8,10 +8,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class MarkerView extends SpecialAbilityView {
-    private static String resource = "resources/dead_head.png";
     private FireView fireView;
     public MarkerView(ModelToViewSpecialAbility modelToViewSpecialAbility, double scaleW, double scaleH)  {
-        super( modelToViewSpecialAbility , resource, scaleW, scaleH);
+        super( modelToViewSpecialAbility, scaleW, scaleH);
       //  fireView = new FireView();
 
     }

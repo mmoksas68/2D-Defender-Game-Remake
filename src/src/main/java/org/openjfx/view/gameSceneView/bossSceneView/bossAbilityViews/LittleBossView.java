@@ -9,9 +9,8 @@ import java.io.FileNotFoundException;
 
 public class LittleBossView extends SpecialAbilityView {
 
-    private static String resource = "resources/boss1.png";
     public LittleBossView(ModelToViewSpecialAbility modelToViewSpecialAbility, double scaleW, double scaleH)  {
-        super( modelToViewSpecialAbility , resource, scaleW, scaleH);
+        super( modelToViewSpecialAbility , scaleW, scaleH);
     }
     @Override
     public void refresh(ModelToViewSpecialAbility modelToViewSpecialAbility, double scaleW, double scaleH) {

@@ -3,6 +3,7 @@ package org.openjfx.view.gameSceneView.bossSceneView;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import org.openjfx.model.bossEntities.BossAbility.Laser;
 import org.openjfx.model.bossEntities.BossAbility.LittleBoss;
 import org.openjfx.model.bossEntities.BossAbility.SpecialAbility;
 import org.openjfx.model.bossEntities.BossMap;
@@ -96,14 +97,15 @@ public class BossMapView extends AnchorPane {
             getChildren().add( bossOneView);
         }
     }
+
     public void refreshSpecialAbilityView( ModelToViewSpecialAbility modelToViewSpecialAbility) {
         SpecialAbilityView specialAbilityView;
         if ( currentNodes.containsKey( modelToViewSpecialAbility.getID())) {
             specialAbilityView = getType( modelToViewSpecialAbility);
             if ( modelToViewSpecialAbility.isDead()) {
-                getChildren().remove( specialAbilityView);
-                specialAbilities.remove( specialAbilityView);
-            }else {
+                getChildren().remove(specialAbilityView);
+                specialAbilities.remove(specialAbilityView);
+            } else {
                 specialAbilityView.refresh(modelToViewSpecialAbility, layoutScaleWidth, layoutScaleHeight);
             }
         }

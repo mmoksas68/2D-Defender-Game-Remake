@@ -166,28 +166,38 @@ public class SpacecraftController {
         spacecraft.moveToDirection(spacecraft.getVelocity(), directionX, directionY);
     }
 
+
     public void activateSmartBomb(){
-
-        if(spacecraft.getSmartBombStock() > 0){
-
-            spacecraft.setSmartBombStock(spacecraft.getSmartBombStock()-1);
-            PositionHelper spacecraftHelper = new PositionHelper(spacecraft);
-            for(var enemy : preBossMap.getEnemies().values()){
-                PositionHelper enemyHelper = new PositionHelper(enemy);
-                if(PositionHelper.isInRadar(enemyHelper, spacecraftHelper, Spacecraft.SMARTBOMB_RADIUS)){
-                    enemy.setHealthPoint(enemy.getHealthPoint()-Spacecraft.SMARTBOMB_DAMAGE);
-                    if(enemy.getHealthPoint() <= 0){
-                        enemy.setDead(true);
+        if( bossMap == null){
+            if(spacecraft.getSmartBombStock() > 0){
+                spacecraft.setSmartBombStock(spacecraft.getSmartBombStock()-1);
+                PositionHelper spacecraftHelper = new PositionHelper(spacecraft);
+                for(var enemy : preBossMap.getEnemies().values()){
+                    PositionHelper enemyHelper = new PositionHelper(enemy);
+                    if(PositionHelper.isInRadar(enemyHelper, spacecraftHelper, Spacecraft.SMARTBOMB_RADIUS)){
+                        enemy.setHealthPoint(enemy.getHealthPoint()-Spacecraft.SMARTBOMB_DAMAGE);
+                        if(enemy.getHealthPoint() <= 0){
+                            enemy.setDead(true);
+                        }
+                    }
+                }
+                for(var station : preBossMap.getStations().values()){
+                    PositionHelper stationHelper = new PositionHelper(station);
+                    if(PositionHelper.isInRadar(stationHelper, spacecraftHelper, Spacecraft.SMARTBOMB_RADIUS)){
+                        station.setHealthPoint(station.getHealthPoint()-Spacecraft.SMARTBOMB_DAMAGE);
+                        if(station.getHealthPoint() <= 0){
+                            station.setDead(true);
+                        }
                     }
                 }
             }
-            for(var station : preBossMap.getStations().values()){
-                PositionHelper stationHelper = new PositionHelper(station);
-                if(PositionHelper.isInRadar(stationHelper, spacecraftHelper, Spacecraft.SMARTBOMB_RADIUS)){
-                    station.setHealthPoint(station.getHealthPoint()-Spacecraft.SMARTBOMB_DAMAGE);
-                    if(station.getHealthPoint() <= 0){
-                        station.setDead(true);
-                    }
+        }
+        else {
+            if(spacecraft.getSmartBombStock() > 0){
+                spacecraft.setSmartBombStock(spacecraft.getSmartBombStock()-1);
+                bossMap.getBoss().setHealthPoint( bossMap.getBoss().getHealthPoint() - Spacecraft.SMARTBOMB_DAMAGE);
+                if( bossMap.getBoss().getHealthPoint() <= 0){
+                    bossMap.getBoss().setDead(true);
                 }
             }
         }

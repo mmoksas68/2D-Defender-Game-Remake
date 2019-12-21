@@ -50,7 +50,7 @@ public class BossGameController  {
         isSinglePlayer = gameSituation.isSinglePlayer();
         this.scene = scene;
         rootPane = new RootPane(initWidth, initHeight);
-        bossMapController = new BossMapController( new BossMap( 1, isSinglePlayer));
+        bossMapController = new BossMapController( new BossMap( 2, isSinglePlayer));
         bossController = new BossController( bossMapController.getBossMap().getLevel(), bossMapController.getBossMap());
         this.width = initWidth;
         this.height = initHeight;

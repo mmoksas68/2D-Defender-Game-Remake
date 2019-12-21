@@ -4,9 +4,8 @@ import org.openjfx.utilization.ModelToView;
 import org.openjfx.utilization.ModelToViewSpecialAbility;
 
 public class RocketView extends SpecialAbilityView {
-    private static String resource = "resources/rocket.png";
     public RocketView(ModelToViewSpecialAbility modelToViewSpecialAbility, double scaleW, double scaleH)  {
-        super( modelToViewSpecialAbility , resource, scaleW, scaleH);
+        super( modelToViewSpecialAbility, scaleW, scaleH);
     }
 
     @Override
