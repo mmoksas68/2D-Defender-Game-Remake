@@ -60,8 +60,6 @@ public class BossMapController {
                     }
                     else if( iterator instanceof SpecialAbility){
                         obj.setHealthPoint(obj.getHealthPoint() - ((SpecialAbility) iterator).getDamage());
-                        if ( ((SpecialAbility) iterator).getDamage() != 0)
-                            SoundController.explosion();
                     }
 /* TO BE IMPLEMENTED
                     else if( iterator instanceof Buff){
@@ -83,4 +81,6 @@ public class BossMapController {
     public BossMap getBossMap() {
         return bossMap;
     }
+
+
 }

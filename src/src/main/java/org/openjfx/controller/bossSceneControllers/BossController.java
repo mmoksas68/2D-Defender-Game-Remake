@@ -10,15 +10,17 @@ import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 public class BossController {
     private BossBehaviourAlgorithm algorithm;
     private BossMap bossMap;
-    public BossController(int level, BossMap bossMap) {
+    private BossMapView bossMapView;
+    public BossController(int level, BossMap bossMap, BossMapView bossMapView) {
         this.bossMap = bossMap;
+        this.bossMapView = bossMapView;
         selectAlgorithm( level);
     }
 
     private  void  selectAlgorithm ( int level) {
         switch (level) {
             case 1:
-                algorithm = new BossOneBehaviour( bossMap);
+                algorithm = new BossOneBehaviour( bossMap, bossMapView);
                 break;
             case 2:
                 algorithm = new BossTwoBehaviour( bossMap);

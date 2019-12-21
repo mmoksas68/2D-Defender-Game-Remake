@@ -9,10 +9,12 @@ import org.openjfx.model.bossEntities.BossAbility.SpecialAbility;
 import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.utilization.*;
 import org.openjfx.view.gameSceneView.bossSceneView.bossAbilityViews.*;
+import org.openjfx.view.gameSceneView.bossSceneView.bossAbilityViews.fireAnimation.FireAnimation;
 import org.openjfx.view.gameSceneView.bossSceneView.bossViews.BossOneView;
 import org.openjfx.view.gameSceneView.commonViews.bulletView.BulletView;
 import org.openjfx.view.gameSceneView.commonViews.spacecraftView.SpacecraftViewGroup;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BossMapView extends AnchorPane {
@@ -21,6 +23,8 @@ public class BossMapView extends AnchorPane {
     private java.util.Map <Long, ImageView> specialAbilities= new HashMap<>();
     private SpacecraftViewGroup spacecraftViewGroup1 = null;
     private SpacecraftViewGroup spacecraftViewGroup2 = null;
+    private java.util.Map<Long, FireAnimation> fireAnimations = new HashMap<Long, FireAnimation>();
+    private LaserIndicatorView laserIndicatorView = null;
     private double layoutScaleWidth;
     private double layoutScaleHeight;
 
@@ -141,6 +145,45 @@ public class BossMapView extends AnchorPane {
         else if ( modelToViewSpecialAbility.isLittleBoss())
             return  new LittleBossView( modelToViewSpecialAbility, layoutScaleWidth, layoutScaleHeight);
         return null;
+    }
+    public void addFireAnimation(ModelToViewSpecialAbility modelToView) {
+        FireAnimation fireAnimation = new FireAnimation(modelToView, layoutScaleWidth, layoutScaleHeight);
+        fireAnimations.put(modelToView.getID(), fireAnimation);
+        fireAnimation.setImageViewTimer(1);
+        getChildren().add(fireAnimation.getImageViewList()[0]);
+    }
+    public void refreshFireAnimation(){
+        ArrayList<Long> toBeDeleted = new ArrayList<>();
+        for(var fireAnimation : fireAnimations.values()){
+            fireAnimation.setImageViewTimer(fireAnimation.getImageViewTimer() % fireAnimation.getImageViewPeriod());
+            if(fireAnimation.getImageViewTimer() == 0 && fireAnimation.getCurrent() < 7){
+                getChildren().remove(fireAnimation.getImageViewList()[fireAnimation.getCurrent()]);
+                getChildren().add(fireAnimation.getImageViewList()[fireAnimation.getCurrent()+1]);
+                fireAnimation.setCurrent(fireAnimation.getCurrent()+1);
+            }
+            if(fireAnimation.getCurrent() >= 7){
+                toBeDeleted.add(fireAnimation.getID());
+                getChildren().remove(fireAnimation.getImageViewList()[7]);
+            }
+            fireAnimation.setImageViewTimer(fireAnimation.getImageViewTimer()+1);
+
+        }
+        for(var currentID : toBeDeleted){
+            fireAnimations.remove(currentID);
+        }
+    }
+    public void addLaserIndicator (double [] array) {
+
+        if ( laserIndicatorView == null) {
+            laserIndicatorView = new LaserIndicatorView( array, layoutScaleWidth, layoutScaleHeight);
+            getChildren().add( laserIndicatorView);
+        }
+    }
+    public void removeLaserIndicator () {
+        if ( laserIndicatorView != null) {
+            getChildren().remove( laserIndicatorView);
+            laserIndicatorView = null;
+        }
     }
 }
 

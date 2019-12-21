@@ -8,11 +8,12 @@ public class Rocket extends SpecialAbility{
     private static double hitBoxWidth = 25;
     private static int healthPoint = 200;
     private static int damage = 0;
-
+    private Marker destinationMarker;
     private double destinationX;
     private double destinationY;
-    public Rocket (Location location) {
+    public Rocket (Location location, Marker marker) {
         super( location, hitBoxWidth, hitBoxHeight, healthPoint);
+        this.destinationMarker = marker;
         setDamage( damage);
         setAbilityBehaviourAlgorithm( new RocketAbilityAlgorithm(this));
     }
@@ -33,5 +34,7 @@ public class Rocket extends SpecialAbility{
         this.destinationY = destinationY;
     }
 
-
+    public Marker getDestinationMarker() {
+        return destinationMarker;
+    }
 }

@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import org.openjfx.controller.SoundController;
 import org.openjfx.controller.preBossSceneControllers.SpacecraftController;
+import org.openjfx.model.bossEntities.BossAbility.Marker;
+import org.openjfx.model.bossEntities.BossAbility.Rocket;
 import org.openjfx.model.bossEntities.BossAbility.SpecialAbility;
 import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.bossEntities.Boss.Boss;
@@ -38,6 +40,7 @@ public class BossGameController  {
     private int scoreDecayTimer = 0;
     private final int SCORE_DECAY_PERIOD = 30000;
     private boolean isSinglePlayer;
+    private int level = 1;
     private AnimationTimer animationTimer = new AnimationTimer() {
         @Override
         public void handle(long l) {
@@ -51,8 +54,8 @@ public class BossGameController  {
         isSinglePlayer = gameSituation.isSinglePlayer();
         this.scene = scene;
         rootPane = new RootPane(initWidth, initHeight);
-        bossMapController = new BossMapController( new BossMap( 1, isSinglePlayer));
-        bossController = new BossController( bossMapController.getBossMap().getLevel(), bossMapController.getBossMap());
+        bossMapController = new BossMapController( new BossMap( level, isSinglePlayer));
+        bossController = new BossController( bossMapController.getBossMap().getLevel(), bossMapController.getBossMap(), rootPane.getBossMapView());
         this.width = initWidth;
         this.height = initHeight;
 
@@ -89,6 +92,7 @@ public class BossGameController  {
         if ( !isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
             spacecraftController2.getInputs();
         bossController.behave();
+
     }
     private void initGame() {
         refreshMap();
@@ -103,7 +107,7 @@ public class BossGameController  {
         }
         animationTimer.start();
         //decreaseScore();
-        animationTimer.start();
+      //  animationTimer.start();
     }
 
     private void refreshMap() {
@@ -181,12 +185,17 @@ public class BossGameController  {
         for (SpecialAbility specialAbility : bossMapController.getBossMap().getSpecialAbilities().values()) {
             if ( specialAbility.isDead()) {
                 toBeDeleted.add( specialAbility.getID());
+                if ( specialAbility instanceof Rocket)
+                    rootPane.getBossMapView().addFireAnimation(new ModelToViewSpecialAbility(((Rocket) specialAbility).getDestinationMarker()));
             }
             rootPane.getBossMapView().refreshSpecialAbilityView( new ModelToViewSpecialAbility( specialAbility));
+
         }
         for (Long id : toBeDeleted) {
             bossMapController.getBossMap().removeSpecialAbility(id);
         }
+        rootPane.getBossMapView().refreshFireAnimation();
+
     }
 
     //#############################################################################################################
@@ -401,19 +410,3 @@ public class BossGameController  {
     }
 }
 
- /*   double [] boundArray = { moveright, moveleft, moveup, movedown};
-            bossMap.checkBoundry( boundArray, bossMap.getSpacecraft());
-
-                    double xDirection = boundArray [0] + boundArray [1]; // moveright + moveleft
-                    double yDirection = boundArray [2] + boundArray[3];  // moveup + movedown
-                    double multiplier = 1 / Math.sqrt( Math.pow( xDirection,2) + Math.pow( yDirection, 2));
-                    if ( xDirection != 0 || yDirection != 0) {
-                    bossMap.getSpacecraft().moveToDirection(bossMap.getSpacecraft().getVelocity(),xDirection * multiplier, yDirection * multiplier);
-                    }
-                    bulletFire( bossMap.getSpacecraft(), spacePressed);
-                    bossController.behave();
-                    for (var bullet : bossMap.getBullets().values()) {
-                    bullet.moveToDirection(bullet.getVelocity(), bullet.getDirectionX(), bullet.getDirectionY());
-                    }
-                    refreshMap();
-//  bossMapView.refreshExplodeAnimations();*/

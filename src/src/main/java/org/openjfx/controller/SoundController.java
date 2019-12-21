@@ -8,6 +8,20 @@ import java.io.File;
 
 public class SoundController {
 
+    public static void sendLaser() {
+        String musicFile = "assets/sounds/bosslaser.wav";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setVolume(Settings.getInstance().getVolume() );
+        mediaPlayer.play();
+    }
+    public static void sendRocket() {
+        String musicFile = "assets/sounds/rocketboss.wav";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setVolume(Settings.getInstance().getVolume() );
+        mediaPlayer.play();
+    }
     public static void fireBullet(){
         String musicFile = "assets/sounds/laser1.wav";     // For example
         Media sound = new Media(new File(musicFile).toURI().toString());

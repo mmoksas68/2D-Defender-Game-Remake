@@ -1,5 +1,6 @@
 package org.openjfx.controller.bossSceneControllers.BossBehaviourManager;
 
+import org.openjfx.controller.SoundController;
 import org.openjfx.model.bossEntities.Boss.BossTwo;
 import org.openjfx.model.bossEntities.BossAbility.Rocket;
 import org.openjfx.model.bossEntities.BossMap;
@@ -22,6 +23,7 @@ public class BossTwoBehaviour extends BossDefaultBehaviour {
    public void useSpecialAbility()  {
         BossTwo boss = (BossTwo) bossMap.getBoss();
         if ( Math.random() < boss.getROCKET_FREQ() ) {
+            SoundController.sendRocket();
             markers = boss.markAreas( (bossMap.getBoss().getLocation().getPositionX() -2*Marker.radius),(BossMap.MAP_HEIGHT- Marker.radius));
             for ( Marker marker: markers) {
                bossMap.addSpecialAbility( marker);
@@ -39,11 +41,13 @@ public class BossTwoBehaviour extends BossDefaultBehaviour {
         abilityTimer = abilityTimer - 0.016;
         if ( !markers.get(0).getIsRocketFired()) {
             if (rockets.get(0).isDead()) {
-                for (Marker marker : markers)
+                for (Marker marker : markers) {
                     marker.activate();
+                }
             }
         }
         if ( abilityTimer <= 0) {
+            bossMap.setFiring( false);
             for (Marker marker : markers) {
                 marker.setDead(true);
 

@@ -22,6 +22,14 @@ public class BossOne extends Boss {
         setBulletVelocity( bulletVelocity);
     }
 
+    public double [] sendLaserIndicator () {
+        double [] values = new double[ 4];
+        values [0] = getLocation().getPositionX() - 20;
+        values [1] = getLocation().getPositionY() + (getHitBoxHeight() /4);
+        values [2] = getHitBoxHeight()/2;
+        values [3] = getHitBoxHeight()/2;
+        return values;
+    }
     public Laser sendLaser () {
         double laserWidth = getLocation().getPositionX();
         return new Laser( new Location( 0,getLocation().getPositionY() + getHitBoxHeight()/2), laserWidth);
