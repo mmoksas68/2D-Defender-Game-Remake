@@ -27,6 +27,10 @@ public class BossThree extends Boss {
         return new LittleBoss( new Location( getLocation().getPositionX(),getLocation().getPositionY() + getHitBoxHeight()/2));
     }
 
+    public static int getMaxHealthPoint() {
+        return MAX_HEALTH_POINT;
+    }
+
    /* @Override
     public int getBulletDamage() {
         return 0;

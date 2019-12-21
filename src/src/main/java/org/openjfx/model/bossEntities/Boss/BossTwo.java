@@ -68,4 +68,8 @@ public class BossTwo extends Boss {
     public void clearRockets() {
         rockets.clear();
     }
+
+    public static int getMaxHealthPoint() {
+        return MAX_HEALTH_POINT;
+    }
 }
