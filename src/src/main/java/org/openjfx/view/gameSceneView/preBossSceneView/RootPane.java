@@ -105,8 +105,10 @@ public class RootPane extends BorderPane {
         timeline.getKeyFrames().add(kf2);
         timeline.getKeyFrames().add(kf3);
         timeline.play();
-
     }
+
+
+
     public PreBossMapView getPreBossMapView1() {
         return preBossMapView1;
     }

@@ -73,7 +73,7 @@ public class BossGameController  {
         bossController = new BossController( bossMapController.getBossMap().getLevel(), bossMapController.getBossMap());
         this.width = initWidth;
         this.height = initHeight;
-
+        gameSituation = GameSituation.getInstance();
         spacecraftController1 = new SpacecraftController(bossMapController.getBossMap().getSpacecraft1(), rootPane.getBossMapView(),bossMapController.getBossMap());
         if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
             spacecraftController2 = new SpacecraftController( bossMapController.getBossMap().getSpacecraft2(), rootPane.getBossMapView(), bossMapController.getBossMap());
@@ -96,7 +96,6 @@ public class BossGameController  {
                     spacecraftController2 = null;
                     keysFor1();
                 }
-                rootPane.twoPlayerOneShipScreen(spacecraftController1.getPreBossMapView());
             };
             gameSituation.twoPlayerSingleShipProperty().addListener(isFirstDied);
         }
@@ -133,7 +132,7 @@ public class BossGameController  {
         refreshAndReflectMeteor();
         refreshAndReflectScore();
         refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
-        if ( !isSinglePlayer)
+        if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
             refreshAndReflectSpacecraft( spacecraftController2.getSpacecraft());
         refresAndReflectBoss();
         refreshAndReflectSpecialAbility();
@@ -184,10 +183,19 @@ public class BossGameController  {
         if ( spacecraft.getID() == spacecraftController1.getSpacecraft().getID()) {
             rootPane.getBossMapView().refreshSpacecraftMain(new ModelToViewSpaceCraft(spacecraft));
             rootPane.getTopBarView().getMiddleView().refresh(new RadarObject(spacecraft));
+            if(spacecraft.isDead()){
+                gameSituation.setIsFirstCraftDied(true);
+            }
         }
         else if ( spacecraft.getID() == spacecraftController2.getSpacecraft().getID()) {
             rootPane.getBossMapView().refreshSpacecraftSecondary( new ModelToViewSpaceCraft( spacecraft));
             rootPane.getTopBarView().getMiddleView().refresh( new RadarObject( spacecraft));
+            if(spacecraft.isDead()){
+                gameSituation.setIsSecondCraftDied(true);
+            }
+        }
+        if(gameSituation.isFirstCraftDied() || gameSituation.isSecondCraftDied()){
+            gameSituation.setTwoPlayerSingleShip(true);
         }
     }
     private void refresAndReflectBoss() {

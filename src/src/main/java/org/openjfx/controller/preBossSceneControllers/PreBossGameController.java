@@ -95,9 +95,6 @@ public class PreBossGameController {
         gameSituation.twoPlayerSingleShipProperty().addListener(isFirstDied);
     }
 
-
-
-
     private void timerPulse(){
 
         refreshMap();
@@ -214,7 +211,6 @@ public class PreBossGameController {
 
 
         rootPane.getTopBarView().getMiddleView().refresh(new RadarObject(spacecraft));
-
     }
 
     private void refreshAndReflectStations(){

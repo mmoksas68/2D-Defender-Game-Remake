@@ -12,12 +12,13 @@ import org.openjfx.model.bossEntities.Boss.BossTwo;
 import org.openjfx.model.commonEntities.Bullet.Bullet;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BossMap {
+public class BossMap implements Serializable {
     private static Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     public static double MAP_HEIGHT = primaryScreenBounds.getHeight();
     public static double MAP_WIDTH = primaryScreenBounds.getWidth();
