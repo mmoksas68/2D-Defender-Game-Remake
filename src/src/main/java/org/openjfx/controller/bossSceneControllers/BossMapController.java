@@ -75,7 +75,7 @@ public class BossMapController {
                 }
 
                 if (obj.getHealthPoint() <= 0)
-                    iterator.setDead(true);
+                    obj.setDead(true);
             }
         }
     }

@@ -13,7 +13,7 @@ enum GunTypes{
 
 
 public class Spacecraft extends LocatableObject {
-    public static final int MAX_HEALTH = 1000000;
+    public static final int MAX_HEALTH = 10;
     public static final double WIDTH = 120;
     public static final double HEIGHT = 90;
     public static final int MAX_SMARTBOMB = 3;
