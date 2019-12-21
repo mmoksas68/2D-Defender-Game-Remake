@@ -3,13 +3,7 @@ package org.openjfx.utilization;
 
 import org.openjfx.model.bossEntities.BossAbility.*;
 
-public class ModelToViewSpecialAbility {
-    private double locationX;
-    private double locationY;
-    private double hitboxWidth;
-    private double hitboxHeight;
-    private long ID;
-    private boolean isDead;
+public class ModelToViewSpecialAbility extends ModelToView{
     private double ydir;
     private double xdir;
     private boolean isLaser = false;
@@ -17,12 +11,7 @@ public class ModelToViewSpecialAbility {
     private boolean isRocket = false;
     private boolean isLittleBoss = false;
     public ModelToViewSpecialAbility (SpecialAbility specialAbility) {
-        locationX = specialAbility.getLocation().getPositionX();
-        locationY = specialAbility.getLocation().getPositionY();
-        hitboxWidth = specialAbility.getHitBoxWidth();
-        hitboxHeight = specialAbility.getHitBoxHeight();
-        ID = specialAbility.getID();
-        isDead = specialAbility.isDead();
+        super(specialAbility);
         ydir = specialAbility.getyDir();
         xdir = specialAbility.getxDir();
         findType(specialAbility);
@@ -37,32 +26,9 @@ public class ModelToViewSpecialAbility {
         else if ( specialAbility instanceof LittleBoss)
             isLittleBoss = true;
     }
-    public double getLocationX() {
-        return locationX;
-    }
-
-    public double getLocationY() {
-        return locationY;
-    }
-
-    public double getHitboxWidth() {
-        return hitboxWidth;
-    }
-
-    public double getHitboxHeight() {
-        return hitboxHeight;
-    }
-
-    public long getID() {
-        return ID;
-    }
 
     public double getYdir() {
         return ydir;
-    }
-
-    public boolean isDead() {
-        return isDead;
     }
 
     public boolean isLaser() {

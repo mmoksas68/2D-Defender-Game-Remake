@@ -5,21 +5,10 @@ import org.openjfx.model.bossEntities.Boss.BossOne;
 import org.openjfx.model.bossEntities.Boss.BossThree;
 import org.openjfx.model.bossEntities.Boss.BossTwo;
 
-public class ModelToViewBoss {
-    private double locationX;
-    private double locationY;
-    private double hitboxWidth;
-    private double hitboxHeight;
-    private long ID;
-    private boolean isDead;
+public class ModelToViewBoss extends ModelToView{
     private int bossType;
     public ModelToViewBoss (Boss boss) {
-        locationX = boss.getLocation().getPositionX();
-        locationY = boss.getLocation().getPositionY();
-        hitboxHeight = boss.getHitBoxHeight();
-        hitboxWidth = boss.getHitBoxWidth();
-        ID = boss.getID();
-        isDead = boss.isDead();
+        super(boss);
         findType( boss);
     }
 
@@ -30,29 +19,6 @@ public class ModelToViewBoss {
             bossType = 2;
         else if( boss instanceof BossThree)
             bossType = 3;
-    }
-    public double getLocationX() {
-        return locationX;
-    }
-
-    public double getLocationY() {
-        return locationY;
-    }
-
-    public double getHitboxWidth() {
-        return hitboxWidth;
-    }
-
-    public double getHitboxHeight() {
-        return hitboxHeight;
-    }
-
-    public long getID() {
-        return ID;
-    }
-
-    public boolean isDead() {
-        return isDead;
     }
 
     public int getBossType() {

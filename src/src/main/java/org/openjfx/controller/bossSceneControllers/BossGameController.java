@@ -51,7 +51,7 @@ public class BossGameController  {
 
     public BossGameController(Scene scene, double initWidth, double initHeight) {
         gameSituation = GameSituation.getInstance();
-        level = 3;
+        level = 1;
         isSinglePlayer = gameSituation.isSinglePlayer();
         this.scene = scene;
         rootPane = new RootPane(initWidth, initHeight);
