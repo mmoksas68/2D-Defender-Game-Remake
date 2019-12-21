@@ -29,9 +29,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="package-info" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -73,10 +73,6 @@
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="org.openjfx.view.menuView.menuEntitiesView" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
-      <recent name="org.openjfx.view.menuView" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\spacecrafts" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\gameInfoIcons" />
@@ -85,11 +81,16 @@
       <recent name="C:\Users\kosed\Desktop\Combined\src\src\main\java\org\openjfx\model\menuEntities" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\pehli\IdeaProjects\cs319\src\assets\images\animations" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\src" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets\sounds" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets\userInterfaceResources" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets\menuAssets" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
+      <recent name="org.openjfx.view.menuView" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -285,16 +286,5 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="656" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576394971790" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/module-info.java</url>
-          <line>3</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

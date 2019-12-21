@@ -12,7 +12,7 @@ public class RocketAbilityAlgorithm implements AbilityBehaviourAlgorithm {
     @Override
     public void moveSpecialAbility() {
         Rocket rocket = (Rocket) specialAbility;
-        if ( rocket.getLocation().getPositionX() <= rocket.getDestinationX() + Marker.radius/2)
+        if ( rocket.getLocation().getPositionX() <= rocket.getDestinationX())
             rocket.setDead( true);
         else
         rocket.moveWithVelocityVector( rocket.getVelocity(), rocket.getxDir(),rocket.getyDir());

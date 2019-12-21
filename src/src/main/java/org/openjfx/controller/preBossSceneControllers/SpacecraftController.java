@@ -39,8 +39,10 @@ public class SpacecraftController {
     }
 
     public void getInputs() {
-        double xDirection = rightKeyPressed ? 1 : ( leftKeyPressed ? -1 : 0);
-        double yDirection = downKeyPressed ? -1 : ( upKeyPressed ? 1 : 0);
+        double [] boundArray = { rightKeyPressed ? 1 : 0, leftKeyPressed ? -1 : 0, upKeyPressed ? 1 : 0, downKeyPressed ? -1 : 0};
+        checkBoundaryBossMap( boundArray);
+        double xDirection = boundArray[0] + boundArray[1];
+        double yDirection = boundArray[2] + boundArray [3];
         double multiplier = 1 / Math.sqrt( Math.pow( xDirection,2) + Math.pow( yDirection, 2));
         if ( xDirection != 0 || yDirection != 0) {
             spacecraft.setMoving(true);
@@ -52,6 +54,7 @@ public class SpacecraftController {
         ((SpacecraftGun)spacecraft.getSpacecraftGun()).setFiring(fireKeyPressed);
 
         fireBullet();
+
 
     }
     public void checkInputs(){
@@ -218,6 +221,14 @@ public class SpacecraftController {
             }
         }
     }
+
+    public void checkBoundaryBossMap ( double [] array) {
+            if (spacecraft.getLocation().getPositionX() + spacecraft.getHitBoxWidth() >= (3*BossMap.MAP_WIDTH) /4) array[0] = 0;
+            if (spacecraft.getLocation().getPositionX() <= 0) array[1] = 0;
+            if (spacecraft.getLocation().getPositionY() <= 0) array[2] = 0;
+            if (spacecraft.getLocation().getPositionY() + spacecraft.getHitBoxHeight()>= BossMap.MAP_HEIGHT) array[3] = 0;
+    }
+
     public BossMapView getBossMapView() {
         return bossMapView;
     }

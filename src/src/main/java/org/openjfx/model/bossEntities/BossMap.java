@@ -2,6 +2,7 @@ package org.openjfx.model.bossEntities;
 
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
+import org.openjfx.model.bossEntities.BossAbility.Rocket;
 import org.openjfx.model.bossEntities.BossAbility.SpecialAbility;
 import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
@@ -30,7 +31,7 @@ public class BossMap {
     private Spacecraft spacecraft2;
     private java.util.Map<Long, Bullet> bullets = new HashMap<Long, Bullet>();
     private java.util.Map <Long, SpecialAbility> specialAbilities = new HashMap<>();
-
+    private boolean isFiring = false;
 
     public BossMap(int level, boolean isSinglePlayer) {
         this.level = level;
@@ -89,6 +90,7 @@ public class BossMap {
     public void addBullet(Bullet bullet) {
         bullets.put(bullet.getID(), bullet);
     }
+
     public void addSpecialAbility ( SpecialAbility specialAbility) {
         specialAbilities.put( specialAbility.getID(), specialAbility);
     }
@@ -98,6 +100,14 @@ public class BossMap {
 
     public Map<Long, SpecialAbility> getSpecialAbilities() {
         return specialAbilities;
+    }
+
+    public boolean isFiring() {
+        return isFiring;
+    }
+
+    public void setFiring(boolean firing) {
+        isFiring = firing;
     }
 
     public Boss getBoss() {

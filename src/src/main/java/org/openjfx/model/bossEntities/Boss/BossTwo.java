@@ -32,7 +32,7 @@ public class BossTwo extends Boss {
         double markerX = Math.random() * maxX;
         double markerY = Math.random() * maxY;
         Marker marker = new Marker( new Location( markerX, markerY));
-        Rocket rocket = new Rocket( new Location( getLocation().getPositionX() + getHitBoxWidth()/2, getLocation().getPositionY() + getHitBoxHeight()/2 ));
+        Rocket rocket = new Rocket( new Location( getLocation().getPositionX() + getHitBoxWidth()/2, getLocation().getPositionY() + getHitBoxHeight()/2 ), marker);
         double yLength =  markerY - rocket.getLocation().getPositionY();
         double xLength =  markerX - rocket.getLocation().getPositionX();
         double destinationLength = Math.sqrt( Math.pow( xLength, 2.0) + Math.pow( yLength,2.0) ) ;
