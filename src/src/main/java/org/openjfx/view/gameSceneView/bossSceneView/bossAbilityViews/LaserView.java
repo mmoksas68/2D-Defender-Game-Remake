@@ -8,9 +8,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class LaserView extends SpecialAbilityView {
-    private static String resource = "resources/bossLaser.png";
     public LaserView(ModelToViewSpecialAbility modelToViewSpecialAbility, double scaleW, double scaleH)  {
-        super( modelToViewSpecialAbility , resource, scaleW, scaleH);
+        super( modelToViewSpecialAbility, scaleW, scaleH);
     }
 
 }
