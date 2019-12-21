@@ -37,7 +37,8 @@ public class EndGameMenuController {
         stage = new Stage();
         stage.initOwner(primaryScene.getWindow());
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-        this.scene = new Scene(endGame,350,150);
+        this.scene = new Scene(endGame);
+        this.scene.getStylesheets().add("file:cssFiles/endgame");
         stage.setScene(this.scene);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);

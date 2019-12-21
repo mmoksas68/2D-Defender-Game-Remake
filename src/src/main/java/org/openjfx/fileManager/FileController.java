@@ -181,7 +181,6 @@ public class FileController {
     }
 
     public void loadPassedLevelInfo(){
-        PassedLevelInfo passedLevelInfo = PassedLevelInfo.getInstance();
         try {
             fis = new FileInputStream(new File("gameData/levelInfo.txt"));
         } catch (FileNotFoundException e) {

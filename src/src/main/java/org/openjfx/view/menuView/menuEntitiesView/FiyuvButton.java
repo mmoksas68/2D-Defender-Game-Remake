@@ -20,6 +20,7 @@ public class FiyuvButton extends Button {
 
     public FiyuvButton(String text){
         setText(text);
+        this.getStyleClass().add("fiyuv-button");
         initializeButtonListeners();
     }
 
@@ -54,7 +55,12 @@ public class FiyuvButton extends Button {
                 }
             }
         });
+        this.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                SoundController.buttonEntered();
+            }
+        });
     }
-
 
 }

@@ -1,0 +1,88 @@
+.fiyuv-button{
+    -fx-font-family: "Copperplate Gothic Bold";
+    -fx-font-size: 20;
+    -fx-alignment: center-left;
+    -fx-text-alignment: left;
+    -fx-border-color: transparent;
+    -fx-text-fill: black;
+    -fx-background-color: #af1f00;
+}
+
+.fiyuv-button:pressed{
+    -fx-background-size: 100% 100%;
+}
+
+.fiyuv-button:hover{
+    -fx-effect: dropshadow(gaussian, BLACK, 10, 0,0,0);
+    -fx-text-fill: white;
+}
+
+
+.menu-button{
+    -fx-background-image:url("../assets/menuAssets/black_menu.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+    -fx-pref-width:40;
+    -fx-pref-height: 40;
+    -fx-alignment: center-left;
+    -fx-background-position: center;
+    -fx-background-color: #af1f00;
+}
+
+.menu-button:hover{
+    -fx-background-color: white;
+}
+
+.menu-button:pressed{
+    -fx-effect: dropshadow(three-pass-box, BLACK, 10, 0,0,0);
+}
+.settings-button{
+    -fx-background-image:url("../assets/menuAssets/setting-512.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+    -fx-pref-width:40;
+    -fx-pref-height: 40;
+    -fx-alignment: center-left;
+    -fx-background-position: center;
+    -fx-background-color: #af1f00;
+}
+
+.settings-button:hover{
+    -fx-background-color: white;
+}
+
+.settings-button:pressed{
+    -fx-effect: dropshadow(three-pass-box, BLACK, 10, 0,0,0);
+}
+.pause-image{
+    -fx-image: url("../assets/menuAssets/pause.png");
+}
+.save-button{
+    -fx-background-image:url("../assets/menuAssets/save.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+    -fx-pref-width:40;
+    -fx-pref-height: 40;
+    -fx-alignment: center-left;
+    -fx-background-position: center;
+    -fx-background-color: #af1f00;
+
+}
+
+.save-button:hover{
+    -fx-background-color: white;
+}
+
+.save-button:pressed{
+    -fx-effect: dropshadow(three-pass-box, BLACK, 10, 0,0,0);
+}
+
+.root{
+    -fx-background-color: black;
+    -fx-background-image: url("../assets/menuAssets/Window.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: 100% 100%;
+    -fx-spacing: 40;
+    -fx-padding: 80, 40, 40, 40;
+}

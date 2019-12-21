@@ -40,16 +40,19 @@ public class SoundController {
 
     public static void buttonClick(){
         String buttonClick;
+        buttonClick = "assets/sounds/button_sound2.wav";
+        //buttonClick = "assets/sounds/button_sound3.wav";
+        Media sound = new Media(new File(buttonClick).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setVolume(Settings.getInstance().getVolume());
+        mediaPlayer.play();
+
+    }
+
+    public static void buttonEntered(){
+        String buttonClick;
         int theme = Settings.getInstance().getTheme();
-        if(theme == 0){
-            buttonClick = "assets/sounds/button_sound1.wav";
-        }
-        else if(theme == 1){
-            buttonClick = "assets/sounds/button_sound2.wav";
-        }
-        else{
-            buttonClick = "assets/sounds/button_sound3.wav";
-        }
+        buttonClick = "assets/sounds/button_sound1.wav";
         Media sound = new Media(new File(buttonClick).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setVolume(Settings.getInstance().getVolume());
