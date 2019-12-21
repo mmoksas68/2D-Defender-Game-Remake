@@ -32,7 +32,7 @@ public class BossOne extends Boss {
     }
     public Laser sendLaser () {
         double laserWidth = getLocation().getPositionX();
-        return new Laser( new Location( 0,getLocation().getPositionY() + getHitBoxHeight()/2), laserWidth);
+        return new Laser( new Location( 0,getLocation().getPositionY() + 4*getHitBoxHeight()/9), laserWidth);
     }
 
     public double getLASER_FREQ() {
