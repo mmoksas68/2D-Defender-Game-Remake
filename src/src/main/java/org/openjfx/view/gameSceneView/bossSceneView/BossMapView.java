@@ -94,6 +94,9 @@ public class BossMapView extends AnchorPane {
         if ( currentNodes.containsKey( modelToViewBoss.getID())) {
             bossOneView = (BossOneView) currentNodes.get( modelToViewBoss.getID());
             bossOneView.refresh( modelToViewBoss, layoutScaleWidth, layoutScaleHeight);
+            if(modelToViewBoss.isDead()){
+                getChildren().remove(bossOneView);
+            }
         }
         else {
             bossOneView = new BossOneView( modelToViewBoss, layoutScaleWidth, layoutScaleHeight);
