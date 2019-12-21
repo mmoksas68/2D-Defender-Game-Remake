@@ -102,8 +102,7 @@ public class PauseMenuController {
             gameSaveObj.setPreBossMap(preBossGameController.getPreBossMapController().getPreBossMap());
         }
         gameSaveObj.setLastSavedID(LocatableObject.getCurrentID());
-        System.out.println("in paıse" + LocatableObject.getCurrentID());
-        gameSaveObj.setGameSituation(gameSituation);
+        //gameSaveObj.setGameSituation(gameSituation);
         isSavePressed.setValue(true);
     }
 

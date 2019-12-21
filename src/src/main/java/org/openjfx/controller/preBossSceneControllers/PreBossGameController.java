@@ -77,18 +77,20 @@ public class PreBossGameController {
 
     public void initListeners(){
         ChangeListener<Boolean> isFirstDied = (observable, oldValue, newValue) -> {
-            if(gameSituation.isFirstCraftDied()){
-                spacecraftController2.getPreBossMap().setSpacecraft1(spacecraftController2.getPreBossMap().getSpacecraft2());
-                spacecraftController2.getPreBossMap().setSpacecraft2(null);
-                spacecraftController1 = spacecraftController2;
-                spacecraftController2 = null;
-                keysFor2();
+            if(gameSituation.isTwoPlayerSingleShip()) {
+                if (gameSituation.isFirstCraftDied()) {
+                    spacecraftController2.getPreBossMap().setSpacecraft1(spacecraftController2.getPreBossMap().getSpacecraft2());
+                    spacecraftController2.getPreBossMap().setSpacecraft2(null);
+                    spacecraftController1 = spacecraftController2;
+                    spacecraftController2 = null;
+                    keysFor2();
+                }
+                if (gameSituation.isSecondCraftDied()) {
+                    spacecraftController2 = null;
+                    keysFor1();
+                }
+                rootPane.twoPlayerOneShipScreen(spacecraftController1.getPreBossMapView());
             }
-            if(gameSituation.isSecondCraftDied()){
-                spacecraftController2 = null;
-                keysFor1();
-            }
-            rootPane.twoPlayerOneShipScreen(spacecraftController1.getPreBossMapView());
         };
         gameSituation.twoPlayerSingleShipProperty().addListener(isFirstDied);
     }
@@ -196,10 +198,10 @@ public class PreBossGameController {
                     gameSituation.setIsSecondCraftDied(true);
                 }
             }
-
             if(gameSituation.isFirstCraftDied() || gameSituation.isSecondCraftDied()){
                 gameSituation.setTwoPlayerSingleShip(true);
             }
+
         }
 
         else{

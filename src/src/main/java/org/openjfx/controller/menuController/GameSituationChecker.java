@@ -71,8 +71,7 @@ public class GameSituationChecker {
             scene.getWindow().heightProperty().addListener(stageSizeListener);
         }
         else{
-            gameSituation.resetVar();
-            System.out.println("in game situation  " + GameSaveObj.getInstance().getPreBossMap());
+            System.out.println("in game situation  " + gameSituation.isTwoPlayerSingleShip() + " " + gameSituation.isSinglePlayer());
             if(!gameSituation.isIsPreBossFinished() && !gameSituation.isIsPreBossFinishedSuccessfully())
                 preBossGameController = new PreBossGameController(GameSaveObj.getInstance().getPreBossMap(), scene, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
             else if(!gameSituation.isIsBossFinished() && !gameSituation.isIsBossFinishedSuccessfully())

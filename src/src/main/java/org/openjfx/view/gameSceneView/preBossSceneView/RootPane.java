@@ -1,7 +1,7 @@
 package org.openjfx.view.gameSceneView.preBossSceneView;
 
 import javafx.animation.*;
-import javafx.beans.property.DoubleProperty;
+
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
@@ -9,10 +9,9 @@ import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.view.gameSceneView.preBossSceneView.TopBar.TopBarView;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.security.Key;
+
 
 public class RootPane extends BorderPane {
     private PreBossMapView preBossMapView1;
@@ -35,7 +34,7 @@ public class RootPane extends BorderPane {
     public RootPane ( double width, double height) {
         setMaxSize(width,height);
         setPrefSize(width,height);
-        topBarView = new TopBarView(width, height*1.5/10);
+        topBarView = new TopBarView(width, height*1.5/10, 0, 0);
 
         bossMapView = new BossMapView(width, height*8.8/10);
         setCenter(this.bossMapView);
@@ -50,18 +49,19 @@ public class RootPane extends BorderPane {
         setPrefSize(width,height);
         this.height = height;
         this.width = width;
-        topBarView = new TopBarView(width, height*1.5/10);
+
         if(isSinglePlayer || GameSituation.getInstance().isTwoPlayerSingleShip())
         {
             preBossMapView1 = new PreBossMapView(width, height*8.8/10, isSinglePlayer);
+            topBarView = new TopBarView(width, height*1.5/10, preBossMapView1.getSliderLeft(), 0);
             setCenter(this.preBossMapView1);
         }else{
             preBossMapView1 = new PreBossMapView(width, height*4.4/10, isSinglePlayer);
             preBossMapView2 = new PreBossMapView(width, height*4.4/10, isSinglePlayer);
+            topBarView = new TopBarView(width, height*1.5/10, preBossMapView1.getSliderLeft(), preBossMapView2.getSliderLeft());
             setCenter(preBossMapView1);
             setBottom(preBossMapView2);
         }
-
         setTop(topBarView);
 
        Background background = new Background(image);

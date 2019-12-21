@@ -1,8 +1,7 @@
 package org.openjfx.model.menuEntities;
 
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import org.openjfx.fileManager.MyBooleanProperty;
+import org.openjfx.serializable.MyBooleanProperty;
 
 import java.io.Serializable;
 
@@ -12,6 +11,8 @@ public class GameSituation implements Serializable {
     private int spacecraft1;
     private int spacecraft2;
     private boolean isSinglePlayer;
+
+
     private BooleanProperty isPreBossFinished;
     private BooleanProperty isPreBossFinishedSuccessfully;
     private BooleanProperty isBossFinishedSuccessfully;
@@ -23,6 +24,7 @@ public class GameSituation implements Serializable {
     private static GameSituation gameSituation;
 
     private GameSituation(){
+
         resetVar();
     }
 
@@ -31,6 +33,10 @@ public class GameSituation implements Serializable {
             gameSituation = new GameSituation();
         }
         return gameSituation;
+    }
+
+    public static void setInstance(GameSituation gameSituation2){
+        gameSituation =  gameSituation2;
     }
 
     public void resetVar(){

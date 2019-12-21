@@ -19,10 +19,20 @@ public class FileController {
     }
 
     //##################################################################################################//
-
     public void saveGame(){
+        saveGameSaveObj();
+        saveGameSituation();
+    }
+
+    public void loadGame(){
+        loadGameSaveObj();
+        loadGameSituation();
+    }
+
+
+    public void saveGameSaveObj(){
+        System.out.println("in file " + GameSituation.getInstance().isTwoPlayerSingleShip());
         GameSaveObj gameSaveObj = GameSaveObj.getInstance();
-        System.out.println(gameSaveObj.getGameSituation());
         try {
             fos = new FileOutputStream(new File("gameData/gameSave.txt"));
         } catch (FileNotFoundException e) {
@@ -51,7 +61,7 @@ public class FileController {
         }
     }
 
-    public boolean loadGame(){
+    public boolean loadGameSaveObj(){
 
         try {
             //If you want to use saved game change directory
@@ -67,21 +77,7 @@ public class FileController {
         }
         try {
             GameSaveObj.setInstance((GameSaveObj) ois.readObject());
-            GameSituation gameSituation = GameSituation.getInstance();
-            gameSituation.setLevel(GameSaveObj.getInstance().getGameSituation().getLevel());
-            gameSituation.setScore(GameSaveObj.getInstance().getGameSituation().getScore());
-            gameSituation.setSpacecraft1(GameSaveObj.getInstance().getGameSituation().getSpacecraft1());
-            gameSituation.setSpacecraft2(GameSaveObj.getInstance().getGameSituation().getSpacecraft2());
-            gameSituation.setSinglePlayer(GameSaveObj.getInstance().getGameSituation().isSinglePlayer());
-            gameSituation.setIsPreBossFinished(GameSaveObj.getInstance().getGameSituation().isIsPreBossFinished());
-            gameSituation.setIsPreBossFinishedSuccessfully(GameSaveObj.getInstance().getGameSituation().isIsPreBossFinishedSuccessfully());
-            gameSituation.setIsBossFinishedSuccessfully(GameSaveObj.getInstance().getGameSituation().isIsBossFinishedSuccessfully());
-            gameSituation.setIsBossFinished(GameSaveObj.getInstance().getGameSituation().isIsBossFinished());
-            gameSituation.setIsFirstCraftDied(GameSaveObj.getInstance().getGameSituation().isFirstCraftDied());
-            gameSituation.setIsSecondCraftDied(GameSaveObj.getInstance().getGameSituation().isSecondCraftDied());
-            gameSituation.setTwoPlayerSingleShip(GameSaveObj.getInstance().getGameSituation().isTwoPlayerSingleShip());
             LocatableObject.setCurrentID(GameSaveObj.getInstance().getLastSavedID());
-            System.out.println(GameSaveObj.getInstance().getLastSavedID() +  "in file");
             return true;
         } catch (IOException e) {
             System.out.println("no saved game");
@@ -102,6 +98,94 @@ public class FileController {
         }
         return true;
     }
+
+    public void saveGameSituation() {
+        GameSituation gameSituation = GameSituation.getInstance();
+        GameSituationFileObj gsfo = new GameSituationFileObj();
+        gsfo.setLevel(gameSituation.getLevel());
+        gsfo.setScore(gameSituation.getScore());
+        gsfo.setSpacecraft1(gameSituation.getSpacecraft1());
+        gsfo.setSpacecraft2(gameSituation.getSpacecraft2());
+        gsfo.setSinglePlayer(gameSituation.isSinglePlayer());
+        gsfo.setPreBossFinished(gameSituation.isIsPreBossFinished());
+        gsfo.setPreBossFinishedSuccessfully(gameSituation.isIsPreBossFinishedSuccessfully());
+        gsfo.setBossFinished(gameSituation.isIsBossFinished());
+        gsfo.setBossFinishedSuccessfully(gameSituation.isIsBossFinishedSuccessfully());
+        gsfo.setFirstCraftDied(gameSituation.isFirstCraftDied());
+        gsfo.setSecondCraftDied(gameSituation.isSecondCraftDied());
+        gsfo.setTwoPlayerSingleShip(gameSituation.isTwoPlayerSingleShip());
+        try {
+            fos = new FileOutputStream(new File("gameData/gameSituation.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try{
+            oos = new ObjectOutputStream(fos);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            oos.writeObject(gsfo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            oos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadGameSituation(){
+        try {
+            fis = new FileInputStream(new File("gameData/GameSituation.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            ois = new ObjectInputStream(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            GameSituation gameSituation = GameSituation.getInstance();
+            GameSituationFileObj gsfo = ((GameSituationFileObj) ois.readObject());
+            gameSituation.setLevel(gsfo.getLevel());
+            gameSituation.setScore(gsfo.getScore());
+            gameSituation.setSpacecraft1(gsfo.getSpacecraft1());
+            gameSituation.setSpacecraft2(gsfo.getSpacecraft2());
+            gameSituation.setSinglePlayer(gsfo.isSinglePlayer());
+            gameSituation.setIsPreBossFinished(gsfo.isPreBossFinished());
+            gameSituation.setIsPreBossFinishedSuccessfully(gsfo.isPreBossFinishedSuccessfully());
+            gameSituation.setIsBossFinished(gsfo.isBossFinished());
+            gameSituation.setIsBossFinishedSuccessfully(gsfo.isBossFinishedSuccessfully());
+            gameSituation.setIsFirstCraftDied(gsfo.isFirstCraftDied());
+            gameSituation.setIsSecondCraftDied(gsfo.isSecondCraftDied());
+            gameSituation.setTwoPlayerSingleShip(gsfo.isTwoPlayerSingleShip());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ois.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     public void saveKeys() {
         Settings settings = Settings.getInstance();

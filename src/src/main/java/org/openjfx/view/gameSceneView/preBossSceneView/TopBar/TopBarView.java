@@ -12,7 +12,7 @@ public class TopBarView extends BorderPane {
     private RadarView middleView;
     private GameInfoView rightView;
 
-    public TopBarView(double width, double height) {
+    public TopBarView(double width, double height, double sliderLeft1, double sliderLeft2) {
         leftView = new VBox();
 
         if(!GameSituation.getInstance().isSinglePlayer()){

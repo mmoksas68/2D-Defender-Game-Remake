@@ -17,7 +17,7 @@ public class RadarView extends Pane {
     private HashMap<Long, ImageView> radarObjects = new HashMap<>();
     private double scaleW;
     private double scaleH;
-    private Rectangle rectangle;
+    private double sliderLeft;
 
     public RadarView(double width, double height) {
         setMinSize(width, height);
@@ -61,4 +61,6 @@ public class RadarView extends Pane {
             radarObjects.put(obj.getID(), imageView);
         }
     }
+
+
 }
