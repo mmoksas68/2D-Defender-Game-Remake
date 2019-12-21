@@ -1,18 +1,19 @@
 package org.openjfx.view.gameSceneView.bossSceneView.bossViews;
 
-import javafx.scene.effect.Reflection;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.openjfx.assetManager.Assets;
 import org.openjfx.utilization.ModelToViewBoss;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-public class BossOneView extends ImageView {
-    public  BossOneView (ModelToViewBoss modelToViewBoss, double scaleW, double scaleH)  {
+public class BossView extends ImageView {
+    public BossView (ModelToViewBoss modelToViewBoss, double scaleW, double scaleH)  {
         Assets assets = Assets.getInstance();
-        setImage(assets.getBossAssets().getBoss());
+        if( modelToViewBoss.getBossType() == 1)
+            setImage(assets.getBossAssets().getBossOne());
+        else if( modelToViewBoss.getBossType() == 2)
+            setImage(assets.getBossAssets().getBossTwo());
+        else if( modelToViewBoss.getBossType() == 3)
+            setImage(assets.getBossAssets().getBossThree());
+
         refresh(modelToViewBoss,  scaleW,  scaleH);
     }
     public void refresh (ModelToViewBoss modelToViewBoss, double scaleW, double scaleH) {

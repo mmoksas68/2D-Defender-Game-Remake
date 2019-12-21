@@ -13,6 +13,7 @@ import org.openjfx.utilization.PositionHelper;
 
 public class BossMapController {
     private BossMap bossMap;
+    private boolean bossHit = false;
 
     public BossMapController(BossMap bossMap) {
         this.bossMap = bossMap;
@@ -69,6 +70,7 @@ public class BossMapController {
                 }
                 else if( obj instanceof Boss){
                     if( iterator instanceof Bullet && ((Bullet) iterator).getDirectionX() > 0){
+                        bossHit = true;
                         obj.setHealthPoint(obj.getHealthPoint() - ((Bullet) iterator).getDamage());
                         iterator.setDead(true);
                     }
@@ -78,6 +80,14 @@ public class BossMapController {
                     obj.setDead(true);
             }
         }
+    }
+
+    public boolean isBossHit() {
+        return bossHit;
+    }
+
+    public void setBossHit(boolean bossHit) {
+        this.bossHit = bossHit;
     }
 
     public BossMap getBossMap() {

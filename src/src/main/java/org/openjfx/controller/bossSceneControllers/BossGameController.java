@@ -40,7 +40,7 @@ public class BossGameController  {
     private int scoreDecayTimer = 0;
     private final int SCORE_DECAY_PERIOD = 30000;
     private boolean isSinglePlayer;
-    private int level = 1;
+    private int level;
     private AnimationTimer animationTimer = new AnimationTimer() {
         @Override
         public void handle(long l) {
@@ -51,6 +51,7 @@ public class BossGameController  {
 
     public BossGameController(Scene scene, double initWidth, double initHeight) {
         gameSituation = GameSituation.getInstance();
+        level = 3;
         isSinglePlayer = gameSituation.isSinglePlayer();
         this.scene = scene;
         rootPane = new RootPane(initWidth, initHeight);
@@ -59,7 +60,7 @@ public class BossGameController  {
         this.width = initWidth;
         this.height = initHeight;
 
-        
+
         spacecraftController1 = new SpacecraftController(bossMapController.getBossMap().getSpacecraft1(), rootPane.getBossMapView(),bossMapController.getBossMap());
         if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
             spacecraftController2 = new SpacecraftController( bossMapController.getBossMap().getSpacecraft2(), rootPane.getBossMapView(), bossMapController.getBossMap());
@@ -129,7 +130,7 @@ public class BossGameController  {
 
     private void refreshMap() {
         bossMapController.checkMapSituation();
-        scoreCalculator();
+        refreshAndReflectGameInfo();
         refreshSpacecraftGameInfo();
         refreshAndReflectBuff();
         refreshAndReflectBullet();
@@ -142,12 +143,16 @@ public class BossGameController  {
         refreshAndReflectSpecialAbility();
     }
 
-    private void scoreCalculator () {
-
-    }
     private void refreshAndReflectBuff() {
 
     }
+
+    private void refreshAndReflectGameInfo(){
+        increaseScore();
+        rootPane.getBossTopBarView().getMiddleView().refresh( new ModelToGameInfoView(gameSituation.getScore(),
+                0, 0));
+    }
+
     private void refreshAndReflectBullet() {
         ArrayList<Long> toBeDeleted = new ArrayList<>();
         for (var bullet : bossMapController.getBossMap().getBullets().values()) {
@@ -402,6 +407,13 @@ public class BossGameController  {
 
     //#############################################################################################################
 
+    private void increaseScore() {
+        if( bossMapController.isBossHit() == true) {
+            gameSituation.setScore(gameSituation.getScore() + Boss.SCORE_POINT);
+            bossMapController.setBossHit(false);
+        }
+    }
+
     public Scene getScene() {
         return scene;
     }
@@ -425,7 +437,6 @@ public class BossGameController  {
     public BooleanProperty getGameOnChange() {
         return gameOnChange;
     }
-
 
     public BossMapController getBossMapController() {return bossMapController;}
 }

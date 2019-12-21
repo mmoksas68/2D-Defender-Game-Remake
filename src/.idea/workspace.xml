@@ -73,14 +73,13 @@
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="org.openjfx.view.menuView.menuEntitiesView" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\spacecrafts" />
-      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\gameInfoIcons" />
-      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\bombs" />
-      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images" />
-      <recent name="C:\Users\kosed\Desktop\Combined\src\src\main\java\org\openjfx\model\menuEntities" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
+      <recent name="org.openjfx.view.menuView" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\MEFE\IdeaProjects\cs319\src\assets\bossAssets" />
+      <recent name="C:\Users\MEFE\IdeaProjects\cs319\src\assets" />
       <recent name="C:\Users\pehli\IdeaProjects\cs319\src\assets\images\animations" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\src" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets\sounds" />
@@ -88,9 +87,12 @@
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets\menuAssets" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
-      <recent name="org.openjfx.view.menuView" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\spacecrafts" />
+      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\gameInfoIcons" />
+      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\bombs" />
+      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images" />
+      <recent name="C:\Users\kosed\Desktop\Combined\src\src\main\java\org\openjfx\model\menuEntities" />
     </key>
   </component>
   <component name="RunDashboard">

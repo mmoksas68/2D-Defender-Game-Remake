@@ -8,6 +8,7 @@ import org.openjfx.model.commonEntities.Bullet.Bullet;
 
 public abstract class Boss extends LocatableObject {
 
+    public static final int SCORE_POINT = 10;
     private static double initialX = BossMap.MAP_WIDTH - BossMap.MAP_WIDTH /8;
     private static double initialY = BossMap.MAP_HEIGHT /2;
     private double velocity;

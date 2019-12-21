@@ -3,14 +3,11 @@ package org.openjfx.view.gameSceneView.bossSceneView;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import org.openjfx.model.bossEntities.BossAbility.Laser;
-import org.openjfx.model.bossEntities.BossAbility.LittleBoss;
-import org.openjfx.model.bossEntities.BossAbility.SpecialAbility;
 import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.utilization.*;
 import org.openjfx.view.gameSceneView.bossSceneView.bossAbilityViews.*;
 import org.openjfx.view.gameSceneView.bossSceneView.bossAbilityViews.fireAnimation.FireAnimation;
-import org.openjfx.view.gameSceneView.bossSceneView.bossViews.BossOneView;
+import org.openjfx.view.gameSceneView.bossSceneView.bossViews.BossView;
 import org.openjfx.view.gameSceneView.commonViews.bulletView.BulletView;
 import org.openjfx.view.gameSceneView.commonViews.spacecraftView.SpacecraftViewGroup;
 
@@ -94,18 +91,18 @@ public class BossMapView extends AnchorPane {
         }
     }
     public void refreshBossView(ModelToViewBoss modelToViewBoss) {
-        BossOneView bossOneView;
+        BossView bossView;
         if ( currentNodes.containsKey( modelToViewBoss.getID())) {
-            bossOneView = (BossOneView) currentNodes.get( modelToViewBoss.getID());
-            bossOneView.refresh( modelToViewBoss, layoutScaleWidth, layoutScaleHeight);
+            bossView = (BossView) currentNodes.get( modelToViewBoss.getID());
+            bossView.refresh( modelToViewBoss, layoutScaleWidth, layoutScaleHeight);
             if(modelToViewBoss.isDead()){
-                getChildren().remove(bossOneView);
+                getChildren().remove(bossView);
             }
         }
         else {
-            bossOneView = new BossOneView( modelToViewBoss, layoutScaleWidth, layoutScaleHeight);
-            currentNodes.put( modelToViewBoss.getID(), bossOneView);
-            getChildren().add( bossOneView);
+            bossView = new BossView( modelToViewBoss, layoutScaleWidth, layoutScaleHeight);
+            currentNodes.put( modelToViewBoss.getID(), bossView);
+            getChildren().add( bossView);
         }
     }
 
