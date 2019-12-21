@@ -35,9 +35,11 @@ public class SettingsView extends VBox {
     private HBox hboxForGridPaneAndVBox;
     private  Label keySelection, colorSelection, volumeLabel;
     private KeyTextField[] player1Keys, player2Keys;
-    private Settings settings = Settings.getInstance();
+    private Settings settings;
 
     public SettingsView(double width, double height){
+        settings = Settings.getInstance();
+
         this.width = width;
         this.height = height;
 

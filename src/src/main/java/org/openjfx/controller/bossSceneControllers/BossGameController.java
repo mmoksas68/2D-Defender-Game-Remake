@@ -399,6 +399,10 @@ public class BossGameController  {
     public BooleanProperty getGameOnChange() {
         return gameOnChange;
     }
+
+    public BossMapController getBossMapController(){
+        return bossMapController;
+    }
 }
 
  /*   double [] boundArray = { moveright, moveleft, moveup, movedown};

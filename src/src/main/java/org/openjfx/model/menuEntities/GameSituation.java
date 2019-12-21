@@ -2,6 +2,7 @@ package org.openjfx.model.menuEntities;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import org.openjfx.fileManager.MyBooleanProperty;
 
 import java.io.Serializable;
 
@@ -23,13 +24,7 @@ public class GameSituation implements Serializable {
     private static GameSituation gameSituation;
 
     private GameSituation(){
-        //şimdilik böyle normalde menüden setlenekcek bu değerler
-        level = 1;
-        score = 0;
-        spacecraft1 = 1;
-        spacecraft2 = 0;
-        isSinglePlayer = false;
-        resetVar();
+
     }
 
     public static GameSituation getInstance(){
@@ -44,13 +39,13 @@ public class GameSituation implements Serializable {
     }
 
     public void resetVar(){
-        this.isPreBossFinished = new SimpleBooleanProperty(false);
-        this.isPreBossFinishedSuccessfully = new SimpleBooleanProperty(false);
-        this.isBossFinished = new SimpleBooleanProperty(false);
-        this.isBossFinishedSuccessfully = new SimpleBooleanProperty(false);
-        this.isFirstCraftDied = new SimpleBooleanProperty(false);
-        this.isSecondCraftDied = new SimpleBooleanProperty(false);
-        this.twoPlayerSingleShip = new SimpleBooleanProperty(false);
+        this.isPreBossFinished = new MyBooleanProperty(false);
+        this.isPreBossFinishedSuccessfully = new MyBooleanProperty(false);
+        this.isBossFinished = new MyBooleanProperty(false);
+        this.isBossFinishedSuccessfully = new MyBooleanProperty(false);
+        this.isFirstCraftDied = new MyBooleanProperty(false);
+        this.isSecondCraftDied = new MyBooleanProperty(false);
+        this.twoPlayerSingleShip = new MyBooleanProperty(false);
     }
 
     public void resetScore(){

@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.openjfx.fileManager.FileController;
 import org.openjfx.model.menuEntities.GameSituation;
+import org.openjfx.model.menuEntities.Settings;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,6 +28,8 @@ public class MainController {
     public MainController(Stage stage){
         this.stage = stage;
         scene = new Scene(new Pane());
+        fileController = new FileController();
+        load();
         initMainController();
         stage.setScene(scene);
         stage.setFullScreen(true);
@@ -36,15 +39,12 @@ public class MainController {
         stage.initStyle(StageStyle.UNDECORATED);
         gameSituation = GameSituation.getInstance();
         stage.show();
-        fileController = new FileController();
-        load();
-        //gameSituation =
     }
 
     private void load(){
         //fileController.loadHighScores();
         //fileController.loadPassedLevelInfo();
-        //fileController.loadKeys();
+        fileController.loadKeys();
         //fileController.loadGame();
     }
 
@@ -69,7 +69,6 @@ public class MainController {
 
         ChangeListener<Boolean> saveSettingsListener = (observable, oldValue, newValue) ->{
             if(menuController.getIsSaveSettingsPressed().get()) {
-
                 menuController.setIsSaveSettingsPressed(false);
                 fileController.saveKeys();
             }

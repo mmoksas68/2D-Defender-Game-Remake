@@ -11,6 +11,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import org.openjfx.controller.preBossSceneControllers.PreBossGameController;
 import org.openjfx.controller.bossSceneControllers.BossGameController;
+import org.openjfx.model.menuEntities.GameSaveObj;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.view.menuView.MainMenu;
 import org.openjfx.view.menuView.PauseMenu;
@@ -90,6 +91,16 @@ public class PauseMenuController {
     }
 
     private void save(){
+        GameSaveObj gameSaveObj = GameSaveObj.getInstance();
+        if(gameSituation.isIsPreBossFinishedSuccessfully()){ // if preboss finished and save pressed, saves bossmap
+            gameSaveObj.setPreBossMap(null);
+            gameSaveObj.setBossMap(bossGameController.getBossMapController().getBossMap());
+        }
+        else { // if preboss has not finished yet, saves preboss map
+            gameSaveObj.setBossMap(null);
+            gameSaveObj.setPreBossMap(preBossGameController.getPreBossMapController().getPreBossMap());
+        }
+        gameSaveObj.setGameSituation(gameSituation);
         isSavePressed.setValue(true);
     }
 

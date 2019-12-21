@@ -1,9 +1,7 @@
 package org.openjfx.fileManager;
 
-import org.openjfx.model.menuEntities.GameSaveObj;
-import org.openjfx.model.menuEntities.HighScoreInfo;
-import org.openjfx.model.menuEntities.PassedLevelInfo;
-import org.openjfx.model.menuEntities.Settings;
+import org.openjfx.model.commonEntities.LocatableObject;
+import org.openjfx.model.menuEntities.*;
 import org.openjfx.model.preBossEntities.PreBossMap;
 
 import java.io.*;
@@ -34,7 +32,7 @@ public class FileController {
             e.printStackTrace();
         }
         try {
-            oos.writeObject(gameSaveObj.getPreBossMap());
+            oos.writeObject(gameSaveObj);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,9 +49,8 @@ public class FileController {
         }
     }
 
-    public void loadGame(){
+    public boolean loadGame(){
         try {
-
             //If you want to use saved game change directory
             fis = new FileInputStream(new File("gameData/game.txt"));
         } catch (FileNotFoundException e) {
@@ -67,10 +64,12 @@ public class FileController {
             e.printStackTrace();
         }
         try {
-            GameSaveObj gameSaveObj = GameSaveObj.getInstance();
-            gameSaveObj.setPreBossMap((PreBossMap) ois.readObject());
+           GameSaveObj.setInstance((GameSaveObj) ois.readObject());
+           LocatableObject.setCurrentID(GameSaveObj.getInstance().getLastSavedID());
+           return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("no saved game");
+            return false;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -85,11 +84,12 @@ public class FileController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        return true;
     }
 
     public void saveKeys() {
         Settings settings = Settings.getInstance();
+
         try {
             fos = new FileOutputStream(new File("gameData/setting.txt"));
         } catch (FileNotFoundException e) {

@@ -10,32 +10,18 @@ public class GameSaveObj implements Serializable {
 
     private static GameSaveObj gameSaveObj;
 
-    private static PreBossMap preBossMap;
-    private static BossMap bossMap;
+    private PreBossMap preBossMap;
+    private BossMap bossMap;
+    private GameSituation gameSituation;
+    private long lastSavedID;
 
     private GameSaveObj(){
 
     }
 
-    private GameSaveObj(PreBossMap pre, BossMap boss){
-        preBossMap = pre;
-        bossMap = boss;
-    }
-
     public static GameSaveObj getInstance(){
         if(gameSaveObj == null){
             gameSaveObj = new GameSaveObj();
-        }
-        return gameSaveObj;
-    }
-
-    public static GameSaveObj getInstance(PreBossMap pre, BossMap boss){
-        if(gameSaveObj == null){
-            gameSaveObj = new GameSaveObj(pre,boss);
-        }
-        else {
-            preBossMap = pre;
-            bossMap = boss;
         }
         return gameSaveObj;
     }
@@ -49,7 +35,7 @@ public class GameSaveObj implements Serializable {
     }
 
     public void setBossMap(BossMap bossMap) {
-        GameSaveObj.bossMap = bossMap;
+        this.bossMap = bossMap;
     }
 
     public PreBossMap getPreBossMap() {
@@ -57,6 +43,22 @@ public class GameSaveObj implements Serializable {
     }
 
     public void setPreBossMap(PreBossMap preBossMap) {
-        GameSaveObj.preBossMap = preBossMap;
+        this.preBossMap = preBossMap;
+    }
+
+    public GameSituation getGameSituation() {
+        return gameSituation;
+    }
+
+    public void setGameSituation(GameSituation gameSituation) {
+        this.gameSituation = gameSituation;
+    }
+
+    public long getLastSavedID() {
+        return lastSavedID;
+    }
+
+    public void setLastSavedID(long lastSavedID) {
+        this.lastSavedID = lastSavedID;
     }
 }
