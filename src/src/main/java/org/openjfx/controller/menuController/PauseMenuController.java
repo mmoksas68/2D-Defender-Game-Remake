@@ -27,12 +27,10 @@ public class PauseMenuController {
     private MainMenu mainMenu;
     private BooleanProperty isSavePressed;
     private GameSituation gameSituation;
-    private SettingsView settings;
 
-    PauseMenuController(Scene scene, PreBossGameController preBossGameController, MainMenu mainMenu, SettingsView settings){
+    PauseMenuController(Scene scene, PreBossGameController preBossGameController, MainMenu mainMenu){
         this.mainMenu = mainMenu;
         this.preBossGameController = preBossGameController;
-        this.settings = settings;
         gameSituation = GameSituation.getInstance();
         isSavePressed = new SimpleBooleanProperty(false);
         pauseMenu = new PauseMenu();
@@ -52,7 +50,7 @@ public class PauseMenuController {
         initPauseMenuController();
     }
 
-    PauseMenuController(Scene scene, BossGameController bossGameController, MainMenu mainMenu, SettingsView settings){
+    PauseMenuController(Scene scene, BossGameController bossGameController, MainMenu mainMenu){
         this.mainMenu = mainMenu;
         this.bossGameController = bossGameController;
         gameSituation = GameSituation.getInstance();
@@ -94,13 +92,6 @@ public class PauseMenuController {
         bossGameController = null;
     }
 
-    private void settings(){
-        stage.close();
-        primaryScene.setRoot(settings);
-        preBossGameController = null;
-        bossGameController = null;
-    }
-
 
     private void save(){
         isSavePressed.setValue(true);
@@ -137,13 +128,6 @@ public class PauseMenuController {
            public void handle(ActionEvent event){
                save();
            }
-        });
-
-        pauseMenu.getSettingsButton().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                settings();
-            }
         });
 
 

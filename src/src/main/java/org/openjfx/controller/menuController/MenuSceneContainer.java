@@ -24,7 +24,7 @@ public class MenuSceneContainer {
         highScoresView = new HighScoresView();
         credits = new Credits();
         howToPlay = new HowToPlay();
-        settings = new SettingsView(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
+        settings = new SettingsView();
         spacecraftSelection1 = new SpacecraftSelection(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight(), "Spacecraft Selection 1");
         spacecraftSelection2 = new SpacecraftSelection(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight(), "Spacecraft Selection 2");
         levelSelection = new LevelSelection(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());

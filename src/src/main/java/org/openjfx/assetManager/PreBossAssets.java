@@ -21,6 +21,7 @@ public class PreBossAssets {
     private Image radarMeteor;
     private List<Image> gameInfoIcons = new ArrayList<>();
     private Image tier2unevolved;
+    private List<Image> backgrounds = new ArrayList<>();
 
     PreBossAssets(){
         try {
@@ -35,6 +36,10 @@ public class PreBossAssets {
             radarEnemySpaceStation = new Image(FileController.getFileStream("assets/images/enemySpaceStation.png"));
             radarSpacecraft = new Image(FileController.getFileStream("assets/images/radar_spacecraft.png"));
             radarEnemy = new Image(FileController.getFileStream("assets/images/enemyRadar.png"));
+
+            backgrounds.add(new Image(FileController.getFileStream("assets/images/backgrounds/background.png")));
+            backgrounds.add(new Image(FileController.getFileStream("assets/images/backgrounds/background2.png")));
+            backgrounds.add(new Image(FileController.getFileStream("assets/images/backgrounds/background3.png")));
 
             smartBombCount.add(null);
             smartBombCount.add(new Image(FileController.getFileStream("assets/images/bombs/singleBomb.png")));
@@ -98,5 +103,7 @@ public class PreBossAssets {
     public Image getTier2unevolved() {
         return tier2unevolved;
     }
+
+    public List<Image> getBackgrounds() {return backgrounds;}
 
 }

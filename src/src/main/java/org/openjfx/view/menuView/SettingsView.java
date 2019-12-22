@@ -13,10 +13,8 @@ import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 import org.openjfx.assetManager.Assets;
 import org.openjfx.model.menuEntities.Settings;
-import org.openjfx.view.menuView.menuEntitiesView.FiyuvBottomMenu;
-import org.openjfx.view.menuView.menuEntitiesView.FiyuvButton;
-import org.openjfx.view.menuView.menuEntitiesView.FiyuvHeadingLabel;
-import org.openjfx.view.menuView.menuEntitiesView.KeyTextField;
+import org.openjfx.view.menuView.menuEntitiesView.*;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -42,67 +40,52 @@ public class SettingsView extends VBox {
     private Settings settings = Settings.getInstance();
     private Button defaultSettings;
 
-    public SettingsView(double width, double height){
-        this.width = width;
-        this.height = height;
-
-        vboxSelectionView = new VBox();
-        vboxForVolumeAndColors = new VBox();
-        hboxForGridPaneAndVBox = new HBox();
-
+    public SettingsView(){
+        headingLabel = new FiyuvHeadingLabel("SETTINGS");
         bottomMenu = new FiyuvBottomMenu("Menu", "Save");
+        createHBoxForGridPaneAndVBox();
+        this.getChildren().addAll(headingLabel, hboxForGridPaneAndVBox, bottomMenu);
+        this.setSpacing(75);
+        this.setAlignment(Pos.CENTER);
+        this.getStyleClass().add("menu-root");
+    }
 
-        defaultSettings = new Button("Default Keys");
-        defaultSettings.setPrefWidth(200);
-        defaultSettings.setPrefHeight(50);
+    private void createHBoxForGridPaneAndVBox(){
+        hboxForGridPaneAndVBox = new HBox();
+        createGridPane();
+        createVBoxForColorAndVolume();
+        hboxForGridPaneAndVBox.setAlignment(Pos.CENTER);
+        hboxForGridPaneAndVBox.setSpacing(300);
+    }
 
+    private void createVBoxForColorAndVolume(){
+        vboxForVolumeAndColors = new VBox();
+        createSelectionView();
+        createVolumeSlider();
+        hboxForGridPaneAndVBox.getChildren().add(vboxForVolumeAndColors);
+        vboxForVolumeAndColors.setAlignment(Pos.CENTER);
+        vboxForVolumeAndColors.setSpacing(125);
+    }
+
+
+    private void createVolumeSlider(){
         volumeSlider = new Slider();
-        volumeLabel = new Label("Volume");
-        colorSelection = new Label("Menu Themes");
-
+        volumeLabel = new SubHeaderLabel("Volume");
         VBox volume = new VBox();
         volume.getChildren().addAll(volumeLabel, volumeSlider);
         volume.setAlignment(Pos.CENTER);
-        volume.setSpacing(height / 20);
-
-        createGridPane();
-        createSelectionView();
-
-        VBox vBox = new VBox();
-        vBox.setAlignment(Pos.CENTER);
-
-
-        keySelection = new Label("Key Selection");
-
-        vBox.getChildren().addAll(keySelection, gridPane);
-        vBox.setSpacing(height / 30);
-
+        volume.setSpacing(45);
         volumeSlider.setValue(settings.getVolume());
-
-        vboxForVolumeAndColors.getChildren().addAll(vboxSelectionView, volume);
-        hboxForGridPaneAndVBox.getChildren().addAll(vBox, vboxForVolumeAndColors);
-
-        hboxForGridPaneAndVBox.setAlignment(Pos.CENTER);
-        vboxForVolumeAndColors.setAlignment(Pos.CENTER);
-        vboxSelectionView.setAlignment(Pos.CENTER);
-
-        vboxForVolumeAndColors.setSpacing(height / 5);
-
-        HBox hbox = new HBox();
-        hbox.getChildren().add(defaultSettings);
-
-        this.getChildren().addAll(headingLabel, hboxForGridPaneAndVBox,hbox, bottomMenu);
-        hbox.setAlignment(Pos.BOTTOM_LEFT);
-        gridPane.setAlignment(Pos.CENTER_LEFT);
-        gridPane.setPrefSize(width / 2, height / 2 );
-        this.setSpacing(height / 8);
-        this.setAlignment(Pos.CENTER);
-        this.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
-        this.getStyleClass().add("menu-root");
-
+        vboxForVolumeAndColors.getChildren().add(volume);
+        volume.setMaxWidth(400);
     }
 
+
     private void createSelectionView(){
+        vboxSelectionView = new VBox();
+        vboxSelectionView.setAlignment(Pos.CENTER);
+        colorSelection = new SubHeaderLabel("Menu Themes");
+        colorSelection.getStyleClass().add("sub-header");
 
         radioButtons = new HBox();
         hBoxImages = new HBox();
@@ -118,7 +101,6 @@ public class SettingsView extends VBox {
 
         selection1Button.setSelected(true);
 
-        headingLabel = new FiyuvHeadingLabel("Settings");
 
         radioButtons.getChildren().addAll(selection1Button, selection2Button, selection3Button);
 
@@ -133,26 +115,40 @@ public class SettingsView extends VBox {
         hBoxImages.setAlignment(Pos.CENTER);
 
         for (ImageView imageView : imageViews) {
-            imageView.setFitWidth(width / 15);
-            imageView.setFitWidth(width / 15);
+            imageView.setFitWidth(150);
+            imageView.setFitWidth(150);
         }
         for (ImageView imageView : imageViews) {
-            imageView.setFitHeight(width / 15);
-            imageView.setFitHeight(width / 15);
+            imageView.setFitHeight(150);
+            imageView.setFitHeight(150);
         }
 
-        radioButtons.setSpacing(width/8);
-        hBoxImages.setSpacing(width/15);
+        radioButtons.setSpacing(175);
+        hBoxImages.setSpacing(40);
 
-        vboxSelectionView.setSpacing(height / 20);
+        vboxSelectionView.setSpacing(45);
 
         vboxSelectionView.getChildren().addAll(colorSelection, hBoxImages, radioButtons);
+
+        vboxForVolumeAndColors.getChildren().add(vboxSelectionView);
 
     }
 
 
     private void createGridPane(){
+        VBox vBox = new VBox();
+        vBox.setAlignment(Pos.CENTER);
+        keySelection = new SubHeaderLabel("Key Selection");
+        keySelection.getStyleClass().add("sub-header");
+
+        vBox.setSpacing(45);
+
+
+
         gridPane = new GridPane();
+        //gridPane.setGridLinesVisible(true);
+        gridPane.setVgap(15);
+        gridPane.setHgap(15);
         createLabelsForGridPane();
         createTextFieldsForPlayer1Keys();
         createTextFieldsForPlayer2Keys();
@@ -161,24 +157,36 @@ public class SettingsView extends VBox {
         addPlayer2KeysIntoGridPane();
 
         ColumnConstraints column0 = new ColumnConstraints();
-        column0.setPercentWidth(20);
+        column0.setPrefWidth(175);
         ColumnConstraints column1 = new ColumnConstraints();
-        column1.setPercentWidth(35);
+        column1.setPrefWidth(150);
         ColumnConstraints column2 = new ColumnConstraints();
-        column2.setPercentWidth(35);
+        column2.setPrefWidth(150);
         gridPane.getColumnConstraints().addAll(column0, column1, column2);
+
+        defaultSettings = new Button("Default Keys");
+        defaultSettings.getStyleClass().add("default-keys-button");
+        //defaultSettings.setPrefWidth(100);
+        //defaultSettings.setPrefHeight(50);
+
+        HBox hbox = new HBox(defaultSettings);
+        hbox.setAlignment(Pos.BOTTOM_LEFT);
+
+        vBox.getChildren().addAll(keySelection, gridPane, hbox);
+        hboxForGridPaneAndVBox.getChildren().add(vBox);
+
     }
 
     private void createLabelsForGridPane(){
-        player1Label = new Label("Player 1");
-        player2Label = new Label("Player 2");
-        upLabel = new Label("UP: ");
-        downLabel = new Label("DOWN: ");
-        fireLabel = new Label("FIRE: ");
-        rightLabel = new Label("RIGHT: ");
-        leftLabel = new Label("LEFT: ");
-        hyperjumpLabel = new Label("HYPER JUMP: ");
-        smartbombLabel = new Label("SMART BOMB: ");
+        player1Label = new KeyLabel("Player 1");
+        player2Label = new KeyLabel("Player 2");
+        upLabel = new KeyLabel("Up: ");
+        downLabel = new KeyLabel("Down: ");
+        fireLabel = new KeyLabel("Fire: ");
+        rightLabel = new KeyLabel("Right: ");
+        leftLabel = new KeyLabel("Left: ");
+        hyperjumpLabel = new KeyLabel("Hyper Jump:   ");
+        smartbombLabel = new KeyLabel("Smart bomb:   ");
     }
 
 

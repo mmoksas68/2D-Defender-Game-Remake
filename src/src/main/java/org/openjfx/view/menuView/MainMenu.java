@@ -67,17 +67,17 @@ public class MainMenu extends HBox {
     }
 
     private void createSinglePlayerBtn(){
-        singlePlayerBtn = new FiyuvButton("Single");
+        singlePlayerBtn = new FiyuvButton("Single Player");
         addMenuButton(singlePlayerBtn);
     }
 
     private void createTwoPlayersBtn(){
-        twoPlayersBtn = new FiyuvButton("TwoPlayer");
+        twoPlayersBtn = new FiyuvButton("Two Player");
         addMenuButton(twoPlayersBtn);
     }
 
     private void createHowToPlayBtn(){
-        howToPlayBtn = new FiyuvButton("HowtoPlay");
+        howToPlayBtn = new FiyuvButton("How to Play");
         addMenuButton(howToPlayBtn);
     }
 
