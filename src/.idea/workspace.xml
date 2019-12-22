@@ -59,7 +59,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/aiproject" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -70,33 +70,15 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
-    <key name="ExtractSuperBase.RECENT_KEYS">
-      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
-      <recent name="org.openjfx.view.menuView" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\MEFE\IdeaProjects\cs319\src\assets\bossAssets" />
-      <recent name="C:\Users\MEFE\IdeaProjects\cs319\src\assets" />
-      <recent name="C:\Users\pehli\IdeaProjects\cs319\src\assets\images\animations" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\src" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\sounds" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\userInterfaceResources" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\menuAssets" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
-      <recent name="org.openjfx.view.menuView" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kosed\Desktop\Combined\src\gameData" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\spacecrafts" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\gameInfoIcons" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\bombs" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images" />
-      <recent name="C:\Users\kosed\Desktop\Combined\src\src\main\java\org\openjfx\model\menuEntities" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets\menuAssets" />
@@ -104,6 +86,10 @@
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets\sounds" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets\userInterfaceResources" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
+      <recent name="org.openjfx.view.menuView" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -222,6 +208,7 @@
       <workItem from="1576920521208" duration="223000" />
       <workItem from="1576925793124" duration="2407000" />
       <workItem from="1576939043238" duration="3896000" />
+      <workItem from="1577008882849" duration="1391000" />
     </task>
     <servers />
   </component>

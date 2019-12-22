@@ -28,6 +28,27 @@ public class Settings implements Serializable {
 
 
     private Settings() {
+
+        /*up = KeyCode.UP;
+        down = KeyCode.DOWN;
+        right = KeyCode.RIGHT;
+        left = KeyCode.LEFT;
+        fire = KeyCode.NUMPAD1;
+        hyperJump = KeyCode.NUMPAD2;
+        smartBomb = KeyCode.NUMPAD3;
+
+        up2 = KeyCode.W;
+        down2 = KeyCode.S;
+        right2 = KeyCode.D;
+        left2 = KeyCode.A;
+        fire2 = KeyCode.SPACE;
+        hyperJump2 = KeyCode.Z;
+        smartBomb2 = KeyCode.X;
+
+        volume = 50;
+
+        theme = 0; */
+
     }
 
     public static Settings getInstance(){

@@ -26,10 +26,14 @@ public class GameSituationChecker {
     private GameSaveObj gameSaveObj;
     private Scene scene;
     private PassedLevelInfo passedLevelInfo;
-
+    private PreBossMap preBossMap;
+    private BossMap bossMap;
+    private boolean flag1 = false;
+    private boolean flag2 = false;
     private Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
     public GameSituationChecker(Scene scene, boolean newGame){
+        System.out.println("game situation checker");
         this.scene = scene;
         isPaused = new SimpleBooleanProperty(false);
         isEnd = new SimpleBooleanProperty(false);
@@ -38,6 +42,8 @@ public class GameSituationChecker {
         gameSituation = GameSituation.getInstance();
         initGameListeners();
         startGame(newGame);
+        ifPaused();
+        ifEnd();
     }
 
     public GameSituationChecker(Scene scene, int bossScene){
@@ -47,19 +53,19 @@ public class GameSituationChecker {
         gameSaveObj = GameSaveObj.getInstance();
         passedLevelInfo = PassedLevelInfo.getInstance();
         gameSituation = GameSituation.getInstance();
+        gameSituation.resetVar();
         gameSituation.setSinglePlayer(false);
         gameSituation.setIsPreBossFinishedSuccessfully(true);
         gameSituation.setIsBossFinished(false);
         bossGameController = new BossGameController(scene, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
         initGameListeners();
-        ifPaused();
-        ifEnd();
     }
 
 
 
     private void startGame(boolean newGame){
         if(newGame){
+            gameSituation.resetVar();
             preBossGameController = new PreBossGameController(scene, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
             ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) ->{
                 preBossGameController.setWidth(scene.getWindow().getWidth());
@@ -69,13 +75,13 @@ public class GameSituationChecker {
             scene.getWindow().heightProperty().addListener(stageSizeListener);
         }
         else{
-            if(!gameSituation.isIsPreBossFinished())
+            if(!gameSituation.isIsPreBossFinished() && !gameSituation.isIsPreBossFinishedSuccessfully()) {
                 preBossGameController = new PreBossGameController(GameSaveObj.getInstance().getPreBossMap(), scene, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
-            else if(!gameSituation.isIsBossFinished())
+            }
+            else if(!gameSituation.isIsBossFinished() && !gameSituation.isIsBossFinishedSuccessfully()) {
                 bossGameController = new BossGameController(GameSaveObj.getInstance().getBossMap(), scene, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
+            }
         }
-        ifPaused();
-        ifEnd();
     }
 
 
@@ -120,13 +126,47 @@ public class GameSituationChecker {
             };
             gameSituation.isPreBossFinishedProperty().addListener(isEndListener);
         }
+
+        if(!(preBossGameController == null)){
+            ChangeListener<Boolean> isSuccesfullyEndListener = ((observableValue, aBoolean, t1) -> {
+               if(gameSituation.isIsPreBossFinishedSuccessfully()){
+                   System.out.println("nende 2 kere");
+                   changePreBossToBoss();
+                   gameSituation.setIsBossFinishedSuccessfully(false);
+               }
+            });
+            gameSituation.isPreBossFinishedSuccessfullyProperty().addListener(isSuccesfullyEndListener);
+        }
+
+        ChangeListener<Boolean> isSuccesfullyEndBossListener = ((observableValue, aBoolean, t1) -> {
+            if(gameSituation.isIsBossFinishedSuccessfully()){
+                System.out.println("2 kere");
+                isEnd.set(true);
+            }
+        });
+        gameSituation.isBossFinishedSuccessfullyProperty().addListener(isSuccesfullyEndBossListener);
+
+
+        ChangeListener<Boolean> isEndBossListener = ((observableValue, aBoolean, t1) -> {
+            if(gameSituation.isIsBossFinished()){
+                isEnd.set(true);
+                this.bossGameController = null;
+            }
+        });
+        gameSituation.isBossFinishedProperty().addListener(isEndBossListener);
+
     }
 
 
 
     private void changePreBossToBoss(){
-
-
+        bossGameController = new BossGameController(scene, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
+        //GameSaveObj.getInstance().setBossMap(bossGameController.getBossMapController().getBossMap());
+        if(!flag1) {
+            ifPaused();
+            ifEnd();
+            flag1 = true;
+        }
     }
 
 

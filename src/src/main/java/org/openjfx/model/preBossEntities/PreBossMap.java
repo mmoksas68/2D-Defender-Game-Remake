@@ -63,12 +63,12 @@ public class PreBossMap implements Serializable {
                 initialEvolvedEnemyStationCount = 2;
                 break;
             case 2:
-                initialTier1unevolvedEnemyCount = 15;
-                initialTier1evolvedEnemyCount = 5;
-                initialTier2unevolvedEnemyCount = 10;
-                initialTier2evolvedEnemyCount = 5;
-                initialUnevolvedEnemyStationCount = 4;
-                initialEvolvedEnemyStationCount = 3;
+                initialTier1unevolvedEnemyCount = 1;
+                initialTier1evolvedEnemyCount = 0;
+                initialTier2unevolvedEnemyCount = 0;
+                initialTier2evolvedEnemyCount = 0;
+                initialUnevolvedEnemyStationCount = 0;
+                initialEvolvedEnemyStationCount = 0;
                 break;
             case 3:
                 initialTier1unevolvedEnemyCount = 5;

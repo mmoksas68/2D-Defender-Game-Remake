@@ -3,8 +3,10 @@ package org.openjfx.model.preBossEntities.Station;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.preBossEntities.Enemy.*;
 
+import java.io.Serializable;
 
-public class EnemyFactory {
+
+public class EnemyFactory implements Serializable {
 
     public Enemy produceEnemy(EnemyTypes enemy, Location location){
         Enemy myEnemy = null;

@@ -11,9 +11,9 @@ public class Tier2Enemy extends Enemy {
     public static final int MAX_HEALTH = 1;
     public static final int SCORE_POINT = 4;
     public static final int CLASHING_DAMAGE = 30;
-    public static final double IMPACT_RADIUS = 275;
+    public static final double IMPACT_RADIUS = 200;
     public static final int VELOCITY = 7;
-    public static final int RADAR_RADIUS = 500;
+    public static final int RADAR_RADIUS = 275;
     public static final int RUSHING_DURATION = 80;
 
     private int rushingTimer = 0;

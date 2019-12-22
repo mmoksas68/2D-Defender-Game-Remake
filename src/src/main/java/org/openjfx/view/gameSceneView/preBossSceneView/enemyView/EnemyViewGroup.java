@@ -89,7 +89,7 @@ public class EnemyViewGroup {
                 y = 0;
             }
             double angle = Math.atan(x/y);
-            Double ang = new Double(angle);
+            Double ang = Double.valueOf(angle);
             if(!ang.isNaN() && !ang.isInfinite()){
                 if(ang*180/Math.PI == 0 || ang*180/Math.PI == 90 || ang*180/Math.PI == -90 || ang*180/Math.PI == 180){
                     enemyView.setRotate(90);

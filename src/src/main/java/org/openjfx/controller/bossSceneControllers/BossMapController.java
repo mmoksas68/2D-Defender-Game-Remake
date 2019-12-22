@@ -8,6 +8,7 @@ import org.openjfx.model.commonEntities.Buff.Buff;
 import org.openjfx.model.commonEntities.Bullet.Bullet;
 import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
+import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.utilization.PositionHelper;
 
 
@@ -39,7 +40,7 @@ public class BossMapController {
         checkCollision( bossMap.getSpacecraft1(), bossMap.getBullets());
         checkCollision( bossMap.getBoss(), bossMap.getBullets());
         checkCollision( bossMap.getSpacecraft1(), bossMap.getSpecialAbilities());
-        if(!bossMap.isSinglePlayer()){
+        if(!bossMap.isSinglePlayer() && !GameSituation.getInstance().isTwoPlayerSingleShip()){
             checkCollision(bossMap.getSpacecraft2(), bossMap.getBullets());
             checkCollision( bossMap.getSpacecraft2(), bossMap.getSpecialAbilities());
         }

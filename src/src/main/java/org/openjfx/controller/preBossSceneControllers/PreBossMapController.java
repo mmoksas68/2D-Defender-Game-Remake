@@ -5,6 +5,7 @@ import org.openjfx.model.commonEntities.FiringBehavior.EnemyGun;
 import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
+import org.openjfx.model.menuEntities.GameSaveObj;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.preBossEntities.Enemy.*;
 import org.openjfx.model.preBossEntities.Meteor.Meteor;
@@ -31,7 +32,9 @@ public class PreBossMapController {
     }
 
     public PreBossMapController(PreBossMap preBossMap) {
+        gameSituation = GameSituation.getInstance();
         this.preBossMap = preBossMap;
+        this.isSinglePlayer = gameSituation.isSinglePlayer();
     }
 
     public void checkMapSituation() {
@@ -41,7 +44,6 @@ public class PreBossMapController {
             checkCollision(bullet, Collections.singletonMap(preBossMap.getSpacecraft1().getID(), preBossMap.getSpacecraft1()));
             if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
                 checkCollision(bullet, Collections.singletonMap(preBossMap.getSpacecraft2().getID(), preBossMap.getSpacecraft2()));
-
             bullet.moveToDirection(bullet.getVelocity(), bullet.getDirectionX(), bullet.getDirectionY());
             bullet.setDistanceTravelled( bullet.getDistanceTravelled() + bullet.getVelocity());
             if(bullet.getDistanceTravelled() > Bullet.MAX_DISTANCE)

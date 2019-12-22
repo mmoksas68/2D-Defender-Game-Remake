@@ -7,7 +7,8 @@ import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.utilization.PositionHelper;
 
-public abstract class SimpleGun implements FiringBehavior{
+public abstract class SimpleGun implements FiringBehavior {
+
     private int gunPeriod;
     private int bulletDamage;
     private int gunTimer;
