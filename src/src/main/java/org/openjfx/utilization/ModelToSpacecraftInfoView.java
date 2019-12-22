@@ -1,6 +1,7 @@
 package org.openjfx.utilization;
 
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
+import org.openjfx.model.menuEntities.GameSituation;
 
 public class ModelToSpacecraftInfoView {
     private int hyperJumpBattery;
@@ -8,7 +9,9 @@ public class ModelToSpacecraftInfoView {
     private int HP;
 
     public ModelToSpacecraftInfoView(Spacecraft spacecraft){
-        hyperJumpBattery = spacecraft.getHyperJumpBattery();
+        if(!GameSituation.getInstance().isIsBossFinishedSuccessfully() || !GameSituation.getInstance().isIsPreBossFinished()) {
+            hyperJumpBattery = spacecraft.getHyperJumpBattery();
+        }
         smartBombCount = spacecraft.getSmartBombStock();
         HP = spacecraft.getHealthPoint();
     }

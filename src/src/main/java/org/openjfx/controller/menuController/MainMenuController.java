@@ -2,20 +2,10 @@ package org.openjfx.controller.menuController;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.effect.GaussianBlur;
-import javafx.scene.input.KeyCombination;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.openjfx.controller.SoundController;
-import org.openjfx.controller.bossSceneControllers.BossGameController;
-import org.openjfx.controller.preBossSceneControllers.PreBossGameController;
-import org.openjfx.fileManager.FileController;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.menuEntities.PassedLevelInfo;
 import org.openjfx.model.menuEntities.*;
@@ -23,19 +13,15 @@ import org.openjfx.view.menuView.*;
 
 public class MainMenuController {
 
-    private Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-
     private Scene scene;
     private MenuSceneContainer menuSceneContainer;
-    private PreBossGameController preBossGameController;
-
     private HighScoreInfo highScore;
     private GameSituation gameSituation;
     private Settings settings;
     private PassedLevelInfo passedLevelInfo = PassedLevelInfo.getInstance();
     private BooleanProperty isGameStartPressed, isSaveSettingsPressed, isQuitPressed, isResumePressed, isBossScene;
     private int theme;
-    private BossGameController bossGameController;
+
 
 
     public MainMenuController(Scene scene) {
@@ -51,7 +37,6 @@ public class MainMenuController {
         gameSituation = GameSituation.getInstance();
         settings = Settings.getInstance();
         isBossScene = new SimpleBooleanProperty(false);
-
         setTheme();
     }
 

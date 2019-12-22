@@ -4,8 +4,8 @@ import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
 
 public class Bullet extends LocatableObject {
-    public static final double WIDTH = 5;
-    public static final double HEIGHT = 5;
+    public static final double WIDTH = 7;
+    public static final double HEIGHT = 7;
     public static final double MAX_DISTANCE = 1000;
     private int damage;
     private double velocity;

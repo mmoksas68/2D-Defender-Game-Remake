@@ -190,6 +190,41 @@ public class PreBossMapView extends Pane {
         }
     }
 
+    public void refreshBuff(ModelToViewBuff modelToViewBuff) {
+        BuffView buffView;
+        if(buffs.containsKey(modelToViewBuff.getID())){
+            buffView = buffs.get(modelToViewBuff.getID());
+            if(modelToViewBuff.isDead()){
+                getChildren().remove(buffView);
+                buffs.remove(modelToViewBuff.getID());
+            }else {
+                buffView.refresh(modelToViewBuff, sliderLeft, layoutScaleWidth, layoutScaleHeight.get() );
+            }
+        } else if(!modelToViewBuff.isDead()){
+            buffView = new BuffView(modelToViewBuff, sliderLeft, layoutScaleWidth, layoutScaleHeight.get());
+            buffs.put(modelToViewBuff.getID(), buffView);
+            getChildren().add(buffView);
+        }
+    }
+
+
+    public void refreshMeteor(ModelToViewMeteor modelToViewMeteor) {
+        MeteorView meteorView;
+        if(meteors.containsKey(modelToViewMeteor.getID())){
+            meteorView = meteors.get(modelToViewMeteor.getID());
+            if(modelToViewMeteor.isDead()){
+                getChildren().remove(meteorView);
+                meteors.remove(modelToViewMeteor.getID());
+            }else {
+                meteorView.refresh(modelToViewMeteor, sliderLeft, layoutScaleWidth, layoutScaleHeight.get() );
+            }
+        } else if(!modelToViewMeteor.isDead()){
+            meteorView = new MeteorView(modelToViewMeteor, sliderLeft, layoutScaleWidth, layoutScaleHeight.get());
+            meteors.put(modelToViewMeteor.getID(), meteorView);
+            getChildren().add(meteorView);
+        }
+    }
+
     /*@Override
     public void setPrefSize(double v, double v1) {
         super.setPrefSize(v, v1);
@@ -311,4 +346,6 @@ public class PreBossMapView extends Pane {
     public DoubleProperty heightSize(){
         return heightSize;
     }
+
+
 }

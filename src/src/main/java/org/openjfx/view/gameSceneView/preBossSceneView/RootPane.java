@@ -1,6 +1,7 @@
 package org.openjfx.view.gameSceneView.preBossSceneView;
 
 import javafx.animation.*;
+
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
@@ -9,9 +10,9 @@ import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.view.gameSceneView.bossSceneView.topBar.BossTopBarView;
 import org.openjfx.view.gameSceneView.preBossSceneView.TopBar.TopBarView;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+
 
 public class RootPane extends BorderPane {
     private PreBossMapView preBossMapView1;
@@ -36,10 +37,8 @@ public class RootPane extends BorderPane {
         setMaxSize(width,height);
         setPrefSize(width,height);
         bossTopBarView = new BossTopBarView(width, height*1.5/10);
-
         bossMapView = new BossMapView(width, height*8.8/10);
         setCenter(this.bossMapView);
-
         setTop(bossTopBarView);
         Background background = new Background(image);
         setBackground(background);
@@ -50,18 +49,19 @@ public class RootPane extends BorderPane {
         setPrefSize(width,height);
         this.height = height;
         this.width = width;
-        topBarView = new TopBarView(width, height*1.5/10);
+
         if(isSinglePlayer || GameSituation.getInstance().isTwoPlayerSingleShip())
         {
             preBossMapView1 = new PreBossMapView(width, height*8.8/10, isSinglePlayer);
+            topBarView = new TopBarView(width, height*1.5/10);
             setCenter(this.preBossMapView1);
         }else{
             preBossMapView1 = new PreBossMapView(width, height*4.4/10, isSinglePlayer);
             preBossMapView2 = new PreBossMapView(width, height*4.4/10, isSinglePlayer);
+            topBarView = new TopBarView(width, height*1.5/10);
             setCenter(preBossMapView1);
             setBottom(preBossMapView2);
         }
-
         setTop(topBarView);
 
         Background background = new Background(image);
@@ -105,8 +105,10 @@ public class RootPane extends BorderPane {
         timeline.getKeyFrames().add(kf2);
         timeline.getKeyFrames().add(kf3);
         timeline.play();
-
     }
+
+
+
     public PreBossMapView getPreBossMapView1() {
         return preBossMapView1;
     }

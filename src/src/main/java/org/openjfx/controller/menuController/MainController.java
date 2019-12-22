@@ -9,7 +9,9 @@ import org.openjfx.controller.bossSceneControllers.BossGameController;
 import org.openjfx.fileManager.FileController;
 import org.openjfx.model.menuEntities.GameSaveObj;
 import org.openjfx.model.menuEntities.GameSituation;
+import org.openjfx.model.menuEntities.Settings;
 import org.openjfx.model.menuEntities.PassedLevelInfo;
+
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,8 +35,11 @@ public class MainController {
         this.stage = stage;
         scene = new Scene(new Pane());
         fileController = new FileController();
+
+
         loadInitialElements();
         initMainController();
+
         stage.setScene(scene);
         stage.setFullScreen(true);
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
@@ -50,9 +55,8 @@ public class MainController {
         fileController.loadKeys();
         fileController.loadPassedLevelInfo();
     }
-
-    private void loadGameElements(){
-        //fileController.loadGame(); //Burayı kaldır Doğukan
+    private void loadGameElements() {
+        fileController.loadGame(); //Burayı kaldır Doğukan
     }
 
     private void initMainController(){
@@ -63,23 +67,36 @@ public class MainController {
                 passedLevelInfo = PassedLevelInfo.getInstance();
                 gameSaveObj = GameSaveObj.getInstance();
                 menuController.setIsGameStartPressed(false);
-                initGameSituationChecker(true);
+                if(gameSituationChecker == null){
+                    initGameSituationChecker();
+                    gameSituationChecker.startGame(true);
+                }
+                else {
+                    gameSituationChecker.startGame(true);
+                }
+
             }
         };
         menuController.getIsGameStartPressed().addListener(newGameListener);
 
         ChangeListener<Boolean> resumeListener = (observable, oldValue, newValue) ->{
             if(menuController.getIsResumePressed().get()) {
+                gameSituation = GameSituation.getInstance();
                 menuController.setIsResumePressed(false);
                 loadGameElements();
-                initGameSituationChecker(false);
+                if(gameSituationChecker == null) {
+                    initGameSituationChecker();
+                    gameSituationChecker.startGame(false);
+                }
+                else{
+                    gameSituationChecker.startGame(false);
+                }
             }
         };
         menuController.getIsResumePressed().addListener(resumeListener);
 
         ChangeListener<Boolean> saveSettingsListener = (observable, oldValue, newValue) ->{
             if(menuController.getIsSaveSettingsPressed().get()) {
-
                 menuController.setIsSaveSettingsPressed(false);
                 fileController.saveKeys();
             }
@@ -89,7 +106,7 @@ public class MainController {
         ChangeListener<Boolean> quitListener = (observable, oldValue, newValue) ->{
             if(menuController.getIsQuitPressed().get()) {
                 menuController.setIsQuitPressed(false);
-                fileController.saveGame();  //burayı da kaldır
+                //fileController.saveGame();  //burayı da kaldır
                 stage.close();
                 System.exit(0);
             }
@@ -128,12 +145,13 @@ public class MainController {
 
 
 
-    private void initGameSituationChecker(boolean newGame){
-        gameSituationChecker = new GameSituationChecker(scene, newGame);
+    private void initGameSituationChecker(){
+        gameSituationChecker = new GameSituationChecker(scene);
         //saveGame(); //burayı da kaldır
         ChangeListener<Boolean> endGameListener = (observable, oldValue, newValue) ->{
             if(gameSituationChecker.getIsEnd().get()) {
                 gameSituationChecker.setIsEnd(false);
+                System.out.println("End game initialized");
                 initEndGameMenuController();
             }
         };
@@ -148,6 +166,7 @@ public class MainController {
         gameSituationChecker.getIsPaused().addListener(pauseGameListener);
     }
     private void initPauseMenuController(){
+        System.out.println("not exist in main");
         if(gameSituation.isIsPreBossFinishedSuccessfully()) {
             pauseMenuController = new PauseMenuController(scene, gameSituationChecker.getBossGameController(), menuController.getMainMenu(), menuController.getSettingsView());
         }
@@ -164,6 +183,7 @@ public class MainController {
     }
 
     private void initEndGameMenuController(){
+
         endGameMenuController = new EndGameMenuController(scene, menuController.getMainMenu());
         ChangeListener<Boolean> highScoreListener = (observable, oldValue, newValue) ->{
             if(endGameMenuController.getIsHighScoreChanged().get()) {
@@ -199,7 +219,7 @@ public class MainController {
         endGameMenuController.getIsNextLevelPressed().addListener(nextLevelListener);
     }
 
-    private void saveGame(){
+    /*private void saveGame(){
         Timer timer = new Timer();
         TimerTask task = new TimerTask(){
             @Override
@@ -211,5 +231,5 @@ public class MainController {
             }
         };
         timer.schedule(task, 0, 30000);
-    }
+    } */
 }

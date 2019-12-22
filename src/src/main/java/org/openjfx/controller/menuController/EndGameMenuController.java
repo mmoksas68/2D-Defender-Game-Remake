@@ -33,7 +33,6 @@ public class EndGameMenuController {
         isRestartPressed = new SimpleBooleanProperty(false);
         isNextLevelPressed = new SimpleBooleanProperty(false);
         endGame = new EndGameMenuView();
-
         stage = new Stage();
         stage.initOwner(primaryScene.getWindow());
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
@@ -43,7 +42,6 @@ public class EndGameMenuController {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.initOwner(primaryScene.getWindow());
-
         stage.show();
         initEndGameMenuListeners();
     }

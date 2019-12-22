@@ -2,7 +2,6 @@ package org.openjfx.model.preBossEntities.Station;
 
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.menuEntities.GameSituation;
-import org.openjfx.model.menuEntities.GameSituation2;
 
 public class EnemyStation extends Station{
     public static final int MAX_HEALTH = 50;

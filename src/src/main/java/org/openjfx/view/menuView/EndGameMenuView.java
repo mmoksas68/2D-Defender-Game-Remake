@@ -32,7 +32,7 @@ public class EndGameMenuView extends VBox {
 
         if(gameSituation.isIsBossFinishedSuccessfully())
             this.getChildren().add(image1);
-        else
+        else if(!gameSituation.isIsPreBossFinishedSuccessfully())
             this.getChildren().add(image2);
 
         this.getChildren().add(scoreLabel);

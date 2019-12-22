@@ -27,6 +27,25 @@ public abstract class Enemy extends LocatableObject{
         this.scorePoint = isEvolved ? 2*scorePoint : scorePoint;
         this.destinationType = EnemyDestinations.RandomLocation;
         this.destinationLocation = new Location(0,0 );
+        double random = (Math.random()*10);
+        if(random < 5)
+            buffType = BuffTypes.EMPTY;
+        else if(random < 6)
+            buffType = BuffTypes.HEALTH;
+        else if(random < 7)
+            buffType = BuffTypes.GUN_POWER;
+        else if(random < 8)
+            buffType = BuffTypes.GUN_TYPE;
+        else if(random < 8.5)
+            buffType = BuffTypes.FIRE_RATE;
+        else if(random < 9)
+            buffType = BuffTypes.SPEED;
+        else if(random < 9.5)
+            buffType = BuffTypes.HYPER_JUMP;
+        else if(random < 10)
+            buffType = BuffTypes.SMART_BOMB;
+        else
+            buffType = BuffTypes.EMPTY;
     }
 
     public double getVelocity() {

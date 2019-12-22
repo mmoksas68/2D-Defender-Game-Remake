@@ -42,7 +42,10 @@ public class SettingsView extends VBox {
     private Settings settings = Settings.getInstance();
     private Button defaultSettings;
 
+
     public SettingsView(double width, double height){
+        settings = Settings.getInstance();
+
         this.width = width;
         this.height = height;
 

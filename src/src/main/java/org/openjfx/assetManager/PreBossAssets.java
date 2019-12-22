@@ -18,7 +18,7 @@ public class PreBossAssets {
     private Image radarEnemy;
     private Image radarEnemySpaceStation;
     private Image radarSpacecraft;
-    private Image radarMeteor;
+    private Image meteor;
     private List<Image> gameInfoIcons = new ArrayList<>();
     private Image tier2unevolved;
 
@@ -35,6 +35,8 @@ public class PreBossAssets {
             radarEnemySpaceStation = new Image(FileController.getFileStream("assets/images/enemySpaceStation.png"));
             radarSpacecraft = new Image(FileController.getFileStream("assets/images/radar_spacecraft.png"));
             radarEnemy = new Image(FileController.getFileStream("assets/images/enemyRadar.png"));
+
+            meteor = new Image(FileController.getFileStream("assets/images/meteor.png"));
 
             smartBombCount.add(null);
             smartBombCount.add(new Image(FileController.getFileStream("assets/images/bombs/singleBomb.png")));
@@ -99,4 +101,15 @@ public class PreBossAssets {
         return tier2unevolved;
     }
 
+    public List<Image> getStation() {
+        return station;
+    }
+
+    public List<Image> getSmartBombCount() {
+        return smartBombCount;
+    }
+
+    public Image getMeteor() {
+        return meteor;
+    }
 }

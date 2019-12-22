@@ -11,6 +11,8 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import org.openjfx.controller.preBossSceneControllers.PreBossGameController;
 import org.openjfx.controller.bossSceneControllers.BossGameController;
+import org.openjfx.model.commonEntities.LocatableObject;
+import org.openjfx.model.menuEntities.GameSaveObj;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.view.menuView.MainMenu;
 import org.openjfx.view.menuView.PauseMenu;
@@ -80,7 +82,7 @@ public class PauseMenuController {
             preBossGameController.getScoreTimeline().play();
             preBossGameController.setGameOn(true);
         }
-        else if (!gameSituation.isIsBossFinished()){ //game infodan bakarak karar verecek şimdilik gameInfoyu koymadım diye böyle
+        else if (!(bossGameController == null) &&!gameSituation.isIsBossFinished()){ //game infodan bakarak karar verecek şimdilik gameInfoyu koymadım diye böyle
             bossGameController.getScene().getRoot().setEffect(null);
             bossGameController.getAnimationTimer().start();
             bossGameController.setGameOn(true);
@@ -103,6 +105,17 @@ public class PauseMenuController {
 
 
     private void save(){
+        GameSaveObj gameSaveObj = GameSaveObj.getInstance();
+        if(gameSituation.isIsPreBossFinishedSuccessfully()){ // if preboss finished and save pressed, saves bossmap
+            gameSaveObj.setPreBossMap(null);
+            gameSaveObj.setBossMap(bossGameController.getBossMapController().getBossMap());
+        }
+        else { // if preboss has not finished yet, saves preboss map
+            gameSaveObj.setBossMap(null);
+            gameSaveObj.setPreBossMap(preBossGameController.getPreBossMapController().getPreBossMap());
+        }
+        gameSaveObj.setLastSavedID(LocatableObject.getCurrentID());
+        //gameSaveObj.setGameSituation(gameSituation);
         isSavePressed.setValue(true);
     }
 

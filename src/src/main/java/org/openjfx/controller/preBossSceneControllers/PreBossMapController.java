@@ -1,10 +1,15 @@
 package org.openjfx.controller.preBossSceneControllers;
 
+import org.openjfx.controller.SoundController;
+import org.openjfx.model.commonEntities.Buff.Buff;
 import org.openjfx.model.commonEntities.Bullet.Bullet;
+import org.openjfx.model.commonEntities.FiringBehavior.BulletTypes;
 import org.openjfx.model.commonEntities.FiringBehavior.EnemyGun;
+import org.openjfx.model.commonEntities.FiringBehavior.SpacecraftGun;
 import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
+import org.openjfx.model.menuEntities.GameSaveObj;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.preBossEntities.Enemy.*;
 import org.openjfx.model.preBossEntities.Meteor.Meteor;
@@ -23,6 +28,8 @@ public class PreBossMapController {
     private List<Enemy> rushingEnemies = new ArrayList<>();
     private boolean isSinglePlayer;
     private GameSituation gameSituation;
+    private int meteorTimer = 1;
+    public static final int METEOR_PERIOD = 50;
 
     public PreBossMapController(boolean isSinglePlayer) {
         gameSituation = GameSituation.getInstance();
@@ -31,7 +38,9 @@ public class PreBossMapController {
     }
 
     public PreBossMapController(PreBossMap preBossMap) {
+        gameSituation = GameSituation.getInstance();
         this.preBossMap = preBossMap;
+        this.isSinglePlayer = gameSituation.isSinglePlayer();
     }
 
     public void checkMapSituation() {
@@ -41,13 +50,34 @@ public class PreBossMapController {
             checkCollision(bullet, Collections.singletonMap(preBossMap.getSpacecraft1().getID(), preBossMap.getSpacecraft1()));
             if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
                 checkCollision(bullet, Collections.singletonMap(preBossMap.getSpacecraft2().getID(), preBossMap.getSpacecraft2()));
-
             bullet.moveToDirection(bullet.getVelocity(), bullet.getDirectionX(), bullet.getDirectionY());
             bullet.setDistanceTravelled( bullet.getDistanceTravelled() + bullet.getVelocity());
             if(bullet.getDistanceTravelled() > Bullet.MAX_DISTANCE)
             {
                 bullet.setDead(true);
             }
+        }
+
+        meteorRain();
+
+        for(var meteor: preBossMap.getMeteors().values()){
+            checkCollision(meteor, preBossMap.getEnemies());
+            checkCollision(meteor, preBossMap.getStations());
+            checkCollision(meteor, Collections.singletonMap(preBossMap.getSpacecraft1().getID(), preBossMap.getSpacecraft1()));
+            if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
+                checkCollision(meteor, Collections.singletonMap(preBossMap.getSpacecraft2().getID(), preBossMap.getSpacecraft2()));
+            meteor.moveToDirection(meteor.getVelocity(), meteor.getDirectionX(), meteor.getDirectionY());
+            PositionHelper helper = new PositionHelper(meteor);
+            if(!helper.isInside(PreBossMap.MAP_WIDTH, PreBossMap.MAP_HEIGHT)){
+                meteor.setDead(true);
+            }
+
+        }
+
+        for(var buff: preBossMap.getBuffs().values()){
+            checkCollision(buff, Collections.singletonMap(preBossMap.getSpacecraft1().getID(), preBossMap.getSpacecraft1()));
+            if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
+                checkCollision(buff, Collections.singletonMap(preBossMap.getSpacecraft2().getID(), preBossMap.getSpacecraft2()));
         }
 
         firingEnemies = new ArrayList<Enemy>();
@@ -115,6 +145,8 @@ public class PreBossMapController {
                     iterator.setHealthPoint(iterator.getHealthPoint() - ((Meteor) obj).getDamage());
                 else if (obj instanceof Tier2Enemy){
                     explodeTier2(obj);
+                }else if(obj instanceof Buff){
+                    ((Buff)obj).setOwnerID(iterator.getID());
                 }
                 if (iterator.getHealthPoint() <= 0)
                     iterator.setDead(true);
@@ -227,6 +259,16 @@ public class PreBossMapController {
 
     }
 
+    public void meteorRain(){
+        this.setMeteorTimer(this.getMeteorTimer() % METEOR_PERIOD);
+
+            if (this.getMeteorTimer() == 0) {
+                for (int i = 0; i < 15 ; i++){
+                    preBossMap.addMeteor(new Meteor( new Location(0,0)));
+                }
+            }
+            this.setMeteorTimer(this.getMeteorTimer() + 1);
+    }
 
     public PreBossMap getPreBossMap() {
         return preBossMap;
@@ -238,5 +280,13 @@ public class PreBossMapController {
 
     public List<Enemy> getRushingEnemies() {
         return rushingEnemies;
+    }
+
+    public int getMeteorTimer() {
+        return meteorTimer;
+    }
+
+    public void setMeteorTimer(int meteorTimer) {
+        this.meteorTimer = meteorTimer;
     }
 }

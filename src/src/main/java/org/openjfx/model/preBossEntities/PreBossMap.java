@@ -3,6 +3,7 @@ package org.openjfx.model.preBossEntities;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import org.openjfx.model.commonEntities.Buff.Buff;
+import org.openjfx.model.commonEntities.Buff.BuffTypes;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.preBossEntities.Enemy.Tier1Enemy;
@@ -21,8 +22,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class PreBossMap implements Serializable {
-    private static Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-    public static double MAP_HEIGHT = primaryScreenBounds.getHeight();
+    public static double MAP_HEIGHT = 1000;
     public static double MAP_WIDTH = 10000;
     private int level;
 
@@ -63,12 +63,12 @@ public class PreBossMap implements Serializable {
                 initialEvolvedEnemyStationCount = 2;
                 break;
             case 2:
-                initialTier1unevolvedEnemyCount = 15;
-                initialTier1evolvedEnemyCount = 5;
-                initialTier2unevolvedEnemyCount = 10;
-                initialTier2evolvedEnemyCount = 5;
-                initialUnevolvedEnemyStationCount = 4;
-                initialEvolvedEnemyStationCount = 3;
+                initialTier1unevolvedEnemyCount = 30;
+                initialTier1evolvedEnemyCount = 0;
+                initialTier2unevolvedEnemyCount = 0;
+                initialTier2evolvedEnemyCount = 0;
+                initialUnevolvedEnemyStationCount = 0;
+                initialEvolvedEnemyStationCount = 0;
                 break;
             case 3:
                 initialTier1unevolvedEnemyCount = 5;
@@ -140,6 +140,7 @@ public class PreBossMap implements Serializable {
             addStation(evolvedEnemyStation);
         }
     }
+
 
     public void addEnemy(Enemy enemy) {
         enemies.put(enemy.getID(), enemy);

@@ -3,11 +3,10 @@ package org.openjfx.model.commonEntities.FiringBehavior;
 import org.openjfx.controller.SoundController;
 import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.commonEntities.Bullet.Bullet;
-import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.preBossEntities.PreBossMap;
-import org.openjfx.utilization.PositionHelper;
 
-public abstract class SimpleGun implements FiringBehavior{
+public abstract class SimpleGun implements FiringBehavior {
+
     private int gunPeriod;
     private int bulletDamage;
     private int gunTimer;
@@ -26,26 +25,93 @@ public abstract class SimpleGun implements FiringBehavior{
 
         if (isFiring) {
             if (this.getGunTimer() == 0) {
-                Bullet bullet = this.fireBullet();
-                bossMap.addBullet(bullet);
+                Bullet bullet = null;
+
                 if (this instanceof SpacecraftGun) {
                     SoundController.fireBullet();
-                }
+                    SpacecraftGun temp = ((SpacecraftGun) this);
+                    switch (temp.getSpacecraft().getGunTypes())
+                    {
+                        case SINGLE:
+                            temp.setBulletType(BulletTypes.Single);
+                            bullet = this.fireBullet();
+                            bossMap.addBullet(bullet);
+                            break;
+                        case DOUBLE:
+                            temp.setBulletType(BulletTypes.DoubleFirst);
+                            bullet = this.fireBullet();
+                            bossMap.addBullet(bullet);
+
+                            temp.setBulletType(BulletTypes.DoubleSecond);
+                            bullet = this.fireBullet();
+                            bossMap.addBullet(bullet);
+                            break;
+                        case TRIPLE:
+                            temp.setBulletType(BulletTypes.TripleFirst);
+                            bullet = this.fireBullet();
+                            bossMap.addBullet(bullet);
+
+                            temp.setBulletType(BulletTypes.TripleSecond);
+                            bullet = this.fireBullet();
+                            bossMap.addBullet(bullet);
+
+                            temp.setBulletType(BulletTypes.TripleThird);
+                            bullet = this.fireBullet();
+                            bossMap.addBullet(bullet);
+                            break;
+                    }
+                }else
+                    bullet = this.fireBullet();
+                bossMap.addBullet(bullet);
             }
             this.setGunTimer(this.getGunTimer() + 1);
         } else if (this.getGunTimer() != 0)
             this.setGunTimer(this.getGunTimer() + 1);
     }
+
     public void gunTimer(PreBossMap preBossMap){
         this.setGunTimer(this.getGunTimer() % this.getGunPeriod());
 
         if (isFiring) {
             if (this.getGunTimer() == 0) {
-                Bullet bullet = this.fireBullet();
-                preBossMap.addBullet(bullet);
+                Bullet bullet = null;
+
                 if (this instanceof SpacecraftGun) {
                     SoundController.fireBullet();
-                }
+                    SpacecraftGun temp = ((SpacecraftGun) this);
+                    switch (temp.getSpacecraft().getGunTypes())
+                    {
+                        case SINGLE:
+                            temp.setBulletType(BulletTypes.Single);
+                            bullet = this.fireBullet();
+                            preBossMap.addBullet(bullet);
+                            break;
+                        case DOUBLE:
+                            temp.setBulletType(BulletTypes.DoubleFirst);
+                            bullet = this.fireBullet();
+                            preBossMap.addBullet(bullet);
+
+                            temp.setBulletType(BulletTypes.DoubleSecond);
+                            bullet = this.fireBullet();
+                            preBossMap.addBullet(bullet);
+                            break;
+                        case TRIPLE:
+                            temp.setBulletType(BulletTypes.TripleFirst);
+                            bullet = this.fireBullet();
+                            preBossMap.addBullet(bullet);
+
+                            temp.setBulletType(BulletTypes.TripleSecond);
+                            bullet = this.fireBullet();
+                            preBossMap.addBullet(bullet);
+
+                            temp.setBulletType(BulletTypes.TripleThird);
+                            bullet = this.fireBullet();
+                            preBossMap.addBullet(bullet);
+                            break;
+                    }
+                }else
+                    bullet = this.fireBullet();
+                    preBossMap.addBullet(bullet);
             }
             this.setGunTimer(this.getGunTimer() + 1);
         } else if (this.getGunTimer() != 0)

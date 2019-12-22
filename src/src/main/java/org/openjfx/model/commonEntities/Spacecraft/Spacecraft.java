@@ -5,29 +5,26 @@ import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.FiringBehavior.FiringBehavior;
 import org.openjfx.model.commonEntities.FiringBehavior.SpacecraftGun;
 
-enum GunTypes{
-    SINGLE,
-    DOUBLE,
-    TRIPLE
-}
-
 
 public class Spacecraft extends LocatableObject {
-    public static final int MAX_HEALTH = 0;
+    public static final int MAX_HEALTH = 100;
+    public static final int HEALTH_INCREASE = 25;
     public static final double WIDTH = 120;
     public static final double HEIGHT = 90;
     public static final int MAX_SMARTBOMB = 3;
     public static final int SMARTBOMB_DAMAGE = 100;
     public static final int SMARTBOMB_RADIUS = 800;
-    public static final double MAX_VELOCITY = 90;
+    public static final double MAX_VELOCITY = 15;
     public static final double SHIELD_DURATION = 90;
     public static final double BULLET_VELOCITY = 30;
-    public static final double MAX_BULLET_DAMAGE = 120;
-    public static final double MIN_GUNPERIOD = 120;
+    public static final double MAX_BULLET_DAMAGE = 30;
+    public static final int MIN_GUNPERIOD = 9;
+    public static final int GUNPERIOD_BUFF = 3;
     public static final int INIT_GUNPERIOD = 15;
     public static final double INIT_VELOCITY = 10;
     public static final int INIT_BULLET_DAMAGE = 10;
     public static final int MAX_HYPERJUMP_ENERGY = 100;
+    public static final int HYPERJUMP_ENERGY_BUFF = 50;
     public static final int HYPERJUMP_PERIOD = 50;
 
     private double velocity;
@@ -44,6 +41,7 @@ public class Spacecraft extends LocatableObject {
 
     public Spacecraft(Location location) {
         super(location, WIDTH, HEIGHT, MAX_HEALTH);
+        gunTypes = GunTypes.SINGLE;
         velocity = INIT_VELOCITY;
         smartBombStock = MAX_SMARTBOMB;
         isShieldActive = false;
@@ -55,12 +53,14 @@ public class Spacecraft extends LocatableObject {
         spacecraftGun = new SpacecraftGun(INIT_GUNPERIOD, INIT_BULLET_DAMAGE, 0, BULLET_VELOCITY, this);
     }
 
+
+
     public double getVelocity() {
         return velocity;
     }
 
     public void setVelocity(double velocity) {
-        this.velocity = velocity;
+        this.velocity = velocity < MAX_VELOCITY ?  velocity : MAX_VELOCITY;
     }
 
     public int getShieldTimer() {
@@ -76,7 +76,7 @@ public class Spacecraft extends LocatableObject {
     }
 
     public void setSmartBombStock(int smartBombStock) {
-        this.smartBombStock = smartBombStock;
+        this.smartBombStock = smartBombStock < MAX_SMARTBOMB ? smartBombStock : MAX_SMARTBOMB;
     }
 
     public boolean isShieldActive() {
@@ -100,7 +100,7 @@ public class Spacecraft extends LocatableObject {
     }
 
     public void setHyperJumpBattery(int hyperJumpBattery) {
-        this.hyperJumpBattery = hyperJumpBattery;
+        this.hyperJumpBattery = hyperJumpBattery < MAX_HYPERJUMP_ENERGY ? hyperJumpBattery : MAX_HYPERJUMP_ENERGY;
     }
 
     public int getBatteryTimer() {
@@ -133,5 +133,24 @@ public class Spacecraft extends LocatableObject {
 
     public void setChoosenPicNo(int choosenPicNo) {
         this.choosenPicNo = choosenPicNo;
+    }
+
+    public GunTypes getGunTypes() {
+        return gunTypes;
+    }
+
+    public void developGun() {
+        if (gunTypes.equals(GunTypes.SINGLE))
+            gunTypes = GunTypes.DOUBLE;
+        else if (gunTypes.equals(GunTypes.DOUBLE))
+            gunTypes = GunTypes.TRIPLE;
+    }
+
+    @Override
+    public void setHealthPoint(int healthPoint) {
+        if(healthPoint < MAX_HEALTH )
+            super.setHealthPoint(healthPoint);
+        else
+            super.setHealthPoint(MAX_HEALTH);
     }
 }

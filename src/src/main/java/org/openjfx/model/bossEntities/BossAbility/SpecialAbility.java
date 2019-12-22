@@ -4,7 +4,9 @@ import org.openjfx.controller.bossSceneControllers.abilityBehaviourManager.Abili
 import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
 
-public class SpecialAbility extends LocatableObject {
+import java.io.Serializable;
+
+public class SpecialAbility extends LocatableObject{
     private double velocity;
     private double xDir;
     private double yDir;
