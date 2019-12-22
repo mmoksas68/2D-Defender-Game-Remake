@@ -125,8 +125,8 @@ public class MainController {
     }
 
     private void initGameSituationChecker(int bossScene){
-        //gameSituationChecker = new GameSituationChecker(scene, bossScene);
-        /*ChangeListener<Boolean> endGameListener = (observable, oldValue, newValue) ->{
+        gameSituationChecker = new GameSituationChecker(scene, bossScene);
+        ChangeListener<Boolean> endGameListener = (observable, oldValue, newValue) ->{
             if(gameSituationChecker.getIsEnd().get()) {
                 gameSituationChecker.setIsEnd(false);
                 initEndGameMenuController();
@@ -140,7 +140,7 @@ public class MainController {
                 initPauseMenuController();
             }
         };
-        gameSituationChecker.getIsPaused().addListener(pauseGameListener); */
+        gameSituationChecker.getIsPaused().addListener(pauseGameListener);
     }
 
 

@@ -42,7 +42,7 @@ public class GameSituationChecker {
         gameSituation = GameSituation.getInstance();
     }
 
-    /*public GameSituationChecker(Scene scene, int bossScene){
+    public GameSituationChecker(Scene scene, int bossScene){
         this.scene = scene;
         isPaused = new SimpleBooleanProperty(false);
         isEnd = new SimpleBooleanProperty(false);
@@ -54,7 +54,12 @@ public class GameSituationChecker {
         gameSituation.setIsPreBossFinishedSuccessfully(true);
         gameSituation.setIsBossFinished(false);
         bossGameController = new BossGameController(scene, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
-    } */
+        ifPausedBoss();
+        if(!isChanged2){
+            ifEndBoss();
+            isChanged2 = true;
+        }
+    }
 
     public void startGame(boolean newGame){
         if(newGame){
