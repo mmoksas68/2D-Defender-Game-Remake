@@ -7,6 +7,9 @@ import javafx.beans.value.ChangeListener;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
+import org.openjfx.model.commonEntities.Buff.Buff;
+import org.openjfx.model.commonEntities.Buff.BuffTypes;
+import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.menuEntities.GameSaveObj;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.menuEntities.Settings;
@@ -37,7 +40,6 @@ public class PreBossGameController {
     private BooleanProperty gameOnChange = new SimpleBooleanProperty(false);
     private BooleanProperty gameIsFinish = new SimpleBooleanProperty(false);
     private int scoreDecayTimer = 0;
-    private boolean isSinglePlayer;
 
     private AnimationTimer animationTimer = new AnimationTimer() {
         @Override
@@ -49,31 +51,30 @@ public class PreBossGameController {
     public PreBossGameController(Scene scene, double initWidth, double initHeight) {
         settings = Settings.getInstance();
         gameSituation = GameSituation.getInstance();
-        isSinglePlayer = gameSituation.isSinglePlayer();
         this.scene = scene;
-        rootPane = new RootPane(initWidth, initHeight, isSinglePlayer);
+        rootPane = new RootPane(initWidth, initHeight, gameSituation.isSinglePlayer());
         this.width = initWidth;
         this.height = initHeight;
-        preBossMapController = new PreBossMapController(isSinglePlayer);
+        preBossMapController = new PreBossMapController(gameSituation.isSinglePlayer());
         spacecraftController1 = new SpacecraftController(preBossMapController.getPreBossMap().getSpacecraft1(), rootPane.getPreBossMapView1(), preBossMapController.getPreBossMap());
-        if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
+        if(!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
             spacecraftController2 = new SpacecraftController(preBossMapController.getPreBossMap().getSpacecraft2(), rootPane.getPreBossMapView2(), preBossMapController.getPreBossMap());
         scene.setRoot(rootPane);
         initGame();
         initListeners();
     }
+
     public PreBossGameController(PreBossMap preBossMap, Scene scene, double initWidth, double initHeight) {
         settings = Settings.getInstance();
         this.scene = scene;
         gameSituation = GameSituation.getInstance();
-        isSinglePlayer = gameSituation.isSinglePlayer();
-        rootPane = new RootPane(initWidth,initHeight,isSinglePlayer);
+        rootPane = new RootPane(initWidth,initHeight, gameSituation.isSinglePlayer());
         this.width = initWidth;
         this.height = initHeight;
         preBossMapController = new PreBossMapController(preBossMap);
-        isSinglePlayer = gameSituation.isSinglePlayer();
+
         spacecraftController1 = new SpacecraftController(preBossMapController.getPreBossMap().getSpacecraft1(), rootPane.getPreBossMapView1(), preBossMapController.getPreBossMap());
-        if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
+        if(!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
             spacecraftController2 = new SpacecraftController(preBossMapController.getPreBossMap().getSpacecraft2(), rootPane.getPreBossMapView2(), preBossMapController.getPreBossMap());
         scene.setRoot(rootPane);
         initGame();
@@ -104,13 +105,13 @@ public class PreBossGameController {
 
         refreshMap();
         spacecraftController1.checkInputs();
-        if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
+        if (!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
             spacecraftController2.checkInputs();
 
     }
 
     private void initGame(){
-        if(isSinglePlayer || gameSituation.isSecondCraftDied()){
+        if(gameSituation.isSinglePlayer()|| gameSituation.isSecondCraftDied()){
             keysFor1();
         }
         else if(gameSituation.isFirstCraftDied()){
@@ -135,10 +136,18 @@ public class PreBossGameController {
         refreshAndReflectStations();
         refreshSpacecraftGameInfo();
         refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
-        if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
+        rootPane.getTopBarView().getMiddleView().refreshSlider(spacecraftController1.getPreBossMapView().getSliderLeft(), 1);
+
+        if(!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
+        {
             refreshAndReflectSpacecraft(spacecraftController2.getSpacecraft());
+            rootPane.getTopBarView().getMiddleView().refreshSlider(spacecraftController2.getPreBossMapView().getSliderLeft(), 2);
+
+        }
         updateHyperJumpBattery();
         checkEndGame();
+
+
     }
 
 
@@ -149,19 +158,28 @@ public class PreBossGameController {
             if (enemy.isDead()) {
                 toBeDeleted.add(enemy.getID());
                 spacecraftController1.getPreBossMapView().addExplodeAnimation(new ModelToView(enemy));
-                if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
+                if (!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
                     spacecraftController2.getPreBossMapView().addExplodeAnimation(new ModelToView(enemy));
             }
 
             spacecraftController1.getPreBossMapView().refreshEnemy(modelToViewEnemy);
-            if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
+            if (!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
                 spacecraftController2.getPreBossMapView().refreshEnemy(modelToViewEnemy);
             rootPane.getTopBarView().getMiddleView().refresh(new RadarObject(enemy));
         }
 
         for (var it : toBeDeleted) {
+
+            if(!preBossMapController.getPreBossMap().getEnemies().get(it).getBuffType().equals(BuffTypes.EMPTY))
+            {
+                PositionHelper helper = new PositionHelper(preBossMapController.getPreBossMap().getEnemies().get(it));
+                preBossMapController.getPreBossMap().addBuff(
+                        new Buff(new Location(helper.getMiddlePointX() - Buff.WIDTH/2, helper.getMiddlePointY() - Buff.HEIGHT/2 ),
+                                 preBossMapController.getPreBossMap().getEnemies().get(it).getBuffType())
+                );
+            }
             preBossMapController.getPreBossMap().deleteEnemy(it);
-            //SoundController.explosion();
+                //SoundController.explosion();
         }
 
     }
@@ -173,7 +191,7 @@ public class PreBossGameController {
                 toBeDeleted.add(bullet.getID());
             }
             spacecraftController1.getPreBossMapView().refreshBullet(new ModelToViewBullet(bullet));
-            if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
+            if (!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
                 spacecraftController2.getPreBossMapView().refreshBullet(new ModelToViewBullet(bullet));
 
         }
@@ -184,7 +202,7 @@ public class PreBossGameController {
 
 
     private void refreshAndReflectSpacecraft(Spacecraft spacecraft){
-        if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip()){
+        if(!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip()){
 
             if(spacecraft.getID() == spacecraftController1.getSpacecraft().getID())
             {
@@ -229,11 +247,11 @@ public class PreBossGameController {
                 toBeDeleted.add(station.getID());
 
                 spacecraftController1.getPreBossMapView().addExplodeAnimation(new ModelToView(station));
-                if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
+                if (!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
                     spacecraftController2.getPreBossMapView().addExplodeAnimation(new ModelToView(station));
             }
             spacecraftController1.getPreBossMapView().refreshStations(new ModelToViewStation(station));
-            if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
+            if (!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
                 spacecraftController2.getPreBossMapView().refreshStations(new ModelToViewStation(station));
             rootPane.getTopBarView().getMiddleView().refresh(new RadarObject(station));
         }
@@ -245,23 +263,53 @@ public class PreBossGameController {
     }
 
     private void refreshAndReflectBuff(){
+        ArrayList<Long> toBeDeleted = new ArrayList<>();
+        for (var buff : preBossMapController.getPreBossMap().getBuffs().values()) {
+            if (buff.isDead()) {
+                toBeDeleted.add(buff.getID());
+                if(buff.getOwnerID() == spacecraftController1.getSpacecraft().getID()){
+                    spacecraftController1.applyBuff(buff.getBuffType());
+                }
+                if( !gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip() &&
+                    buff.getOwnerID() == spacecraftController2.getSpacecraft().getID()){
+                    spacecraftController2.applyBuff(buff.getBuffType());
+                }
+            }
+            spacecraftController1.getPreBossMapView().refreshBuff(new ModelToViewBuff(buff));
+            if (!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
+                spacecraftController2.getPreBossMapView().refreshBuff(new ModelToViewBuff(buff));
 
+        }
+        for (var it : toBeDeleted) {
+            preBossMapController.getPreBossMap().deleteBuff(it);
+        }
     }
 
     private void refreshAndReflectMeteor(){
-
+        ArrayList<Long> toBeDeleted = new ArrayList<>();
+        for (var meteor : preBossMapController.getPreBossMap().getMeteors().values()) {
+            if (meteor.isDead()) {
+                toBeDeleted.add(meteor.getID());
+            }
+            spacecraftController1.getPreBossMapView().refreshMeteor(new ModelToViewMeteor(meteor));
+            if (!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
+                spacecraftController2.getPreBossMapView().refreshMeteor(new ModelToViewMeteor(meteor));
+        }
+        for (var it : toBeDeleted) {
+            preBossMapController.getPreBossMap().deleteMeteor(it);
+        }
     }
 
     private void refreshSpacecraftGameInfo(){
-        if((gameSituation.isTwoPlayerSingleShip() && gameSituation.isSecondCraftDied())|| isSinglePlayer || !gameSituation.isTwoPlayerSingleShip()){
+        if((gameSituation.isTwoPlayerSingleShip() && gameSituation.isSecondCraftDied())|| gameSituation.isSinglePlayer() || !gameSituation.isTwoPlayerSingleShip()){
             ModelToSpacecraftInfoView modelToSpacecraftInfoView1 = new ModelToSpacecraftInfoView(spacecraftController1.getSpacecraft());
             rootPane.getTopBarView().getSpacecraftInfoView1().refresh(modelToSpacecraftInfoView1);
         }
-        if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip()){
+        if(!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip()){
             ModelToSpacecraftInfoView modelToSpacecraftInfoView2 = new ModelToSpacecraftInfoView(spacecraftController2.getSpacecraft());
             rootPane.getTopBarView().getSpacecraftInfoView2().refresh(modelToSpacecraftInfoView2);
         }
-        if(!isSinglePlayer && gameSituation.isTwoPlayerSingleShip() && gameSituation.isFirstCraftDied()){
+        if(!gameSituation.isSinglePlayer() && gameSituation.isTwoPlayerSingleShip() && gameSituation.isFirstCraftDied()){
             ModelToSpacecraftInfoView modelToSpacecraftInfoView2 = new ModelToSpacecraftInfoView(spacecraftController1.getSpacecraft());
             rootPane.getTopBarView().getSpacecraftInfoView2().refresh(modelToSpacecraftInfoView2);
         }
@@ -288,7 +336,7 @@ public class PreBossGameController {
         if(spacecraft1.getHyperJumpBattery() < Spacecraft.MAX_HYPERJUMP_ENERGY && spacecraft1.getBatteryTimer() == 0){
             spacecraft1.setHyperJumpBattery(spacecraft1.getHyperJumpBattery() + 1);
         }
-        if (!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip()){
+        if (!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip()){
             Spacecraft spacecraft2 = spacecraftController2.getSpacecraft();
             spacecraft2.setBatteryTimer(spacecraft2.getBatteryTimer()+1);
             spacecraft2.setBatteryTimer(spacecraft2.getBatteryTimer() % Spacecraft.HYPERJUMP_PERIOD);

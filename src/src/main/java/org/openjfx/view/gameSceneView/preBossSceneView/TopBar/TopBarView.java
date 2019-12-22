@@ -12,7 +12,7 @@ public class TopBarView extends BorderPane {
     private RadarView middleView;
     private GameInfoView rightView;
 
-    public TopBarView(double width, double height, double sliderLeft1, double sliderLeft2) {
+    public TopBarView(double width, double height) {
         leftView = new VBox();
 
         if(!GameSituation.getInstance().isSinglePlayer()){
@@ -21,12 +21,12 @@ public class TopBarView extends BorderPane {
             leftView.getChildren().add(spacecraftInfoView1);
             spacecraftInfoView2 = new SpacecraftInfoView("PLAYER 2",width*3/10, height/2);
             leftView.getChildren().add(spacecraftInfoView2);
-            middleView = new RadarView(width*4/10, height, sliderLeft1*0.4, sliderLeft2*0.4);
+            middleView = new RadarView(width*4/10, height);
         }
         else{
             spacecraftInfoView1 = new SpacecraftInfoView("PLAYER 1",width*3/10, height);
             leftView.getChildren().add(spacecraftInfoView1);
-            middleView = new RadarView(width*4/10, height, sliderLeft1*0.4, sliderLeft2*0.4);
+            middleView = new RadarView(width*4/10, height);
         }
 
         rightView = new GameInfoView(width*3/10, height);

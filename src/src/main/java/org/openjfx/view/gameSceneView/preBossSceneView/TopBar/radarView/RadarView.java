@@ -26,15 +26,15 @@ public class RadarView extends Pane {
     Rectangle rectangle;
     Rectangle rectangle2;
 
-    public RadarView(double width, double height, double sliderLeft, double sliderLeft2) {
-        this.sliderLeft = sliderLeft;
-        rectangle = new Rectangle(0 , 0, width*0.1920, height); // musab buraya göz atarsan iyi olur
+    public RadarView(double width, double height) {
+        scaleW = width / 1920;
+        scaleH = height / 1080;
+        rectangle = new Rectangle(0 , 0, width/5, height);
         rectangle.setFill(Color.TRANSPARENT);
         rectangle.setStroke(Color.WHITE);
         this.getChildren().add(rectangle);
         if(!GameSituation.getInstance().isSinglePlayer() && !GameSituation.getInstance().isTwoPlayerSingleShip()) {
-            this.sliderLeft2 = sliderLeft2;
-            rectangle2 = new Rectangle(0 , 0, width*0.1920, height); // musab buraya göz atarsan iyi olur
+            rectangle2 = new Rectangle(0 , 0, width/5, height);
             rectangle2.setFill(Color.TRANSPARENT);
             rectangle2.setStroke(Color.RED);
             this.getChildren().add(rectangle2);
@@ -48,9 +48,6 @@ public class RadarView extends Pane {
 
     public void refresh(RadarObject obj){
         ImageView imageView = null;
-        /*if (obj.getType().equals(RadarTypes.Spacecraft)){
-            getChildren().add(rectangle);
-        } */
         if(radarObjects.containsKey(obj.getID()) ){
             imageView = radarObjects.get(obj.getID());
             if(obj.isDead()){
@@ -79,11 +76,21 @@ public class RadarView extends Pane {
             getChildren().add(imageView);
             radarObjects.put(obj.getID(), imageView);
         }
+    }
 
-        rectangle.setTranslateX(sliderLeft*0.1920);
+    public void refreshSlider(double slider, int sliderOption){
+
+        if(sliderOption == 1)
+            sliderLeft = slider;
+        else
+            sliderLeft2= slider;
+
+        rectangle.setTranslateX(sliderLeft/PreBossMap.MAP_WIDTH*getWidth());
+
         if(!GameSituation.getInstance().isSinglePlayer() && !GameSituation.getInstance().isTwoPlayerSingleShip()){
-            rectangle2.setTranslateX(sliderLeft2*0.1920);
+            rectangle2.setTranslateX(sliderLeft2/PreBossMap.MAP_WIDTH*getWidth());
         }
+
         else if(!GameSituation.getInstance().isSinglePlayer() && GameSituation.getInstance().isTwoPlayerSingleShip()){
             if(GameSituation.getInstance().isFirstCraftDied()){
                 getChildren().remove(rectangle);
