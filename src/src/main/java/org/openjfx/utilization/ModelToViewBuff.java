@@ -10,4 +10,12 @@ public class ModelToViewBuff extends ModelToView{
         super(buff);
         type = buff.getBuffType();
     }
+
+    public BuffTypes getType() {
+        return type;
+    }
+
+    public void setType(BuffTypes type) {
+        this.type = type;
+    }
 }

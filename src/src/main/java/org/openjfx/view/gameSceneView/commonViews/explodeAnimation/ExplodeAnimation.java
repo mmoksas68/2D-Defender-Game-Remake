@@ -22,10 +22,10 @@ public class ExplodeAnimation {
         {
             try {
                 imageViewList[i] = new ImageView(new Image(new FileInputStream(imageUrl + (i+1) + ".png" )));
-                imageViewList[i].setFitHeight(modelToView.getHitboxHeight());
-                imageViewList[i].setFitWidth(modelToView.getHitboxWidth());
-                imageViewList[i].setTranslateX(modelToView.getLocationX() - viewLeft);
-                imageViewList[i].setTranslateY(modelToView.getLocationY());
+                imageViewList[i].setFitHeight(modelToView.getHitboxHeight() * scaleH);
+                imageViewList[i].setFitWidth(modelToView.getHitboxWidth() * scaleW);
+                imageViewList[i].setTranslateX((modelToView.getLocationX() - viewLeft) * scaleW);
+                imageViewList[i].setTranslateY(modelToView.getLocationY() * scaleH);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

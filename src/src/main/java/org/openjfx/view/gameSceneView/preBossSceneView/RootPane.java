@@ -53,12 +53,12 @@ public class RootPane extends BorderPane {
         if(isSinglePlayer || GameSituation.getInstance().isTwoPlayerSingleShip())
         {
             preBossMapView1 = new PreBossMapView(width, height*8.8/10, isSinglePlayer);
-            topBarView = new TopBarView(width, height*1.5/10, preBossMapView1.getSliderLeft(), 0);
+            topBarView = new TopBarView(width, height*1.5/10);
             setCenter(this.preBossMapView1);
         }else{
             preBossMapView1 = new PreBossMapView(width, height*4.4/10, isSinglePlayer);
             preBossMapView2 = new PreBossMapView(width, height*4.4/10, isSinglePlayer);
-            topBarView = new TopBarView(width, height*1.5/10, preBossMapView1.getSliderLeft(), preBossMapView2.getSliderLeft());
+            topBarView = new TopBarView(width, height*1.5/10);
             setCenter(preBossMapView1);
             setBottom(preBossMapView2);
         }

@@ -2,6 +2,7 @@ package org.openjfx.controller.preBossSceneControllers;
 
 import javafx.geometry.Pos;
 import org.openjfx.model.bossEntities.BossMap;
+import org.openjfx.model.commonEntities.Buff.BuffTypes;
 import org.openjfx.model.commonEntities.FiringBehavior.SpacecraftGun;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
@@ -103,6 +104,7 @@ public class SpacecraftController {
                     if (spacecraft.getLocation().getPositionX() < preBossMapView.getSliderLeft() + 170.0) {
                         spacecraft.getLocation().setPositionX(preBossMapView.getSliderLeft() + 170.0);
                         preBossMapView.setSliderLeft(preBossMapView.getSliderLeft() - 4);
+                        preBossMapView.setSliderAccelerationSpeed(-(spacecraft.getVelocity() / Math.sqrt(2)));
                     }
                 }
 
@@ -111,6 +113,7 @@ public class SpacecraftController {
                     if (spacecraft.getLocation().getPositionX() > preBossMapView.getSliderLeft() + 1750.0 - spacecraft.getHitBoxWidth()) {
                         spacecraft.getLocation().setPositionX(preBossMapView.getSliderLeft() + 1750.0 - spacecraft.getHitBoxWidth());
                         preBossMapView.setSliderLeft(preBossMapView.getSliderLeft() + 4);
+                        preBossMapView.setSliderAccelerationSpeed((spacecraft.getVelocity() / Math.sqrt(2)));
                     }
                 }
 
@@ -228,6 +231,38 @@ public class SpacecraftController {
             if (spacecraft.getLocation().getPositionX() <= 0) array[1] = 0;
             if (spacecraft.getLocation().getPositionY() <= 0) array[2] = 0;
             if (spacecraft.getLocation().getPositionY() + spacecraft.getHitBoxHeight()>= BossMap.MAP_HEIGHT) array[3] = 0;
+    }
+
+    public void applyBuff(BuffTypes type){
+        switch (type){
+            case EMPTY:
+                break;
+            case SHIELD:
+                break;
+            case SPEED:
+                spacecraft.setVelocity(spacecraft.getVelocity() + Spacecraft.INIT_VELOCITY/4);
+                 break;
+            case SMART_BOMB:
+                spacecraft.setSmartBombStock(spacecraft.getSmartBombStock() + 1);
+                break;
+            case HEALTH:
+                spacecraft.setHealthPoint(spacecraft.getHealthPoint() + Spacecraft.HEALTH_INCREASE);
+                break;
+            case HYPER_JUMP:
+                spacecraft.setHyperJumpBattery(spacecraft.getHyperJumpBattery() + Spacecraft.HYPERJUMP_ENERGY_BUFF);
+                break;
+            case FIRE_RATE:
+                ((SpacecraftGun)spacecraft.getSpacecraftGun()).increaseFrequency();
+                break;
+            case GUN_POWER:
+                ((SpacecraftGun)spacecraft.getSpacecraftGun()).increaseDamage();
+                break;
+            case GUN_TYPE:
+                spacecraft.developGun();
+                break;
+            default:
+                break;
+        }
     }
 
     public BossMapView getBossMapView() {
