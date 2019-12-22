@@ -39,6 +39,7 @@ public class BossGameController  {
     private SpacecraftController spacecraftController2;
     private boolean gameOn = true;
     private BooleanProperty gameOnChange = new SimpleBooleanProperty(false);
+    private BooleanProperty gameIsFinish = new SimpleBooleanProperty(false);
     private int scoreDecayTimer = 0;
     private final int SCORE_DECAY_PERIOD = 30000;
     private int level;
@@ -215,6 +216,7 @@ public class BossGameController  {
                 spacecraftController1.getBossMapView().refreshSpacecraftMain(new ModelToViewSpaceCraft(spacecraft));
             if (spacecraft.isDead()) {
                 gameSituation.setIsFirstCraftDied(true);
+                gameIsFinishProperty().set(true);
                 gameSituation.setIsBossFinished(true);
                 animationTimer.stop();
             }
@@ -223,6 +225,7 @@ public class BossGameController  {
 
     private void checkEndGame(){
         if(bossMapController.getBossMap().getBoss().isDead()){
+            gameIsFinishProperty().set(true);
             gameSituation.setIsBossFinishedSuccessfully(true);
             animationTimer.stop();
         }
@@ -460,5 +463,17 @@ public class BossGameController  {
     }
 
     public BossMapController getBossMapController() {return bossMapController;}
+
+    public boolean isGameIsFinish() {
+        return gameIsFinish.get();
+    }
+
+    public BooleanProperty gameIsFinishProperty() {
+        return gameIsFinish;
+    }
+
+    public void setGameIsFinish(boolean gameIsFinish) {
+        this.gameIsFinish.set(gameIsFinish);
+    }
 }
 

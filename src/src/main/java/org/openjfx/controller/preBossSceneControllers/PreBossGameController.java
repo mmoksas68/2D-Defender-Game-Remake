@@ -35,6 +35,7 @@ public class PreBossGameController {
     private SpacecraftController spacecraftController2;
     private boolean gameOn = true;
     private BooleanProperty gameOnChange = new SimpleBooleanProperty(false);
+    private BooleanProperty gameIsFinish = new SimpleBooleanProperty(false);
     private int scoreDecayTimer = 0;
     private boolean isSinglePlayer;
 
@@ -210,6 +211,7 @@ public class PreBossGameController {
         else{
             spacecraftController1.getPreBossMapView().refreshSpacecraftMain( new ModelToViewSpaceCraft(spacecraft));
             if(spacecraftController1.getPreBossMap().getSpacecraft1().isDead()){
+                gameIsFinishProperty().set(true);
                 gameSituation.setIsPreBossFinished(true);
                 animationTimer.stop();
             }
@@ -273,6 +275,7 @@ public class PreBossGameController {
 
     private void checkEndGame(){
         if(preBossMapController.getPreBossMap().getEnemies().size() == 0 && preBossMapController.getPreBossMap().getStations().size() == 0){
+            gameIsFinishProperty().set(true);
             gameSituation.setIsPreBossFinishedSuccessfully(true);
             animationTimer.stop();
         }
@@ -612,6 +615,16 @@ public class PreBossGameController {
     }
 
 
+    public boolean isGameIsFinish() {
+        return gameIsFinish.get();
+    }
 
+    public BooleanProperty gameIsFinishProperty() {
+        return gameIsFinish;
+    }
+
+    public void setGameIsFinish(boolean gameIsFinish) {
+        this.gameIsFinish.set(gameIsFinish);
+    }
 }
 

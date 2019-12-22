@@ -126,13 +126,15 @@ public class GameSituationChecker {
         }
     private void ifEndPreBoss() {
         ChangeListener<Boolean> isEndListener = (observable, oldValue, newValue) -> {
-            if (gameSituation.isIsPreBossFinished() ){//&& preBossGameController.gameOnChangeProperty().get()) {
-                //if(preBossGameController.isGameOn()){
+            if (gameSituation.isIsPreBossFinished() && preBossGameController.gameIsFinishProperty().get()) {
+                if(preBossGameController.isGameOn()) {
                     preBossGameController.getAnimationTimer().stop();
-                    /*preBossGameController.getScoreTimeline().stop();
-                    preBossGameController.setGameOn(false); */
+                    preBossGameController.getScoreTimeline().stop();
+                    preBossGameController.setGameOn(false);
+                    preBossGameController.getScene().getRoot().setEffect(new GaussianBlur());
                     isEnd.set(true);
-                
+                }
+                preBossGameController.setGameOnChange(false);
             }
         };
         gameSituation.isPreBossFinishedProperty().addListener(isEndListener);
@@ -149,18 +151,28 @@ public class GameSituationChecker {
     }
 
     private void ifEndBoss() {
-        ChangeListener<Boolean> isSuccesfullyEndBossListener = ((observableValue, aBoolean, t1) -> {
-            if (gameSituation.isIsBossFinishedSuccessfully()) {
-                bossGameController.getAnimationTimer().stop();
-                isEnd.set(true);
+        ChangeListener<Boolean> isSuccessfullyEndBossListener = ((observableValue, aBoolean, t1) -> {
+            if (gameSituation.isIsBossFinishedSuccessfully() && bossGameController.gameIsFinishProperty().get()) {
+                if(bossGameController.isGameOn()){
+                    bossGameController.getAnimationTimer().stop();
+                    bossGameController.setGameOn(false);
+                    bossGameController.getScene().getRoot().setEffect(new GaussianBlur());
+                    isEnd.set(true);
+                }
+                bossGameController.gameOnChangeProperty().set(false);
             }
         });
-        gameSituation.isBossFinishedSuccessfullyProperty().addListener(isSuccesfullyEndBossListener);
+        gameSituation.isBossFinishedSuccessfullyProperty().addListener(isSuccessfullyEndBossListener);
 
         ChangeListener<Boolean> isEndBossListener = ((observableValue, aBoolean, t1) -> {
-            if (gameSituation.isIsBossFinished()) {
-                bossGameController.getAnimationTimer().stop();
-                isEnd.set(true);
+            if (gameSituation.isIsBossFinished() && bossGameController.gameIsFinishProperty().get()) {
+                if(bossGameController.isGameOn()){
+                    bossGameController.getAnimationTimer().stop();
+                    bossGameController.setGameOn(false);
+                    bossGameController.getScene().getRoot().setEffect(new GaussianBlur());
+                    isEnd.set(true);
+                }
+                bossGameController.gameOnChangeProperty().set(false);
             }
         });
         gameSituation.isBossFinishedProperty().addListener(isEndBossListener);
