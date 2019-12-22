@@ -1,7 +1,10 @@
 package org.openjfx.model.bossEntities.Boss;
 
+import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossOneBehaviour;
+import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.bossEntities.BossAbility.Laser;
+import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 
 public class BossOne extends Boss {
 
@@ -15,11 +18,12 @@ public class BossOne extends Boss {
     private static double bulletVelocity = 10.0;
     private static double gunFrequency = 0.05;
 
-    public BossOne () {
+    public BossOne (BossMap bossMap) {
         super ( velocity, hitBoxWidth, hitBoxHeight, MAX_HEALTH_POINT);
         setGunFrequency( gunFrequency);
         setGunPower( gunPower);
         setBulletVelocity( bulletVelocity);
+        super.setBehaviourAlgorithm( new BossOneBehaviour( bossMap));
     }
 
     public double [] sendLaserIndicator () {

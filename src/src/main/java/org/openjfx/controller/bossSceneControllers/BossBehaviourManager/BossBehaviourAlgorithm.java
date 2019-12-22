@@ -1,6 +1,8 @@
 package org.openjfx.controller.bossSceneControllers.BossBehaviourManager;
 
-public interface BossBehaviourAlgorithm {
+import java.io.Serializable;
+
+public interface BossBehaviourAlgorithm extends Serializable {
     void clockTick ();
     void startAbilityTimer( double time);
     void useSpecialAbility() ;

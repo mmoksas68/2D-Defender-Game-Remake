@@ -1,9 +1,11 @@
 package org.openjfx.model.bossEntities.Boss;
 
+import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossBehaviourAlgorithm;
 import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.Bullet.Bullet;
+import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 
 
 public abstract class Boss extends LocatableObject {
@@ -18,8 +20,9 @@ public abstract class Boss extends LocatableObject {
     private int gunPeriod;
     private int gunTimer;
     private double bulletVelocity;
+    private BossBehaviourAlgorithm algorithm;
 
-    public Boss( double velocity, double hitBoxWidth, double hitBoxHeight, int healthPoint) {
+    public Boss(double velocity, double hitBoxWidth, double hitBoxHeight, int healthPoint) {
         super( new Location(initialX,initialY), hitBoxWidth, hitBoxHeight, healthPoint);
         this.velocity = velocity;
     }
@@ -78,4 +81,24 @@ public abstract class Boss extends LocatableObject {
     public void setGunFrequency(double gunFrequency) {
         this.gunFrequency = gunFrequency;
     }
+
+    public BossBehaviourAlgorithm getBehaviourAlgorithm() {
+        return algorithm;
+    }
+
+    public void setBehaviourAlgorithm(BossBehaviourAlgorithm behaviourAlgorithm) {
+        this.algorithm = behaviourAlgorithm;
+    }
+    public void behave()  {
+        if ( algorithm.getAbilityTimer() <= 0.0) {
+            algorithm.moveBoss();
+            algorithm.useSpecialAbility();
+
+        }
+        else {
+            algorithm.clockTick();
+        }
+        algorithm.shoot();
+    }
+
 }

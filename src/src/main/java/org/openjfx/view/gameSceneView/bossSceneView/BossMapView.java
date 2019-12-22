@@ -11,6 +11,7 @@ import org.openjfx.view.gameSceneView.bossSceneView.bossViews.BossView;
 import org.openjfx.view.gameSceneView.commonViews.bulletView.BulletView;
 import org.openjfx.view.gameSceneView.commonViews.spacecraftView.SpacecraftViewGroup;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 

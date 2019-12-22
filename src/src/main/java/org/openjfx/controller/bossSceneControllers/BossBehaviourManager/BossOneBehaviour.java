@@ -11,19 +11,18 @@ import org.openjfx.view.gameSceneView.bossSceneView.bossAbilityViews.LaserView;
 public class BossOneBehaviour extends BossDefaultBehaviour {
     Laser laser;
     boolean laserUsed = false;
-    BossMapView bossMapView;
-    public BossOneBehaviour(BossMap bossMap, BossMapView bossMapView) {
+    boolean notifyController = false;
+    public BossOneBehaviour(BossMap bossMap) {
         super( bossMap);
-        this.bossMapView = bossMapView;
     }
     @Override
     public void useSpecialAbility()  {
         Boss boss = bossMap.getBoss();
         if ( Math.random() < ((BossOne) boss).getLASER_FREQ()) {
-              bossMapView.addLaserIndicator ( ((BossOne) boss).sendLaserIndicator());
               startAbilityTimer(1.0);
               laser = ((BossOne) boss).sendLaser();
               laserUsed = true;
+              notifyController = true;
         }
     }
 
@@ -32,8 +31,8 @@ public class BossOneBehaviour extends BossDefaultBehaviour {
         abilityTimer = abilityTimer - 0.016;
 
         if ( abilityTimer <= 0) {
-            bossMapView.removeLaserIndicator();
             laser.setDead( true);
+            notifyController = false;
         } else if ( abilityTimer <= 0.5 && laserUsed) {
             SoundController.sendLaser();
             bossMap.addSpecialAbility( laser);
@@ -44,5 +43,8 @@ public class BossOneBehaviour extends BossDefaultBehaviour {
     @Override
     public void startAbilityTimer(double time) {
         abilityTimer = time;
+    }
+    public boolean isNotifyController() {
+        return notifyController;
     }
 }
