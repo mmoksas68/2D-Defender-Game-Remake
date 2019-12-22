@@ -7,6 +7,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import org.openjfx.assetManager.Assets;
 import org.openjfx.assetManager.MenuAssets;
+import org.openjfx.model.menuEntities.GameSaveObj;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvButton;
 
 import java.util.ArrayList;
@@ -47,13 +48,13 @@ public class MainMenu extends HBox {
     }
 
     private void createButtons(){
+        createResumeBtn();
         createSinglePlayerBtn();
         createTwoPlayersBtn();
         createHowToPlayBtn();
         createSettingsBtn();
         createCreditsBtn();
         createScoresBtn();
-        createResumeBtn();
         createExitBtn();
 
         createBossSceneButton();
@@ -102,6 +103,7 @@ public class MainMenu extends HBox {
     }
 
     private void createResumeBtn(){
+
         resumeBtn = new FiyuvButton("Resume");
         addMenuButton(resumeBtn);
     }
@@ -140,4 +142,9 @@ public class MainMenu extends HBox {
     public FiyuvButton getResumeBtn(){return resumeBtn;}
 
     public FiyuvButton getBossSceneButton(){return bossSceneButton;}
+    
+    public void addResumeButton(){
+        if(!this.getChildren().contains(resumeBtn))
+            getChildren().add(0, resumeBtn);
+    }
 }

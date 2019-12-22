@@ -313,6 +313,7 @@ public class FileController {
         HighScoreInfo highScoreInfo = HighScoreInfo.getInstance();
         try {
             fos = new FileOutputStream(new File("gameData/highScores.txt"));
+            System.out.println("saved");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

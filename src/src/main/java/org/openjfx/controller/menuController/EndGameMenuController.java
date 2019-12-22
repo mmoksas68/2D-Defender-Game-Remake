@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.menuEntities.HighScoreInfo;
 import org.openjfx.model.menuEntities.PassedLevelInfo;
@@ -43,23 +42,28 @@ public class EndGameMenuController {
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.initOwner(primaryScene.getWindow());
         stage.show();
-        updateHighScores();
         initEndGameMenuListeners();
     }
+
+    public void updateInfo(){
+        updateHighScores();
+        updatePassedLevelInfo();
+    }
+
 
     private void updateHighScores(){
         if(gameSituation.isIsBossFinishedSuccessfully()){
             boolean updated = HighScoreInfo.getInstance().updateScores(gameSituation.getLevel(), gameSituation.isSinglePlayer(), gameSituation.getScore());
             if(updated) {
-                isHighScoreChanged.setValue(true);
-                System.out.println(HighScoreInfo.getInstance().getLevel1Scores()[0].get(0).getScore());
+               isHighScoreChanged.setValue(true);
+                //System.out.println(HighScoreInfo.getInstance().getLevel1Scores()[0].get(0).getScore());
             }
         }
     }
 
     private void updatePassedLevelInfo(){
         if(gameSituation.isIsBossFinishedSuccessfully()){
-            if(passedLevelInfo.getIsLevelPassed(gameSituation.getLevel())) {
+            if(!passedLevelInfo.getIsLevelPassed(gameSituation.getLevel())) {
                 passedLevelInfo.setLevelPassed(gameSituation.getLevel(), true);
                 isPassedLevelInfoChanged.setValue(true);
             }
@@ -68,6 +72,7 @@ public class EndGameMenuController {
 
     private void restart(){
         isRestartPressed.setValue(true);
+        stage.close();
     }
 
     private void exit(){
@@ -77,6 +82,8 @@ public class EndGameMenuController {
 
     private void nextLevel(){
         isNextLevelPressed.setValue(true);
+        isHighScoreChanged.setValue(true);
+        stage.close();
     }
 
     private void initEndGameMenuListeners(){

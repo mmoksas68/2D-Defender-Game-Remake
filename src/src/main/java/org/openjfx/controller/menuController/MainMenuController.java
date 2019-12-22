@@ -377,4 +377,9 @@ ON CLICK
     public void setIsBossScene(boolean b){isBossScene.set(b);}
 
     public BooleanProperty getIsBossScene(){return isBossScene;}
+
+
+    public void addResumeButton(){
+        menuSceneContainer.getMainMenu().addResumeButton();
+    }
 }

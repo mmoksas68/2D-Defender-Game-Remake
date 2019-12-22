@@ -176,6 +176,7 @@ public class MainController {
         ChangeListener<Boolean> saveGameListener = (observable, oldValue, newValue) ->{
             if (pauseMenuController.getIsSavePressed().get()) {
                 pauseMenuController.setIsSavePressed(false);
+                menuController.addResumeButton();
                 fileController.saveGame();
             }
         };
@@ -188,6 +189,7 @@ public class MainController {
         ChangeListener<Boolean> highScoreListener = (observable, oldValue, newValue) ->{
             if(endGameMenuController.getIsHighScoreChanged().get()) {
                 endGameMenuController.setIsHighScoreChanged(false);
+                System.out.println("--------");
                 fileController.saveHighScores();
             }
         };
@@ -217,9 +219,13 @@ public class MainController {
             }
         };
         endGameMenuController.getIsNextLevelPressed().addListener(nextLevelListener);
+
+        endGameMenuController.updateInfo();
     }
 
-    /*private void saveGame(){
+
+    /*
+    private void saveGame(){
         Timer timer = new Timer();
         TimerTask task = new TimerTask(){
             @Override
