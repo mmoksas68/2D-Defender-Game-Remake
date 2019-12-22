@@ -6,7 +6,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.stage.Screen;
-import org.openjfx.controller.bossSceneControllers.BossController;
+
 import org.openjfx.controller.bossSceneControllers.BossGameController;
 import org.openjfx.controller.preBossSceneControllers.PreBossGameController;
 import org.openjfx.model.bossEntities.BossMap;
