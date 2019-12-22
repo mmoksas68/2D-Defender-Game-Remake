@@ -25,7 +25,6 @@ public class PauseMenu extends VBox {
     private FiyuvButton resumeBtn;
     private Button menuBtn;
     private Button saveBtn;
-    private Button settingsButton;
 
     public PauseMenu(){
 
@@ -48,14 +47,12 @@ public class PauseMenu extends VBox {
 
         menuBtn = new GameButtons();
         saveBtn = new GameButtons();
-        settingsButton = new GameButtons();
 
         menuBtn.getStyleClass().add("menu-button");
         saveBtn.getStyleClass().add("save-button");
-        settingsButton.getStyleClass().add("settings-button");
 
 
-        HBox hbox = new HBox(menuBtn, settingsButton, saveBtn);
+        HBox hbox = new HBox(menuBtn, saveBtn);
         hbox.setSpacing(30);
         hbox.setAlignment(Pos.CENTER);
         getChildren().addAll(hbox, resumeBtn);
@@ -72,8 +69,6 @@ public class PauseMenu extends VBox {
     public Button getSaveBtn(){
         return saveBtn;
     }
-
-    public Button getSettingsButton(){return settingsButton;}
 
 
 }

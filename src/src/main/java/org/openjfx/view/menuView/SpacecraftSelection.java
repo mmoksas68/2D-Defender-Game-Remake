@@ -71,18 +71,18 @@ public class SpacecraftSelection extends VBox {
 
     private void designView() {
         for (ImageView imageView : imageViews) {
-            imageView.setFitWidth(width / 7);
-            imageView.setFitWidth(width / 7);
+            imageView.setFitWidth(200);
+            imageView.setFitWidth(200);
         }
         for (ImageView imageView : imageViews) {
-            imageView.setFitHeight(width / 7);
-            imageView.setFitHeight(width / 7);
+            imageView.setFitHeight(200);
+            imageView.setFitHeight(200);
         }
 
-        radioButtons.setSpacing(width/3);
-        hBoxImages.setSpacing(width/5);
+        radioButtons.setSpacing(450);
+        hBoxImages.setSpacing(250);
 
-        this.setSpacing(height/15);
+        this.setSpacing(100);
     }
 
     public int getSelectedItem(){

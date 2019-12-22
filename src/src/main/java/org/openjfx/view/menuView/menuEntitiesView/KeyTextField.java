@@ -8,11 +8,12 @@ import javafx.scene.input.KeyEvent;
 public class KeyTextField extends TextField {
     private KeyCode keyCode;
     public KeyTextField(KeyCode keyCode) {
-        setMinWidth(100);
-        setMaxWidth(50);
+        setPrefWidth(100);
+        setPrefHeight(40);
         this.keyCode = keyCode;
         this.setText(keyCode.toString());
         createListener();
+        this.getStyleClass().add("key-text-field");
     }
 
     private void createListener() {

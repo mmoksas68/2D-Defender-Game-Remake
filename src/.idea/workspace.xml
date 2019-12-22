@@ -69,20 +69,6 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
-    <key name="ExtractSuperBase.RECENT_KEYS">
-      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
-      <recent name="org.openjfx.view.menuView" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\menuAssets" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\src" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\sounds" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\userInterfaceResources" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kosed\Desktop\Combined\src\gameData" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\spacecrafts" />
@@ -90,13 +76,39 @@
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\bombs" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images" />
     </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\menuAssets" />
+      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\userInterfaceResources\Font" />
+      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\images\backgrounds" />
+      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\images\gameInfoIcons" />
+      <recent name="C:\javafx\IdeaProjects\CS319\src\src" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
+      <recent name="org.openjfx.view.menuView" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="13" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="org.openjfx.App" />
-      <module name="src" />
+      <module name="cs319" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.openjfx.*" />
@@ -112,18 +124,6 @@
         <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />

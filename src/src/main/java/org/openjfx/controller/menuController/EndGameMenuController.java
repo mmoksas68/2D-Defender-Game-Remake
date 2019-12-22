@@ -43,14 +43,17 @@ public class EndGameMenuController {
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.initOwner(primaryScene.getWindow());
         stage.show();
+        updateHighScores();
         initEndGameMenuListeners();
     }
 
     private void updateHighScores(){
         if(gameSituation.isIsBossFinishedSuccessfully()){
             boolean updated = HighScoreInfo.getInstance().updateScores(gameSituation.getLevel(), gameSituation.isSinglePlayer(), gameSituation.getScore());
-            if(updated)
+            if(updated) {
                 isHighScoreChanged.setValue(true);
+                System.out.println(HighScoreInfo.getInstance().getLevel1Scores()[0].get(0).getScore());
+            }
         }
     }
 

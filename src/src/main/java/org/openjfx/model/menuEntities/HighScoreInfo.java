@@ -14,21 +14,6 @@ public class HighScoreInfo implements Serializable{
 
 
     private HighScoreInfo() {
-
-        level1Scores = new ArrayList[2];
-        level2Scores = new ArrayList[2];
-        level3Scores = new ArrayList[2];
-
-        for(int i = 0; i < 2; i++){
-            level1Scores[i] = new ArrayList<>();
-            level2Scores[i] = new ArrayList<>();
-            level3Scores[i] = new ArrayList<>();
-            for(int j = 0; j < 10; j++){
-                level1Scores[i].add(new HighScore(j+1, 0));
-                level2Scores[i].add(new HighScore(j+1, 0));
-                level3Scores[i].add(new HighScore(j+1, 0));
-            }
-        }
     }
 
     public static HighScoreInfo getInstance(){
@@ -78,6 +63,7 @@ public class HighScoreInfo implements Serializable{
                 HighScore highScore = addScore(index, level, score);
                 if (highScore != null) {
                     Comparator<HighScore> comparator = Comparator.comparingInt(HighScore::getScore);
+                    comparator = comparator.reversed();
                     Collections.sort(level1Scores[index], comparator);
                     level1Scores[index].remove(10);
                     highScore.setRanking(level1Scores[index].indexOf(highScore) + 1);

@@ -168,10 +168,10 @@ public class MainController {
     private void initPauseMenuController(){
         System.out.println("not exist in main");
         if(gameSituation.isIsPreBossFinishedSuccessfully()) {
-            pauseMenuController = new PauseMenuController(scene, gameSituationChecker.getBossGameController(), menuController.getMainMenu(), menuController.getSettingsView());
+            pauseMenuController = new PauseMenuController(scene, gameSituationChecker.getBossGameController(), menuController.getMainMenu());
         }
         else
-            pauseMenuController = new PauseMenuController(scene, gameSituationChecker.getPreBossGameController(), menuController.getMainMenu(), menuController.getSettingsView());
+            pauseMenuController = new PauseMenuController(scene, gameSituationChecker.getPreBossGameController(), menuController.getMainMenu());
 
         ChangeListener<Boolean> saveGameListener = (observable, oldValue, newValue) ->{
             if (pauseMenuController.getIsSavePressed().get()) {
