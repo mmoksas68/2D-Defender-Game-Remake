@@ -67,7 +67,14 @@ public class MainController {
                 passedLevelInfo = PassedLevelInfo.getInstance();
                 gameSaveObj = GameSaveObj.getInstance();
                 menuController.setIsGameStartPressed(false);
-                initGameSituationChecker(true);
+                if(gameSituationChecker == null){
+                    initGameSituationChecker();
+                    gameSituationChecker.startGame(true);
+                }
+                else {
+                    gameSituationChecker.startGame(true);
+                }
+
             }
         };
         menuController.getIsGameStartPressed().addListener(newGameListener);
@@ -77,7 +84,13 @@ public class MainController {
                 gameSituation = GameSituation.getInstance();
                 menuController.setIsResumePressed(false);
                 loadGameElements();
-                initGameSituationChecker(false);
+                if(gameSituationChecker == null) {
+                    initGameSituationChecker();
+                    gameSituationChecker.startGame(false);
+                }
+                else{
+                    gameSituationChecker.startGame(false);
+                }
             }
         };
         menuController.getIsResumePressed().addListener(resumeListener);
@@ -93,7 +106,7 @@ public class MainController {
         ChangeListener<Boolean> quitListener = (observable, oldValue, newValue) ->{
             if(menuController.getIsQuitPressed().get()) {
                 menuController.setIsQuitPressed(false);
-                fileController.saveGame();  //burayı da kaldır
+                //fileController.saveGame();  //burayı da kaldır
                 stage.close();
                 System.exit(0);
             }
@@ -112,8 +125,8 @@ public class MainController {
     }
 
     private void initGameSituationChecker(int bossScene){
-        gameSituationChecker = new GameSituationChecker(scene, bossScene);
-        ChangeListener<Boolean> endGameListener = (observable, oldValue, newValue) ->{
+        //gameSituationChecker = new GameSituationChecker(scene, bossScene);
+        /*ChangeListener<Boolean> endGameListener = (observable, oldValue, newValue) ->{
             if(gameSituationChecker.getIsEnd().get()) {
                 gameSituationChecker.setIsEnd(false);
                 initEndGameMenuController();
@@ -127,13 +140,13 @@ public class MainController {
                 initPauseMenuController();
             }
         };
-        gameSituationChecker.getIsPaused().addListener(pauseGameListener);
+        gameSituationChecker.getIsPaused().addListener(pauseGameListener); */
     }
 
 
 
-    private void initGameSituationChecker(boolean newGame){
-        gameSituationChecker = new GameSituationChecker(scene, newGame);
+    private void initGameSituationChecker(){
+        gameSituationChecker = new GameSituationChecker(scene);
         //saveGame(); //burayı da kaldır
         ChangeListener<Boolean> endGameListener = (observable, oldValue, newValue) ->{
             if(gameSituationChecker.getIsEnd().get()) {
@@ -153,6 +166,7 @@ public class MainController {
         gameSituationChecker.getIsPaused().addListener(pauseGameListener);
     }
     private void initPauseMenuController(){
+        System.out.println("not exist in main");
         if(gameSituation.isIsPreBossFinishedSuccessfully()) {
             pauseMenuController = new PauseMenuController(scene, gameSituationChecker.getBossGameController(), menuController.getMainMenu(), menuController.getSettingsView());
         }

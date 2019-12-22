@@ -24,7 +24,7 @@ public class GameSituation implements Serializable {
     private static GameSituation gameSituation;
 
     private GameSituation(){
-
+        System.out.println("lol gameSituation");
         resetVar();
     }
 

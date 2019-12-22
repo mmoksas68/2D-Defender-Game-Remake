@@ -13,7 +13,6 @@ public class FileController {
     private FileInputStream fis;
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
-
     public FileController(){
 
     }
@@ -31,8 +30,7 @@ public class FileController {
 
 
     public void saveGameSaveObj(){
-        System.out.println("in file " + GameSituation.getInstance().isTwoPlayerSingleShip());
-        GameSaveObj gameSaveObj = GameSaveObj.getInstance();
+
         try {
             fos = new FileOutputStream(new File("gameData/gameSave.txt"));
         } catch (FileNotFoundException e) {
@@ -44,7 +42,7 @@ public class FileController {
             e.printStackTrace();
         }
         try {
-            oos.writeObject(gameSaveObj);
+            oos.writeObject(GameSaveObj.getInstance());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -64,7 +62,6 @@ public class FileController {
     public boolean loadGameSaveObj(){
 
         try {
-            //If you want to use saved game change directory
             fis = new FileInputStream(new File("gameData/gameSave.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -77,6 +74,8 @@ public class FileController {
         }
         try {
             GameSaveObj.setInstance((GameSaveObj) ois.readObject());
+            //System.out.println(GameSaveObj.getInstance().getBossMap());
+            System.out.println(GameSaveObj.getInstance().getPreBossMap());
             LocatableObject.setCurrentID(GameSaveObj.getInstance().getLastSavedID());
             return true;
         } catch (IOException e) {
@@ -344,7 +343,6 @@ public class FileController {
     public void loadHighScores(){
         try {
             fis = new FileInputStream(new File("gameData/highScores.txt"));
-            System.out.println("load");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
