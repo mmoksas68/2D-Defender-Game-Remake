@@ -37,3 +37,10 @@ Link for Final Report - Iteration 1: https://docs.google.com/document/d/17pWJwK9
 Link for Analysis Report - Iteration 2: https://docs.google.com/document/d/1L-8ScWRzFM2HsAhrN8Fdlump0ErxVqAv8usLizhub2s/edit#
 
 Link for Design Report - Iteration 2: https://docs.google.com/document/d/1oX8xtuVoJi-2l2M4Ar5VPt3BMgzFL6SrcEAGktXtfLM/edit
+
+
+To run Fiyuv++:
+You should install JRE 13 - Download JRE13
+Your computer should have 250MB free space (200MB for JRE13, 42MB for game)
+Download Fiyuv++
+After downloading Fiyuv++, you can play it by running Fiyuv++.exe file.

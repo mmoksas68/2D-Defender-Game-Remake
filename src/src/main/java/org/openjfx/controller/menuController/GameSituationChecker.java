@@ -205,14 +205,6 @@ public class GameSituationChecker {
     }
 
 
-    private void pauseGame(){
-
-    }
-
-    private void endGame(){
-        
-    }
-
     /*private void updateSaveFile(){
         try {
             timer = new Timer();
