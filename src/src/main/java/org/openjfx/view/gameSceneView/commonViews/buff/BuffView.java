@@ -15,9 +15,6 @@ public class BuffView extends ImageView {
     public BuffView(ModelToViewBuff modelToViewBuff, double scaleW, double scaleH){
         Assets assets = Assets.getInstance();
         switch (modelToViewBuff.getType()){
-            case SHIELD:
-                setImage(assets.getPreBossAssets().getBuffIcons().get(0));
-                break;
             case SPEED:
                 setImage(assets.getPreBossAssets().getBuffIcons().get(1));
                 break;
@@ -51,9 +48,6 @@ public class BuffView extends ImageView {
     public BuffView(ModelToViewBuff modelToViewBuff, double viewLeft, double scaleW, double scaleH) {
         Assets assets = Assets.getInstance();
         switch (modelToViewBuff.getType()){
-            case SHIELD:
-                setImage(assets.getPreBossAssets().getBuffIcons().get(0));
-                break;
             case SPEED:
                 setImage(assets.getPreBossAssets().getBuffIcons().get(1));
                 break;

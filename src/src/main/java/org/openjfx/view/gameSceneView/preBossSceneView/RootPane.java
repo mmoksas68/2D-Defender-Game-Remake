@@ -31,6 +31,15 @@ public class RootPane extends BorderPane {
     private BackgroundImage image = new BackgroundImage(image2, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
 
+/*
+    static {
+        try {
+            image = new BackgroundImage(new Image(new FileInputStream("assets/preBossAssets/background.png")), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+*/
     public RootPane ( double width, double height) {
         setMaxSize(width,height);
         setPrefSize(width,height);

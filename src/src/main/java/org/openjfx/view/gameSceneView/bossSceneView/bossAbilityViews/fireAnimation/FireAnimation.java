@@ -19,7 +19,7 @@ public class FireAnimation {
     public FireAnimation(ModelToViewSpecialAbility modelToView, double scaleW, double scaleH){
         ID = modelToView.getID();
         imageViewList = new ImageView[8];
-        String imageUrl = "assets/images/animations/fireAnimations/fire_";
+        String imageUrl = "assets/bossAssets/fireAnimations/fire_";
         for(int i = 0; i < 8; i++)
         {
             try {

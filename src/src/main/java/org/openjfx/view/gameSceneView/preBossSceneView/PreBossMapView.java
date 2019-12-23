@@ -27,21 +27,9 @@ import java.util.Map;
 
 public class PreBossMapView extends Pane {
 
-    //private static Image image2 = Assets.getInstance().getPreBossAssets().getBackgrounds().get(GameSituation.getInstance().getLevel() -1);
-
-    /*
-    static {
-        try {
-            image = new BackgroundImage(new Image(new FileInputStream("assets/images/backgrounds/background.png")), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-    /
-     */
-
     Image image2 = Assets.getInstance().getPreBossAssets().getBackgrounds().get(GameSituation.getInstance().getLevel() - 1);
     private BackgroundImage image = new BackgroundImage(image2, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
 
 
     private java.util.Map<Long, MeteorView> meteors = new HashMap<Long, MeteorView>();
@@ -332,8 +320,8 @@ public class PreBossMapView extends Pane {
     public void setLayoutScaleHeight(double layoutScaleHeight) {
         this.layoutScaleHeight.set(layoutScaleHeight / PreBossMap.MAP_HEIGHT);
         setPrefWidth(layoutScaleHeight);
-        Background background = new Background(image);
-        this.setBackground(background);
+        //Background background = new Background(image);
+      //  this.setBackground(background);
     }
 
     public double getSliderAccelerationSpeed() {

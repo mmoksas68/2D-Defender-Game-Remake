@@ -9,12 +9,12 @@ public class ModelToViewEnemy extends ModelToView{
     private double destinationY;
     private int health;
     private int maxHealth;
-    private boolean isEvolved; //for picture
     private boolean isRushing;
+    private EnemyDestinations destination;
 
     public ModelToViewEnemy(Enemy enemy) {
         super(enemy);
-
+        this.destination = enemy.getDestinationType();
         this.health = enemy.getHealthPoint();
         this.destinationX = enemy.getDestinationLocation().getPositionX();
         this.destinationY = enemy.getDestinationLocation().getPositionY();
@@ -22,18 +22,15 @@ public class ModelToViewEnemy extends ModelToView{
         {
             this.type = enemy.isEvolved() ?  EnemyTypes.tier1evolved  : EnemyTypes.tier1unevolved ;
             this.maxHealth = enemy.isEvolved() ? Tier1Enemy.MAX_HEALTH*2 : Tier1Enemy.MAX_HEALTH;
-            this.isEvolved = enemy.isEvolved();
         }else if( enemy instanceof Tier2Enemy)
         {
             this.type = enemy.isEvolved() ?  EnemyTypes.tier2evolved  : EnemyTypes.tier2unevolved ;
             this.maxHealth = enemy.isEvolved() ? Tier2Enemy.MAX_HEALTH*2 : Tier2Enemy.MAX_HEALTH;
-            this.isEvolved = enemy.isEvolved();
             this.isRushing = ((Tier2Enemy) enemy).isRushing();
         }else if( enemy instanceof Tier3Enemy)
         {
             this.type = enemy.isEvolved() ?  EnemyTypes.tier3evolved  : EnemyTypes.tier3unevolved ;
             this.maxHealth = enemy.isEvolved() ? Tier3Enemy.MAX_HEALTH*2 : Tier3Enemy.MAX_HEALTH;
-            this.isEvolved = enemy.isEvolved();
         }
 
     }
@@ -78,13 +75,12 @@ public class ModelToViewEnemy extends ModelToView{
         this.maxHealth = maxHealth;
     }
 
-
-    public boolean getIsEvolved() {
-        return isEvolved;
+    public EnemyDestinations getDestination() {
+        return destination;
     }
 
-    public void setIsEvolved(boolean isEvolved) {
-        this.isEvolved = isEvolved;
+    public void setDestination(EnemyDestinations destination) {
+        this.destination = destination;
     }
 
     public boolean isRushing() {

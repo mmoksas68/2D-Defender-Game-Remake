@@ -2,7 +2,6 @@ package org.openjfx.model.commonEntities.Buff;
 
 public enum BuffTypes{
     EMPTY,
-    SHIELD,
     SPEED,
     SMART_BOMB,
     HEALTH,

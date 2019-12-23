@@ -23,11 +23,11 @@ public abstract class Enemy extends LocatableObject{
         super(location, hitBoxWidth, hitBoxHeight, isEvolved ? 2*healthPoint : healthPoint);
         this.isEvolved = isEvolved;
         this.velocity = velocity;
-        this.radarRadius = isEvolved ? 2*radarRadius : radarRadius;
+        this.radarRadius = isEvolved ? 3*radarRadius/2 : radarRadius;
         this.scorePoint = isEvolved ? 2*scorePoint : scorePoint;
         this.destinationType = EnemyDestinations.RandomLocation;
         this.destinationLocation = new Location(0,0 );
-        double random = (Math.random()*10);
+        double random = (Math.random()*20) -10;
         if(random < 5)
             buffType = BuffTypes.EMPTY;
         else if(random < 6)

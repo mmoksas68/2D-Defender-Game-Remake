@@ -57,10 +57,11 @@ public class PreBossMap implements Serializable {
         this.isSinglePlayer = isSinglePlayer;
         switch (level) {
             case 1:
-                initialTier1unevolvedEnemyCount = 0;
-                initialTier1evolvedEnemyCount = 0;
-                initialUnevolvedEnemyStationCount = 0;
-                initialEvolvedEnemyStationCount = 1;
+                initialTier1unevolvedEnemyCount = 25;
+                initialTier1evolvedEnemyCount = 5;
+                initialUnevolvedEnemyStationCount = 3;
+                initialEvolvedEnemyStationCount = 2;
+
                 break;
             case 2:
                 initialTier1unevolvedEnemyCount = 5;
@@ -139,6 +140,7 @@ public class PreBossMap implements Serializable {
             evolvedEnemyStation.setLocation(PositionHelper.fixLocationBoundry(helper));
             addStation(evolvedEnemyStation);
         }
+
     }
 
 
@@ -244,7 +246,7 @@ public class PreBossMap implements Serializable {
         return initialTier2unevolvedEnemyCount;
     }
 
-    public int getInitialTier1evolvedEnemyCount() {
+     public int getInitialTier1evolvedEnemyCount() {
         return initialTier1evolvedEnemyCount;
     }
 
