@@ -1,5 +1,7 @@
 package org.openjfx.model.bossEntities.Boss;
 
+import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossThreeBehaviour;
+import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.bossEntities.BossAbility.LittleBoss;
 
@@ -12,11 +14,12 @@ public class BossThree extends Boss {
     private static double bulletVelocity = 10.0;
     private static double gunFrequency = 0.05;
 
-    public BossThree () {
+    public BossThree (BossMap bossMap) {
         super ( 3, hitBoxWidth, hitBoxHeight, MAX_HEALTH_POINT);
         setGunFrequency( gunFrequency);
         setGunPower( gunPower);
         setBulletVelocity( bulletVelocity);
+        setBehaviourAlgorithm( new BossThreeBehaviour( bossMap));
     }
 
     public double getLITTLE_BOSS_FREQ() {

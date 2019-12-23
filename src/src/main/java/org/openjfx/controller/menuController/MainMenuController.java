@@ -59,13 +59,11 @@ public class MainMenuController {
     private void playSinglePlayer(){
         gameSituation.setSinglePlayer(true);
         scene.setRoot(menuSceneContainer.getSpacecraftSelection1());
-        SoundController.buttonClick();
     }
 
     private void playTwoPlayer(){
         gameSituation.setSinglePlayer(false);
         scene.setRoot(menuSceneContainer.getSpacecraftSelection1());
-        SoundController.buttonClick();
     }
 
 
@@ -75,24 +73,20 @@ public class MainMenuController {
         else
             scene.setRoot(menuSceneContainer.getSpacecraftSelection2());
 
-        SoundController.buttonClick();
         gameSituation.setSpacecraft1(menuSceneContainer.getSpacecraftSelection1().getSelectedItem());
     }
 
     private void backInSpacecraftScreen2(){
-        SoundController.buttonClick();
         scene.setRoot(menuSceneContainer.getSpacecraftSelection1());
     }
 
     private void nextInSpacecraftScreen2(){
-        SoundController.buttonClick();
         scene.setRoot(menuSceneContainer.getLevelSelection());
 
         gameSituation.setSpacecraft2(menuSceneContainer.getSpacecraftSelection2().getSelectedItem());
     }
 
     private void backInLevelScreen(){
-        SoundController.buttonClick();
         if(gameSituation.isSinglePlayer())
             scene.setRoot(menuSceneContainer.getSpacecraftSelection1());
         else
@@ -100,25 +94,20 @@ public class MainMenuController {
     }
 
     private void start(){
-        gameSituation.setLevel(menuSceneContainer.getLevelSelection().getSelectedItem()+2); //şimdilik level level bakmak için ekledim +2 yi
-        SoundController.buttonClick();
-
+        gameSituation.setLevel(menuSceneContainer.getLevelSelection().getSelectedItem());
         isGameStartPressed.setValue(true);
     }
 
     private void howToPlay(){
-        SoundController.buttonClick();
         scene.setRoot(menuSceneContainer.getHowToPlay());
     }
 
     private void settings(){
-        SoundController.buttonClick();
         menuSceneContainer.getSettings().initializeSettingsView();
         scene.setRoot(menuSceneContainer.getSettings());
     }
 
     private void saveSettings(){
-        SoundController.buttonClick();
 
         if(menuSceneContainer.getSettings().isAllKeysDistinct()) {
             settings.setVolume(menuSceneContainer.getSettings().getVolume());
@@ -147,23 +136,19 @@ public class MainMenuController {
     }
 
     private void highScores(){
-        SoundController.buttonClick();
         scene.setRoot(menuSceneContainer.getHighScoresView());
     }
 
 
     private void credits(){
-        SoundController.buttonClick();
         scene.setRoot(menuSceneContainer.getCredits());
     }
 
     private void quit(){
-        SoundController.buttonClick();
         isQuitPressed.setValue(true);
     }
 
     private void backToMenu(){
-        SoundController.buttonClick();
         scene.setRoot(menuSceneContainer.getMainMenu());
     }
 
@@ -173,7 +158,6 @@ public class MainMenuController {
     */
 
    private void resume(){
-       SoundController.buttonClick();
        isResumePressed.setValue(true);
    }
 
@@ -393,7 +377,12 @@ ON CLICK
 
     public BooleanProperty getIsBossScene(){return isBossScene;}
 
-    public SettingsView getSettingsView() {
-        return menuSceneContainer.getSettings();
+
+    public void enableResumeBtn(){
+        menuSceneContainer.getMainMenu().enableResumeButton();
+    }
+
+    public void disableResumeBtn(){
+        menuSceneContainer.getMainMenu().disableResumeButton();
     }
 }

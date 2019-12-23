@@ -5,6 +5,7 @@ import javafx.animation.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
+import org.openjfx.assetManager.Assets;
 import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
 import org.openjfx.model.menuEntities.GameSituation;
@@ -24,15 +25,12 @@ public class RootPane extends BorderPane {
     private double height;
     private double width;
 
-    private static BackgroundImage image;
+    //private BackgroundImage image;
+    //image = new BackgroundImage(new Image(new FileInputStream("assets/images/backgrounds/background.png")), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+    Image image2 = Assets.getInstance().getPreBossAssets().getBackgrounds().get(GameSituation.getInstance().getLevel() - 1);
+    private BackgroundImage image = new BackgroundImage(image2, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
-    static {
-        try {
-            image = new BackgroundImage(new Image(new FileInputStream("assets/images/background.png")), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+
     public RootPane ( double width, double height) {
         setMaxSize(width,height);
         setPrefSize(width,height);

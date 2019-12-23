@@ -1,6 +1,7 @@
 package org.openjfx.view.gameSceneView.preBossSceneView.enemyView;
 
 import javafx.scene.CacheHint;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -19,7 +20,9 @@ public class EnemyViewGroup {
     private ImageView evolvedTier1 = new ImageView(assets.getPreBossAssets().getTier1evolved());
     private ImageView unevolvedTier1 = new ImageView(assets.getPreBossAssets().getTier1unevolved());
     private ImageView unevolvedTier2 = new ImageView(assets.getPreBossAssets().getTier2unevolved());
-
+    private ImageView evolvedTier2 = new ImageView(assets.getPreBossAssets().getTier2evolved());
+    private ImageView unevolvedTier3 = new ImageView(assets.getPreBossAssets().getTier3unevolved());
+    private ImageView evolvedTier3 = new ImageView(assets.getPreBossAssets().getTier3evolved());
 
     public EnemyViewGroup(ModelToViewEnemy modelToViewEnemy, double viewLeft, double scaleW, double scaleH){
         chooseEnemyView(modelToViewEnemy);
@@ -70,13 +73,13 @@ public class EnemyViewGroup {
             enemyView = unevolvedTier2;
         }
         else if(modelToViewEnemy.getType().equals(EnemyTypes.tier2evolved)){
-            enemyView = unevolvedTier2;
+            enemyView = evolvedTier2;
         }
         else if(modelToViewEnemy.getType().equals(EnemyTypes.tier3unevolved)){
-
+            enemyView = unevolvedTier3;
         }
         else if(modelToViewEnemy.getType().equals(EnemyTypes.tier3evolved)){
-
+            enemyView = evolvedTier3;
         }
     }
 
@@ -101,7 +104,6 @@ public class EnemyViewGroup {
             else{
                 enemyView.setRotate(0);
             }
-
         }
     }
 

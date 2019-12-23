@@ -7,6 +7,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import org.openjfx.assetManager.Assets;
 import org.openjfx.assetManager.MenuAssets;
+import org.openjfx.model.menuEntities.GameSaveObj;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvButton;
 
 import java.util.ArrayList;
@@ -47,13 +48,13 @@ public class MainMenu extends HBox {
     }
 
     private void createButtons(){
+        createResumeBtn();
         createSinglePlayerBtn();
         createTwoPlayersBtn();
         createHowToPlayBtn();
         createSettingsBtn();
         createCreditsBtn();
         createScoresBtn();
-        createResumeBtn();
         createExitBtn();
 
         createBossSceneButton();
@@ -67,17 +68,17 @@ public class MainMenu extends HBox {
     }
 
     private void createSinglePlayerBtn(){
-        singlePlayerBtn = new FiyuvButton("Single");
+        singlePlayerBtn = new FiyuvButton("Single Player");
         addMenuButton(singlePlayerBtn);
     }
 
     private void createTwoPlayersBtn(){
-        twoPlayersBtn = new FiyuvButton("TwoPlayer");
+        twoPlayersBtn = new FiyuvButton("Two Player");
         addMenuButton(twoPlayersBtn);
     }
 
     private void createHowToPlayBtn(){
-        howToPlayBtn = new FiyuvButton("HowtoPlay");
+        howToPlayBtn = new FiyuvButton("How to Play");
         addMenuButton(howToPlayBtn);
     }
 
@@ -102,6 +103,7 @@ public class MainMenu extends HBox {
     }
 
     private void createResumeBtn(){
+
         resumeBtn = new FiyuvButton("Resume");
         addMenuButton(resumeBtn);
     }
@@ -140,4 +142,12 @@ public class MainMenu extends HBox {
     public FiyuvButton getResumeBtn(){return resumeBtn;}
 
     public FiyuvButton getBossSceneButton(){return bossSceneButton;}
+    
+    public void enableResumeButton(){
+            resumeBtn.setVisible(true);
+    }
+
+    public void disableResumeButton(){
+            resumeBtn.setVisible(false);
+    }
 }

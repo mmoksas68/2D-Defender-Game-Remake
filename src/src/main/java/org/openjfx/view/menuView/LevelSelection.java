@@ -17,6 +17,7 @@ import org.openjfx.model.menuEntities.PassedLevelInfo;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvBottomMenu;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvButton;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvHeadingLabel;
+import org.openjfx.view.menuView.menuEntitiesView.SubHeaderLabel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,19 +40,11 @@ public class LevelSelection extends VBox {
         bottomMenu = new FiyuvBottomMenu("Back", "Start");
         hBoxLevelLabels = new HBox();
 
-        levelLabel1 = new Label("Level 1");
-        levelLabel2 = new Label("Level 2");
-        levelLabel3 = new Label("Level 3");
+        levelLabel1 = new SubHeaderLabel("Level 1");
+        levelLabel2 = new SubHeaderLabel("Level 2");
+        levelLabel3 = new SubHeaderLabel("Level 3");
 
-        levelLabel1.setFont(Font.font("Verdana", 25));
-        levelLabel2.setFont(Font.font("Verdana", 25));
-        levelLabel3.setFont(Font.font("Verdana", 25));
-        levelLabel1.setTextFill(Color.BLACK);
-        levelLabel2.setTextFill(Color.BLACK);
-        levelLabel3.setTextFill(Color.BLACK);
-
-
-        hBoxLevelLabels.setSpacing(width*11/40);
+        hBoxLevelLabels.setSpacing(350);
         hBoxLevelLabels.setAlignment(Pos.CENTER);
 
 
@@ -109,30 +102,30 @@ public class LevelSelection extends VBox {
 
     private void designView() {
         for (ImageView imageView : imageViews) {
-            imageView.setFitWidth(width / 6);
-            imageView.setFitWidth(width / 6);
+            imageView.setFitWidth(250);
+            imageView.setFitWidth(250);
         }
         for (ImageView imageView : imageViews) {
-            imageView.setFitHeight(width / 6);
-            imageView.setFitHeight(width / 6);
+            imageView.setFitHeight(250);
+            imageView.setFitHeight(250);
         }
 
-        radioButtons.setSpacing(width / 3 );
+        radioButtons.setSpacing(450);
         radioButtons.setAlignment(Pos.CENTER);
-        hBoxImages.setSpacing(width/6);
+        hBoxImages.setSpacing(200);
 
 
-        this.setSpacing(height/15);
+        this.setSpacing(55);
     }
 
     public int getSelectedItem(){
         if(selection1Button.isSelected())
-            return 0;
-        else if(selection2Button.isSelected()){
             return 1;
+        else if(selection2Button.isSelected()){
+            return 2;
         }
         else{
-            return 2;
+            return 3;
         }
     }
 

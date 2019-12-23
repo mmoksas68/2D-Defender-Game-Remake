@@ -2,8 +2,6 @@ package org.openjfx.assetManager;
 
 import javafx.scene.image.Image;
 import org.openjfx.fileManager.FileController;
-
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
@@ -16,12 +14,12 @@ public class MenuAssets {
     MenuAssets(){
         try {
             gameLogo = new Image(FileController.getFileStream("assets/menuAssets/logo.png"));
-            colorOptions.add(new Image(FileController.getFileStream("assets/menuAssets/color1.jpg")));
-            colorOptions.add(new Image(FileController.getFileStream("assets/menuAssets/color2.png")));
-            colorOptions.add(new Image(FileController.getFileStream("assets/menuAssets/color3.jpg")));
+            colorOptions.add(new Image(FileController.getFileStream("assets/menuAssets/theme1.jpg")));
+            colorOptions.add(new Image(FileController.getFileStream("assets/menuAssets/theme2.jpg")));
+            colorOptions.add(new Image(FileController.getFileStream("assets/menuAssets/theme3.jpg")));
             backgrounds.add(new Image(FileController.getFileStream("assets/menuAssets/background.png")));
             backgrounds.add(new Image(FileController.getFileStream("assets/menuAssets/background2.png")));
-            backgrounds.add(new Image(FileController.getFileStream("assets/menuAssets/background3.jpg")));
+            backgrounds.add(new Image(FileController.getFileStream("assets/menuAssets/background3.png")));
             restart = new Image(FileController.getFileStream("assets/menuAssets/restart.png"));
             credits = new Image(FileController.getFileStream("assets/menuAssets/credits.png"));
 

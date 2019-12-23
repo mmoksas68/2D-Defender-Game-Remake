@@ -1,6 +1,8 @@
 package org.openjfx.model.bossEntities.Boss;
 
+import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossTwoBehaviour;
 import org.openjfx.model.bossEntities.BossAbility.Rocket;
+import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.bossEntities.BossAbility.Marker;
 
@@ -21,11 +23,12 @@ public class BossTwo extends Boss {
     private static double gunFrequency = 0.05;
 
     private ArrayList <Rocket> rockets = new ArrayList<>();
-    public BossTwo () {
+    public BossTwo (BossMap bossmap) {
         super ( velocity, hitBoxWidth, hitBoxHeight, MAX_HEALTH_POINT);
         setGunFrequency( gunFrequency);
         setGunPower( gunPower);
         setBulletVelocity( bulletVelocity);
+        setBehaviourAlgorithm( new BossTwoBehaviour( bossmap));
     }
 
     private Marker createMarker (double maxX, double maxY) {

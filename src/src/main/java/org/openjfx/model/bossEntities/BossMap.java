@@ -33,6 +33,7 @@ public class BossMap implements Serializable {
     private java.util.Map<Long, Bullet> bullets = new HashMap<Long, Bullet>();
     private java.util.Map <Long, SpecialAbility> specialAbilities = new HashMap<>();
     private boolean isFiring = false;
+    private boolean isIndicator = false;
 
     public BossMap(int level, boolean isSinglePlayer) {
         this.level = level;
@@ -46,19 +47,7 @@ public class BossMap implements Serializable {
             spacecraft2 = new Spacecraft(new Location(0, 600));
             spacecraft2.setChoosenPicNo( 1);
         }
-        switch ( level) {
-            case 1:
-                boss = new BossOne();
-                break;
-            case 2:
-                boss = new BossTwo();
-                break;
-            case 3:
-                boss = new BossThree();
-                break;
-            default:
-                break;
-        }
+
     }
 
 
@@ -69,19 +58,6 @@ public class BossMap implements Serializable {
     public Spacecraft getSpacecraft2() {
         return spacecraft2;
     }
-
-    /* public void checkBoundry ( double [] array, LocatableObject gameObject) {
-             double MOVE_OFFSET = 10.0;
-
-            if ( gameObject instanceof Spacecraft) {
-                if (spacecraft.getLocation().getPositionX() >= MAX_WIDTH / 2 - 5 * MOVE_OFFSET) array[0] = 0;
-                if (spacecraft.getLocation().getPositionX() <= 3100 +2 * MOVE_OFFSET) array[1] = 0;
-                if (spacecraft.getLocation().getPositionY() <= 2 * MOVE_OFFSET) array[2] = 0;
-                if (spacecraft.getLocation().getPositionY() >= MAX_HEIGHT - spacecraft.getHitBoxHeight() - 2 * MOVE_OFFSET)
-                    array[3] = 0;
-            }
-
-        }*/
     public java.util.Map<Long, Bullet> getBullets() {
         return bullets;
     }
@@ -115,6 +91,10 @@ public class BossMap implements Serializable {
         return boss;
     }
 
+    public void setBoss(Boss boss) {
+        this.boss = boss;
+    }
+
     public int getLevel() {
         return level;
     }
@@ -129,5 +109,8 @@ public class BossMap implements Serializable {
 
     public boolean isSinglePlayer() { return isSinglePlayer; }
 
+    public boolean isIndicator() {
+        return isIndicator;
+    }
 }
 

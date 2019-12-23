@@ -13,6 +13,8 @@ public class FileController {
     private FileInputStream fis;
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
+
+
     public FileController(){
 
     }
@@ -23,9 +25,10 @@ public class FileController {
         saveGameSituation();
     }
 
-    public void loadGame(){
-        loadGameSaveObj();
+    public boolean loadGame(){
+
         loadGameSituation();
+        return  loadGameSaveObj();
     }
 
 
@@ -64,27 +67,26 @@ public class FileController {
         try {
             fis = new FileInputStream(new File("gameData/gameSave.txt"));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return false;
         }
         try {
             ois = new ObjectInputStream(fis);
         } catch (IOException e) {
             System.out.println("EXCEPTION CATCHED");
-            e.printStackTrace();
+            return false;
         }
         try {
             GameSaveObj.setInstance((GameSaveObj) ois.readObject());
-            //System.out.println(GameSaveObj.getInstance().getBossMap());
-            System.out.println(GameSaveObj.getInstance().getPreBossMap());
+            if(GameSaveObj.getInstance().getPreBossMap() == null && GameSaveObj.getInstance().getBossMap() == null){
+                return false;
+            }
             LocatableObject.setCurrentID(GameSaveObj.getInstance().getLastSavedID());
-            return true;
         } catch (IOException e) {
             System.out.println("no saved game");
             return false;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
         try {
             ois.close();
         } catch (IOException e) {
@@ -182,7 +184,6 @@ public class FileController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
 

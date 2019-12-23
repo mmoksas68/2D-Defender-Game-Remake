@@ -1,5 +1,6 @@
 package org.openjfx.view.menuView.menuEntitiesView;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -18,5 +19,13 @@ public class GameButtons extends Button {
                 SoundController.buttonEntered();
             }
         });
+
+        this.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                SoundController.buttonClick();
+            }
+        });
+
     }
 }

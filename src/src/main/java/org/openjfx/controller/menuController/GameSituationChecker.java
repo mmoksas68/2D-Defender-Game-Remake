@@ -6,7 +6,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.stage.Screen;
-import org.openjfx.controller.bossSceneControllers.BossController;
+
 import org.openjfx.controller.bossSceneControllers.BossGameController;
 import org.openjfx.controller.preBossSceneControllers.PreBossGameController;
 import org.openjfx.model.bossEntities.BossMap;
@@ -230,11 +230,18 @@ public class GameSituationChecker {
     }
 
     public void restartTheLevel(){
-
+        gameSituation.resetScore();
+        bossGameController = null;
+        startGame(true);
     }
 
     public void startNextLevel(){
+        gameSituation.setLevel(gameSituation.getLevel() + 1);
+        gameSituation.resetScore();
+        bossGameController = null;
+        startGame(true);
     }
+
 
     public void setIsPaused(boolean b) {
         isPaused.set(b);

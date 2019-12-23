@@ -9,7 +9,12 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import org.openjfx.controller.SoundController;
+import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossOneBehaviour;
 import org.openjfx.controller.preBossSceneControllers.SpacecraftController;
+import org.openjfx.model.bossEntities.Boss.BossOne;
+import org.openjfx.model.bossEntities.Boss.BossThree;
+import org.openjfx.model.bossEntities.Boss.BossTwo;
+import org.openjfx.model.bossEntities.BossAbility.Laser;
 import org.openjfx.model.bossEntities.BossAbility.Marker;
 import org.openjfx.model.bossEntities.BossAbility.Rocket;
 import org.openjfx.model.bossEntities.BossAbility.SpecialAbility;
@@ -34,7 +39,6 @@ public class BossGameController  {
     private double height;
     private GameSituation gameSituation;
     private BossMapController bossMapController;
-    private BossController bossController;
     private SpacecraftController spacecraftController1;
     private SpacecraftController spacecraftController2;
     private boolean gameOn = true;
@@ -54,11 +58,28 @@ public class BossGameController  {
     public BossGameController(Scene scene, double initWidth, double initHeight) {
         System.out.println("boş constructor");
         gameSituation = GameSituation.getInstance();
-        level = 2;
+        level = 1;
         this.scene = scene;
         rootPane = new RootPane(initWidth, initHeight);
+
         bossMapController = new BossMapController( new BossMap( level, gameSituation.isSinglePlayer()));
-        bossController = new BossController(bossMapController.getBossMap().getLevel(), bossMapController.getBossMap(), rootPane.getBossMapView());
+
+        Boss boss = null;
+        switch ( level) {
+            case 1:
+                boss = new BossOne(bossMapController.getBossMap());
+                break;
+            case 2:
+                boss = new BossTwo(bossMapController.getBossMap());
+                break;
+            case 3:
+                boss = new BossThree(bossMapController.getBossMap());
+                break;
+            default:
+                break;
+        }
+        bossMapController.getBossMap().setBoss( boss);
+        //bossController = new BossController(bossMapController.getBossMap().getLevel(), bossMapController.getBossMap(), rootPane.getBossMapView());
         this.width = initWidth;
         this.height = initHeight;
         spacecraftController1 = new SpacecraftController(bossMapController.getBossMap().getSpacecraft1(), rootPane.getBossMapView(),bossMapController.getBossMap());
@@ -74,7 +95,7 @@ public class BossGameController  {
         this.scene = scene;
         rootPane = new RootPane(initWidth, initHeight);
         bossMapController = new BossMapController(bossMap);
-        bossController = new BossController( bossMapController.getBossMap().getLevel(), bossMapController.getBossMap(), rootPane.getBossMapView());
+       // bossController = new BossController( bossMapController.getBossMap().getLevel(), bossMapController.getBossMap(), rootPane.getBossMapView());
         this.width = initWidth;
         this.height = initHeight;
         gameSituation = GameSituation.getInstance();
@@ -109,7 +130,7 @@ public class BossGameController  {
         spacecraftController1.getInputs();
         if ( !gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
             spacecraftController2.getInputs();
-        bossController.behave();
+        bossMapController.getBossMap().getBoss().behave();
 
     }
     private void initGame() {
@@ -246,7 +267,14 @@ public class BossGameController  {
                     rootPane.getBossMapView().addFireAnimation(new ModelToViewSpecialAbility(((Rocket) specialAbility).getDestinationMarker()));
             }
             rootPane.getBossMapView().refreshSpecialAbilityView( new ModelToViewSpecialAbility( specialAbility));
-
+            if ( specialAbility instanceof Laser) {
+                if (((BossOneBehaviour) bossMapController.getBossMap().getBoss().getBehaviourAlgorithm()).isNotifyController()) {
+                    rootPane.getBossMapView().addLaserIndicator ( ((BossOne) bossMapController.getBossMap().getBoss()).sendLaserIndicator());
+                }
+                if ( bossMapController.getBossMap().getBoss().getBehaviourAlgorithm().getAbilityTimer() <= 0.0) {
+                   rootPane.getBossMapView().removeLaserIndicator();
+                }
+            }
         }
         for (Long id : toBeDeleted) {
             bossMapController.getBossMap().removeSpecialAbility(id);
