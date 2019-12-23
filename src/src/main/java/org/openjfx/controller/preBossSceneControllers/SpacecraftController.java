@@ -237,8 +237,6 @@ public class SpacecraftController {
         switch (type){
             case EMPTY:
                 break;
-            case SHIELD:
-                break;
             case SPEED:
                 spacecraft.setVelocity(spacecraft.getVelocity() + Spacecraft.INIT_VELOCITY/4);
                  break;

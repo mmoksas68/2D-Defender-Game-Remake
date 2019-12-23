@@ -49,8 +49,8 @@ public class SpacecraftGun extends SimpleGun implements Serializable {
         }
 
         Location location = spacecraft.isDirectionLeft() ?
-                new Location(spacecraftHelper.getLeft() - 11,yPosition) :
-                new Location(spacecraftHelper.getRight() + 11,yPosition);
+                new Location(spacecraftHelper.getLeft() - Bullet.WIDTH - 3,yPosition) :
+                new Location(spacecraftHelper.getRight() + 3, yPosition);
 
         return new Bullet(location, getBulletDamage(), getBulletVelocity(), directionX, directionY);
     }

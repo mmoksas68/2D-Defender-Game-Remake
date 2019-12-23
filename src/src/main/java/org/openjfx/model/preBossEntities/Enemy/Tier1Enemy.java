@@ -20,7 +20,7 @@ public class Tier1Enemy extends Enemy{
 
     public Tier1Enemy(Location location, boolean isEvolved) {
         super(location, WIDTH, HEIGHT, MAX_HEALTH, VELOCITY, RADAR_RADIUS, isEvolved, SCORE_POINT);
-        super.setFiringBehavior( new EnemyGun(GUN_PERIOD, BULLET_DAMAGE, 0, BULLET_VELOCITY, this));
+        super.setFiringBehavior(new EnemyGun(isEvolved ? 2*GUN_PERIOD/3 : GUN_PERIOD, isEvolved ? 2*BULLET_DAMAGE : BULLET_DAMAGE, 0, isEvolved ? 4*BULLET_VELOCITY/3 : BULLET_VELOCITY, this));
     }
 
 }

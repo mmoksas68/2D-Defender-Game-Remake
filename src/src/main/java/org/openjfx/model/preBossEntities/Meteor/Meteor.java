@@ -2,6 +2,7 @@ package org.openjfx.model.preBossEntities.Meteor;
 
 import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
+import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.utilization.PositionHelper;
 
 public class Meteor extends LocatableObject {
@@ -15,15 +16,15 @@ public class Meteor extends LocatableObject {
 
     public Meteor(Location location) {
         super(location, 1, 1, 1);
-        // randomization
-        getLocation().setPositionX(PositionHelper.createLocationInsideMap().getPositionX());
-        getLocation().setPositionY(10);
+        getLocation().setPositionX(Math.random()* PreBossMap.MAP_WIDTH);
+        getLocation().setPositionY(15);
         radius = (Math.random()*(MAX_RADIUS-MIN_RADIUS)) + MIN_RADIUS;
         setHitBoxWidth(radius);
         setHitBoxHeight(radius);
         setDirectionX(Math.random() * 5 - 2.5);
         setDirectionY(-(Math.random() * 5 + Math.abs(getDirectionX())*2));
         velocity = (MAX_RADIUS - radius)/6 + 5;
+        damage = (int)(radius/(MAX_RADIUS-MIN_RADIUS) * 10);
     }
 
     public double getVelocity() {

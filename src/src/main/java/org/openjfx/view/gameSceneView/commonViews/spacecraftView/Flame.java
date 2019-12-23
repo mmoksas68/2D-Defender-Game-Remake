@@ -11,7 +11,7 @@ public class Flame extends ImageView {
 
     static {
         try {
-            image = new Image(new FileInputStream("assets/images/Flame_01.png"));
+            image = new Image(new FileInputStream("assets/preBossAssets/Flame_01.png"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
