@@ -71,7 +71,6 @@ public class PreBossGameController {
         this.width = initWidth;
         this.height = initHeight;
         preBossMapController = new PreBossMapController(preBossMap);
-
         spacecraftController1 = new SpacecraftController(preBossMapController.getPreBossMap().getSpacecraft1(), rootPane.getPreBossMapView1(), preBossMapController.getPreBossMap());
         if(!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
             spacecraftController2 = new SpacecraftController(preBossMapController.getPreBossMap().getSpacecraft2(), rootPane.getPreBossMapView2(), preBossMapController.getPreBossMap());
@@ -126,27 +125,24 @@ public class PreBossGameController {
 
 
     private void refreshMap() {
-        preBossMapController.checkMapSituation();
-        refreshAndReflectGameInfo();
         refreshAndReflectBuff();
         refreshAndReflectBullet();
         refreshAndReflectEnemy();
         refreshAndReflectMeteor();
         refreshAndReflectStations();
+        preBossMapController.checkMapSituation();
+
+        refreshAndReflectGameInfo();
         refreshSpacecraftGameInfo();
         rootPane.getTopBarView().getMiddleView().refreshSlider(spacecraftController1.getPreBossMapView().getSliderLeft(), 1);
         refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
-
         if(!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
         {
             rootPane.getTopBarView().getMiddleView().refreshSlider(spacecraftController2.getPreBossMapView().getSliderLeft(), 2);
             refreshAndReflectSpacecraft(spacecraftController2.getSpacecraft());
-
         }
         updateHyperJumpBattery();
         checkEndGame();
-
-
     }
 
 
@@ -631,6 +627,10 @@ public class PreBossGameController {
 
     public void setGameOn(boolean gameOn) {
         this.gameOn = gameOn;
+    }
+
+    public boolean getGameOn( ) {
+        return this.gameOn;
     }
 
     public boolean isGameOnChange() {

@@ -29,6 +29,7 @@ public class MainMenu extends HBox {
     private FiyuvButton scoresBtn;
     private FiyuvButton exitBtn;
     private FiyuvButton resumeBtn;
+    private FiyuvButton autoSaveBtn;
     private  FiyuvButton bossSceneButton;
     private ImageView gameLogo;
     private VBox vbox;
@@ -49,6 +50,7 @@ public class MainMenu extends HBox {
 
     private void createButtons(){
         createResumeBtn();
+        createAutoSave();
         createSinglePlayerBtn();
         createTwoPlayersBtn();
         createHowToPlayBtn();
@@ -108,6 +110,11 @@ public class MainMenu extends HBox {
         addMenuButton(resumeBtn);
     }
 
+    private void createAutoSave(){
+        autoSaveBtn = new FiyuvButton("AutoSave");
+        addMenuButton(autoSaveBtn);
+    }
+
     private void createBossSceneButton(){
         bossSceneButton = new FiyuvButton("Boss Scene Button");
         addMenuButton(bossSceneButton);
@@ -142,6 +149,8 @@ public class MainMenu extends HBox {
     public FiyuvButton getResumeBtn(){return resumeBtn;}
 
     public FiyuvButton getBossSceneButton(){return bossSceneButton;}
+
+    public FiyuvButton getAutoSaveBtn(){return autoSaveBtn;}
     
     public void enableResumeButton(){
             resumeBtn.setVisible(true);
@@ -149,5 +158,15 @@ public class MainMenu extends HBox {
 
     public void disableResumeButton(){
             resumeBtn.setVisible(false);
+    }
+
+    public void enableAutoSaveBtn(){
+        if(!vbox.getChildren().contains(autoSaveBtn))
+            vbox.getChildren().add(1,autoSaveBtn);
+    }
+
+    public void disableAutoSaveBtn(){
+        if(vbox.getChildren().contains(autoSaveBtn) && vbox.getChildren().get(1).equals(autoSaveBtn))
+            vbox.getChildren().remove(1);
     }
 }

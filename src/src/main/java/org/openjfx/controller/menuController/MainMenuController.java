@@ -19,7 +19,7 @@ public class MainMenuController {
     private GameSituation gameSituation;
     private Settings settings;
     private PassedLevelInfo passedLevelInfo = PassedLevelInfo.getInstance();
-    private BooleanProperty isGameStartPressed, isSaveSettingsPressed, isQuitPressed, isResumePressed, isBossScene;
+    private BooleanProperty isGameStartPressed, isSaveSettingsPressed, isQuitPressed, isResumePressed, isBossScene, isAutoSavePressed;;
     private int theme;
 
 
@@ -32,6 +32,7 @@ public class MainMenuController {
         isSaveSettingsPressed = new SimpleBooleanProperty(false);
         isQuitPressed = new SimpleBooleanProperty(false);
         isResumePressed = new SimpleBooleanProperty(false);
+        isAutoSavePressed = new SimpleBooleanProperty(false);
         settings = Settings.getInstance();
         initButtonListeners();
         gameSituation = GameSituation.getInstance();
@@ -139,6 +140,9 @@ public class MainMenuController {
         scene.setRoot(menuSceneContainer.getHighScoresView());
     }
 
+    private void autoSave(){
+        isAutoSavePressed.setValue(true);
+    }
 
     private void credits(){
         scene.setRoot(menuSceneContainer.getCredits());
@@ -326,7 +330,18 @@ ON CLICK
             }
         });
 
+        if(menuSceneContainer.getMainMenu().getAutoSaveBtn() != null){
+            menuSceneContainer.getMainMenu().getAutoSaveBtn().setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    autoSave();
+                }
+            });
+        }
+
     }
+
+
 
     public MainMenu getMainMenu(){
         return menuSceneContainer.getMainMenu();
@@ -337,6 +352,10 @@ ON CLICK
             menuSceneContainer.getLevelSelection().enableLevel2();
         if(passedLevelInfo.getIsLevelPassed(2))
             menuSceneContainer.getLevelSelection().enableLevel3();
+    }
+
+    public BooleanProperty getIsAutoSavePressed(){
+        return  isAutoSavePressed;
     }
 
     public BooleanProperty getIsGameStartPressed(){
@@ -353,6 +372,10 @@ ON CLICK
 
     public BooleanProperty getIsResumePressed(){
         return isResumePressed;
+    }
+
+    public void setIsAutoSavePressed(boolean value){
+        isAutoSavePressed.set(value);
     }
 
     public void setIsQuitPressed(boolean b) {
@@ -384,5 +407,13 @@ ON CLICK
 
     public void disableResumeBtn(){
         menuSceneContainer.getMainMenu().disableResumeButton();
+    }
+
+    public void enableAutoSaveBtn(){
+        menuSceneContainer.getMainMenu().enableAutoSaveBtn();
+    }
+
+    public void disableAutoSaveBtn(){
+        menuSceneContainer.getMainMenu().disableAutoSaveBtn();
     }
 }
