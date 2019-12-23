@@ -27,7 +27,7 @@ public abstract class Enemy extends LocatableObject{
         this.scorePoint = isEvolved ? 2*scorePoint : scorePoint;
         this.destinationType = EnemyDestinations.RandomLocation;
         this.destinationLocation = new Location(0,0 );
-        double random = (Math.random()*10);
+        double random = (Math.random()*20) -10;
         if(random < 5)
             buffType = BuffTypes.EMPTY;
         else if(random < 6)

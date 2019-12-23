@@ -59,7 +59,7 @@ public class PreBossMapController {
         meteorRain();
 
         for(var meteor: preBossMap.getMeteors().values()){
-            checkCollision(meteor, preBossMap.getEnemies());
+         //   checkCollision(meteor, preBossMap.getEnemies());
             checkCollision(meteor, preBossMap.getStations());
             checkCollision(meteor, Collections.singletonMap(preBossMap.getSpacecraft1().getID(), preBossMap.getSpacecraft1()));
             if(!isSinglePlayer && !gameSituation.isTwoPlayerSingleShip())
@@ -95,10 +95,10 @@ public class PreBossMapController {
             enemy.getFiringBehavior().gunTimer(preBossMap);
         }
 
-        for (var enemyStation : preBossMap.getStations().values()){
-            if(enemyStation instanceof EnemyStation)
+        for (var enemyStation : preBossMap.getStations().values() ){
+            if(enemyStation instanceof EnemyStation && preBossMap.getEnemies().size() < 70)
                 spawnSimpleEnemy((EnemyStation) enemyStation);
-            if(enemyStation instanceof EvolvedEnemyStation)
+            if(enemyStation instanceof EvolvedEnemyStation && preBossMap.getEnemies().size() < 70)
                 spawnEvolvedEnemy((EvolvedEnemyStation) enemyStation);
 
         }

@@ -4,8 +4,8 @@ import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
 
 public class Buff extends LocatableObject {
-    public static final double WIDTH = 30;
-    public static final double HEIGHT = 30;
+    public static final double WIDTH = 60;
+    public static final double HEIGHT = 60;
     public static final double BOSSMAP_VELOCITY = 10;
     private BuffTypes buffType;
     private double velocity = BOSSMAP_VELOCITY;

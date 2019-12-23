@@ -17,12 +17,16 @@ public class Meteor extends LocatableObject {
     public Meteor(Location location) {
         super(location, 1, 1, 1);
         getLocation().setPositionX(Math.random()* PreBossMap.MAP_WIDTH);
-        getLocation().setPositionY(15);
+        getLocation().setPositionY(52.3);
         radius = (Math.random()*(MAX_RADIUS-MIN_RADIUS)) + MIN_RADIUS;
         setHitBoxWidth(radius);
         setHitBoxHeight(radius);
         setDirectionX(Math.random() * 5 - 2.5);
+        if ( Math.round( getDirectionX()) == 0.0)
+            setDirectionX( getDirectionX() + 0.5);
         setDirectionY(-(Math.random() * 5 + Math.abs(getDirectionX())*2));
+        if ( Math.round( getDirectionY()) == 0.0)
+            setDirectionY( getDirectionY() - 0.5);
         velocity = (MAX_RADIUS - radius)/6 + 5;
         damage = (int)(radius/(MAX_RADIUS-MIN_RADIUS) * 10);
     }

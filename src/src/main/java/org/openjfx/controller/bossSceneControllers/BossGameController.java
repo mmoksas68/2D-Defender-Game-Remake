@@ -60,7 +60,7 @@ public class BossGameController  {
     public BossGameController(Scene scene, double initWidth, double initHeight) {
         System.out.println("boş constructor");
         gameSituation = GameSituation.getInstance();
-        level = 1;
+        level = gameSituation.getLevel();
         this.scene = scene;
         rootPane = new RootPane(initWidth, initHeight);
 
