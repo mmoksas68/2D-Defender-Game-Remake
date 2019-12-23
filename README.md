@@ -40,7 +40,7 @@ Link for Design Report - Iteration 2: https://docs.google.com/document/d/1oX8xtu
 
 Link for Final Report - Iteration 2: https://drive.google.com/open?id=1KIKXmTs9lgYjCrfhZQyBpCNZuxc2XyLbixZVxCl7188
 
-#How to Install
+# How to Install
 
 To run Fiyuv++:
 
