@@ -2,7 +2,6 @@ package org.openjfx.view.menuView;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -10,15 +9,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.stage.Screen;
 import org.openjfx.assetManager.Assets;
 import org.openjfx.model.menuEntities.PassedLevelInfo;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvBottomMenu;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvButton;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvHeadingLabel;
 import org.openjfx.view.menuView.menuEntitiesView.SubHeaderLabel;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +40,7 @@ public class LevelSelection extends VBox {
         levelLabel2 = new SubHeaderLabel("Level 2");
         levelLabel3 = new SubHeaderLabel("Level 3");
 
-        hBoxLevelLabels.setSpacing(350);
+        hBoxLevelLabels.setSpacing(375);
         hBoxLevelLabels.setAlignment(Pos.CENTER);
 
 

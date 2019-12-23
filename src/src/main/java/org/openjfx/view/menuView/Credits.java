@@ -6,12 +6,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import org.openjfx.assetManager.Assets;
-import org.openjfx.view.menuView.menuEntitiesView.FiyuvBottomMenu;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvButton;
 
 public class Credits extends BorderPane{
 
-    FiyuvButton backButton;
+    private FiyuvButton backButton;
     private ImageView image;
 
     public Credits(){

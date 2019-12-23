@@ -1,13 +1,9 @@
 package org.openjfx.view.menuView;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import org.openjfx.assetManager.Assets;
-import org.openjfx.assetManager.MenuAssets;
-import org.openjfx.model.menuEntities.GameSaveObj;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvButton;
 
 import java.util.ArrayList;
@@ -117,7 +113,7 @@ public class MainMenu extends HBox {
 
     private void createBossSceneButton(){
         bossSceneButton = new FiyuvButton("Boss Scene Button");
-        addMenuButton(bossSceneButton);
+        //addMenuButton(bossSceneButton);
     }
 
     public FiyuvButton getSinglePlayerBtn(){

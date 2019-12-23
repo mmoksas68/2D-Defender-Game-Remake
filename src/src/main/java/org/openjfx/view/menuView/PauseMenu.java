@@ -1,26 +1,15 @@
 package org.openjfx.view.menuView;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import org.openjfx.view.menuView.menuEntitiesView.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class PauseMenu extends VBox {
-
-    private Scene scene;
-
-
-    List<Button> menuButtons;
 
     private FiyuvButton resumeBtn;
     private Button menuBtn;

@@ -1,20 +1,10 @@
 package org.openjfx.view.menuView.menuEntitiesView;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.SortEvent;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 import org.openjfx.controller.SoundController;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class FiyuvButton extends Button {
 

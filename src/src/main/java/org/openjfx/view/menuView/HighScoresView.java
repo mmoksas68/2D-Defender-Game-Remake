@@ -2,12 +2,10 @@ package org.openjfx.view.menuView;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import org.openjfx.controller.SoundController;
 import org.openjfx.model.menuEntities.HighScore;
 import org.openjfx.model.menuEntities.HighScoreInfo;
@@ -16,12 +14,12 @@ import org.openjfx.view.menuView.menuEntitiesView.FiyuvHeadingLabel;
 
 public class HighScoresView extends VBox {
 
-    TableView<HighScore> table1, table2, table3, table4, table5, table6;
-    TableColumn<HighScore, Integer> numberColumn;
-    TableColumn<HighScore, Integer> scoreColumn1;
-    TableColumn<HighScore, Integer> numberColumn2, numberColumn3, numberColumn4, numberColumn5, numberColumn6;
-    TableColumn<HighScore, Integer> scoreColumn2, scoreColumn3, scoreColumn4, scoreColumn5, scoreColumn6;
-    HighScoreInfo highScores;
+    private TableView<HighScore> table1, table2, table3, table4, table5, table6;
+    private TableColumn<HighScore, Integer> numberColumn;
+    private TableColumn<HighScore, Integer> scoreColumn1;
+    private TableColumn<HighScore, Integer> numberColumn2, numberColumn3, numberColumn4, numberColumn5, numberColumn6;
+    private TableColumn<HighScore, Integer> scoreColumn2, scoreColumn3, scoreColumn4, scoreColumn5, scoreColumn6;
+    private HighScoreInfo highScores;
     private TabPane tabPane;
     private Tab level1, level2, level3;
 

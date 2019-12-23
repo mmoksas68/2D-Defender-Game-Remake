@@ -70,20 +70,6 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
-    <key name="ExtractSuperBase.RECENT_KEYS">
-      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
-      <recent name="org.openjfx.view.menuView" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\kosed\Desktop\Combined\src\gameData" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\menuAssets" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\userInterfaceResources\Font" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\images\backgrounds" />
-      <recent name="C:\javafx\IdeaProjects\CS319\src\assets\images\gameInfoIcons" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kosed\Desktop\Combined\src\gameData" />
       <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\spacecrafts" />
@@ -95,8 +81,8 @@
       <recent name="org.openjfx.view.menuView.menuEntitiesView" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\kosed\Desktop\Combined\src\gameData" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets\menuAssets" />
+      <recent name="C:\Users\kosed\Desktop\Combined\src\gameData" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets\userInterfaceResources\Font" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets\images\backgrounds" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets\images\gameInfoIcons" />
@@ -105,18 +91,6 @@
       <recent name="org.openjfx.view.menuView.menuEntitiesView" />
       <recent name="org.openjfx.view.menuView" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
