@@ -4,11 +4,11 @@ import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.menuEntities.GameSituation;
 
 public class EnemyStation extends Station{
-    public static final int MAX_HEALTH = 50;
+    public static final int MAX_HEALTH = 75;
     public static final int SCORE_POINT = 50;
-    public static final int LEVEL1_PRODUCE_PERIOD = 750;
-    public static final int LEVEL2_PRODUCE_PERIOD = 500;
-    public static final int LEVEL3_PRODUCE_PERIOD = 250;
+    public static final int LEVEL1_PRODUCE_PERIOD = 700;
+    public static final int LEVEL2_PRODUCE_PERIOD = 600;
+    public static final int LEVEL3_PRODUCE_PERIOD = 450;
     public static final int PIC_NO = 0;
 
     private EnemyFactory enemyFactory;

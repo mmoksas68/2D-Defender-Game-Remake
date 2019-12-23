@@ -12,11 +12,11 @@ public class Tier3Enemy extends Enemy{
         public static final double HEIGHT = 80;
         public static final int MAX_HEALTH = 30;
         public static final int SCORE_POINT = 6;
-        public static final int BULLET_VELOCITY = 10;
-        public static final int BULLET_DAMAGE = 20;
-        public static final int GUN_PERIOD = 100;
+        public static final int BULLET_VELOCITY = 8;
+        public static final int BULLET_DAMAGE = 15;
+        public static final int GUN_PERIOD = 125;
         public static final int VELOCITY = 5;
-        public static final int RADAR_RADIUS = 750;
+        public static final int RADAR_RADIUS = 600;
 
         public Tier3Enemy(Location location, boolean isEvolved) {
 

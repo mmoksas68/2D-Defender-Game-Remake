@@ -11,7 +11,7 @@ public class Tier1Enemy extends Enemy{
     public static final double HEIGHT = 50;
     public static final int MAX_HEALTH = 10;
     public static final int SCORE_POINT = 2;
-    public static final int BULLET_VELOCITY = 10;
+    public static final int BULLET_VELOCITY = 9;
     public static final int BULLET_DAMAGE = 5;
     public static final int GUN_PERIOD = 100;
     public static final int VELOCITY = 7;

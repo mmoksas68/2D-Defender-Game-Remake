@@ -28,7 +28,7 @@ public class Meteor extends LocatableObject {
         if ( Math.round( getDirectionY()) == 0.0)
             setDirectionY( getDirectionY() - 0.5);
         velocity = (MAX_RADIUS - radius)/6 + 5;
-        damage = (int)(radius/(MAX_RADIUS-MIN_RADIUS) * 10);
+        damage = (int)(radius/(MAX_RADIUS-MIN_RADIUS) * 5);
     }
 
     public double getVelocity() {

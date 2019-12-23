@@ -57,29 +57,29 @@ public class PreBossMap implements Serializable {
         this.isSinglePlayer = isSinglePlayer;
         switch (level) {
             case 1:
-                initialTier1unevolvedEnemyCount = 25;
-                initialTier1evolvedEnemyCount = 5;
-                initialUnevolvedEnemyStationCount = 3;
+                initialTier1unevolvedEnemyCount = 20;
+                initialTier1evolvedEnemyCount = 10;
+                initialUnevolvedEnemyStationCount = 2;
                 initialEvolvedEnemyStationCount = 2;
 
                 break;
             case 2:
-                initialTier1unevolvedEnemyCount = 5;
-                initialTier1evolvedEnemyCount = 5;
-                initialTier2unevolvedEnemyCount = 5;
-                initialTier2evolvedEnemyCount = 5;
-                initialUnevolvedEnemyStationCount = 4;
-                initialEvolvedEnemyStationCount = 4;
-                break;
-            case 3:
-                initialTier1unevolvedEnemyCount = 5;
+                initialTier1unevolvedEnemyCount = 10;
                 initialTier1evolvedEnemyCount = 5;
                 initialTier2unevolvedEnemyCount = 10;
                 initialTier2evolvedEnemyCount = 5;
-                initialTier3unevolvedEnemyCount = 10;
-                initialTier3evolvedEnemyCount = 5;
-                initialUnevolvedEnemyStationCount = 5;
-                initialEvolvedEnemyStationCount = 4;
+                initialUnevolvedEnemyStationCount = 3;
+                initialEvolvedEnemyStationCount = 3;
+                break;
+            case 3:
+                initialTier1unevolvedEnemyCount = 3;
+                initialTier1evolvedEnemyCount = 2;
+                initialTier2unevolvedEnemyCount = 3;
+                initialTier2evolvedEnemyCount = 2;
+                initialTier3unevolvedEnemyCount = 3;
+                initialTier3evolvedEnemyCount = 2;
+                initialUnevolvedEnemyStationCount = 2;
+                initialEvolvedEnemyStationCount = 2;
                 break;
         }
         initMap();

@@ -3,6 +3,7 @@ package org.openjfx.model.bossEntities.Boss;
 import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossTwoBehaviour;
 import org.openjfx.model.bossEntities.BossAbility.Rocket;
 import org.openjfx.model.bossEntities.BossMap;
+import org.openjfx.model.commonEntities.FiringBehavior.BossGun;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.bossEntities.BossAbility.Marker;
 
@@ -10,13 +11,13 @@ import java.util.ArrayList;
 
 public class BossTwo extends Boss {
 
-    private final double ROCKET_FREQ = 0.01;
+    private final double ROCKET_FREQ = 0.0075;
     private final int MAX_ROCKET_NUMBER = 5;
     private final double rocketDamage = 5;
-    private double rocketRadius = 100;
+    private double rocketRadius = 200;
     private static final int hitBoxWidth = 150;
     private static final int hitBoxHeight = 150;
-    private static final int MAX_HEALTH_POINT = 1000;
+    private static final int MAX_HEALTH_POINT = 750;
     private static double velocity = 3;
     private static int gunPower = 10;
     private static double bulletVelocity = 10.0;
@@ -29,6 +30,8 @@ public class BossTwo extends Boss {
         setGunPower( gunPower);
         setBulletVelocity( bulletVelocity);
         setBehaviourAlgorithm( new BossTwoBehaviour( bossmap));
+        bossmap.setBoss( this);
+        setFiringBehavior( new BossGun( bossmap));
     }
 
     private Marker createMarker (double maxX, double maxY) {

@@ -16,7 +16,6 @@ public abstract class BossDefaultBehaviour implements BossBehaviourAlgorithm {
 
     public void moveBoss() {
         Boss boss = bossMap.getBoss();
-        double MOVE_OFFSET = 50; //bossMap.getMOVE_OFFSET();
         double MAX_HEIGHT = BossMap.MAP_HEIGHT; //bossMap.getMAX_HEIGHT();
         if ( movingDown) {
            if ( boss.getLocation().getPositionY() + boss.getHitBoxHeight() >= MAX_HEIGHT)
@@ -34,7 +33,7 @@ public abstract class BossDefaultBehaviour implements BossBehaviourAlgorithm {
     public void shoot ()  {
 
         if ( Math.random() < bossMap.getBoss().getGunFrequency()) {
-            Bullet b = bossMap.getBoss().fireBullet();
+            Bullet b = bossMap.getBoss().getFiringBehavior().fireBullet();
             bossMap.addBullet( b);
         }
 
