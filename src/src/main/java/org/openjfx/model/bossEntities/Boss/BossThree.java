@@ -2,6 +2,7 @@ package org.openjfx.model.bossEntities.Boss;
 
 import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossThreeBehaviour;
 import org.openjfx.model.bossEntities.BossMap;
+import org.openjfx.model.commonEntities.FiringBehavior.BossGun;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.bossEntities.BossAbility.LittleBoss;
 
@@ -20,6 +21,8 @@ public class BossThree extends Boss {
         setGunPower( gunPower);
         setBulletVelocity( bulletVelocity);
         setBehaviourAlgorithm( new BossThreeBehaviour( bossMap));
+        bossMap.setBoss( this);
+        setFiringBehavior( new BossGun( bossMap));
     }
 
     public double getLITTLE_BOSS_FREQ() {

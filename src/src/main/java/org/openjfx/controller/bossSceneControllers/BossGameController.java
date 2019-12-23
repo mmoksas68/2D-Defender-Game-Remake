@@ -66,22 +66,19 @@ public class BossGameController  {
 
         bossMapController = new BossMapController( new BossMap( level, gameSituation.isSinglePlayer()));
 
-        Boss boss = null;
         switch ( level) {
             case 1:
-                boss = new BossOne(bossMapController.getBossMap());
+                bossMapController.getBossMap().setBoss( new BossOne(bossMapController.getBossMap()) );
                 break;
             case 2:
-                boss = new BossTwo(bossMapController.getBossMap());
+                bossMapController.getBossMap().setBoss( new BossTwo(bossMapController.getBossMap()) );
                 break;
             case 3:
-                boss = new BossThree(bossMapController.getBossMap());
+                bossMapController.getBossMap().setBoss( new BossThree(bossMapController.getBossMap()) );
                 break;
             default:
                 break;
         }
-        bossMapController.getBossMap().setBoss( boss);
-        //bossController = new BossController(bossMapController.getBossMap().getLevel(), bossMapController.getBossMap(), rootPane.getBossMapView());
         this.width = initWidth;
         this.height = initHeight;
         spacecraftController1 = new SpacecraftController(bossMapController.getBossMap().getSpacecraft1(), rootPane.getBossMapView(),bossMapController.getBossMap());

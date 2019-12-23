@@ -3,6 +3,8 @@ package org.openjfx.model.bossEntities.Boss;
 import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossBehaviourAlgorithm;
 import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.commonEntities.Buff.BuffTypes;
+import org.openjfx.model.commonEntities.FiringBehavior.BossGun;
+import org.openjfx.model.commonEntities.FiringBehavior.FiringBehavior;
 import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.Bullet.Bullet;
@@ -22,6 +24,7 @@ public abstract class Boss extends LocatableObject {
     private int gunTimer;
     private double bulletVelocity;
     private BossBehaviourAlgorithm algorithm;
+    private FiringBehavior firingBehavior;
     private BuffTypes buffType;
 
     public Boss(double velocity, double hitBoxWidth, double hitBoxHeight, int healthPoint) {
@@ -116,6 +119,15 @@ public abstract class Boss extends LocatableObject {
     public void setBehaviourAlgorithm(BossBehaviourAlgorithm behaviourAlgorithm) {
         this.algorithm = behaviourAlgorithm;
     }
+
+    public FiringBehavior getFiringBehavior() {
+        return firingBehavior;
+    }
+
+    public void setFiringBehavior(FiringBehavior firingBehavior) {
+        this.firingBehavior = firingBehavior;
+    }
+
     public void behave()  {
         if ( algorithm.getAbilityTimer() <= 0.0) {
             algorithm.moveBoss();

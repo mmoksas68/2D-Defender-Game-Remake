@@ -2,6 +2,7 @@ package org.openjfx.model.bossEntities.Boss;
 
 import org.openjfx.controller.bossSceneControllers.BossBehaviourManager.BossOneBehaviour;
 import org.openjfx.model.bossEntities.BossMap;
+import org.openjfx.model.commonEntities.FiringBehavior.BossGun;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.bossEntities.BossAbility.Laser;
 import org.openjfx.view.gameSceneView.bossSceneView.BossMapView;
@@ -24,6 +25,8 @@ public class BossOne extends Boss {
         setGunPower( gunPower);
         setBulletVelocity( bulletVelocity);
         super.setBehaviourAlgorithm( new BossOneBehaviour( bossMap));
+        bossMap.setBoss( this);
+        setFiringBehavior( new BossGun( bossMap));
     }
 
     public double [] sendLaserIndicator () {
