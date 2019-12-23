@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7a46841-6915-4e69-85ec-c406941c34f2" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,12 +70,15 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kosed\Desktop\Combined\src\gameData" />
+      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\spacecrafts" />
+      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\gameInfoIcons" />
+      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\bombs" />
+      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images" />
+    </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="org.openjfx.view.menuView.menuEntitiesView" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
-      <recent name="org.openjfx.view.menuView" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\kosed\Desktop\Combined\src\gameData" />
@@ -83,12 +87,9 @@
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets\images\backgrounds" />
       <recent name="C:\javafx\IdeaProjects\CS319\src\assets\images\gameInfoIcons" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\kosed\Desktop\Combined\src\gameData" />
-      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\spacecrafts" />
-      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\gameInfoIcons" />
-      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images\bombs" />
-      <recent name="C:\Users\kosed\Desktop\Combined\src\assets\images" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.openjfx.view.menuView.menuEntitiesView" />
+      <recent name="org.openjfx.view.menuView" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -211,6 +212,8 @@
       <workItem from="1577021391247" duration="14193000" />
       <workItem from="1577011312160" duration="4831000" />
       <workItem from="1577017924742" duration="15153000" />
+      <workItem from="1577040973604" duration="11900000" />
+      <workItem from="1577094996860" duration="3058000" />
     </task>
     <servers />
   </component>

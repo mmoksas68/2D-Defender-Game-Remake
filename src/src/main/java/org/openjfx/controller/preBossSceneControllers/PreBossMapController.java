@@ -152,7 +152,6 @@ public class PreBossMapController {
                     iterator.setDead(true);
             }
 
-
         }
     }
 
