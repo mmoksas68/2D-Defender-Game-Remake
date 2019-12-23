@@ -40,7 +40,6 @@ public class PreBossGameController {
     private BooleanProperty gameOnChange = new SimpleBooleanProperty(false);
     private BooleanProperty gameIsFinish = new SimpleBooleanProperty(false);
     private int scoreDecayTimer = 0;
-
     private AnimationTimer animationTimer = new AnimationTimer() {
         @Override
         public void handle(long l) {
@@ -135,13 +134,13 @@ public class PreBossGameController {
         refreshAndReflectMeteor();
         refreshAndReflectStations();
         refreshSpacecraftGameInfo();
-        refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
         rootPane.getTopBarView().getMiddleView().refreshSlider(spacecraftController1.getPreBossMapView().getSliderLeft(), 1);
+        refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
 
         if(!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
         {
-            refreshAndReflectSpacecraft(spacecraftController2.getSpacecraft());
             rootPane.getTopBarView().getMiddleView().refreshSlider(spacecraftController2.getPreBossMapView().getSliderLeft(), 2);
+            refreshAndReflectSpacecraft(spacecraftController2.getSpacecraft());
 
         }
         updateHyperJumpBattery();

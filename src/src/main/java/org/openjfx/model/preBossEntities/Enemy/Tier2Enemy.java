@@ -6,8 +6,8 @@ import org.openjfx.model.commonEntities.FiringBehavior.NoGun;
 import java.io.Serializable;
 
 public class Tier2Enemy extends Enemy {
-    public static final double WIDTH = 100;
-    public static final double HEIGHT = 60;
+    public static final double WIDTH = 75;
+    public static final double HEIGHT = 45;
     public static final int MAX_HEALTH = 1;
     public static final int SCORE_POINT = 4;
     public static final int CLASHING_DAMAGE = 30;

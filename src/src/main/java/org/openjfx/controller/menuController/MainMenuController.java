@@ -95,7 +95,6 @@ public class MainMenuController {
 
     private void start(){
         gameSituation.setLevel(menuSceneContainer.getLevelSelection().getSelectedItem());
-
         isGameStartPressed.setValue(true);
     }
 
@@ -379,7 +378,11 @@ ON CLICK
     public BooleanProperty getIsBossScene(){return isBossScene;}
 
 
-    public void addResumeButton(){
-        menuSceneContainer.getMainMenu().addResumeButton();
+    public void enableResumeBtn(){
+        menuSceneContainer.getMainMenu().enableResumeButton();
+    }
+
+    public void disableResumeBtn(){
+        menuSceneContainer.getMainMenu().disableResumeButton();
     }
 }

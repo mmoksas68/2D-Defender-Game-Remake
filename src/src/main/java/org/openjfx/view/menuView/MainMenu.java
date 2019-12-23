@@ -143,8 +143,11 @@ public class MainMenu extends HBox {
 
     public FiyuvButton getBossSceneButton(){return bossSceneButton;}
     
-    public void addResumeButton(){
-        if(!this.getChildren().contains(resumeBtn))
-            getChildren().add(0, resumeBtn);
+    public void enableResumeButton(){
+            resumeBtn.setVisible(true);
+    }
+
+    public void disableResumeButton(){
+            resumeBtn.setVisible(false);
     }
 }

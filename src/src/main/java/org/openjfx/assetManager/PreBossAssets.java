@@ -1,6 +1,7 @@
 package org.openjfx.assetManager;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.openjfx.fileManager.FileController;
 
 import java.io.FileNotFoundException;
@@ -21,6 +22,9 @@ public class PreBossAssets {
     private Image meteor;
     private List<Image> gameInfoIcons = new ArrayList<>();
     private Image tier2unevolved;
+    private Image tier2evolved;
+    private Image tier3unevolved;
+    private Image tier3evolved;
     private List<Image> backgrounds = new ArrayList<>();
 
     PreBossAssets(){
@@ -52,6 +56,10 @@ public class PreBossAssets {
             gameInfoIcons.add(new Image(FileController.getFileStream("assets/images/gameInfoIcons/space-station.png")));
 
             tier2unevolved = new Image(FileController.getFileStream("assets/images/spacecrafts/bomber.png"));
+            tier2evolved = new Image(FileController.getFileStream("assets/images/spacecrafts/bomber2.png"));
+
+            tier3unevolved = new Image(FileController.getFileStream("assets/images/spacecrafts/bomber.png"));
+            tier3evolved = new Image(FileController.getFileStream("assets/images/spacecrafts/bomber2.png"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -118,4 +126,27 @@ public class PreBossAssets {
     }
     public List<Image> getBackgrounds() {return backgrounds;}
 
+    public Image getTier2evolved() {
+        return tier2evolved;
+    }
+
+    public void setTier2evolved(Image tier2evolved) {
+        this.tier2evolved = tier2evolved;
+    }
+
+    public Image getTier3unevolved() {
+        return tier3unevolved;
+    }
+
+    public void setTier3unevolved(Image tier3unevolved) {
+        this.tier3unevolved = tier3unevolved;
+    }
+
+    public Image getTier3evolved() {
+        return tier3evolved;
+    }
+
+    public void setTier3evolved(Image tier3evolved) {
+        this.tier3evolved = tier3evolved;
+    }
 }
