@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import org.openjfx.controller.SoundController;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.menuEntities.PassedLevelInfo;
 import org.openjfx.model.menuEntities.*;
@@ -15,7 +14,6 @@ public class MainMenuController {
 
     private Scene scene;
     private MenuSceneContainer menuSceneContainer;
-    private HighScoreInfo highScore;
     private GameSituation gameSituation;
     private Settings settings;
     private PassedLevelInfo passedLevelInfo = PassedLevelInfo.getInstance();
@@ -100,6 +98,7 @@ public class MainMenuController {
     }
 
     private void howToPlay(){
+        menuSceneContainer.getHowToPlay().setImage();
         scene.setRoot(menuSceneContainer.getHowToPlay());
     }
 

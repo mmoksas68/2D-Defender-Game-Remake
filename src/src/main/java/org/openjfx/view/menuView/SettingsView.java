@@ -1,6 +1,5 @@
 package org.openjfx.view.menuView;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
+
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -8,13 +7,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 import org.openjfx.assetManager.Assets;
 import org.openjfx.model.menuEntities.Settings;
 import org.openjfx.view.menuView.menuEntitiesView.*;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -106,9 +103,12 @@ public class SettingsView extends VBox {
 
         imageViews = new ArrayList<ImageView>();
         for(int i = 0; i < images.size(); i++){
+            HBox imageViewWrapper = new HBox();
+            imageViewWrapper.setStyle("-fx-border-color: black;" + "-fx-border-width: 3;");
             ImageView imageView = new ImageView(images.get(i));
-            imageViews.add(i, imageView);
-            hBoxImages.getChildren().add(imageView);
+            imageViews.add(imageView);
+            imageViewWrapper.getChildren().add(imageView);
+            hBoxImages.getChildren().add(imageViewWrapper);
         }
 
         radioButtons.setAlignment(Pos.CENTER);

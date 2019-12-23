@@ -16,7 +16,6 @@ import org.openjfx.model.menuEntities.GameSaveObj;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.view.menuView.MainMenu;
 import org.openjfx.view.menuView.PauseMenu;
-import org.openjfx.view.menuView.SettingsView;
 
 public class PauseMenuController {
 

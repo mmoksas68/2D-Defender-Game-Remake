@@ -1,12 +1,7 @@
 package org.openjfx.controller.menuController;
 
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
-import javafx.scene.control.Menu;
 import javafx.stage.Screen;
-import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
-import org.openjfx.model.menuEntities.HighScore;
-import org.openjfx.model.menuEntities.HighScoreInfo;
 import org.openjfx.view.menuView.*;
 
 public class MenuSceneContainer {

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class MenuAssets {
 
-    private Image gameLogo, restart, credits;
+    private Image gameLogo, restart, credits, howtoplay, howtoplay2;
     private ArrayList<Image> colorOptions = new ArrayList<>();
     private ArrayList<Image> backgrounds = new ArrayList<>();
 
@@ -22,6 +22,8 @@ public class MenuAssets {
             backgrounds.add(new Image(FileController.getFileStream("assets/menuAssets/background3.png")));
             restart = new Image(FileController.getFileStream("assets/menuAssets/restart.png"));
             credits = new Image(FileController.getFileStream("assets/menuAssets/credits.png"));
+            howtoplay = new Image(FileController.getFileStream("assets/menuAssets/Howtoplay.png"));
+            howtoplay2 = new Image(FileController.getFileStream("assets/menuAssets/howtoplay2.png"));
 
 
         } catch (FileNotFoundException e) {
@@ -47,4 +49,12 @@ public class MenuAssets {
 
     public Image getCredits(){return credits;}
 
+    public Image getHowtoPlay() {
+        return howtoplay;
+    }
+
+
+    public Image getHowtoPlay2() {
+        return howtoplay2;
+    }
 }

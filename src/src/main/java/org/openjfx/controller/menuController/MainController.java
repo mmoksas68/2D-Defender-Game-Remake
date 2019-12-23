@@ -5,16 +5,10 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.openjfx.controller.bossSceneControllers.BossGameController;
 import org.openjfx.fileManager.FileController;
 import org.openjfx.model.menuEntities.GameSaveObj;
 import org.openjfx.model.menuEntities.GameSituation;
-import org.openjfx.model.menuEntities.Settings;
 import org.openjfx.model.menuEntities.PassedLevelInfo;
-
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainController {
 

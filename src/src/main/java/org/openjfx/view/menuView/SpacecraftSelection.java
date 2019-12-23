@@ -2,19 +2,16 @@ package org.openjfx.view.menuView;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import org.openjfx.assetManager.Assets;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvBottomMenu;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvButton;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvHeadingLabel;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -5,8 +5,6 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 
-import java.util.ArrayList;
-
 public class FiyuvBottomMenu extends HBox {
     private Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     private String buttonName1, buttonName2;

@@ -14,7 +14,6 @@ import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.menuEntities.GameSaveObj;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.menuEntities.PassedLevelInfo;
-import org.openjfx.model.menuEntities.Settings;
 import org.openjfx.model.preBossEntities.PreBossMap;
 
 import java.util.Timer;
@@ -29,7 +28,6 @@ public class GameSituationChecker {
     private BooleanProperty isPaused, isEnd, isSaved, deleteAutoSave;
     private PreBossGameController preBossGameController;
     private BossGameController bossGameController;
-    private GameSaveObj gameSaveObj;
     private Scene scene;
     private PassedLevelInfo passedLevelInfo;
     private Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -43,7 +41,6 @@ public class GameSituationChecker {
         isEnd = new SimpleBooleanProperty(false);
         isSaved = new SimpleBooleanProperty(false);
         deleteAutoSave = new SimpleBooleanProperty(false);
-        gameSaveObj = GameSaveObj.getInstance();
         passedLevelInfo = PassedLevelInfo.getInstance();
         gameSituation = GameSituation.getInstance();
         isOn = true;
@@ -55,7 +52,6 @@ public class GameSituationChecker {
         isEnd = new SimpleBooleanProperty(false);
         isSaved = new SimpleBooleanProperty(false);
         deleteAutoSave = new SimpleBooleanProperty(false);
-        gameSaveObj = GameSaveObj.getInstance();
         passedLevelInfo = PassedLevelInfo.getInstance();
         gameSituation = GameSituation.getInstance();
         gameSituation.resetVar();

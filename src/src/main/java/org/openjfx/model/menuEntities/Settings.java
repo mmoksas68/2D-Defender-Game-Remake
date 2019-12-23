@@ -1,9 +1,7 @@
 package org.openjfx.model.menuEntities;
 
 import javafx.scene.input.KeyCode;
-
 import java.io.Serializable;
-import java.security.Key;
 
 public class Settings implements Serializable {
 

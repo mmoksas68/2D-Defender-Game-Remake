@@ -1,26 +1,9 @@
 package org.openjfx.view.menuView.menuEntitiesView;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class FiyuvHeadingLabel extends Label {
-
-    private Background background;
-    public FiyuvHeadingLabel(String text, double width, double height){
-        setPrefHeight(height);
-        setPrefWidth(width);
-        setText(text);
-        setWrapText(true);
-        this.getStyleClass().add("heading-label");
-    }
 
     public FiyuvHeadingLabel(String text) {
         setPrefHeight(100);
