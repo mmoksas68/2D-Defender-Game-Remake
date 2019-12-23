@@ -21,7 +21,7 @@ public class ModelToViewStation extends ModelToView{
         }else if( station instanceof  EvolvedEnemyStation)
         {
             this.type = StationTypes.EvolvedEnemyStation;
-            this.maxHealth = EnemyStation.MAX_HEALTH;
+            this.maxHealth = EvolvedEnemyStation.MAX_HEALTH;
         }
         picNo = station.getPicNo();
     }

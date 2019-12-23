@@ -203,9 +203,6 @@ public class GameSituationChecker {
             bossGameController = null;
         }
         preBossGameController.getAnimationTimer().stop();
-        gameSituation.setTwoPlayerSingleShip(false);
-        gameSituation.setIsFirstCraftDied(false);
-        gameSituation.setIsSecondCraftDied(false);
         this.bossGameController = new BossGameController(scene, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
         initBossListeners();
         isChanged2 = true;

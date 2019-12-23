@@ -7,6 +7,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
+import org.openjfx.controller.SoundController;
 import org.openjfx.model.commonEntities.Buff.Buff;
 import org.openjfx.model.commonEntities.Buff.BuffTypes;
 import org.openjfx.model.commonEntities.Location;
@@ -174,7 +175,7 @@ public class PreBossGameController {
                 );
             }
             preBossMapController.getPreBossMap().deleteEnemy(it);
-                //SoundController.explosion();
+            //SoundController.explosion();
 
             if(enemy instanceof Tier3Enemy)
             {
@@ -182,7 +183,6 @@ public class PreBossGameController {
                     preBossMapController.getPreBossMap().addEnemy(newEnemy);
                 }
             }
-
         }
 
     }
@@ -261,7 +261,7 @@ public class PreBossGameController {
 
         for (var it : toBeDeleted) {
             preBossMapController.getPreBossMap().deleteStation(it);
-            //SoundController.explosion();
+            SoundController.explosion();
         }
     }
 
