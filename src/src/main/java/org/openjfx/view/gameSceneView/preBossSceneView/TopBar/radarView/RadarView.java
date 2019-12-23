@@ -86,16 +86,17 @@ public class RadarView extends Pane {
             sliderLeft2= slider;
 
         rectangle.setTranslateX(sliderLeft/PreBossMap.MAP_WIDTH*getWidth());
-
         if(!GameSituation.getInstance().isSinglePlayer() && !GameSituation.getInstance().isTwoPlayerSingleShip()){
             rectangle2.setTranslateX(sliderLeft2/PreBossMap.MAP_WIDTH*getWidth());
         }
 
-        else if(!GameSituation.getInstance().isSinglePlayer() && GameSituation.getInstance().isTwoPlayerSingleShip()){
+        if(!GameSituation.getInstance().isSinglePlayer() && GameSituation.getInstance().isTwoPlayerSingleShip()){
             if(GameSituation.getInstance().isFirstCraftDied()){
-                getChildren().remove(rectangle);
+                rectangle2.setTranslateX(sliderLeft/PreBossMap.MAP_WIDTH*getWidth());
+                getChildren().remove(rectangle2);
             }
-            getChildren().remove(rectangle2);
+            else if(GameSituation.getInstance().isSecondCraftDied())
+                getChildren().remove(rectangle2);
         }
     }
 

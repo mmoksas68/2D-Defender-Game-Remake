@@ -45,7 +45,7 @@ public class PreBossGameController {
     private AnimationTimer animationTimer = new AnimationTimer() {
         @Override
         public void handle(long l) {
-                 timerPulse();
+            timerPulse();
         }
     };
 
@@ -102,12 +102,10 @@ public class PreBossGameController {
     }
 
     private void timerPulse(){
-
         refreshMap();
         spacecraftController1.checkInputs();
-        if (!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
+        if (!GameSituation.getInstance().isSinglePlayer() && !GameSituation.getInstance().isTwoPlayerSingleShip())
             spacecraftController2.checkInputs();
-
     }
 
     private void initGame(){
