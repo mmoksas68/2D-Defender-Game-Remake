@@ -199,7 +199,7 @@ public class MainController {
                 gameSituationChecker.setDeleteAutoSave(false);
                 fileController.deleteAutoSave();
                 menuController.disableAutoSaveBtn();
-                gameSituationChecker.getTimer().cancel();
+                //gameSituationChecker.getTimer().cancel(); // geri açarsan unutma
             }
         });
         gameSituationChecker.deleteAutoSaveProperty().addListener(deleteAutoSave);

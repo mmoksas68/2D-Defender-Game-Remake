@@ -6,14 +6,14 @@ import org.openjfx.model.commonEntities.FiringBehavior.NoGun;
 import java.io.Serializable;
 
 public class Tier2Enemy extends Enemy {
-    public static final double WIDTH = 100;
-    public static final double HEIGHT = 70;
-    public static final int MAX_HEALTH = 1;
+    public static final double WIDTH = 110;
+    public static final double HEIGHT = 80;
+    public static final int MAX_HEALTH = 10;
     public static final int SCORE_POINT = 4;
-    public static final int CLASHING_DAMAGE = 30;
+    public static final int CLASHING_DAMAGE = 15;
     public static final double IMPACT_RADIUS = 200;
-    public static final int VELOCITY = 7;
-    public static final int RADAR_RADIUS = 275;
+    public static final int VELOCITY = 6;
+    public static final int RADAR_RADIUS = 300;
     public static final int RUSHING_DURATION = 80;
 
     private int rushingTimer = 0;

@@ -8,15 +8,15 @@ import java.util.ArrayList;
 
 public class Tier3Enemy extends Enemy{
 
-        public static final double WIDTH = 100;
-        public static final double HEIGHT = 60;
-        public static final int MAX_HEALTH = 1;
+        public static final double WIDTH = 110;
+        public static final double HEIGHT = 80;
+        public static final int MAX_HEALTH = 30;
         public static final int SCORE_POINT = 6;
         public static final int BULLET_VELOCITY = 10;
-        public static final int BULLET_DAMAGE = 30;
+        public static final int BULLET_DAMAGE = 20;
         public static final int GUN_PERIOD = 100;
         public static final int VELOCITY = 5;
-        public static final int RADAR_RADIUS = 1000;
+        public static final int RADAR_RADIUS = 750;
 
         public Tier3Enemy(Location location, boolean isEvolved) {
 

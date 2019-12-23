@@ -6,13 +6,13 @@ import org.openjfx.model.commonEntities.FiringBehavior.FiringBehavior;
 import org.openjfx.model.commonEntities.FiringBehavior.SpacecraftGun;
 
 public class Spacecraft extends LocatableObject {
-    public static final int MAX_HEALTH = 1000;
-    public static final int HEALTH_INCREASE = 100;
-    public static final double WIDTH = 150;
-    public static final double HEIGHT = 115;
+    public static final int MAX_HEALTH = 100;
+    public static final int HEALTH_INCREASE = 20;
+    public static final double WIDTH = 100;
+    public static final double HEIGHT = 75;
     public static final int MAX_SMARTBOMB = 3;
     public static final int SMARTBOMB_DAMAGE = 100;
-    public static final int SMARTBOMB_RADIUS = 800;
+    public static final int SMARTBOMB_RADIUS = 500;
     public static final double MAX_VELOCITY = 15;
     public static final double BULLET_VELOCITY = 30;
     public static final double MAX_BULLET_DAMAGE = 30;

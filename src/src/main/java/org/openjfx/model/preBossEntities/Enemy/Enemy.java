@@ -28,19 +28,19 @@ public abstract class Enemy extends LocatableObject{
         this.destinationType = EnemyDestinations.RandomLocation;
         this.destinationLocation = new Location(0,0 );
         double random = (Math.random()*20) -10;
-        if(random < 5)
+        if(random < 7)
             buffType = BuffTypes.EMPTY;
-        else if(random < 6)
+        else if(random < 7.5)
             buffType = BuffTypes.HEALTH;
-        else if(random < 7)
-            buffType = BuffTypes.GUN_POWER;
         else if(random < 8)
+            buffType = BuffTypes.GUN_POWER;
+        else if(random < 8.25)
             buffType = BuffTypes.GUN_TYPE;
-        else if(random < 8.5)
+        else if(random < 8.75)
             buffType = BuffTypes.FIRE_RATE;
-        else if(random < 9)
+        else if(random < 9.25)
             buffType = BuffTypes.SPEED;
-        else if(random < 9.5)
+        else if(random < 9.75)
             buffType = BuffTypes.HYPER_JUMP;
         else if(random < 10)
             buffType = BuffTypes.SMART_BOMB;
