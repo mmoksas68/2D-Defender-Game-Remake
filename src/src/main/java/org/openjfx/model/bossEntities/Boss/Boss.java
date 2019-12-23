@@ -1,6 +1,7 @@
 package org.openjfx.model.bossEntities.Boss;
 
 import org.openjfx.model.bossEntities.BossMap;
+import org.openjfx.model.commonEntities.Buff.BuffTypes;
 import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.Bullet.Bullet;
@@ -18,10 +19,36 @@ public abstract class Boss extends LocatableObject {
     private int gunPeriod;
     private int gunTimer;
     private double bulletVelocity;
+    private BuffTypes buffType;
 
     public Boss( double velocity, double hitBoxWidth, double hitBoxHeight, int healthPoint) {
         super( new Location(initialX,initialY), hitBoxWidth, hitBoxHeight, healthPoint);
         this.velocity = velocity;
+        buffType = BuffTypes.EMPTY;
+    }
+
+    public void generateBuff(){
+        double random = (Math.random() * 10);
+        if (random < 7)
+            buffType = BuffTypes.EMPTY;
+        else if (random < 7.5)
+            buffType = BuffTypes.HEALTH;
+        else if (random < 8)
+            buffType = BuffTypes.GUN_POWER;
+        else if (random < 8.5)
+            buffType = BuffTypes.GUN_TYPE;
+        else if (random < 9)
+            buffType = BuffTypes.FIRE_RATE;
+        else if (random < 9.5)
+            buffType = BuffTypes.SPEED;
+        else if (random < 10)
+            buffType = BuffTypes.SMART_BOMB;
+        else
+            buffType = BuffTypes.EMPTY;
+    }
+
+    public BuffTypes getBuffType() {
+        return buffType;
     }
 
     public double getVelocity() { return velocity; }

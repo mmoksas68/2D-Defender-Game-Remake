@@ -4,6 +4,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import org.openjfx.model.bossEntities.BossAbility.Rocket;
 import org.openjfx.model.bossEntities.BossAbility.SpecialAbility;
+import org.openjfx.model.commonEntities.Buff.Buff;
 import org.openjfx.model.commonEntities.LocatableObject;
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.bossEntities.Boss.Boss;
@@ -32,6 +33,7 @@ public class BossMap implements Serializable {
     private Spacecraft spacecraft2;
     private java.util.Map<Long, Bullet> bullets = new HashMap<Long, Bullet>();
     private java.util.Map <Long, SpecialAbility> specialAbilities = new HashMap<>();
+    private java.util.Map<Long, Buff> buffs = new HashMap<Long, Buff>();
     private boolean isFiring = false;
 
     public BossMap(int level, boolean isSinglePlayer) {
@@ -129,5 +131,16 @@ public class BossMap implements Serializable {
 
     public boolean isSinglePlayer() { return isSinglePlayer; }
 
+    public void addBuff(Buff buff) {
+        buffs.put(buff.getID(), buff);
+    }
+
+    public void deleteBuff(long ID) {
+        buffs.remove(ID);
+    }
+
+    public Map<Long, Buff> getBuffs() {
+        return buffs;
+    }
 }
 

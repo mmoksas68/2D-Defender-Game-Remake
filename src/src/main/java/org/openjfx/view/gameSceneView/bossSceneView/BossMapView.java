@@ -8,6 +8,7 @@ import org.openjfx.utilization.*;
 import org.openjfx.view.gameSceneView.bossSceneView.bossAbilityViews.*;
 import org.openjfx.view.gameSceneView.bossSceneView.bossAbilityViews.fireAnimation.FireAnimation;
 import org.openjfx.view.gameSceneView.bossSceneView.bossViews.BossView;
+import org.openjfx.view.gameSceneView.commonViews.buff.BuffView;
 import org.openjfx.view.gameSceneView.commonViews.bulletView.BulletView;
 import org.openjfx.view.gameSceneView.commonViews.spacecraftView.SpacecraftViewGroup;
 
@@ -18,6 +19,7 @@ public class BossMapView extends AnchorPane {
     private static BackgroundImage image;
     private java.util.Map<Long, BulletView> bullets = new HashMap<Long, BulletView>();
     private java.util.Map <Long, ImageView> specialAbilities= new HashMap<>();
+    private java.util.Map<Long, BuffView> buffs = new HashMap<Long, BuffView>();
     private SpacecraftViewGroup spacecraftViewGroup1 = null;
     private SpacecraftViewGroup spacecraftViewGroup2 = null;
     private java.util.Map<Long, FireAnimation> fireAnimations = new HashMap<Long, FireAnimation>();
@@ -103,6 +105,23 @@ public class BossMapView extends AnchorPane {
             bossView = new BossView( modelToViewBoss, layoutScaleWidth, layoutScaleHeight);
             currentNodes.put( modelToViewBoss.getID(), bossView);
             getChildren().add( bossView);
+        }
+    }
+
+    public void refreshBuff(ModelToViewBuff modelToViewBuff) {
+        BuffView buffView;
+        if(buffs.containsKey(modelToViewBuff.getID())){
+            buffView = buffs.get(modelToViewBuff.getID());
+            if(modelToViewBuff.isDead()){
+                getChildren().remove(buffView);
+                buffs.remove(modelToViewBuff.getID());
+            }else {
+                buffView.refresh(modelToViewBuff, layoutScaleWidth, layoutScaleHeight );
+            }
+        } else if(!modelToViewBuff.isDead()){
+            buffView = new BuffView(modelToViewBuff, layoutScaleWidth, layoutScaleHeight);
+            buffs.put(modelToViewBuff.getID(), buffView);
+            getChildren().add(buffView);
         }
     }
 

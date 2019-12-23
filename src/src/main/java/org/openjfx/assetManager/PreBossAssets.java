@@ -21,6 +21,7 @@ public class PreBossAssets {
     private Image meteor;
     private List<Image> gameInfoIcons = new ArrayList<>();
     private Image tier2unevolved;
+    private List<Image> buffIcons = new ArrayList<>();
 
     PreBossAssets(){
         try {
@@ -48,9 +49,22 @@ public class PreBossAssets {
             gameInfoIcons.add(new Image(FileController.getFileStream("assets/images/gameInfoIcons/space-station.png")));
 
             tier2unevolved = new Image(FileController.getFileStream("assets/images/spacecrafts/bomber.png"));
+
+            buffIcons.add(new Image(FileController.getFileStream("assets/images/buffs/shield.png")));
+            buffIcons.add(new Image(FileController.getFileStream("assets/images/buffs/speed.png")));
+            buffIcons.add(new Image(FileController.getFileStream("assets/images/bombs/singleBomb.png")));
+            buffIcons.add(new Image(FileController.getFileStream("assets/images/buffs/health.png")));
+            buffIcons.add(new Image(FileController.getFileStream("assets/images/buffs/hyperJump.png")));
+            buffIcons.add(new Image(FileController.getFileStream("assets/images/buffs/fireRate.png")));
+            buffIcons.add(new Image(FileController.getFileStream("assets/images/buffs/gunPower.png")));
+            buffIcons.add(new Image(FileController.getFileStream("assets/images/buffs/gunType.png")));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Image> getBuffIcons() {
+        return buffIcons;
     }
 
     public List<Image> getEnemyStation() {

@@ -15,7 +15,9 @@ import org.openjfx.model.bossEntities.BossAbility.Rocket;
 import org.openjfx.model.bossEntities.BossAbility.SpecialAbility;
 import org.openjfx.model.bossEntities.BossMap;
 import org.openjfx.model.bossEntities.Boss.Boss;
+import org.openjfx.model.commonEntities.Buff.Buff;
 import org.openjfx.model.commonEntities.Bullet.Bullet;
+import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.menuEntities.Settings;
@@ -134,7 +136,6 @@ public class BossGameController  {
         bossMapController.checkMapSituation();
         refreshAndReflectBuff();
         refreshAndReflectBullet();
-        refreshAndReflectMeteor();
         refreshAndReflectScore();
         refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
         if (!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
@@ -146,8 +147,27 @@ public class BossGameController  {
         refreshSpacecraftGameInfo();
     }
 
-    private void refreshAndReflectBuff() {
+    private void refreshAndReflectBuff(){
+        ArrayList<Long> toBeDeleted = new ArrayList<>();
+        for (var buff : bossMapController.getBossMap().getBuffs().values()) {
+            if (buff.isDead()) {
+                toBeDeleted.add(buff.getID());
+                if(buff.getOwnerID() == spacecraftController1.getSpacecraft().getID()){
+                    spacecraftController1.applyBuff(buff.getBuffType());
+                }
+                if( !gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip() &&
+                        buff.getOwnerID() == spacecraftController2.getSpacecraft().getID()){
+                    spacecraftController2.applyBuff(buff.getBuffType());
+                }
+            }
+            spacecraftController1.getBossMapView().refreshBuff(new ModelToViewBuff(buff));
+            if (!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
+                spacecraftController2.getBossMapView().refreshBuff(new ModelToViewBuff(buff));
 
+        }
+        for (var it : toBeDeleted) {
+            bossMapController.getBossMap().deleteBuff(it);
+        }
     }
 
     private void refreshAndReflectGameInfo(){
@@ -163,15 +183,12 @@ public class BossGameController  {
                 toBeDeleted.add(bullet.getID());
             }
             rootPane.getBossMapView().refreshBullet(new ModelToViewBullet(bullet));
-
         }
         for (var it : toBeDeleted) {
             bossMapController.getBossMap().deleteBullet(it);
         }
     }
-    private void refreshAndReflectMeteor() {
 
-    }
     private void refreshAndReflectScore() {
         rootPane.getBossTopBarView().getMiddleView().refresh();
     }
@@ -433,6 +450,11 @@ public class BossGameController  {
 
     private void increaseScore() {
         if( bossMapController.isBossHit() == true) {
+            PositionHelper helper = new PositionHelper(bossMapController.getBossMap().getBoss());
+            bossMapController.getBossMap().addBuff(
+                    new Buff(new Location(helper.getMiddlePointX() - 100, helper.getMiddlePointY() - Buff.HEIGHT/2 ),
+                            bossMapController.getBossMap().getBoss().getBuffType())
+            );
             gameSituation.setScore(gameSituation.getScore() + Boss.SCORE_POINT);
             bossMapController.setBossHit(false);
         }

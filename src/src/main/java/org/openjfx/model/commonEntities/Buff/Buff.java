@@ -31,4 +31,8 @@ public class Buff extends LocatableObject {
     public void setOwnerID(long ownerID) {
         this.ownerID = ownerID;
     }
+
+    public double getVelocity() {
+        return velocity;
+    }
 }
