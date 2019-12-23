@@ -13,7 +13,9 @@ import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.menuEntities.GameSaveObj;
 import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.menuEntities.Settings;
+import org.openjfx.model.preBossEntities.Enemy.Enemy;
 import org.openjfx.model.preBossEntities.Enemy.Tier1Enemy;
+import org.openjfx.model.preBossEntities.Enemy.Tier3Enemy;
 import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.model.commonEntities.Spacecraft.Spacecraft;
 import org.openjfx.model.preBossEntities.Station.EnemyStation;
@@ -169,17 +171,25 @@ public class PreBossGameController {
         }
 
         for (var it : toBeDeleted) {
-
-            if(!preBossMapController.getPreBossMap().getEnemies().get(it).getBuffType().equals(BuffTypes.EMPTY))
+            Enemy enemy = preBossMapController.getPreBossMap().getEnemies().get(it);
+            if(!enemy.getBuffType().equals(BuffTypes.EMPTY))
             {
-                PositionHelper helper = new PositionHelper(preBossMapController.getPreBossMap().getEnemies().get(it));
+                PositionHelper helper = new PositionHelper(enemy);
                 preBossMapController.getPreBossMap().addBuff(
                         new Buff(new Location(helper.getMiddlePointX() - Buff.WIDTH/2, helper.getMiddlePointY() - Buff.HEIGHT/2 ),
-                                 preBossMapController.getPreBossMap().getEnemies().get(it).getBuffType())
+                                enemy.getBuffType())
                 );
             }
             preBossMapController.getPreBossMap().deleteEnemy(it);
                 //SoundController.explosion();
+
+            if(enemy instanceof Tier3Enemy)
+            {
+                for (var newEnemy: ((Tier3Enemy) enemy).divide()){
+                    preBossMapController.getPreBossMap().addEnemy(newEnemy);
+                }
+            }
+
         }
 
     }

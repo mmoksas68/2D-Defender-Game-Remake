@@ -15,6 +15,7 @@ public class BulletView extends ImageView {
         setCache(true);
         setSmooth(true);
         refresh(modelToViewBullet,  viewLeft,  scaleW,  scaleH);
+        setRotate(-Math.toDegrees(Math.atan(modelToViewBullet.getDirectionX()/-modelToViewBullet.getDirectionY())) + 90);
     }
     public BulletView (ModelToViewBullet modelToViewBullet, double scaleW, double scaleH) {
         Assets assets = Assets.getInstance();

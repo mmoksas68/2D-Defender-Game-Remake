@@ -24,23 +24,13 @@ public class EnemyGun extends SimpleGun{
         double y = Math.abs(enemy.getDestinationLocation().getPositionY()/enemy.getDestinationLocation().getPositionX())*x;
 
         if(enemy.getDestinationLocation().getPositionX() < 0)
-            x = -x;
+            x = -x - Bullet.WIDTH;
+        else
+            x += Bullet.WIDTH/2;
         if(enemy.getDestinationLocation().getPositionY() < 0)
-            y = -y;
-
-        if(x > 0){
-            x += 1;
-        }
-        else{
-            x -= 1;
-        }
-
-        if(y > 0){
-            y += 1;
-        }
-        else{
-            y -= 1;
-        }
+            y = -y - Bullet.WIDTH/2 ;
+        else
+            y += Bullet.WIDTH/2;
 
         x += enemyHelper.getMiddlePointX();
         y += enemyHelper.getMiddlePointY();

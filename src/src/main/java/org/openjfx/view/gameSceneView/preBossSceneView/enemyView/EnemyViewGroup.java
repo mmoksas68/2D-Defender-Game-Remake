@@ -16,11 +16,6 @@ public class EnemyViewGroup {
     private Rectangle healthBar;
     private Assets assets = Assets.getInstance();
 
-    private ImageView evolvedTier1 = new ImageView(assets.getPreBossAssets().getTier1evolved());
-    private ImageView unevolvedTier1 = new ImageView(assets.getPreBossAssets().getTier1unevolved());
-    private ImageView unevolvedTier2 = new ImageView(assets.getPreBossAssets().getTier2unevolved());
-
-
     public EnemyViewGroup(ModelToViewEnemy modelToViewEnemy, double viewLeft, double scaleW, double scaleH){
         chooseEnemyView(modelToViewEnemy);
         enemyView.setCacheHint(CacheHint.SPEED);
@@ -31,6 +26,8 @@ public class EnemyViewGroup {
     }
 
     public void refresh(ModelToViewEnemy modelToViewEnemy , double viewLeft, double scaleW, double scaleH){
+
+        enemyView.setRotate(-Math.toDegrees(Math.atan(modelToViewEnemy.getDestinationX()/-modelToViewEnemy.getDestinationY())));
         enemyView.setTranslateX((modelToViewEnemy.getLocationX() - viewLeft) * scaleW);
         enemyView.setTranslateY(modelToViewEnemy.getLocationY() * scaleH);
         enemyView.setFitHeight(modelToViewEnemy.getHitboxHeight() * scaleH);
@@ -39,7 +36,6 @@ public class EnemyViewGroup {
         healthBar.setWidth(((double)modelToViewEnemy.getHealth()/modelToViewEnemy.getMaxHealth()*enemyView.getFitWidth()/2));
         healthBar.setTranslateX((enemyView.getTranslateX() + enemyView.getFitWidth()/4));
         healthBar.setTranslateY((enemyView.getTranslateY() + enemyView.getFitHeight()));
-        chooseEnemyView(modelToViewEnemy);
         changeDirectionOfView(modelToViewEnemy);
     }
 
@@ -60,31 +56,41 @@ public class EnemyViewGroup {
     }
 
     private void chooseEnemyView(ModelToViewEnemy modelToViewEnemy){
-        if(modelToViewEnemy.getType().equals(EnemyTypes.tier1unevolved)){
-            enemyView = unevolvedTier1;
-        }
-        else if(modelToViewEnemy.getType().equals(EnemyTypes.tier1evolved)){
-            enemyView = evolvedTier1;
-        }
-        else if(modelToViewEnemy.getType().equals(EnemyTypes.tier2unevolved)){
-            enemyView = unevolvedTier2;
-        }
-        else if(modelToViewEnemy.getType().equals(EnemyTypes.tier2evolved)){
-            enemyView = unevolvedTier2;
-        }
-        else if(modelToViewEnemy.getType().equals(EnemyTypes.tier3unevolved)){
+        switch (modelToViewEnemy.getType()){
+            case tier1unevolved:
+                enemyView = new ImageView(assets.getPreBossAssets().getTier1unevolved());
+                break;
+
+            case tier1evolved:
+                enemyView = new ImageView(assets.getPreBossAssets().getTier1evolved());
+            break;
+
+            case tier2unevolved:
+                enemyView = new ImageView(assets.getPreBossAssets().getTier2unevolved());
+                break;
+
+            case tier2evolved:
+                enemyView = new ImageView(assets.getPreBossAssets().getTier2evolved());
+                break;
+
+            case tier3unevolved:
+                enemyView = new ImageView(assets.getPreBossAssets().getTier3unevolved());
+                break;
+
+            case tier3evolved:
+                enemyView = new ImageView(assets.getPreBossAssets().getTier3evolved());
+                break;
 
         }
-        else if(modelToViewEnemy.getType().equals(EnemyTypes.tier3evolved)){
 
-        }
     }
 
     private void changeDirectionOfView(ModelToViewEnemy modelToViewEnemy){
-        if(modelToViewEnemy.getType().equals(EnemyTypes.tier2unevolved) || modelToViewEnemy.getType().equals(EnemyTypes.tier2evolved)){
+
             double x = modelToViewEnemy.getDestinationX();
             double y = modelToViewEnemy.getDestinationY();
-            if(!modelToViewEnemy.isRushing()){
+            if(((modelToViewEnemy.getType().equals(EnemyTypes.tier2unevolved) || modelToViewEnemy.getType().equals(EnemyTypes.tier2evolved))
+                    &&!modelToViewEnemy.isRushing()) || modelToViewEnemy.getDestination().equals(EnemyDestinations.RandomLocation)){
                 x = 0;
                 y = 0;
             }
@@ -102,7 +108,7 @@ public class EnemyViewGroup {
                 enemyView.setRotate(0);
             }
 
-        }
+
     }
 
 }

@@ -10,8 +10,6 @@ import java.util.List;
 public class PreBossAssets {
 
     private List<Image> station = new ArrayList<>();
-    private Image tier1unevolved;
-    private Image tier1evolved;
     private List<Image> spacecraft = new ArrayList<>();
     private Image bullet;
     private List<Image> smartBombCount = new ArrayList<>();
@@ -20,34 +18,44 @@ public class PreBossAssets {
     private Image radarSpacecraft;
     private Image meteor;
     private List<Image> gameInfoIcons = new ArrayList<>();
+    private Image tier1unevolved;
+    private Image tier1evolved;
     private Image tier2unevolved;
+    private Image tier2evolved;
+    private Image tier3unevolved;
+    private Image tier3evolved;
+
 
     PreBossAssets(){
         try {
-            station.add(new Image(FileController.getFileStream("assets/images/buildings/enemybuilding2t1.png")));
-            station.add(new Image(FileController.getFileStream("assets/images/buildings/enemybuilding2t3.png")));
-            tier1unevolved = new Image(FileController.getFileStream("assets/images/enemy.png"));
-            tier1evolved = new Image(FileController.getFileStream("assets/images/evolvedTier1.png"));
-            spacecraft.add(new Image(FileController.getFileStream("assets/images/Spaceship_01_BLUE.png")));
-            spacecraft.add(new Image(FileController.getFileStream("assets/images/Spaceship_01_GREEN.png")));
-            spacecraft.add(new Image(FileController.getFileStream("assets/images/Spaceship_01_PURPLE.png")));
-            bullet = new Image(FileController.getFileStream("assets/images/bullet.png"));
-            radarEnemySpaceStation = new Image(FileController.getFileStream("assets/images/enemySpaceStation.png"));
-            radarSpacecraft = new Image(FileController.getFileStream("assets/images/radar_spacecraft.png"));
-            radarEnemy = new Image(FileController.getFileStream("assets/images/enemyRadar.png"));
+            station.add(new Image(FileController.getFileStream("assets/preBossAssets/buildings/enemybuilding1t1.png")));
+            station.add(new Image(FileController.getFileStream("assets/preBossAssets/buildings/enemybuilding2t3.png")));
+            tier1unevolved = new Image(FileController.getFileStream("assets/preBossAssets/enemies/Ship1.png"));
+            tier1evolved = new Image(FileController.getFileStream("assets/preBossAssets/enemies/Ship2.png"));
+            tier2unevolved = new Image(FileController.getFileStream("assets/preBossAssets/enemies/Ship3.png"));
+            tier2evolved = new Image(FileController.getFileStream("assets/preBossAssets/enemies/Ship4.png"));
+            tier3unevolved = new Image(FileController.getFileStream("assets/preBossAssets/enemies/Ship5.png"));
+            tier3evolved = new Image(FileController.getFileStream("assets/preBossAssets/enemies/Ship6.png"));
+            spacecraft.add(new Image(FileController.getFileStream("assets/preBossAssets/Spaceship_01_BLUE.png")));
+            spacecraft.add(new Image(FileController.getFileStream("assets/preBossAssets/Spaceship_01_GREEN.png")));
+            spacecraft.add(new Image(FileController.getFileStream("assets/preBossAssets/Spaceship_01_PURPLE.png")));
+            bullet = new Image(FileController.getFileStream("assets/preBossAssets/laser.png"));
+            radarEnemySpaceStation = new Image(FileController.getFileStream("assets/preBossAssets/enemySpaceStation.png"));
+            radarSpacecraft = new Image(FileController.getFileStream("assets/preBossAssets/radar_spacecraft.png"));
+            radarEnemy = new Image(FileController.getFileStream("assets/preBossAssets/enemyRadar.png"));
 
-            meteor = new Image(FileController.getFileStream("assets/images/meteor.png"));
+            meteor = new Image(FileController.getFileStream("assets/preBossAssets/meteor.png"));
 
             smartBombCount.add(null);
-            smartBombCount.add(new Image(FileController.getFileStream("assets/images/bombs/singleBomb.png")));
-            smartBombCount.add(new Image(FileController.getFileStream("assets/images/bombs/doubleBomb.png")));
-            smartBombCount.add(new Image(FileController.getFileStream("assets/images/bombs/tripleBomb.png")));
+            smartBombCount.add(new Image(FileController.getFileStream("assets/preBossAssets/bombs/singleBomb.png")));
+            smartBombCount.add(new Image(FileController.getFileStream("assets/preBossAssets/bombs/doubleBomb.png")));
+            smartBombCount.add(new Image(FileController.getFileStream("assets/preBossAssets/bombs/tripleBomb.png")));
 
-            gameInfoIcons.add(new Image(FileController.getFileStream("assets/images/gameInfoIcons/scoreIcon.png")));
-            gameInfoIcons.add(new Image(FileController.getFileStream("assets/images/gameInfoIcons/monster.png")));
-            gameInfoIcons.add(new Image(FileController.getFileStream("assets/images/gameInfoIcons/space-station.png")));
+            gameInfoIcons.add(new Image(FileController.getFileStream("assets/preBossAssets/gameInfoIcons/scoreIcon.png")));
+            gameInfoIcons.add(new Image(FileController.getFileStream("assets/preBossAssets/gameInfoIcons/monster.png")));
+            gameInfoIcons.add(new Image(FileController.getFileStream("assets/preBossAssets/gameInfoIcons/space-station.png")));
 
-            tier2unevolved = new Image(FileController.getFileStream("assets/images/spacecrafts/bomber.png"));
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -111,5 +119,17 @@ public class PreBossAssets {
 
     public Image getMeteor() {
         return meteor;
+    }
+
+    public Image getTier3unevolved() {
+        return tier3unevolved;
+    }
+
+    public Image getTier2evolved() {
+        return tier2evolved;
+    }
+
+    public Image getTier3evolved() {
+        return tier3evolved;
     }
 }

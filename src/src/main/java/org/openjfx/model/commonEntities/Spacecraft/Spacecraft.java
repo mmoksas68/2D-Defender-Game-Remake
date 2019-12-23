@@ -5,17 +5,15 @@ import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.commonEntities.FiringBehavior.FiringBehavior;
 import org.openjfx.model.commonEntities.FiringBehavior.SpacecraftGun;
 
-
 public class Spacecraft extends LocatableObject {
-    public static final int MAX_HEALTH = 100;
+    public static final int MAX_HEALTH = 300;
     public static final int HEALTH_INCREASE = 25;
-    public static final double WIDTH = 120;
-    public static final double HEIGHT = 90;
+    public static final double WIDTH = 150;
+    public static final double HEIGHT = 115;
     public static final int MAX_SMARTBOMB = 3;
     public static final int SMARTBOMB_DAMAGE = 100;
     public static final int SMARTBOMB_RADIUS = 800;
     public static final double MAX_VELOCITY = 15;
-    public static final double SHIELD_DURATION = 90;
     public static final double BULLET_VELOCITY = 30;
     public static final double MAX_BULLET_DAMAGE = 30;
     public static final int MIN_GUNPERIOD = 9;
@@ -29,8 +27,6 @@ public class Spacecraft extends LocatableObject {
 
     private double velocity;
     private int smartBombStock;
-    private boolean isShieldActive;
-    private int shieldTimer;
     private boolean isDirectionLeft;
     private int hyperJumpBattery;
     private int batteryTimer;
@@ -44,8 +40,6 @@ public class Spacecraft extends LocatableObject {
         gunTypes = GunTypes.SINGLE;
         velocity = INIT_VELOCITY;
         smartBombStock = MAX_SMARTBOMB;
-        isShieldActive = false;
-        shieldTimer = 0;
         isDirectionLeft = false;
         hyperJumpBattery = MAX_HYPERJUMP_ENERGY;
         batteryTimer = 0;
@@ -63,13 +57,6 @@ public class Spacecraft extends LocatableObject {
         this.velocity = velocity < MAX_VELOCITY ?  velocity : MAX_VELOCITY;
     }
 
-    public int getShieldTimer() {
-        return shieldTimer;
-    }
-
-    public void setShieldTimer(int shieldTimer) {
-        this.shieldTimer = shieldTimer;
-    }
 
     public int getSmartBombStock() {
         return smartBombStock;
@@ -77,14 +64,6 @@ public class Spacecraft extends LocatableObject {
 
     public void setSmartBombStock(int smartBombStock) {
         this.smartBombStock = smartBombStock < MAX_SMARTBOMB ? smartBombStock : MAX_SMARTBOMB;
-    }
-
-    public boolean isShieldActive() {
-        return isShieldActive;
-    }
-
-    public void setShieldActive(boolean shieldActive) {
-        isShieldActive = shieldActive;
     }
 
     public boolean isDirectionLeft() {

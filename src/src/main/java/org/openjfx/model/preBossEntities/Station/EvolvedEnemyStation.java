@@ -2,6 +2,9 @@ package org.openjfx.model.preBossEntities.Station;
 
 import org.openjfx.model.commonEntities.Location;
 import org.openjfx.model.preBossEntities.Enemy.Enemy;
+import org.openjfx.model.preBossEntities.Enemy.Tier1Enemy;
+import org.openjfx.model.preBossEntities.Enemy.Tier2Enemy;
+import org.openjfx.model.preBossEntities.Enemy.Tier3Enemy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -70,6 +73,25 @@ public class EvolvedEnemyStation extends Station{
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public void addEnemyToInside(Enemy enemy){
+        Enemy tempEnemy = null;
+        if(enemy instanceof Tier1Enemy){
+            tempEnemy = new Tier1Enemy(new Location(getLocation().getPositionX(), getLocation().getPositionY()), true);
+        }  else if(enemy instanceof Tier2Enemy){
+            tempEnemy = new Tier2Enemy(new Location(getLocation().getPositionX(), getLocation().getPositionY()), true);
+        }  else if(enemy instanceof Tier3Enemy){
+            tempEnemy = new Tier3Enemy(new Location(getLocation().getPositionX(), getLocation().getPositionY()), true);
+        }
+        enemiesInside.put(tempEnemy.getID(), tempEnemy);
+        int timer = 1;
+        elapsedTimes.put(tempEnemy.getID(), timer);
+    }
+
+    public void moveEnemiesToOutside(long id){
+        enemiesInside.remove(id);
+        elapsedTimes.remove(id);
     }
 
     public Map<Long, Enemy> getEnemiesInside() {

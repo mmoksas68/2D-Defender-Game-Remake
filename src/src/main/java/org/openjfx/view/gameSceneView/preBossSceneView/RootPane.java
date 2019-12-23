@@ -28,7 +28,7 @@ public class RootPane extends BorderPane {
 
     static {
         try {
-            image = new BackgroundImage(new Image(new FileInputStream("assets/images/background.png")), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+            image = new BackgroundImage(new Image(new FileInputStream("assets/preBossAssets/background.png")), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

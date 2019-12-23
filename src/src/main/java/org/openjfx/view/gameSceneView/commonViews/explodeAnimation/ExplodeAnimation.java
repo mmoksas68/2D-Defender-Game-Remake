@@ -17,7 +17,7 @@ public class ExplodeAnimation {
     public ExplodeAnimation(ModelToView modelToView, double viewLeft, double scaleW, double scaleH){
         ID = modelToView.getID();
         imageViewList = new ImageView[11];
-        String imageUrl = "assets/images/animations/Explosion1/Explosion1_";
+        String imageUrl = "assets/preBossAssets/animations/Explosion1/Explosion1_";
         for(int i = 0; i < 11; i++)
         {
             try {
