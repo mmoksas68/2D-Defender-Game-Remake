@@ -157,14 +157,14 @@ public class BossGameController  {
         refreshAndReflectBullet();
         refreshAndReflectMeteor();
         refreshAndReflectScore();
-        refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
-        if (!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
-            refreshAndReflectSpacecraft( spacecraftController2.getSpacecraft());
         refresAndReflectBoss();
         refreshAndReflectSpecialAbility();
         checkEndGame();
         refreshAndReflectGameInfo();
         refreshSpacecraftGameInfo();
+        refreshAndReflectSpacecraft(spacecraftController1.getSpacecraft());
+        if (!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
+            refreshAndReflectSpacecraft( spacecraftController2.getSpacecraft());
     }
 
     private void refreshAndReflectBuff() {
@@ -260,6 +260,15 @@ public class BossGameController  {
 
     private void refreshAndReflectSpecialAbility () {
         ArrayList <Long> toBeDeleted = new ArrayList<>();
+
+        if ( bossMapController.getBossMap().getBoss().getBehaviourAlgorithm() instanceof  BossOneBehaviour) {
+            if (((BossOneBehaviour) bossMapController.getBossMap().getBoss().getBehaviourAlgorithm()).isNotifyController()) {
+                rootPane.getBossMapView().addLaserIndicator ( ((BossOne) bossMapController.getBossMap().getBoss()).sendLaserIndicator());
+            }
+            if ( bossMapController.getBossMap().getBoss().getBehaviourAlgorithm().getAbilityTimer() <= 0.0) {
+                rootPane.getBossMapView().removeLaserIndicator();
+            }
+        }
         for (SpecialAbility specialAbility : bossMapController.getBossMap().getSpecialAbilities().values()) {
             if ( specialAbility.isDead()) {
                 toBeDeleted.add( specialAbility.getID());
@@ -267,14 +276,6 @@ public class BossGameController  {
                     rootPane.getBossMapView().addFireAnimation(new ModelToViewSpecialAbility(((Rocket) specialAbility).getDestinationMarker()));
             }
             rootPane.getBossMapView().refreshSpecialAbilityView( new ModelToViewSpecialAbility( specialAbility));
-            if ( specialAbility instanceof Laser) {
-                if (((BossOneBehaviour) bossMapController.getBossMap().getBoss().getBehaviourAlgorithm()).isNotifyController()) {
-                    rootPane.getBossMapView().addLaserIndicator ( ((BossOne) bossMapController.getBossMap().getBoss()).sendLaserIndicator());
-                }
-                if ( bossMapController.getBossMap().getBoss().getBehaviourAlgorithm().getAbilityTimer() <= 0.0) {
-                   rootPane.getBossMapView().removeLaserIndicator();
-                }
-            }
         }
         for (Long id : toBeDeleted) {
             bossMapController.getBossMap().removeSpecialAbility(id);

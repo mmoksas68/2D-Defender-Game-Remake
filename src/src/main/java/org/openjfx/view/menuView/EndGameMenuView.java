@@ -50,7 +50,7 @@ public class EndGameMenuView extends VBox {
         menuBtn.getStyleClass().add("menu-button");
         restartBtn.getStyleClass().add("restart-button");
 
-        if(gameSituation.isIsBossFinishedSuccessfully())
+        if(gameSituation.isIsBossFinishedSuccessfully() && gameSituation.getLevel() < 3)
             hbox.getChildren().add(nextLevelBtn);
 
         hbox.setAlignment(Pos.CENTER);

@@ -59,6 +59,7 @@ public class BossMapController {
                     if( iterator instanceof Bullet && ((Bullet) iterator).getDirectionX() < 0){
                         obj.setHealthPoint(obj.getHealthPoint() - ((Bullet) iterator).getDamage());
                         iterator.setDead(true);
+
                     }
                     else if( iterator instanceof SpecialAbility){
                         obj.setHealthPoint(obj.getHealthPoint() - ((SpecialAbility) iterator).getDamage());

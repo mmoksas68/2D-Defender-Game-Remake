@@ -230,11 +230,18 @@ public class GameSituationChecker {
     }
 
     public void restartTheLevel(){
-
+        gameSituation.resetScore();
+        bossGameController = null;
+        startGame(true);
     }
 
     public void startNextLevel(){
+        gameSituation.setLevel(gameSituation.getLevel() + 1);
+        gameSituation.resetScore();
+        bossGameController = null;
+        startGame(true);
     }
+
 
     public void setIsPaused(boolean b) {
         isPaused.set(b);

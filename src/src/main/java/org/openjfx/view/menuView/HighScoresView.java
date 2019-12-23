@@ -1,11 +1,14 @@
 package org.openjfx.view.menuView;
 
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import org.openjfx.controller.SoundController;
 import org.openjfx.model.menuEntities.HighScore;
 import org.openjfx.model.menuEntities.HighScoreInfo;
 import org.openjfx.view.menuView.menuEntitiesView.FiyuvButton;
@@ -39,27 +42,31 @@ public class HighScoresView extends VBox {
         level2 = new Tab("Level 2 Scores");
         level3 = new Tab("Level 3 Scores");
 
+        level1.setClosable(false);
+        level2.setClosable(false);
+        level3.setClosable(false);
 
         heading = new FiyuvHeadingLabel("High Scores");
         this.getChildren().add(heading);
-        heading.setAlignment(Pos.CENTER);
 
         HBox hBoxLevel1 = new HBox();
         HBox hBoxLevel2 = new HBox();
         HBox hBoxLevel3 = new HBox();
 
         hBoxLevel1.getChildren().addAll(table1, table2);
-       // hBoxLevel1.setSpacing(50);
+        hBoxLevel1.setSpacing(50);
 
         hBoxLevel2.getChildren().addAll(table3, table4);
-     //   hBoxLevel2.setSpacing(200);
+        hBoxLevel2.setSpacing(50);
 
         hBoxLevel3.getChildren().addAll(table5, table6);
-       // hBoxLevel3.setSpacing(200);
+        hBoxLevel3.setSpacing(50);
 
+       // tabPane.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
+       // tabPane.setPrefSize(750, 750);
 
-        tabPane.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
-        tabPane.setMaxSize(500, 500);
+        HBox hbox1 = new HBox(tabPane);
+        hbox1.setAlignment(Pos.CENTER);
 
 
 
@@ -71,13 +78,12 @@ public class HighScoresView extends VBox {
 
         //this.getChildren().addAll(tabPane, bottomMenu, heading);
 
-        this.getChildren().add(tabPane);
+        this.getChildren().add(hbox1);
 
-        this.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
 
         HBox hbox = new HBox();
         hbox.getChildren().add(menuButton);
-        menuButton.setAlignment(Pos.BOTTOM_LEFT);
+        hbox.setAlignment(Pos.BOTTOM_LEFT);
 
         this.getChildren().add(hbox);
 
@@ -85,22 +91,47 @@ public class HighScoresView extends VBox {
         this.setSpacing(100);
         this.getStyleClass().add("menu-root");
 
+        initializeListeners();
+
         //tabPane.getStyleClass().add("Style1.css");
 
     }
 
+    private void initializeListeners() {
+        level1.setOnSelectionChanged(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                SoundController.buttonClick();
+            }
+        });
+
+        level2.setOnSelectionChanged(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                SoundController.buttonClick();
+            }
+        });
+
+        level3.setOnSelectionChanged(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                SoundController.buttonClick();
+            }
+        });
+    }
 
 
-   private void createColumns(){
-        numberColumn = new TableColumn<HighScore, Integer>("#");
-        scoreColumn1 = new TableColumn<HighScore, Integer>("One Player Game Score");
-        numberColumn2 = new TableColumn<HighScore, Integer>("#");
-        scoreColumn2 = new TableColumn<HighScore, Integer>("Two Player Game Score");
+    private void createColumns(){
 
-        numberColumn.setCellValueFactory(new PropertyValueFactory<HighScore, Integer>("ranking"));
-        numberColumn2.setCellValueFactory(new PropertyValueFactory<HighScore, Integer>("ranking"));
-        scoreColumn1.setCellValueFactory(new PropertyValueFactory<HighScore, Integer>("score"));
-        scoreColumn2.setCellValueFactory(new PropertyValueFactory<HighScore, Integer>("score"));
+        numberColumn = new TableColumn<>("#");
+        scoreColumn1 = new TableColumn<>("One Player Game Score");
+        numberColumn2 = new TableColumn<>("#");
+        scoreColumn2 = new TableColumn<>("Two Player Game Score");
+
+        numberColumn.setCellValueFactory(new PropertyValueFactory<>("ranking"));
+        numberColumn2.setCellValueFactory(new PropertyValueFactory<>("ranking"));
+        scoreColumn1.setCellValueFactory(new PropertyValueFactory<>("score"));
+        scoreColumn2.setCellValueFactory(new PropertyValueFactory<>("score"));
 
        numberColumn3 = new TableColumn<HighScore, Integer>("#");
        scoreColumn3 = new TableColumn<HighScore, Integer>("One Player Game Score");
@@ -132,9 +163,16 @@ public class HighScoresView extends VBox {
         table5 = new TableView<>(highScores.getLevel3Scores()[0]);
         table6 = new TableView<>(highScores.getLevel3Scores()[1]);
 
+
         table1.getColumns().addAll(numberColumn, scoreColumn1);
         table2.getColumns().addAll(numberColumn2, scoreColumn2);
+
+
+
+
 /*
+
+
         table1.setPrefHeight(200);
         table2.setPrefHeight(200);
         table1.setPrefWidth(200);
@@ -149,11 +187,16 @@ public class HighScoresView extends VBox {
         table6.getColumns().addAll(numberColumn6, scoreColumn6);
 
 
-    }
+        table1.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        table2.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        table3.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        table4.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        table5.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        table6.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+
+    }
     public Button getMenuButton(){
         return menuButton;
     }
-
-
 }

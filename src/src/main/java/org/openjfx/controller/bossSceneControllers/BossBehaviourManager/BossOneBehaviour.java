@@ -12,6 +12,7 @@ public class BossOneBehaviour extends BossDefaultBehaviour {
     Laser laser;
     boolean laserUsed = false;
     boolean notifyController = false;
+    private double timerLaser = 0.5;
     public BossOneBehaviour(BossMap bossMap) {
         super( bossMap);
     }
@@ -29,11 +30,10 @@ public class BossOneBehaviour extends BossDefaultBehaviour {
     @Override
     public void clockTick() {
         abilityTimer = abilityTimer - 0.016;
-
         if ( abilityTimer <= 0) {
             laser.setDead( true);
             notifyController = false;
-        } else if ( abilityTimer <= 0.5 && laserUsed) {
+        } else if ( abilityTimer <= timerLaser && laserUsed) {
             SoundController.sendLaser();
             bossMap.addSpecialAbility( laser);
             laserUsed = false;

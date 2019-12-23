@@ -1,6 +1,6 @@
 .fiyuv-button{
     -fx-font-family: "Copperplate Gothic Bold";
-    -fx-font-size: 25;
+    -fx-font-size: 28;
     -fx-pref-width: 300;
     -fx-pref-height: 60;
     -fx-alignment: center-left;
@@ -17,7 +17,7 @@
 
 .fiyuv-button:hover{
     -fx-effect: dropshadow(gaussian, BLACK, 10, 0,0,0);
-    -fx-text-fill: white;
+    -fx-text-fill: #dedec5;;
 }
 
 .menu-root{
@@ -26,5 +26,128 @@
 }
 
 .heading-label{
-    -fx-text-fill: #110f14;
+    -fx-text-fill:  black;
+    -fx-font-size: 40;
+    -fx-font-family: "Copperplate Gothic Bold";;
 }
+
+.key-text-field{
+    -fx-font-family: "Copperplate Gothic Bold";
+    -fx-font-size: 18;
+    -fx-background-color: #dedec5;
+    -fx-text-fill: #41000e;
+}
+
+.default-keys-button{
+    -fx-font-family: "Copperplate Gothic Bold";
+    -fx-font-size: 15;
+    -fx-pref-width: 150;
+    -fx-pref-height: 50;
+    -fx-alignment: center-left;
+    -fx-text-alignment: left;
+    -fx-border-color: transparent;
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+}
+.default-keys-button:hover{
+    -fx-effect: dropshadow(three-pass-box, BLACK, 10, 0,0,0);
+    -fx-text-fill: #dedec5;;
+}
+
+.table-view{
+    -fx-pref-width: 500;
+    width: 100%;
+    height: 100%;
+    -fx-font-size: 15;
+}
+th, td {
+    -fx-border-color: black;
+    overflow: hidden;
+//max-width: 500px;
+    width: 100%;
+    height: 100%;
+}
+
+.table-cell:filled{
+    -fx-border-color: black;
+}
+
+.table-row-cell:empty{
+    -fx-background-color: gray;
+}
+.table-row-cell:empty .table-cell {
+    -fx-border-width: 0;
+}
+
+.table-row-cell:filled{
+    -fx-pref-height: 35;
+    -fx-font-family: "Copperplate Gothic Bold";
+    -fx-font-size: 20;
+    -fx-background-color: gray;
+    -fx-border-color: #dedec5;
+}
+
+.tab-pane{
+    -fx-pref-width: 900;
+    -fx-pref-height: 1200;
+    -fx-background-color: gray;
+}
+
+.tab-pane .tab{
+    -fx-pref-width: 150;
+    -fx-pref-height: 40;
+    -fx-font-family: "Copperplate Gothic Bold";
+    -fx-font-size: 15;
+//-fx-background-color: #dedec5;
+    -fx-background-color: gray;
+    -fx-background-radius: 5;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+    -fx-text-fill: black;
+//-fx-background-color: gray;
+}
+
+.tab:selected{
+    -fx-effect: dropshadow(gaussian, BLACK, 10, 0,0,0);
+}
+
+.tab:selected .tab-label{
+    -fx-text-fill: #dedec5;
+    -fx-font-family: "Copperplate Gothic Light";
+}
+
+
+.tab-pane .tab-header-area{
+    -fx-padding: 0 0 50 0;
+}
+
+.tab-pane .tab-header-area .tab-header-background{
+    -fx-background-color:gray;
+    -fx-spacing: 15;
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-background-color: gray;
+    -fx-border-color: black;
+    -fx-pref-height: 40;
+}
+
+.table-view .column-header{
+    -fx-font-family: "Copperplate Gothic Bold";
+    -fx-text-fill: beige;
+}
+
+
+.key-label{
+    -fx-font-family: "Copperplate Gothic Bold";
+    -fx-font-size: 20;
+    //-fx-text-fill: #dedec5;
+}
+
+.sub-header{
+    -fx-font-family: "Copperplate Gothic Bold";
+    -fx-font-size: 25;
+}
+

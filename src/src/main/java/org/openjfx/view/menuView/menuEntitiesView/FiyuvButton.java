@@ -43,6 +43,7 @@ public class FiyuvButton extends Button {
             public void handle(MouseEvent mouseEvent) {
                 if (mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                     setButtonPressedStyle();
+                    SoundController.buttonClick();
                 }
             }
         });
@@ -55,7 +56,7 @@ public class FiyuvButton extends Button {
                 }
             }
         });
-        this.setOnMouseEntered(new EventHandler<MouseEvent>() {
+        setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 SoundController.buttonEntered();

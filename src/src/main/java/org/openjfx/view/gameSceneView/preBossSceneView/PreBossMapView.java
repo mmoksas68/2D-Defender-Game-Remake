@@ -6,6 +6,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import org.openjfx.assetManager.Assets;
+import org.openjfx.model.menuEntities.GameSituation;
 import org.openjfx.model.preBossEntities.PreBossMap;
 import org.openjfx.utilization.*;
 import org.openjfx.view.gameSceneView.commonViews.buff.BuffView;
@@ -25,15 +27,21 @@ import java.util.Map;
 
 public class PreBossMapView extends Pane {
 
-    private static BackgroundImage image;
+    //private static Image image2 = Assets.getInstance().getPreBossAssets().getBackgrounds().get(GameSituation.getInstance().getLevel() -1);
 
+    /*
     static {
         try {
-            image = new BackgroundImage(new Image(new FileInputStream("assets/images/background.png")), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+            image = new BackgroundImage(new Image(new FileInputStream("assets/images/backgrounds/background.png")), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
+    /
+     */
+
+    Image image2 = Assets.getInstance().getPreBossAssets().getBackgrounds().get(GameSituation.getInstance().getLevel() - 1);
+    private BackgroundImage image = new BackgroundImage(image2, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
 
     private java.util.Map<Long, MeteorView> meteors = new HashMap<Long, MeteorView>();
@@ -52,6 +60,7 @@ public class PreBossMapView extends Pane {
     private DoubleProperty heightSize;
 
     public PreBossMapView(double widthSize, double heightSize, boolean isSinglePlayer) {
+
         this.heightSize = new SimpleDoubleProperty();
         this.widthSize = widthSize;
         this.heightSize.set(heightSize);
