@@ -20,22 +20,42 @@ public class FileController {
     }
 
     //##################################################################################################//
-    public void saveGame(){
-        saveGameSaveObj();
-        saveGameSituation();
+    public void deleteAutoSave(){
+        File file = new File("gameData/autoSavedGameSituation.txt");
+        File file1 = new File("gameData/autoSave.txt");
+        if(file.delete()){
+            System.out.println("deleted");
+        }
+        else {
+            System.out.println("cannot delete");
+        }
+        if(file1.delete()){
+            System.out.println("delete 2");
+        }
+        else {
+            System.out.println("cannot delete");
+        }
     }
 
-    public boolean loadGame(){
+    public void saveGame(boolean isAutoSave){
+        saveGameSaveObj(isAutoSave);
+        saveGameSituation(isAutoSave);
+    }
 
-        loadGameSituation();
-        return  loadGameSaveObj();
+    public boolean loadGame(boolean isAutoSaved){
+        return  loadGameSaveObj(isAutoSaved) && loadGameSituation(isAutoSaved);
     }
 
 
-    public void saveGameSaveObj(){
+    public void saveGameSaveObj(boolean isAutoSave){
 
         try {
-            fos = new FileOutputStream(new File("gameData/gameSave.txt"));
+            if(!isAutoSave) {
+                fos = new FileOutputStream(new File("gameData/gameSave.txt"));
+            }
+            else {
+                fos = new FileOutputStream(new File("gameData/autoSave.txt"));
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -62,10 +82,12 @@ public class FileController {
         }
     }
 
-    public boolean loadGameSaveObj(){
-
+    public boolean loadGameSaveObj(boolean isAutoSaved){
         try {
-            fis = new FileInputStream(new File("gameData/gameSave.txt"));
+            if(!isAutoSaved)
+                fis = new FileInputStream(new File("gameData/gameSave.txt"));
+            else
+                fis = new FileInputStream(new File("gameData/autoSave.txt"));
         } catch (FileNotFoundException e) {
             return false;
         }
@@ -100,7 +122,7 @@ public class FileController {
         return true;
     }
 
-    public void saveGameSituation() {
+    public void saveGameSituation(boolean isAutoSave) {
         GameSituation gameSituation = GameSituation.getInstance();
         GameSituationFileObj gsfo = new GameSituationFileObj();
         gsfo.setLevel(gameSituation.getLevel());
@@ -116,7 +138,10 @@ public class FileController {
         gsfo.setSecondCraftDied(gameSituation.isSecondCraftDied());
         gsfo.setTwoPlayerSingleShip(gameSituation.isTwoPlayerSingleShip());
         try {
-            fos = new FileOutputStream(new File("gameData/gameSituation.txt"));
+            if(!isAutoSave)
+                fos = new FileOutputStream(new File("gameData/gameSituation.txt"));
+            else
+                fos = new FileOutputStream(new File("gameData/autoSavedGameSituation.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -143,16 +168,21 @@ public class FileController {
         }
     }
 
-    public void loadGameSituation(){
+    public boolean loadGameSituation(boolean isAutoSved){
         try {
-            fis = new FileInputStream(new File("gameData/GameSituation.txt"));
+            if(!isAutoSved)
+                fis = new FileInputStream(new File("gameData/GameSituation.txt"));
+            else
+                fis = new FileInputStream(new File("gameData/autoSavedGameSituation.txt"));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("hata 1 file");
+            return false;
         }
         try {
             ois = new ObjectInputStream(fis);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("hata 2 file");
+            return false;
         }
         try {
             GameSituation gameSituation = GameSituation.getInstance();
@@ -170,9 +200,11 @@ public class FileController {
             gameSituation.setIsSecondCraftDied(gsfo.isSecondCraftDied());
             gameSituation.setTwoPlayerSingleShip(gsfo.isTwoPlayerSingleShip());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("hata 3 file");
+            return false;
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("hata 4 file");
+            return false;
         }
         try {
             fis.close();
@@ -184,6 +216,7 @@ public class FileController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return true;
     }
 
 

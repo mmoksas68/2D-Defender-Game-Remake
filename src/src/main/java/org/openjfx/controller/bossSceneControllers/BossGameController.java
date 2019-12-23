@@ -97,12 +97,11 @@ public class BossGameController  {
         this.scene = scene;
         rootPane = new RootPane(initWidth, initHeight);
         bossMapController = new BossMapController(bossMap);
-       // bossController = new BossController( bossMapController.getBossMap().getLevel(), bossMapController.getBossMap(), rootPane.getBossMapView());
+       //bossController = new BossController( bossMapController.getBossMap().getLevel(), bossMapController.getBossMap(), rootPane.getBossMapView());
         this.width = initWidth;
         this.height = initHeight;
         gameSituation = GameSituation.getInstance();
         spacecraftController1 = new SpacecraftController(bossMapController.getBossMap().getSpacecraft1(), rootPane.getBossMapView(),bossMapController.getBossMap());
-        System.out.println(spacecraftController1);
         if (!gameSituation.isSinglePlayer() && !gameSituation.isTwoPlayerSingleShip())
             spacecraftController2 = new SpacecraftController( bossMapController.getBossMap().getSpacecraft2(), rootPane.getBossMapView(), bossMapController.getBossMap());
         scene.setRoot(rootPane);
@@ -110,7 +109,9 @@ public class BossGameController  {
         initListeners();
     }
 
-        public void initListeners(){
+
+
+    public void initListeners(){
             ChangeListener<Boolean> isFirstDied = (observable, oldValue, newValue) -> {
                 if(gameSituation.isFirstCraftDied()){
                     spacecraftController2.getBossMap().setSpacecraft1(spacecraftController2.getBossMap().getSpacecraft2());
@@ -136,7 +137,6 @@ public class BossGameController  {
 
     }
     private void initGame() {
-
         if(gameSituation.isSinglePlayer() || gameSituation.isSecondCraftDied()){
             keysFor1();
         }
@@ -488,7 +488,9 @@ public class BossGameController  {
             bossMapController.setBossHit(false);
         }
     }
-
+    public boolean getGameOn() {
+        return this.gameOn;
+    }
     public Scene getScene() {
         return scene;
     }

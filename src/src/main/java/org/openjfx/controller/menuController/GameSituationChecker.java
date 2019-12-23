@@ -16,36 +16,44 @@ import org.openjfx.model.menuEntities.PassedLevelInfo;
 import org.openjfx.model.menuEntities.Settings;
 import org.openjfx.model.preBossEntities.PreBossMap;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class GameSituationChecker {
 
+    private static boolean isChanged = false;
+    private static boolean isChanged2 = false;
+
     private GameSituation gameSituation;
-    private Settings settings;
-    private BooleanProperty isPaused, isEnd;
+    private BooleanProperty isPaused, isEnd, isSaved, deleteAutoSave;
     private PreBossGameController preBossGameController;
     private BossGameController bossGameController;
     private GameSaveObj gameSaveObj;
     private Scene scene;
     private PassedLevelInfo passedLevelInfo;
-    private PreBossMap preBossMap;
-    private BossMap bossMap;
     private Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-    private boolean newGame;
-    private static boolean isChanged = false;
-    private static boolean isChanged2 = false;
+    private boolean newGame, isOn;
+    private Timer timer = new Timer();
+
 
     public GameSituationChecker(Scene scene){
         this.scene = scene;
         isPaused = new SimpleBooleanProperty(false);
         isEnd = new SimpleBooleanProperty(false);
+        isSaved = new SimpleBooleanProperty(false);
+        deleteAutoSave = new SimpleBooleanProperty(false);
         gameSaveObj = GameSaveObj.getInstance();
         passedLevelInfo = PassedLevelInfo.getInstance();
         gameSituation = GameSituation.getInstance();
+        isOn = true;
     }
 
     public GameSituationChecker(Scene scene, int bossScene){
         this.scene = scene;
         isPaused = new SimpleBooleanProperty(false);
         isEnd = new SimpleBooleanProperty(false);
+        isSaved = new SimpleBooleanProperty(false);
+        deleteAutoSave = new SimpleBooleanProperty(false);
         gameSaveObj = GameSaveObj.getInstance();
         passedLevelInfo = PassedLevelInfo.getInstance();
         gameSituation = GameSituation.getInstance();
@@ -59,6 +67,7 @@ public class GameSituationChecker {
             ifEndBoss();
             isChanged2 = true;
         }
+        isOn = true;
     }
 
     public void startGame(boolean newGame){
@@ -93,7 +102,8 @@ public class GameSituationChecker {
 
             }
         }
-
+        isOn = true;
+        updateSaveFile();
     }
         private void ifPausedBoss() {
             if (!(bossGameController == null) && !gameSituation.isIsBossFinished()) {
@@ -108,6 +118,7 @@ public class GameSituationChecker {
                         bossGameController.setGameOnChange(false);
                     }
                 };
+
                 bossGameController.getGameOnChange().addListener(gameOnChangeListener2);
             }
         }
@@ -201,6 +212,32 @@ public class GameSituationChecker {
     private void endGame(){
         
     }
+
+    private void updateSaveFile(){
+        timer = new Timer();
+        TimerTask task = new TimerTask(){
+            @Override
+            public void run(){
+                if(!gameSituation.isIsPreBossFinished() && !gameSituation.isIsPreBossFinishedSuccessfully() && isOn) {
+                    if(preBossGameController.getGameOn()) {
+                        GameSaveObj.getInstance().setPreBossMap(preBossGameController.getPreBossMapController().getPreBossMap());
+                        isSaved.set(true);
+                    }
+                }
+                else if(gameSituation.isIsPreBossFinishedSuccessfully() && !gameSituation.isIsBossFinished() && !gameSituation.isIsBossFinishedSuccessfully() && isOn) {
+                    if(bossGameController.getGameOn()) {
+                        GameSaveObj.getInstance().setBossMap(bossGameController.getBossMapController().getBossMap());
+                        isSaved.set(true);
+                    }
+                }
+                else if ((gameSituation.isIsBossFinished() || gameSituation.isIsBossFinishedSuccessfully() || gameSituation.isIsPreBossFinished()) && isOn){
+                    deleteAutoSave.set(true);
+                    isOn = false;
+                }
+            }
+        };
+        timer.schedule(task, 0, 2000);
+    }
     
     private void initBossListeners(){
         ifEndBoss();
@@ -242,6 +279,9 @@ public class GameSituationChecker {
         startGame(true);
     }
 
+    public Timer getTimer(){
+        return  timer;
+    }
 
     public void setIsPaused(boolean b) {
         isPaused.set(b);
@@ -249,6 +289,14 @@ public class GameSituationChecker {
 
     public void setIsEnd(boolean b) {
         isEnd.set(b);
+    }
+
+    public BooleanProperty getIsSaved(){
+        return isSaved;
+    }
+
+    public void setIsSaved(boolean b){
+        isSaved.set(b);
     }
 
     public PreBossMap getPreBossMap(){
@@ -270,5 +318,25 @@ public class GameSituationChecker {
 
     public void setNewGame(boolean newGame) {
         this.newGame = newGame;
+    }
+
+    public boolean isDeleteAutoSave() {
+        return deleteAutoSave.get();
+    }
+
+    public BooleanProperty deleteAutoSaveProperty() {
+        return deleteAutoSave;
+    }
+
+    public void setDeleteAutoSave(boolean deleteAutoSave) {
+        this.deleteAutoSave.set(deleteAutoSave);
+    }
+
+    public boolean isOn() {
+        return isOn;
+    }
+
+    public void setOn(boolean on) {
+        isOn = on;
     }
 }

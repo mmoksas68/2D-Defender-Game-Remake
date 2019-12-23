@@ -57,10 +57,10 @@ public class PreBossMap implements Serializable {
         this.isSinglePlayer = isSinglePlayer;
         switch (level) {
             case 1:
-                initialTier1unevolvedEnemyCount = 25;
-                initialTier1evolvedEnemyCount = 5;
-                initialUnevolvedEnemyStationCount = 3;
-                initialEvolvedEnemyStationCount = 2;
+                initialTier1unevolvedEnemyCount = 0;
+                initialTier1evolvedEnemyCount = 0;
+                initialUnevolvedEnemyStationCount = 0;
+                initialEvolvedEnemyStationCount = 1;
                 break;
             case 2:
                 initialTier1unevolvedEnemyCount = 5;
