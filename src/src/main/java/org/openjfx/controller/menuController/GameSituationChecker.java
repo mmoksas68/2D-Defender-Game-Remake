@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.stage.Screen;
 
+import org.openjfx.SystemInfo;
 import org.openjfx.controller.bossSceneControllers.BossGameController;
 import org.openjfx.controller.preBossSceneControllers.PreBossGameController;
 import org.openjfx.model.bossEntities.BossMap;
@@ -33,7 +34,7 @@ public class GameSituationChecker {
     private PassedLevelInfo passedLevelInfo;
     private Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     private boolean newGame, isOn;
-    private Timer timer = new Timer();
+    private Timer timer;
 
 
     public GameSituationChecker(Scene scene){
@@ -83,6 +84,7 @@ public class GameSituationChecker {
             ifPausedPreBoss();
             ifEndPreBoss();
             isChanged = true;
+            isOn = true;
         }
         else{
             if (!gameSituation.isIsPreBossFinished() && !gameSituation.isIsPreBossFinishedSuccessfully()) {
@@ -104,6 +106,7 @@ public class GameSituationChecker {
         }
         isOn = true;
         updateSaveFile();
+
     }
         private void ifPausedBoss() {
             if (!(bossGameController == null) && !gameSituation.isIsBossFinished()) {
@@ -214,7 +217,7 @@ public class GameSituationChecker {
     }
 
     private void updateSaveFile(){
-        timer = new Timer();
+        Timer timer = new Timer();
         TimerTask task = new TimerTask(){
             @Override
             public void run(){
@@ -228,15 +231,17 @@ public class GameSituationChecker {
                     if(bossGameController.getGameOn()) {
                         GameSaveObj.getInstance().setBossMap(bossGameController.getBossMapController().getBossMap());
                         isSaved.set(true);
+
                     }
                 }
                 else if ((gameSituation.isIsBossFinished() || gameSituation.isIsBossFinishedSuccessfully() || gameSituation.isIsPreBossFinished()) && isOn){
                     deleteAutoSave.set(true);
                     isOn = false;
                 }
+                timer.cancel();
             }
         };
-        timer.schedule(task, 0, 2000);
+        timer.schedule(task, 2000);
     }
     
     private void initBossListeners(){
