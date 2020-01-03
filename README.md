@@ -19,11 +19,11 @@ Defender is an old video game. In this game, a player controls a spaceship to sa
 
 
 # Group Members
-- Doğukan KÖSE
-- Musab OKŞAŞ
-- Aybüke ERTEKİN
-- Hamza PEHLİVAN
-- Meryem EFE
+- Doğukan KÖSE    [kandogu](https://github.com/kandogu)
+- Musab OKŞAŞ     [mmoksas68](https://github.com/mmoksas68)
+- Aybüke ERTEKİN  [aybukeertekin](https://github.com/aybukeertekin)
+- Hamza PEHLİVAN  [hamzapehlivan](https://github.com/hamzapehlivan)
+- Meryem EFE      [meryemefe](https://github.com/meryemefe)
 
 # Links
 Link for Project Meetings Document: https://drive.google.com/file/d/1SZuEcgDk-16_4ClcNFcdrplQeXqld5ln/view?usp=sharing
