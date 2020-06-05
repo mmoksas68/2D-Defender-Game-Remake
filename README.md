@@ -1,5 +1,5 @@
 # CS_319_Project
-Defender Game
+A remake version of Defender Arcade Game, which was made in 1980, implemented in JavaFx. This project was a term project with 5 group members. Main idea of the project was to learn object-oriented project design life-cycle while learning how to progress as a group. Documentations are included in the project.
 
 # About Game
 Defender is an old video game. In this game, a player controls a spaceship to save humanoids from aliens on his planet. Aliens can both capture humanoids and destroy the player’s spaceship. Therefore, the player tries to kill all aliens using laser weapon before getting destroyed. The player has also smart bombs which destroy all aliens on the screen. Spaceship can fly in right or left direction while screen scrolls continuously. The player can be hit 3 times by enemies before the game ends. If player can get certain scores, s/he earns right to be hit more times before the game ends. Player can change the place of spaceship on the planet using hyperspace jump. Also, it should not be forgotten that captured humanoids will turn into mutants, i.e. new enemies.
