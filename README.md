@@ -1,23 +1,23 @@
 # CS_319_Project
 A remake version of Defender Arcade Game, which was made in 1980, implemented in JavaFx. This project was a term project with 5 group members. Main idea of the project was to learn object-oriented project design life-cycle while learning how to progress as a group. Documentations are included in the project.
 
-#Main Menu
+# Main Menu
 ![alt text](https://github.com/mmoksas68/2D-Defender-Game-Remake/blob/Fiyuv++Game/screenshots/1.PNG?raw=true)
 <br>
 <br>
-#Level Options
+# Level Options
 ![alt text](https://github.com/mmoksas68/2D-Defender-Game-Remake/blob/Fiyuv++Game/screenshots/2.PNG?raw=true)
 <br>
 <br>
-#Single Player Game
+# Single Player Game
 ![alt text](https://github.com/mmoksas68/2D-Defender-Game-Remake/blob/Fiyuv++Game/screenshots/4.PNG?raw=true)
 <br>
 <br>
-#Two Player Game
+# Two Player Game
 ![alt text](https://github.com/mmoksas68/2D-Defender-Game-Remake/blob/Fiyuv++Game/screenshots/5.PNG?raw=true)
 <br>
 <br>
-#Boss Fights
+# Boss Fights
 ![alt text](https://github.com/mmoksas68/2D-Defender-Game-Remake/blob/Fiyuv++Game/screenshots/3.PNG?raw=true)
 <br>
 <br>
